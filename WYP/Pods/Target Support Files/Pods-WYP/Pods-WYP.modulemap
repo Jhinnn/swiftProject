@@ -1,0 +1,6 @@
+framework module Pods_WYP {
+  umbrella header "Pods-WYP-umbrella.h"
+
+  export *
+  module * { export * }
+}
