@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E1436271FAACE6D00916F5B /* testTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1436261FAACE6D00916F5B /* testTableViewCell.swift */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
 		A4185E001EF22EA800930D56 /* MoreCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */; };
@@ -324,6 +325,7 @@
 /* Begin PBXFileReference section */
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E1436261FAACE6D00916F5B /* testTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewCell.swift; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
 		A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommunityViewController.swift; sourceTree = "<group>"; };
 		A419E73F1EC1B16600C277D8 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -1838,6 +1840,7 @@
 				F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */,
 				F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */,
 				F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */,
+				9E1436261FAACE6D00916F5B /* testTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2856,6 +2859,7 @@
 				F91E42D11EA70DC200CDCE19 /* ContentModel.swift in Sources */,
 				A4B2050D1EC01291007DA418 /* StatementCell.m in Sources */,
 				F9986A411EA61C2B002C502B /* NewsNaviViewController.swift in Sources */,
+				9E1436271FAACE6D00916F5B /* testTableViewCell.swift in Sources */,
 				A476BD491E934670009733A5 /* UITextView+Select.m in Sources */,
 				F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */,
 				F9599BC41EB20CE300440E66 /* LotteryDetailsViewController.swift in Sources */,

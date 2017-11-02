@@ -10,6 +10,23 @@ import UIKit
 
 class GroupsViewController: BaseViewController {
     
+    //新增--start
+    var myManageGroupTableView:UITableView?
+    var myJoinGroupTableView:UITableView?
+    var myJoinGroupViewGlobal:UIView?
+    var myManageGroupViewGlobal:UIView?
+    
+    //我管理的群tableview的高度
+    var ManagerTableViewHeight = 200
+    //我加入的群tableview的高度
+    var JoinTableViewHeight = 400
+    
+    //记录 我管理的群 点击View的转态: 0--未点开 1--点开
+    var ManagerGroupClickStatus:NSInteger = 0
+    //记录 我加入的群 点击View的转态: 0--未点开 1--点开
+    var JoinGroupClickStatus:NSInteger = 0
+    //新增--end
+    
     var dataSource: [GroupsModel]?
 
     // MARK: - life cycle
@@ -23,13 +40,38 @@ class GroupsViewController: BaseViewController {
     
     // MARK: - private method
     func viewConfig() {
-        view.addSubview(groupTableview)
+        self.setupUI()
+        //暂且注释，但会要用到
+//        view.addSubview(groupTableview)
+        
     }
     
     func layoutPageSubviews() {
-        groupTableview.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 64, 0))
+        myManageGroupViewGlobal?.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top).offset(14)
+            make.left.right.equalTo(view)
+            make.height.equalTo(40)
         }
+        myManageGroupTableView?.snp.makeConstraints { (make) in
+            make.left.right.equalTo(view)
+            make.top.equalTo((myManageGroupViewGlobal?.snp.bottom)!)
+            make.height.equalTo(0)
+        }
+        myJoinGroupViewGlobal?.snp.makeConstraints { (make) in
+            make.top.equalTo((myManageGroupTableView?.snp.bottom)!)
+            make.left.right.equalTo(view)
+            make.height.equalTo(40)
+        }
+        myJoinGroupTableView?.snp.makeConstraints { (make) in
+                make.left.right.equalTo(view)
+                make.top.equalTo((myJoinGroupViewGlobal?.snp.bottom)!)
+                make.height.equalTo(0)
+        }
+
+        //更新之前代码
+//        groupTableview.snp.makeConstraints { (make) in
+//            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 64, 0))
+//        }
     }
     
     func loadGroupsData(requestType: RequestType) {
@@ -72,7 +114,9 @@ class GroupsViewController: BaseViewController {
                    make.height.equalTo(11)
                }
                 
-               self.groupTableview.reloadData()
+//               self.groupTableview.reloadData()
+                self.myManageGroupTableView?.reloadData()
+                self.myJoinGroupTableView?.reloadData()
             } else {
                 print(info!)
             }
@@ -101,6 +145,27 @@ class GroupsViewController: BaseViewController {
         groupTableView.register(GroupsTableViewCell.self, forCellReuseIdentifier: "groupsCell")
         return  groupTableView
     }()
+    //懒加载我加入群的tableView
+    lazy var secondGroupTableView:WYPTableView = {
+        let secondGroupTableView = WYPTableView(frame: .zero, style: .plain)
+        secondGroupTableView.backgroundColor = UIColor.white
+        secondGroupTableView.rowHeight = 60
+        secondGroupTableView.delegate = self
+        secondGroupTableView.dataSource = self
+        secondGroupTableView.tableFooterView = UIView()
+        
+        secondGroupTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+            self.loadGroupsData(requestType: .loadMore)
+        })
+        secondGroupTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.loadGroupsData(requestType: .update)
+        })
+        
+        //注册
+        secondGroupTableView.register(GroupsTableViewCell.self, forCellReuseIdentifier: "groupsCell")
+        return  secondGroupTableView
+    }()
+    
     
     // 没有数据时的图片
     lazy var noDataImageView: UIImageView = {
@@ -117,6 +182,122 @@ class GroupsViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
+    
+    //新增--start
+    func setupUI(){
+        //我管理的群
+        let myManageGroupView = UIView()
+        myManageGroupView.backgroundColor = UIColor.white
+        let myManageGroupViewNameLabel = UILabel()
+        myManageGroupViewNameLabel.text = "我管理的群"
+        myManageGroupViewNameLabel.textColor = UIColor.black
+        myManageGroupView.addSubview(myManageGroupViewNameLabel)
+        myManageGroupViewNameLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(myManageGroupView.snp.center)
+            make.left.equalTo(myManageGroupView.snp.left).offset(30)
+            
+        }
+        view.addSubview(myManageGroupView)
+        myManageGroupViewGlobal = myManageGroupView
+        //我管理的群--添加手势
+        let clickMyManageGroupGesture = UITapGestureRecognizer(target: self, action: #selector(clickMyManageGroupViewTap))
+        myManageGroupView.addGestureRecognizer(clickMyManageGroupGesture)
+        //我管理的群--添加tableView
+        
+        let tableView = groupTableview
+        view.addSubview(tableView)
+        myManageGroupTableView = tableView
+        
+        
+        //我加入的群
+        let myJionGroupView = UIView()
+        myJionGroupView.backgroundColor = UIColor.white
+        let myJoingroupViewNameLabel = UILabel()
+        myJoingroupViewNameLabel.text = "我加入的群"
+        myJoingroupViewNameLabel.textColor = UIColor.black
+        myJionGroupView.addSubview(myJoingroupViewNameLabel)
+        myJoingroupViewNameLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(myJionGroupView.snp.center)
+            make.left.equalTo(myJionGroupView.snp.left).offset(30)
+        }
+        view.addSubview(myJionGroupView)
+        myJoinGroupViewGlobal = myJionGroupView
+        //我加入的群--添加手势
+        let clickMyJoinGroupGesture = UITapGestureRecognizer(target: self, action: #selector(clickMyJoinGroupViewTap))
+        myJionGroupView.addGestureRecognizer(clickMyJoinGroupGesture)
+        
+        
+        //我加入的群--添加tableView
+        let JoinTableView = secondGroupTableView
+        view.addSubview(JoinTableView)
+        myJoinGroupTableView = JoinTableView
+        
+    }
+    
+    //我管理的群--展开
+    @objc func clickMyManageGroupViewTap(sender: UITapGestureRecognizer) {
+        if ManagerGroupClickStatus == 0 {
+            ManagerGroupClickStatus = 1
+            //计算我管理群组tableView的高度
+            let myManageGroupTableViewHeight = (dataSource?.count)! * 60
+            let referenceHeight1 = view.frame.maxY
+            let referenceHeight2 = myManageGroupViewGlobal?.frame.maxY
+            let referenceHeight = referenceHeight1 - referenceHeight2!
+            if (CGFloat(myManageGroupTableViewHeight) > referenceHeight) {
+                myManageGroupTableView?.snp.updateConstraints({ (make) in
+                    make.height.equalTo(referenceHeight)
+                })
+            }else{
+                myManageGroupTableView?.snp.updateConstraints({ (make) in
+                    make.height.equalTo(myManageGroupTableViewHeight)
+                })
+            }
+            view.layoutIfNeeded()
+            return
+        }
+        if ManagerGroupClickStatus == 1 {
+            ManagerGroupClickStatus = 0
+            myManageGroupTableView?.snp.updateConstraints({ (make) in
+                make.height.equalTo(0)
+            })
+            view.layoutIfNeeded()
+            return
+        }
+    }
+    
+    //我加入的群--展开
+    @objc func clickMyJoinGroupViewTap(sener:UITapGestureRecognizer) {
+        if JoinGroupClickStatus == 0 {
+            JoinGroupClickStatus = 1
+            //计算我管理群组tableView的高度
+            let myJoinGroupTableViewHeight = (dataSource?.count)! * 60;
+            let referenceHeight1 = view.frame.maxY
+            let referenceHeight2 = myJoinGroupViewGlobal?.frame.maxY
+            let referenceHeight = referenceHeight1 - referenceHeight2!
+            if CGFloat(myJoinGroupTableViewHeight) > referenceHeight {
+                myJoinGroupTableView?.snp.updateConstraints({ (make) in
+                    make.height.equalTo(referenceHeight)
+                })
+            }else{
+                myJoinGroupTableView?.snp.updateConstraints({ (make) in
+                    make.height.equalTo(myJoinGroupTableViewHeight)
+                })
+            }
+            view.layoutIfNeeded()
+            return
+        }
+        if JoinGroupClickStatus == 1 {
+            JoinGroupClickStatus = 0
+            myJoinGroupTableView?.snp.updateConstraints({ (make) in
+                make.height.equalTo(0)
+            })
+            view.layoutIfNeeded()
+            return
+            
+        }
+    }
+
+    
 }
 
 extension GroupsViewController: UITableViewDelegate,UITableViewDataSource {
@@ -151,3 +332,6 @@ extension GroupsViewController: UITableViewDelegate,UITableViewDataSource {
         navigationController?.pushViewController(conversationVC, animated: true)
     }
 }
+
+
+
