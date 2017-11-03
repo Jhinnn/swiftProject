@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E1436271FAACE6D00916F5B /* testTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1436261FAACE6D00916F5B /* testTableViewCell.swift */; };
+		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
 		A4185E001EF22EA800930D56 /* MoreCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */; };
@@ -326,6 +327,8 @@
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E1436261FAACE6D00916F5B /* testTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewCell.swift; sourceTree = "<group>"; };
+		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
+		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
 		A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommunityViewController.swift; sourceTree = "<group>"; };
 		A419E73F1EC1B16600C277D8 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -718,6 +721,15 @@
 				5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9E22D42F1FACD4C700846374 /* ScanAddFriendView */ = {
+			isa = PBXGroup;
+			children = (
+				9E22D4301FACD50000846374 /* LSXPopMenu.h */,
+				9E22D4311FACD50000846374 /* LSXPopMenu.m */,
+			);
+			path = ScanAddFriendView;
 			sourceTree = "<group>";
 		};
 		A41CE6731EBABCFD000BCDE9 /* 我的社区 */ = {
@@ -1837,6 +1849,7 @@
 		F99869651EA61C2B002C502B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E22D42F1FACD4C700846374 /* ScanAddFriendView */,
 				F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */,
 				F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */,
 				F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */,
@@ -2918,6 +2931,7 @@
 				F9986A6D1EA61DFF002C502B /* SYNavTabBar.swift in Sources */,
 				F99869F61EA61C2B002C502B /* GroupMemberCollectionViewCell.swift in Sources */,
 				F9986A151EA61C2B002C502B /* AttentionRoomTableViewCell.swift in Sources */,
+				9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */,
 				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
 				F9986A2C1EA61C2B002C502B /* MyOrdersViewController.swift in Sources */,
 				F9CE6F8F1EC56B1200B9B06D /* RecordsDetailModel.swift in Sources */,

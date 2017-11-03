@@ -126,15 +126,26 @@ class MyCommunityViewController: BaseViewController {
         tableViewHeaderView.addSubview(nickNameLabel)
         tableViewHeaderView.addSubview(friendsCountLabel)
         tableViewHeaderView.addSubview(fansCountLabel)
-        tableView.addSubview(followBtn)
-        view.addSubview(commentInputView)
+//        tableView.addSubview(followBtn)
+        tableViewHeaderView.addSubview(followBtn)
+//        view.addSubview(commentInputView)
         
+//        //添加 查找聊天记录View
+        view.addSubview(findChatHistory)
+//        //添加 消息免打扰View
+        view.addSubview(essageDoNotDisturb)
+//        //添加 发送消息按钮
+        view.addSubview(sendMessageButton)
         setupUIFrame()
     }
     
     func setupUIFrame() {
+//        tableView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
+//        }
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
+            make.top.equalTo(view).offset(-64)
+            make.left.right.equalTo(view)
         }
         
         headerImgView.snp.makeConstraints { (make) in
@@ -166,12 +177,52 @@ class MyCommunityViewController: BaseViewController {
             make.left.equalTo(fansCountLabel.snp.right).offset(15)
             make.size.equalTo(CGSize(width: 60, height: 30))
         }
-        
+        /* 原来代码
         commentInputView.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
             make.bottom.equalTo(view).offset(0)
         }
+     */
+        findChatHistory.snp.makeConstraints { (make) in
+            make.top.equalTo(tableView.snp.bottom).offset(10)
+            make.left.right.equalTo(view)
+        }
+        essageDoNotDisturb.snp.makeConstraints { (make) in
+            make.top.equalTo(findChatHistory.snp.bottom)
+            make.left.right.equalTo(view)
+        }
+        sendMessageButton.snp.makeConstraints { (make) in
+            make.top.equalTo(essageDoNotDisturb.snp.bottom).offset(23)
+            make.bottom.equalTo(view).offset(-33)
+            make.left.equalTo(view.snp.left).offset(42)
+            make.right.equalTo(view.snp.right).offset(-42)
+            make.height.equalTo(44)
+        }
+        
+        
+        
+
+        
     }
+    
+    //发送消息按钮
+    lazy var sendMessageButton: UIButton = {
+        let sendMessageButton:UIButton = UIButton()
+        sendMessageButton.backgroundColor = UIColor.black
+        return sendMessageButton
+    }()
+    //消息免打扰View
+    lazy var essageDoNotDisturb: UIView = {
+        let essageDoNotDisturb:UIView = UIView()
+        essageDoNotDisturb.backgroundColor = UIColor.yellow
+        return essageDoNotDisturb
+    }()
+    //查找聊天记录
+    lazy var findChatHistory: UIView = {
+        let findChatHistory = UIView()
+        findChatHistory.backgroundColor = UIColor.red
+        return findChatHistory
+    }()
     
     // 表视图
     lazy var tableView: WYPTableView = {

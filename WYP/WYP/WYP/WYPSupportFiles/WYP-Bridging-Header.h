@@ -62,3 +62,6 @@
 
 // 二维码扫描
 #import "SGQRCode.h"
+
+//扫描添加按钮
+#import "LSXPopMenu.h"
