@@ -96,7 +96,9 @@ class MeViewController: UITableViewController {
             levelButton.isHidden = false
             
             self.headImgView.kf.setImage(with: URL(string: AppInfo.shared.user?.headImgUrl ?? ""), for: .normal, placeholder: UIImage(named: "mine_header_icon_normal_iPhone"), options: nil, progressBlock: nil, completionHandler: nil)
-                        
+            print("--------")
+            print(AppInfo.shared.user?.token ?? "")
+            print("--------")
             NetRequest.getUserInfoNetRequest(token: AppInfo.shared.user?.token ?? "", complete: { (success, info, userInfoDic) in
                 if success {
                     // 获取成功

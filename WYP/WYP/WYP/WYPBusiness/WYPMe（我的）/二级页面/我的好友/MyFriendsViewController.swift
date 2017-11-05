@@ -96,12 +96,6 @@ class MyFriendsViewController: BaseViewController {
         let y = CGFloat(78)
         let p = CGPoint(x: x, y: y)
         LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["datum_icon_dimension_normal","datum_icon_Information_normalmore"], menuWidth: 150, isShowTriangle: false, delegate: self as! LSXPopMenuDelegate)
-//        let scanAdd:LSXPopMenu = LSXPopMenu(titles: ["扫一扫","添加好友"], icons: ["datum_icon_dimension_normal","datum_icon_Information_normalmore"], menuWidth: 150, delegate: self as! LSXPopMenuDelegate)
-//        scanAdd.cornerRadius=5
-//        scanAdd.textColor=UIColor.black
-//        scanAdd.fontSize=25
-//        let cankaoView = UIView(frame: CGRect(x: <#T##Double#>, y: <#T##Double#>, width: <#T##Double#>, height: <#T##Double#>))
-//        scanAdd.showRely(on:sender.image)
         //原来的代码，暂时注释掉
 //        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }
@@ -165,6 +159,10 @@ extension MyFriendsViewController: SYNavTabBarDelegate {
 }
 //点击扫一扫添加好友
 extension MyFriendsViewController:LSXPopMenuDelegate{
-    
+    func lsxPopupMenuDidSelected(at index: Int, lsxPopupMenu LSXPopupMenu: LSXPopMenu!) {
+        if index == 1 {
+            navigationController?.pushViewController(AddFriendsViewController(), animated: true)
+        }
+//        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
+    }
 }
-

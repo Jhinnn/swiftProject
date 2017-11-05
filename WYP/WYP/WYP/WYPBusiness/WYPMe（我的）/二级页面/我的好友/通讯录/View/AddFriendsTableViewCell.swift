@@ -43,7 +43,7 @@ class AddFriendsTableViewCell: UITableViewCell {
         }
         addAttentionButton.snp.makeConstraints { (make) in
             make.right.equalTo(contentView).offset(-13.5)
-            make.size.equalTo(CGSize(width: 72.5, height: 29))
+            make.size.equalTo(CGSize(width: 60, height: 25))
             make.centerY.equalTo(contentView)
         }
         friendsTitleLabel.snp.makeConstraints { (make) in
@@ -77,8 +77,10 @@ class AddFriendsTableViewCell: UITableViewCell {
     }()
     lazy var addAttentionButton: UIButton = {
         let addAttentionButton = UIButton(type: .custom)
-        addAttentionButton.setImage(UIImage(named: "mine_add_button_normal_iPhone"), for: .normal)
-        addAttentionButton.setImage(UIImage(named: "mine_add_button_selected_iPhone"), for: .selected)
+        addAttentionButton.layer.cornerRadius = 5
+        addAttentionButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+//        addAttentionButton.setImage(UIImage(named: "mine_add_button_normal_iPhone"), for: .normal)
+//        addAttentionButton.setImage(UIImage(named: "mine_add_button_selected_iPhone"), for: .selected)
         addAttentionButton.addTarget(self, action: #selector(applyAddFriends(sender:)), for: .touchUpInside)
         return addAttentionButton
     }()

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E1436271FAACE6D00916F5B /* testTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1436261FAACE6D00916F5B /* testTableViewCell.swift */; };
+		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
+		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
@@ -326,7 +327,8 @@
 /* Begin PBXFileReference section */
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E1436261FAACE6D00916F5B /* testTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testTableViewCell.swift; sourceTree = "<group>"; };
+		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
+		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
@@ -1853,7 +1855,6 @@
 				F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */,
 				F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */,
 				F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */,
-				9E1436261FAACE6D00916F5B /* testTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1900,6 +1901,7 @@
 			isa = PBXGroup;
 			children = (
 				F99869701EA61C2B002C502B /* AddFriendsTableViewCell.swift */,
+				9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1911,6 +1913,7 @@
 				F99869731EA61C2B002C502B /* ContactsViewController.swift */,
 				F99869741EA61C2B002C502B /* SearchFriendsViewController.swift */,
 				F9FA08F31EB9C9A200E71E4D /* SearchFriendsResultViewController.swift */,
+				9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2861,6 +2864,7 @@
 				F956CE7E1EDEA7E600B751D4 /* WYPTableView.swift in Sources */,
 				F99869F31EA61C2B002C502B /* HotShowRoomCell.swift in Sources */,
 				F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */,
+				9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */,
 				F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */,
 				F972F3DF1ECC6F370078B423 /* ApplyGroupModel.swift in Sources */,
 				F9986A2F1EA61C2B002C502B /* TopicsModel.swift in Sources */,
@@ -2872,7 +2876,6 @@
 				F91E42D11EA70DC200CDCE19 /* ContentModel.swift in Sources */,
 				A4B2050D1EC01291007DA418 /* StatementCell.m in Sources */,
 				F9986A411EA61C2B002C502B /* NewsNaviViewController.swift in Sources */,
-				9E1436271FAACE6D00916F5B /* testTableViewCell.swift in Sources */,
 				A476BD491E934670009733A5 /* UITextView+Select.m in Sources */,
 				F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */,
 				F9599BC41EB20CE300440E66 /* LotteryDetailsViewController.swift in Sources */,
@@ -2946,6 +2949,7 @@
 				F94DB8341EB31EEE00B014AD /* VideoDetailViewController.swift in Sources */,
 				F9A30CE41ED2B0AA00AD68F4 /* AnnouncementViewController.swift in Sources */,
 				F9986A261EA61C2B002C502B /* SearchFriendsViewController.swift in Sources */,
+				9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */,
 				F9986A5D1EA61C2B002C502B /* CompanyCertificationViewController.swift in Sources */,
 				F9986A2A1EA61C2B002C502B /* NotificationCell.swift in Sources */,
 				F9986A5F1EA61C2B002C502B /* AddAttentionTableViewCell.swift in Sources */,

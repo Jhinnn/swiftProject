@@ -12,15 +12,22 @@ import AddressBook
 class ContactsFriendsViewController: BaseViewController {
 
     var tableView: UITableView!
+    var dataArray:NSMutableArray?
+    var subArray:NSMutableArray?
+    var titleArray = NSMutableArray()
+    var finalDataArray = NSMutableArray()
+    
+    
+    
+    
+    
     
     /// 联系人模型数组
     var dataSourceArray = [PersonModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewConfig()
-        
         // 1.获取授权的状态
         let status = ABAddressBookGetAuthorizationStatus()
         if status == ABAuthorizationStatus.authorized {
@@ -82,7 +89,12 @@ class ContactsFriendsViewController: BaseViewController {
         GetAddressBook.getOriginalAddressBook(addressBookArray: { (addressBookArray) in
             
             self.dataSourceArray = addressBookArray
-            
+            print(self.dataSourceArray)
+            self.dealDataWithArray(array: self.dataSourceArray)
+//            let nickName = self.returnFirstWordWithString(str: "安全")
+//            let charArray:[CChar] = nickName.cString(using: String.Encoding.utf8)!
+//            let firstWord = charArray[0]
+//            print(firstWord)
             // 刷新单元格
             self.friendsTableView.reloadData()
             self.friendsTableView.mj_header.endRefreshing()
@@ -145,42 +157,133 @@ class ContactsFriendsViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
+    
+    func returnFirstWordWithString(str:String) -> String {
+        //将mutStr中的汉字转化为带音标的拼音（如果是汉字就转换，如果不是则保持原样）
+        //2，由于汉字转拼音只能通过CoreFoundation框架转换，所以需要先把字符串转换成cf字符串
+        let strToDealWith = NSMutableString.init(string: str) as CFMutableString
+        //将带有音标的拼音转换成不带音标的拼音（这一步是从上一步的基础上来的，所以这两句话一句也不能少）
+        //3，把cf字符串转换成带有音标的拼音，kCFStringTransformToLatin
+         CFStringTransform(strToDealWith,nil, kCFStringTransformToLatin, false);
+         CFStringTransform(strToDealWith, nil, kCFStringTransformStripCombiningMarks, false);
+        let str2 = strToDealWith as String
+        if str2.characters.count > 0{
+        let index = str2.index(str.startIndex, offsetBy: 1)  //索引为从开始偏移5个位置
+            print(str2.substring(to: index))
+            let str3 = str2.substring(to: index)
+            let str4 = str3.uppercased()
+            print(str4)
+            return str4
+        }else{
+             return ""
+        }
+    }
+    
+    func dealDataWithArray(array:[PersonModel]){
+        dataArray = NSMutableArray()
+        for _ in 0..<27 {
+            let subArray = NSMutableArray()
+            dataArray?.add(subArray)
+            print(dataArray?.count ?? 27)
+        }
+        for modal:PersonModel in array {
+            let nickName:String = returnFirstWordWithString(str: modal.name)
+            print(nickName)
+            let charArray:[CChar] = nickName.cString(using: String.Encoding.utf8)!
+            let firstWord = charArray[0]
+            print(firstWord)
+            if firstWord >= 65 && firstWord<=90{
+                let index:Int = Int(firstWord) - 65
+                let arr:NSMutableArray = dataArray![index] as! NSMutableArray
+                arr.add(modal)
+                print(arr.count)
+            }else{
+                let arr:NSMutableArray = dataArray?.lastObject as! NSMutableArray
+                arr.add(modal)
+            }
+        }
+        print(dataArray)
+//        finalDataArray = NSMutableArray()
+        for array in dataArray! {
+            if (array as AnyObject).count != 0{
+                finalDataArray.add(array)
+                let array2:NSMutableArray = array as! NSMutableArray
+                let personModal:PersonModel = array2[0] as! PersonModel
+                let nickName:String = returnFirstWordWithString(str: personModal.name)
+                let charArray:[CChar] = nickName.cString(using: String.Encoding.utf8)!
+                let firstWord = charArray[0]
+                if firstWord >= 65 && firstWord<=90{
+                    titleArray.add(nickName)
+                }
+            }
+        }
+        if titleArray.count != finalDataArray.count{
+            titleArray.add("#")
+        }
+        self.friendsTableView.reloadData()
+        print(finalDataArray)
+    }
 }
 
 extension ContactsFriendsViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataSourceArray.count == 0 {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if finalDataArray.count == 0 {
             noDataLabel.isHidden = false
             noDataImageView.isHidden = false
-        
+            
         } else {
             noDataLabel.isHidden = true
             noDataImageView.isHidden = true
         }
-        return dataSourceArray.count
-        
+        return finalDataArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if finalDataArray.count == 0 {
+//            noDataLabel.isHidden = false
+//            noDataImageView.isHidden = false
+//
+//        } else {
+//            noDataLabel.isHidden = true
+//            noDataImageView.isHidden = true
+//        }
+//        return finalDataArray.count
+        let array:NSMutableArray = finalDataArray[section] as! NSMutableArray
+        return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactsCell") as! AddFriendsTableViewCell
         cell.delegate = self
-        
-        let model = dataSourceArray[indexPath.row]
+        let array:NSMutableArray = finalDataArray[indexPath.section] as! NSMutableArray
+        let model:PersonModel = array[indexPath.row] as! PersonModel
         
         cell.friendsTitleLabel.text = model.name
         cell.friendsImageView.image = model.headerImage ?? UIImage.init(named: "mine_header_icon_normal_iPhone")
         cell.addAttentionButton.tag = 170 + indexPath.row
-
+        cell.addAttentionButton.backgroundColor = UIColor(red: 212/250, green: 97/250, blue: 81/250, alpha: 1)
+        cell.addAttentionButton.setTitle("添加好友", for: .normal)
+        cell.addAttentionButton.setTitleColor(UIColor.white, for: .normal)
+        cell.addAttentionButton.titleLabel?.textColor = UIColor.white
         return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let title:String = titleArray[section] as! String
+        return title
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let model = dataSourceArray[indexPath.row]
-        
+        let array:NSMutableArray = finalDataArray[indexPath.section] as! NSMutableArray
+        let model:PersonModel = array[indexPath.row] as! PersonModel
+//        let model = dataSourceArray[indexPath.row]
+     
         SYAlertController.showAlertController(view: self, title: model.name, message: "\(model.mobileArray)")
+    }
+ 
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
+        return array
     }
     
 }
