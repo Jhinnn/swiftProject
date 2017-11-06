@@ -11,6 +11,7 @@
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
 		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
+		9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
 		A4185E001EF22EA800930D56 /* MoreCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */; };
@@ -333,6 +334,7 @@
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
 		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
+		9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
 		A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommunityViewController.swift; sourceTree = "<group>"; };
 		A419E73F1EC1B16600C277D8 /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
@@ -1701,6 +1703,7 @@
 			isa = PBXGroup;
 			children = (
 				F99869441EA61C2B002C502B /* UserSettingsViewController.swift */,
+				9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */,
 				F9FE90451F9ECB3700D31F3C /* MyQRViewController.swift */,
 			);
 			path = ViewControllers;
@@ -2939,6 +2942,7 @@
 				F99869F61EA61C2B002C502B /* GroupMemberCollectionViewCell.swift in Sources */,
 				F9986A151EA61C2B002C502B /* AttentionRoomTableViewCell.swift in Sources */,
 				9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */,
+				9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */,
 				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
 				F9986A2C1EA61C2B002C502B /* MyOrdersViewController.swift in Sources */,
 				F9CE6F8F1EC56B1200B9B06D /* RecordsDetailModel.swift in Sources */,

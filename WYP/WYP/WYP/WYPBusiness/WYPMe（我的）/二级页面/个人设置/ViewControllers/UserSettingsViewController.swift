@@ -11,9 +11,9 @@ import AVKit
 
 class UserSettingsViewController: BaseViewController {
 
-    fileprivate let titleArray = ["头像", "昵称", "性别", "个性签名"]
+    fileprivate let titleArray = ["头像", "昵称", "性别", "个性签名","我的二维码"]
     
-    fileprivate var infoArray: [String] = ["", AppInfo.shared.user!.nickName!, "\(AppInfo.shared.user!.sex!)",  AppInfo.shared.user!.signature!]
+    fileprivate var infoArray: [String] = ["", AppInfo.shared.user!.nickName!, "\(AppInfo.shared.user!.sex!)",  AppInfo.shared.user!.signature!,""]
     
     fileprivate var infoKey = ""
     
@@ -215,7 +215,7 @@ extension UserSettingsViewController: UITableViewDataSource, UITableViewDelegate
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleArray.count
+        return titleArray.count ;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -253,6 +253,10 @@ extension UserSettingsViewController: UITableViewDataSource, UITableViewDelegate
                 make.width.equalTo(headImgView.snp.height)
                 make.right.equalTo(cell).offset(-35)
             }
+        }
+        if indexPath.row == 4 {
+            //我的二维码
+            
         }
         
         return cell
@@ -292,6 +296,8 @@ extension UserSettingsViewController: UITableViewDataSource, UITableViewDelegate
             infoKey = "signature"
             
             setupTextView(placeholder: "请输入个性签名")
+        case [0, 4]:
+             self.navigationController?.pushViewController(QRCodeViewController(), animated: true)
         default:
             print("")
         }

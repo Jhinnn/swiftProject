@@ -13,6 +13,9 @@ class ScanOneScanViewController: BaseViewController {
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
+    var scanLine:UIView?
+    var scanSession:AVCaptureSession?
+    var zhiXingCount:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,28 +68,55 @@ class ScanOneScanViewController: BaseViewController {
             videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
             videoPreviewLayer?.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer!)
+            // 初始化二维码选框并高亮边框
+            qrCodeFrameView = UIView()
+            if let qrCodeFrameView = qrCodeFrameView {
+                qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+                qrCodeFrameView.layer.borderWidth = 1
+                view.addSubview(qrCodeFrameView)
+                qrCodeFrameView.snp.makeConstraints({ (make) in
+                    make.center.equalTo(view)
+                    make.width.height.equalTo(200)
+                })
+                view.bringSubview(toFront: qrCodeFrameView)
+            }
+            //让横线在扫描的区域内上下移动
+            scanLine = UIView()
+            if let scanLine = scanLine {
+                scanLine.backgroundColor = UIColor.green
+                view.addSubview(scanLine)
+                scanLine.snp.makeConstraints({ (make) in
+                    make.center.equalTo(view)
+                    make.width.equalTo(170)
+                    make.height.equalTo(1)
+                })
+                view.bringSubview(toFront: scanLine)
+                let startPoint = CGPoint(x: view.center.x  , y: view.center.y - 100)
+                let endPoint = CGPoint(x: view.center.x, y: view.center.y + 50)
+                let translation = CABasicAnimation(keyPath: "position")
+                    translation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    translation.fromValue = NSValue(cgPoint: startPoint)
+                    translation.toValue = NSValue(cgPoint: endPoint)
+                    translation.duration = 4.0
+                    translation.repeatCount = MAXFLOAT
+                    translation.autoreverses = true
+                scanLine.layer.add(translation, forKey: "position")
+            }
             // 开始视频捕获
             captureSession?.startRunning()
             // 将显示信息的 label 与 top bar 提到最前面
             view.bringSubview(toFront: messageLabel)
-//            view.bringSubview(toFront: topbar)
-            // 初始化二维码选框并高亮边框
-            qrCodeFrameView = UIView()
-            
-            if let qrCodeFrameView = qrCodeFrameView {
-                qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
-                qrCodeFrameView.layer.borderWidth = 2
-                view.addSubview(qrCodeFrameView)
-                view.bringSubview(toFront: qrCodeFrameView)
-            }
-            
-            
         } catch {
             // 如果出现任何错误，仅做输出处理，并返回
             print(error)
             return
         }
     }
+    
+    let addFriend: () = {
+        print("Not coming back here.")
+    }()
+    
 
 }
 extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
@@ -108,10 +138,19 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                messageLabel.text = metadataObj.stringValue
+//                messageLabel.text = metadataObj.stringValue
+                if zhiXingCount == 0{
+                    let vc = VerifyApplicationViewController()
+                    vc.applyMobile = metadataObj.stringValue
+                    navigationController?.pushViewController(vc, animated: true)
+                    zhiXingCount = zhiXingCount + 1
+                }
+
             }
         }
     }
+    
+    
 }
 
 
