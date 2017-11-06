@@ -105,7 +105,7 @@ extension AddFriendsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+          navigationController?.pushViewController(ScanOneScanViewController(), animated: true)
         }else{
          navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
         }

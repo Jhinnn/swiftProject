@@ -162,6 +162,8 @@ extension MyFriendsViewController:LSXPopMenuDelegate{
     func lsxPopupMenuDidSelected(at index: Int, lsxPopupMenu LSXPopupMenu: LSXPopMenu!) {
         if index == 1 {
             navigationController?.pushViewController(AddFriendsViewController(), animated: true)
+        }else{
+            navigationController?.pushViewController(ScanOneScanViewController(), animated: true)
         }
 //        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }

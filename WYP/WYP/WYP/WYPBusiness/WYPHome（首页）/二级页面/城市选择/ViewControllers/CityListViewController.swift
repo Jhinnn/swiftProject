@@ -64,6 +64,7 @@ class CityListViewController: BaseViewController {
             return
         }
         let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+        print(jsonString)
         citySource = [CityModel].deserialize(from: jsonString) as? [CityModel]
         
         var array = [String]()

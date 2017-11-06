@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
+		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
 		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
@@ -329,6 +330,7 @@
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
 		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
@@ -1914,6 +1916,7 @@
 				F99869741EA61C2B002C502B /* SearchFriendsViewController.swift */,
 				F9FA08F31EB9C9A200E71E4D /* SearchFriendsResultViewController.swift */,
 				9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */,
+				9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2904,6 +2907,7 @@
 				F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */,
 				A49DA1F71EA9A3AB000E4AFA /* ShowroomMemberCell.swift in Sources */,
 				F9986A101EA61C2B002C502B /* UserSettingsViewController.swift in Sources */,
+				9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */,
 				F9F5BE201ECED1A000F6C9C3 /* MapViewController.swift in Sources */,
 				F99869F81EA61C2B002C502B /* ButtonGroupView.swift in Sources */,
 				F9D92ADD1EE6506300AA1CC6 /* RoomNewsDetailViewController.swift in Sources */,

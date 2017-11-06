@@ -143,9 +143,17 @@ class MyCommunityViewController: BaseViewController {
 //        tableView.snp.makeConstraints { (make) in
 //            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
 //        }
+        sendMessageButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(view).offset(-33)
+            make.left.equalTo(view.snp.left).offset(42)
+            make.right.equalTo(view.snp.right).offset(-42)
+            make.height.equalTo(44)
+        }
+
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(-64)
             make.left.right.equalTo(view)
+            make.height.equalTo(180)
         }
         
         headerImgView.snp.makeConstraints { (make) in
@@ -182,7 +190,8 @@ class MyCommunityViewController: BaseViewController {
             make.left.right.equalTo(view)
             make.bottom.equalTo(view).offset(0)
         }
-     */
+        */
+        /* 原来代码
         findChatHistory.snp.makeConstraints { (make) in
             make.top.equalTo(tableView.snp.bottom).offset(10)
             make.left.right.equalTo(view)
@@ -191,14 +200,7 @@ class MyCommunityViewController: BaseViewController {
             make.top.equalTo(findChatHistory.snp.bottom)
             make.left.right.equalTo(view)
         }
-        sendMessageButton.snp.makeConstraints { (make) in
-            make.top.equalTo(essageDoNotDisturb.snp.bottom).offset(23)
-            make.bottom.equalTo(view).offset(-33)
-            make.left.equalTo(view.snp.left).offset(42)
-            make.right.equalTo(view.snp.right).offset(-42)
-            make.height.equalTo(44)
-        }
-        
+        */
         
         
 
@@ -208,7 +210,9 @@ class MyCommunityViewController: BaseViewController {
     //发送消息按钮
     lazy var sendMessageButton: UIButton = {
         let sendMessageButton:UIButton = UIButton()
-        sendMessageButton.backgroundColor = UIColor.black
+        sendMessageButton.layer.cornerRadius = 5
+        sendMessageButton.setTitle("添加朋友", for: .normal)
+        sendMessageButton.backgroundColor = UIColor(red: 221/250, green: 78/250, blue: 60/250, alpha: 1)
         return sendMessageButton
     }()
     //消息免打扰View
@@ -441,6 +445,7 @@ class MyCommunityViewController: BaseViewController {
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
+                print(json)
                 // 获取code码
                 let code = json["code"].intValue
                 if code == 400 {
