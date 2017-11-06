@@ -65,6 +65,7 @@ class SearchFriendsViewController: BaseViewController {
                     let array = result!.value(forKey: "data")
                     let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                    print(jsonString)
                     self.searchResult = [AttentionPeopleModel].deserialize(from: jsonString) as? [AttentionPeopleModel]
                     let searchVC = SearchFriendsResultViewController()
                     searchVC.friends = self.searchResult

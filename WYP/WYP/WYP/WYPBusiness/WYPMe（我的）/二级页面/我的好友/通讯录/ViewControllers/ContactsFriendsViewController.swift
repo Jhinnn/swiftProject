@@ -16,8 +16,10 @@ class ContactsFriendsViewController: BaseViewController {
     var subArray:NSMutableArray?
     var titleArray = NSMutableArray()
     var finalDataArray = NSMutableArray()
+    var addFriendsPhoneNumber = String()
     
-    
+    // 搜索结果
+    var searchResult: [AttentionPeopleModel]?
     
     
     
@@ -223,6 +225,51 @@ class ContactsFriendsViewController: BaseViewController {
         self.friendsTableView.reloadData()
         print(finalDataArray)
     }
+    
+    func addressBookAddFriends(searchResultArray:[AttentionPeopleModel]?){
+        let community = MyCommunityViewController()
+        community.title = "个人主页"
+        let attentionPeopleModel:AttentionPeopleModel = searchResultArray![0]
+        community.addFriendsPhoneNumber = addFriendsPhoneNumber 
+        community.userId = attentionPeopleModel.peopleId ?? ""
+        community.headImageUrl = attentionPeopleModel.icon ?? ""
+        community.nickName = attentionPeopleModel.nickName ?? ""
+        community.fansCount = String.init(format: "粉丝:%@人", attentionPeopleModel.fans ?? "")
+        community.friendsCountLabel.text = String.init(format: "好友:%@人", attentionPeopleModel.friends ?? "")
+        community.type = "2"
+        if attentionPeopleModel.peopleId == AppInfo.shared.user?.userId {
+            community.userType = "200"
+        }
+        // 判断是否关注
+        if attentionPeopleModel.isFollow == "0" {
+            community.isFollowed = false
+        } else if attentionPeopleModel.isFollow == "1" {
+            community.isFollowed = true
+        }
+        
+        self.navigationController?.pushViewController(community, animated: true)
+    }
+    // 搜索通讯录好友
+    func loadAddressBookFriendsData(phoneNumber:String?) {
+        NetRequest.addSearchFriendsNetRequest(openId: AppInfo.shared.user?.token ?? "", keyword: phoneNumber ?? "") { (success, info, result) in
+            if success {
+                if info == "没有此用户" {
+                    SVProgressHUD.showError(withStatus: info!)
+                } else {
+                    let array = result!.value(forKey: "data")
+                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                    print(jsonString)
+                    self.searchResult = [AttentionPeopleModel].deserialize(from: jsonString) as? [AttentionPeopleModel]
+                    self.addressBookAddFriends(searchResultArray: self.searchResult)
+                }
+                
+            } else {
+                print(info!)
+            }
+        }
+    }
+
 }
 
 extension ContactsFriendsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -277,8 +324,13 @@ extension ContactsFriendsViewController: UITableViewDelegate, UITableViewDataSou
         let array:NSMutableArray = finalDataArray[indexPath.section] as! NSMutableArray
         let model:PersonModel = array[indexPath.row] as! PersonModel
 //        let model = dataSourceArray[indexPath.row]
-     
-        SYAlertController.showAlertController(view: self, title: model.name, message: "\(model.mobileArray)")
+        let phoneNumberArray:[String] = model.mobileArray
+        let phoneNumber:String = phoneNumberArray[0]
+        print(phoneNumber)
+        addFriendsPhoneNumber = phoneNumber
+        self.loadAddressBookFriendsData(phoneNumber: phoneNumber)
+//        SYAlertController.showAlertController(view: self, title: model.name, message: "\(model.mobileArray)")
+        
     }
  
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {

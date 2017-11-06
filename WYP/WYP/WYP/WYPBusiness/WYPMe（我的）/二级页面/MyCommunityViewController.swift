@@ -13,9 +13,12 @@ import SVProgressHUD
 
 class MyCommunityViewController: BaseViewController {
     
+
     var userId: String!
     var nickName: String!
     var friendsCount: String!
+    
+
     var headImageUrl: String? {
         willSet {
             let url = URL(string: newValue ?? "")
@@ -210,6 +213,7 @@ class MyCommunityViewController: BaseViewController {
     //发送消息按钮
     lazy var sendMessageButton: UIButton = {
         let sendMessageButton:UIButton = UIButton()
+        sendMessageButton.addTarget(self, action: #selector(clickAddFriendsButton), for: UIControlEvents.touchUpInside)
         sendMessageButton.layer.cornerRadius = 5
         sendMessageButton.setTitle("添加朋友", for: .normal)
         sendMessageButton.backgroundColor = UIColor(red: 221/250, green: 78/250, blue: 60/250, alpha: 1)
@@ -361,6 +365,11 @@ class MyCommunityViewController: BaseViewController {
         return noDataButton
     }()
     
+    lazy var addFriendsPhoneNumber:String = {
+        let addFriendsPhoneNumber = String()
+        return addFriendsPhoneNumber
+    }()
+    
     func keyboardWillShow(note: NSNotification) {
         let userInfo = note.userInfo!
         let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -441,6 +450,7 @@ class MyCommunityViewController: BaseViewController {
                                       "page": "\(pageNumber)",
             "usertype": userType]
         let url = kApi_baseUrl(path: "api/Community")
+        print(parameters)
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -462,8 +472,7 @@ class MyCommunityViewController: BaseViewController {
                         
                         statementFrame.statement = statement
                         models.append(statementFrame)
-                        
-                        //                        self.dataList.append(statementFrame)
+                        self.dataList.append(statementFrame)
                     }
                     
                     if requestType == .update {
@@ -472,7 +481,7 @@ class MyCommunityViewController: BaseViewController {
                         // 把新数据添加进去
                         self.dataList = self.dataList + models
                     }
-                    
+                    print(self.dataList.count)
                     // 没有数据时
                     self.view.addSubview(self.noDataImageView)
                     self.view.addSubview(self.noDataLabel)
@@ -516,6 +525,16 @@ class MyCommunityViewController: BaseViewController {
         releaseVC.userToken = AppInfo.shared.user?.token ?? ""
         releaseVC.uid = AppInfo.shared.user?.userId ?? ""
         navigationController?.pushViewController(releaseVC, animated: true)
+    }
+    
+    //点击添加好友按钮
+    func clickAddFriendsButton(){
+        
+        let vc = VerifyApplicationViewController()
+        vc.applyMobile = self.addFriendsPhoneNumber
+        print(vc.applyMobile)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 
