@@ -69,7 +69,6 @@ class navTitleView: UIView {
         searchView.layer.cornerRadius = 5.0
         searchView.layer.masksToBounds = true
         searchView.searchLabel.text = "搜索内容..."
-        
         return searchView
     }()
     

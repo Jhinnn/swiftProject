@@ -11,6 +11,7 @@
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
 		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
+		9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */; };
 		9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
 		A414DBED7594F1E1689D75DE /* Pods_WYP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */; };
@@ -334,6 +335,7 @@
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
 		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
+		9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvisorySearchTitleView.swift; sourceTree = "<group>"; };
 		9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
 		A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreCommunityViewController.swift; sourceTree = "<group>"; };
@@ -2188,6 +2190,7 @@
 				F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */,
 				F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */,
 				F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */,
+				9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2823,6 +2826,7 @@
 				A4B204FC1EC01291007DA418 /* JFImageGroupTableViewController.m in Sources */,
 				A4A134F71EA4BD6600FC4D67 /* AppInfo.swift in Sources */,
 				F9986A081EA61C2B002C502B /* MeViewController.swift in Sources */,
+				9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */,
 				A42EDE121EDEB21D00C0B500 /* FYLCityModel.m in Sources */,
 				F9986A3F1EA61C2B002C502B /* TravelTableViewCell.swift in Sources */,
 				F9E086671EA9BA630023EA43 /* RoomInfoModel.swift in Sources */,

@@ -126,9 +126,7 @@ class MeViewController: UITableViewController {
         }  else {
             // 未登录
             headImgView.setImage(placeholderImg, for: .normal)
-            
             nickNameButton.isHidden = false
-            
             lvScoreButton.isHidden = true
             levelButton.isHidden = true
         }
@@ -150,7 +148,6 @@ class MeViewController: UITableViewController {
     // MARK: - event response
     // 设置设置按钮和通知按钮
     private func setupSetAndNotification() {
-        
         let setBarButtonItem = UIBarButtonItem(image: UIImage(named: "mine_setting_button_normal_iPhone"), style: .done, target: self, action: #selector(setBarButtonItemAction))
         
         let notificationItem = UIBarButtonItem(customView: notificationBarButtonItem)
@@ -243,5 +240,7 @@ class MeViewController: UITableViewController {
             // 申请入驻
             navigationController?.pushViewController(ApplyToEnterViewController(), animated: true)
         }
+        
     }
+    
 }

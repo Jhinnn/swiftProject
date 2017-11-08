@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
     }
     // 加载页数
     var pageNumber: Int = 1
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

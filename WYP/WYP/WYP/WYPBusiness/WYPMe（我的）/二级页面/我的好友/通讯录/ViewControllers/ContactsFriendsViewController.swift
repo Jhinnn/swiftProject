@@ -17,6 +17,8 @@ class ContactsFriendsViewController: BaseViewController {
     var titleArray = NSMutableArray()
     var finalDataArray = NSMutableArray()
     var addFriendsPhoneNumber = String()
+    var searchDataArray = [PersonModel]()
+    
     
     // 搜索结果
     var searchResult: [AttentionPeopleModel]?
@@ -93,10 +95,6 @@ class ContactsFriendsViewController: BaseViewController {
             self.dataSourceArray = addressBookArray
             print(self.dataSourceArray)
             self.dealDataWithArray(array: self.dataSourceArray)
-//            let nickName = self.returnFirstWordWithString(str: "安全")
-//            let charArray:[CChar] = nickName.cString(using: String.Encoding.utf8)!
-//            let firstWord = charArray[0]
-//            print(firstWord)
             // 刷新单元格
             self.friendsTableView.reloadData()
             self.friendsTableView.mj_header.endRefreshing()
@@ -334,8 +332,8 @@ extension ContactsFriendsViewController: UITableViewDelegate, UITableViewDataSou
     }
  
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
-        return array
+//        let array = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","#"];
+        return titleArray as? [String]
     }
     
 }
@@ -349,17 +347,28 @@ extension ContactsFriendsViewController: AddFriendsTableViewCellDelegate {
 }
 
 extension ContactsFriendsViewController: UISearchBarDelegate {
+    /*
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var row: Int?
-        var arr = [String]()
         for i in 0..<dataSourceArray.count {
-            arr.append(dataSourceArray[i].name)
+            
+            let modal = dataSourceArray[i]
+            print(modal.name)
+            print(modal.mobileArray)
+            let frinedsPhoneNumberArray:[String] = modal.mobileArray
+            let
+            
+            //            let friendsPhoneNumber = modal.mobileArray[0]
+            
+//            if (searchBar.text == modal.name || searchBar.text == friendsPhoneNumber){
+//                searchDataArray.append(modal)
+//            }
         }
-        for i in 0..<arr.count {
-            if arr[i] == searchBar.text {
-                row = arr.index(of: searchBar.text ?? "")
-            }
-        }
-       friendsTableView.scrollToRow(at: IndexPath(row: row ?? 0, section: 0), at: .top, animated: true)
+ 
+        self.dealDataWithArray(array: searchDataArray)
+        self.friendsTableView.reloadData()
     }
+    */
 }
+
+
+

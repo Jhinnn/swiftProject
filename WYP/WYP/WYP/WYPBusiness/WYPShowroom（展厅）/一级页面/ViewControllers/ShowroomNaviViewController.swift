@@ -111,7 +111,6 @@ class ShowroomNaviViewController: BaseViewController {
     }
 
     private func viewConfig() {
-
         // 设置导航控制器
         searchTitleView.searchView.snp.updateConstraints { (make) in
             make.size.equalTo(CGSize(width: 210 * width_height_ratio, height: 30))

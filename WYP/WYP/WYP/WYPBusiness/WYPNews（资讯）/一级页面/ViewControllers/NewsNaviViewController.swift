@@ -116,10 +116,8 @@ class NewsNaviViewController: BaseViewController {
         view.addSubview(navTabBar)
         
     }
-    
     // 初始化视图
     func viewConfig() {
-        
         // 设置导航控制器
         self.navigationItem.titleView = searchTitleView
     }
@@ -132,7 +130,6 @@ class NewsNaviViewController: BaseViewController {
             make.height.equalTo(42)
         }
     }
-    
     lazy var searchViewController: PYSearchViewController = {
         let hotSearchArray = ["赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017","赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017"]
         
@@ -195,11 +192,12 @@ class NewsNaviViewController: BaseViewController {
         return mainView
     }()
     
-    lazy var searchTitleView: navTitleView = {
-        let searchTitleView = navTitleView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 34))
+    lazy var searchTitleView: AdvisorySearchTitleView = {
+        let searchTitleView = AdvisorySearchTitleView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 34))
         searchTitleView.delegate = self
         return searchTitleView
     }()
+    
 }
 
 extension NewsNaviViewController: UIScrollViewDelegate {

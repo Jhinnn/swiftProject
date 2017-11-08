@@ -149,10 +149,8 @@ class ScrambleForTicketNaviViewController: BaseViewController {
     }
 
     private func viewConfig() {
-        
         // 设置城市选择按钮
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
-        
         // 设置导航控制器
         self.navigationItem.titleView = searchTitleView
     }
@@ -244,15 +242,12 @@ class ScrambleForTicketNaviViewController: BaseViewController {
         leftBarButton.setImage(UIImage(named: "common_down_button_normal_iPhone"), for: .normal)
         leftBarButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         leftBarButton.addTarget(self, action: #selector(chooseCity(sender:)), for: .touchUpInside)
-        
         return leftBarButton
     }()
     
     // 导航栏上的view
     lazy var searchTitleView: commonSearchView = {
         let searchTitleView = commonSearchView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 34))
-
-        
         // 添加手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(searchNews(sender:)))
         tap.numberOfTapsRequired = 1

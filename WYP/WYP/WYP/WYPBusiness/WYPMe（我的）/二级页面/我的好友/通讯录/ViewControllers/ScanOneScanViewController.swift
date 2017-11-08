@@ -138,7 +138,7 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-//                messageLabel.text = metadataObj.stringValue
+                messageLabel.text = metadataObj.stringValue
                 if zhiXingCount == 0{
                     let vc = VerifyApplicationViewController()
                     vc.applyMobile = metadataObj.stringValue

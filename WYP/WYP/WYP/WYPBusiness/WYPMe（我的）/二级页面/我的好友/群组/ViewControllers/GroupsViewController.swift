@@ -15,6 +15,8 @@ class GroupsViewController: BaseViewController {
     var myJoinGroupTableView:UITableView?
     var myJoinGroupViewGlobal:UIView?
     var myManageGroupViewGlobal:UIView?
+    var myManageGroupViewLetfImage:UIImageView?
+    var myJoinGroupViewLetfImage:UIImageView?
     
     //我管理的群tableview的高度
     var ManagerTableViewHeight = 200
@@ -50,7 +52,7 @@ class GroupsViewController: BaseViewController {
         myManageGroupViewGlobal?.snp.makeConstraints { (make) in
             make.top.equalTo(view.snp.top).offset(14)
             make.left.right.equalTo(view)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         myManageGroupTableView?.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
@@ -60,7 +62,7 @@ class GroupsViewController: BaseViewController {
         myJoinGroupViewGlobal?.snp.makeConstraints { (make) in
             make.top.equalTo((myManageGroupTableView?.snp.bottom)!)
             make.left.right.equalTo(view)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         myJoinGroupTableView?.snp.makeConstraints { (make) in
                 make.left.right.equalTo(view)
@@ -188,14 +190,22 @@ class GroupsViewController: BaseViewController {
         //我管理的群
         let myManageGroupView = UIView()
         myManageGroupView.backgroundColor = UIColor.white
+        let leftImageView = UIImageView()
+        myManageGroupViewLetfImage = leftImageView
+        leftImageView.image = UIImage(named: "chat_icon_advance_normalmore")
+        myManageGroupView.addSubview(leftImageView)
+        leftImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(myManageGroupView).offset(10)
+            make.centerY.equalTo(myManageGroupView)
+            make.height.width.equalTo(13)
+        }
         let myManageGroupViewNameLabel = UILabel()
         myManageGroupViewNameLabel.text = "我管理的群"
         myManageGroupViewNameLabel.textColor = UIColor.black
         myManageGroupView.addSubview(myManageGroupViewNameLabel)
         myManageGroupViewNameLabel.snp.makeConstraints { (make) in
             make.center.equalTo(myManageGroupView.snp.center)
-            make.left.equalTo(myManageGroupView.snp.left).offset(30)
-            
+            make.left.equalTo(leftImageView.snp.right).offset(10)
         }
         view.addSubview(myManageGroupView)
         myManageGroupViewGlobal = myManageGroupView
@@ -212,16 +222,26 @@ class GroupsViewController: BaseViewController {
         //我加入的群
         let myJionGroupView = UIView()
         myJionGroupView.backgroundColor = UIColor.white
+        let leftImageView2 = UIImageView()
+        myJoinGroupViewLetfImage = leftImageView2
+        leftImageView2.image = UIImage(named: "chat_icon_advance_normalmore")
+        myJionGroupView.addSubview(leftImageView2)
+        leftImageView2.snp.makeConstraints { (make) in
+            make.left.equalTo(myJionGroupView).offset(10)
+            make.centerY.equalTo(myJionGroupView)
+            make.height.width.equalTo(13)
+        }
         let myJoingroupViewNameLabel = UILabel()
         myJoingroupViewNameLabel.text = "我加入的群"
         myJoingroupViewNameLabel.textColor = UIColor.black
         myJionGroupView.addSubview(myJoingroupViewNameLabel)
         myJoingroupViewNameLabel.snp.makeConstraints { (make) in
             make.center.equalTo(myJionGroupView.snp.center)
-            make.left.equalTo(myJionGroupView.snp.left).offset(30)
+            make.left.equalTo(leftImageView2.snp.right).offset(10)
         }
         view.addSubview(myJionGroupView)
         myJoinGroupViewGlobal = myJionGroupView
+        
         //我加入的群--添加手势
         let clickMyJoinGroupGesture = UITapGestureRecognizer(target: self, action: #selector(clickMyJoinGroupViewTap))
         myJionGroupView.addGestureRecognizer(clickMyJoinGroupGesture)
@@ -252,6 +272,7 @@ class GroupsViewController: BaseViewController {
                     make.height.equalTo(myManageGroupTableViewHeight)
                 })
             }
+            myManageGroupViewLetfImage?.transform = CGAffineTransform(rotationAngle: 1.57)
             view.layoutIfNeeded()
             return
         }
@@ -260,6 +281,7 @@ class GroupsViewController: BaseViewController {
             myManageGroupTableView?.snp.updateConstraints({ (make) in
                 make.height.equalTo(0)
             })
+            myManageGroupViewLetfImage?.transform = CGAffineTransform(rotationAngle: .pi*2*360/360)
             view.layoutIfNeeded()
             return
         }
@@ -283,6 +305,7 @@ class GroupsViewController: BaseViewController {
                     make.height.equalTo(myJoinGroupTableViewHeight)
                 })
             }
+            myJoinGroupViewLetfImage?.transform = CGAffineTransform(rotationAngle: 1.57)
             view.layoutIfNeeded()
             return
         }
@@ -291,6 +314,7 @@ class GroupsViewController: BaseViewController {
             myJoinGroupTableView?.snp.updateConstraints({ (make) in
                 make.height.equalTo(0)
             })
+            myJoinGroupViewLetfImage?.transform = CGAffineTransform(rotationAngle: .pi*2*360/360)
             view.layoutIfNeeded()
             return
             
