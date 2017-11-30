@@ -17,6 +17,9 @@ class NewsVideosViewController: BaseViewController {
     // 搜索关键字
     var keyword: String?
     
+    //刷新次数
+    var upnumb: Int = 0
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,8 +108,9 @@ class NewsVideosViewController: BaseViewController {
                 }
             }
         } else {
-            NetRequest.newsNetRequest(page: "\(pageNumber)", type_id: "4", uid: AppInfo.shared.user?.userId ?? "", userId: AppInfo.shared.user?.userId ?? "") { (success, info, result) in
+            NetRequest.newsNetRequest(page: "\(pageNumber)", type_id: "4", uid: AppInfo.shared.user?.userId ?? "", userId: AppInfo.shared.user?.userId ?? "", upParams: upnumb) { (success, info, result) in
                 if success {
+                    self.upnumb = self.upnumb + 1
                     
                     let array = result!.value(forKey: "ziXun")
                     let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)

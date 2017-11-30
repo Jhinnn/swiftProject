@@ -134,6 +134,12 @@ public func deviceTypeIPhone6Plus() -> Bool {
     return UIScreen.main.bounds.size.height == 736
 }
 
+
+// 判断设置iphone X
+public func deviceTypeIPhoneX() -> Bool {
+    return UIScreen.main.bounds.size.height == 812
+}
+
 // 资讯分页导航
 public var newsCurrentIndex: NSInteger = 0
 // 展厅分页导航

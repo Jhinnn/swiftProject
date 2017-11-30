@@ -23,6 +23,9 @@ class NewsViewController: BaseViewController {
     // 搜索关键字
     var keyword: String?
     
+    //刷新次数
+    var upnumb: Int = 0
+    
     // banner数据
     var bannerData: [BannerModel]?
     // banner图片
@@ -155,8 +158,9 @@ class NewsViewController: BaseViewController {
                 }
             }
         } else {
-            NetRequest.newsNetRequest(page: "\(pageNumber)", type_id: newsType ?? "", uid: AppInfo.shared.user?.userId ?? "", userId: AppInfo.shared.user?.userId ?? "") { (success, info, result) in
+            NetRequest.newsNetRequest(page: "\(pageNumber)", type_id: newsType ?? "", uid: AppInfo.shared.user?.userId ?? "", userId: AppInfo.shared.user?.userId ?? "", upParams: upnumb) { (success, info, result) in
                 if success {
+                    self.upnumb = self.upnumb + 1
                     var news = [InfoModel]()
                     // 资讯
                     let array = result?.value(forKey: "ziXun")

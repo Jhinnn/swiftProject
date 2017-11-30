@@ -609,12 +609,14 @@ class NetRequest {
     
     // MARK: - 资讯相关
     // 资讯列表接口
-    class func newsNetRequest(page: String, type_id: String, uid: String, userId: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func newsNetRequest(page: String, type_id: String, uid: String, userId: String, upParams: Int, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
                                       "id": type_id,
                                       "uid": uid,
                                       "user_id": userId,
+                                      "upParams": upParams,
                                       "page": page]
         
         Alamofire.request(kApi_news, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -912,9 +914,10 @@ class NetRequest {
     }
     
     // 首页 - 首页列表
-    class func homeListNetRequest(uid: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func homeListNetRequest(uid: String, upnumb: Int, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
+                                      "upParams": upnumb,
                                       "uid": uid]
         Alamofire.request(kApi_homeList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {

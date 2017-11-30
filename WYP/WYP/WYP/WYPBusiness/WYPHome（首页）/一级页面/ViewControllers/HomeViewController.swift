@@ -39,6 +39,9 @@ class HomeViewController: BaseViewController {
     // 记录偏移量
     var navOffset: CGFloat = 0
     
+    //记录刷新次数
+    var upnumb: Int = 0
+    
     // 分组标题
     lazy var sectionTitleArray: [String] = {
 //        let sectionTitleArray = ["抢票专区", "热门发现", "推荐群组", "热点资讯", "", "精选话题"]
@@ -51,6 +54,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadHomeData()
         
         NetworkStatusListener()
         setupBarButtonItem()
@@ -118,7 +122,7 @@ class HomeViewController: BaseViewController {
         
         // 获取数据
         headlineArray = [String]()
-        loadHomeData()
+        
         // 获取轮播图的数据
         loadBannerData()
         
@@ -136,11 +140,14 @@ class HomeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(pushToStartAdv), name: NSNotification.Name(rawValue: "startAdv"), object: nil)
     }
     
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
         
     }
+   
     
+
     // 判断当前是不是最新版本
     func currentVersion() {
         NetRequest.getCurrentVersion { (success, array) in
@@ -395,15 +402,19 @@ class HomeViewController: BaseViewController {
     
     func loadHomeData() {
 
-        NetRequest.homeListNetRequest(uid: AppInfo.shared.user?.userId ?? "") { (success, info, result) in
+        NetRequest.homeListNetRequest(uid: (AppInfo.shared.user?.userId ?? ""), upnumb: self.upnumb) { (success, info, result) in
             if success {
                 self.homeData = HomeModel.deserialize(from: result) 
                 self.homeNewsData = self.homeData?.hotNews
                 self.headlineArray.append(self.homeData?.headLine?[0].text ?? "")
                 self.headlineArray.append(self.homeData?.headLine?[1].text ?? "")
+                self.upnumb = self.upnumb + 1
+                print(self.upnumb)
                 
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
+                
+                
                 
             } else {
                 print(info!)

@@ -95,7 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationIconBadgeNumber == 0 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationNumber"), object: nil)
         }
-        
+
+    
         if #available(iOS 10, *) {
 
             let entiity = JPUSHRegisterEntity()
