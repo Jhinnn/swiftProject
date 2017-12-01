@@ -34,6 +34,8 @@ class BaseNavigationController: UINavigationController {
         
         self.interactivePopGestureRecognizer?.isEnabled = false
         pan?.delegate = self
+        
+        
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {

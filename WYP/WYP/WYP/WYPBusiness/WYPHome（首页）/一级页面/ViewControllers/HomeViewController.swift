@@ -444,7 +444,7 @@ class HomeViewController: BaseViewController {
     
     // 设置表视图头视图
     lazy var syBanner: SYBannerView = {
-        let banner = SYBannerView(frame: CGRect(x: 0, y: 70, width: kScreen_width, height: 180 * width_height_ratio))
+        let banner = SYBannerView(frame: CGRect(x: 0, y: 80, width: kScreen_width, height: 180 * width_height_ratio))
         banner.delegate = self
         return banner
     }()

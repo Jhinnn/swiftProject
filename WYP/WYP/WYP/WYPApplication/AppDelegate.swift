@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guidePageWindow.backgroundColor = UIColor.clear
         guidePageWindow.windowLevel = UIWindowLevelStatusBar
         guidePageWindow.rootViewController = GuideViewController()
+       
         return guidePageWindow
     }()
     
@@ -53,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window?.backgroundColor = UIColor.themeColor
+        
+        print("屏目尺寸\(self.window?.bounds)")
 
         // MARK: - 设置导航条样式
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -398,6 +401,7 @@ extension AppDelegate: RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMRece
         }
         
     }
+
     
  }
  
