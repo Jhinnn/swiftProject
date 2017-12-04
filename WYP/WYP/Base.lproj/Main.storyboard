@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="207" sectionHeaderHeight="52" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="qps-qu-d68">
-                                <rect key="frame" x="0.0" y="24" width="375" height="739"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="763"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="classificationBtnCellIdentifier" rowHeight="170" id="CZV-pU-RCJ">
@@ -778,7 +778,7 @@
                             <constraint firstAttribute="bottom" secondItem="qps-qu-d68" secondAttribute="bottom" constant="49" id="51f-XD-s6I"/>
                             <constraint firstAttribute="trailing" secondItem="qps-qu-d68" secondAttribute="trailing" id="S1M-9b-D9Y"/>
                             <constraint firstItem="qps-qu-d68" firstAttribute="leading" secondItem="BwV-Wv-mep" secondAttribute="leading" id="abq-ia-uqZ"/>
-                            <constraint firstItem="qps-qu-d68" firstAttribute="top" secondItem="Nc1-2k-ay7" secondAttribute="bottom" constant="-64" id="epZ-Zg-rcR"/>
+                            <constraint firstItem="qps-qu-d68" firstAttribute="top" secondItem="Nc1-2k-ay7" secondAttribute="bottom" constant="-88" id="epZ-Zg-rcR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lQv-m2-TUf"/>
