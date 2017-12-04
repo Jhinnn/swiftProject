@@ -52,7 +52,7 @@ class AboutViewController: BaseViewController {
     
     lazy var versionLabel: UILabel = {
         let versionLabel = UILabel()
-        versionLabel.text = "1001阿拉丁1.0.4"
+        versionLabel.text = "1001阿拉丁1.8"
         versionLabel.font = UIFont.systemFont(ofSize: 15)
         versionLabel.textAlignment = .center
         
