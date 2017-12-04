@@ -69,6 +69,8 @@ class GuideViewController: BaseViewController {
         } else if deviceTypeIPhone6Plus() {
             // 是5.5寸
             size = 5.5
+        } else{
+             size = 5.5
         }
         // 拼接图片完整的名字
         let newImageName = "\(imageName)_\(size).png"

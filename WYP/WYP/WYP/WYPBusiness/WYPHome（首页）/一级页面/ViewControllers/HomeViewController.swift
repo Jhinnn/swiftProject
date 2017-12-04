@@ -77,7 +77,7 @@ class HomeViewController: BaseViewController {
                 self.navigationController?.navigationBar.isTranslucent = true
                 self.navigationController?.navigationBar.subviews.first?.alpha = 0
                 if self.view.frame.size.height == 812.0{
-                 
+        
                     self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
                  
                 }else{
@@ -85,8 +85,8 @@ class HomeViewController: BaseViewController {
                 }
                 
             } else {
-                self.searchTitleView.alpha = 1
-                self.navigationController?.navigationBar.isTranslucent = false
+                self.searchTitleView.alpha = 0
+                
                 
             }
         }
