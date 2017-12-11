@@ -93,8 +93,10 @@ class NewsNaviViewController: BaseViewController {
             viewArray.append(news)
         }
         
-        let topic = NewsTopicViewController()
-        viewArray.append(topic)
+        let tallk = TallkViewController()
+        tallk.newsType = "1"
+        viewArray.append(tallk)
+        
         subViewControllers = viewArray
         
         //添加视图控制器

@@ -84,6 +84,7 @@
 		A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4ECDEFE1E83A47300A05B40 /* LBCodeButton.swift */; };
 		A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F790E31E8147D500B3EA57 /* AppDelegate+Extension.swift */; };
 		A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */; };
+		EF33619A1FDD0BBA00F85954 /* TallkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3361991FDD0BBA00F85954 /* TallkViewController.swift */; };
 		F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */; };
 		F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307F1EC18DD800DF5E47 /* RecordModel.swift */; };
 		F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91330821EC1B89000DF5E47 /* RecordsTableViewCell.swift */; };
@@ -454,6 +455,7 @@
 		A4FE0E4A1EA8591500F13C8F /* PooCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PooCodeView.h; sourceTree = "<group>"; };
 		A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
 		B6C9247D1A1409A06196536E /* Pods-WYP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.debug.xcconfig"; sourceTree = "<group>"; };
+		EF3361991FDD0BBA00F85954 /* TallkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallkViewController.swift; sourceTree = "<group>"; };
 		F90563211F46D1FC00C396DD /* WYP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYP.entitlements; sourceTree = "<group>"; };
 		F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackRecordViewController.swift; sourceTree = "<group>"; };
 		F913307F1EC18DD800DF5E47 /* RecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -2201,6 +2203,7 @@
 				F99869AE1EA61C2B002C502B /* NewsNaviViewController.swift */,
 				F99869AF1EA61C2B002C502B /* NewsPhotosViewController.swift */,
 				F99869B01EA61C2B002C502B /* NewsTopicViewController.swift */,
+				EF3361991FDD0BBA00F85954 /* TallkViewController.swift */,
 				F99869B11EA61C2B002C502B /* NewsVideosViewController.swift */,
 				F99869B21EA61C2B002C502B /* NewsViewController.swift */,
 			);
@@ -2972,6 +2975,7 @@
 				F9599BC81EB20CE300440E66 /* TicketTimeCell.swift in Sources */,
 				F9599BC61EB20CE300440E66 /* TheaterMapCell.swift in Sources */,
 				F9438E891EB88FAB006AA065 /* RoomSearchResultViewController.swift in Sources */,
+				EF33619A1FDD0BBA00F85954 /* TallkViewController.swift in Sources */,
 				F9FE905D1F9F024800D31F3C /* SGQRCodeScanningView.m in Sources */,
 				F9E725BE1F3D654900BDE8A0 /* SeriveTermsViewController.swift in Sources */,
 				F9FE905C1F9F024800D31F3C /* SGQRCodeScanManager.m in Sources */,
@@ -3194,7 +3198,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JYGJJ26C2T;
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
@@ -3227,7 +3231,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JYGJJ26C2T;
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
