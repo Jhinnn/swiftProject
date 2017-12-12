@@ -75,14 +75,21 @@ class HomeViewController: BaseViewController {
             if self.navOffset == 0 {
                 self.searchTitleView.alpha = 0.5
                 self.navigationController?.navigationBar.isTranslucent = true
+                self.navigationController?.navBarTintColor = UIColor.blue
                 self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            
                 if self.view.frame.size.height == 812.0{
         
                     self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
+                  
                  
                 }else{
                     self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+                    
                 }
+                self.tableView.snp.makeConstraints({ (make) in
+                    make.top.equalTo(self.view.snp.top)
+                })
                 
             } else {
                 self.searchTitleView.alpha = 0

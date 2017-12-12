@@ -94,7 +94,7 @@ class NewsNaviViewController: BaseViewController {
         }
         
         let tallk = TallkViewController()
-        tallk.newsType = "1"
+        tallk.newsType = "12"
         viewArray.append(tallk)
         
         subViewControllers = viewArray
