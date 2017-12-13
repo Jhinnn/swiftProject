@@ -273,18 +273,37 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 //            navigationController?.pushViewController(community, animated: true)
             
             
-            // 跳转到聊天页面
+//            // 跳转到聊天页面
+//            let sectionTitles : NSArray = letterResultArray?.object(at: indexPath.section-1) as! NSArray
+//            for people in personSource {
+//                if people.name == sectionTitles.object(at: indexPath.row) as! String {
+//                    let conversationVC = ChatDeatilViewController()
+//                    conversationVC.conversationType = RCConversationType.ConversationType_PRIVATE
+//                    conversationVC.targetId = people.peopleId
+//                    conversationVC.title = people.name
+//                    conversationVC.flag = 11
+//                    navigationController?.pushViewController(conversationVC, animated: true)
+//                }
+//            }
+            
+            
+            
+            
             let sectionTitles : NSArray = letterResultArray?.object(at: indexPath.section-1) as! NSArray
             for people in personSource {
                 if people.name == sectionTitles.object(at: indexPath.row) as! String {
-                    let conversationVC = ChatDeatilViewController()
-                    conversationVC.conversationType = RCConversationType.ConversationType_PRIVATE
-                    conversationVC.targetId = people.peopleId
-                    conversationVC.title = people.name
-                    conversationVC.flag = 11
-                    navigationController?.pushViewController(conversationVC, animated: true)
+                    // 跳转到个人资料页面
+                    let personalInformationVC = PersonalInformationViewController()
+                    personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+                    personalInformationVC.targetId = people.peopleId
+                    personalInformationVC.name = people.name
+                    navigationController?.pushViewController(personalInformationVC, animated: true)
                 }
             }
+            
+            
+            
+            
         }
     }
 }

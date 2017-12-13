@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
@@ -329,6 +330,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewController.swift; sourceTree = "<group>"; };
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
@@ -1924,6 +1926,7 @@
 				F9FA08F31EB9C9A200E71E4D /* SearchFriendsResultViewController.swift */,
 				9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */,
 				9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */,
+				38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2757,6 +2760,7 @@
 				F9986A531EA61C2B002C502B /* ShowroomNaviViewController.swift in Sources */,
 				F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */,
 				F9986A141EA61C2B002C502B /* AttentionRoomViewController.swift in Sources */,
+				38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */,
 				F94351BB1EDFBE0600FB4831 /* GroupsMemberListViewController.swift in Sources */,
 				F96FEEBA1F14A9C70003C58F /* WBImageBrowserView.m in Sources */,
 				A4B205011EC01291007DA418 /* JFPhotoView.m in Sources */,
