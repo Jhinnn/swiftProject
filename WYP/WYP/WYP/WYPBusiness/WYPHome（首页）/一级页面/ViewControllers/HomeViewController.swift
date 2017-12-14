@@ -81,7 +81,6 @@ class HomeViewController: BaseViewController {
                 if self.view.frame.size.height == 812.0{
         
                     self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
-                  
                  
                 }else{
                     self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)

@@ -86,6 +86,8 @@
 		A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F790E31E8147D500B3EA57 /* AppDelegate+Extension.swift */; };
 		A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */; };
 		EF33619A1FDD0BBA00F85954 /* TallkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3361991FDD0BBA00F85954 /* TallkViewController.swift */; };
+		EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */; };
+		EFB3AE051FE2131600E8FC5A /* GroupdetalsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFB3AE041FE2131600E8FC5A /* GroupdetalsViewController.storyboard */; };
 		F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */; };
 		F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307F1EC18DD800DF5E47 /* RecordModel.swift */; };
 		F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91330821EC1B89000DF5E47 /* RecordsTableViewCell.swift */; };
@@ -458,6 +460,8 @@
 		A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
 		B6C9247D1A1409A06196536E /* Pods-WYP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.debug.xcconfig"; sourceTree = "<group>"; };
 		EF3361991FDD0BBA00F85954 /* TallkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallkViewController.swift; sourceTree = "<group>"; };
+		EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDeailsViewController.swift; sourceTree = "<group>"; };
+		EFB3AE041FE2131600E8FC5A /* GroupdetalsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupdetalsViewController.storyboard; sourceTree = "<group>"; };
 		F90563211F46D1FC00C396DD /* WYP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYP.entitlements; sourceTree = "<group>"; };
 		F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackRecordViewController.swift; sourceTree = "<group>"; };
 		F913307F1EC18DD800DF5E47 /* RecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -1851,6 +1855,8 @@
 		F99869621EA61C2B002C502B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EFB3AE041FE2131600E8FC5A /* GroupdetalsViewController.storyboard */,
+				EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */,
 				F99869631EA61C2B002C502B /* GroupsViewController.swift */,
 				F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */,
 				F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */,
@@ -2676,6 +2682,7 @@
 				F9B660B71F04EA5400692DE2 /* WMPlayer.bundle in Resources */,
 				F985615C1EF8FE2000965183 /* image1.jpg in Resources */,
 				F9761C1B1F03AA6F009CAE49 /* Info.plist in Resources */,
+				EFB3AE051FE2131600E8FC5A /* GroupdetalsViewController.storyboard in Resources */,
 				A43C2A561E8102F70037BB5A /* Main.storyboard in Resources */,
 				A44B22791EA628CA001A02AC /* fzjzjw.ttf in Resources */,
 				A4301C281E5FDEB000E8E222 /* Assets.xcassets in Resources */,
@@ -2889,6 +2896,7 @@
 				F9B1878B1F61184C00394D44 /* ClassifyTableViewCell.swift in Sources */,
 				F94756D51F6E7518008EA8F3 /* HeadModel.swift in Sources */,
 				F9986A441EA61C2B002C502B /* NewsVideosViewController.swift in Sources */,
+				EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */,
 				F9FA08ED1EB9863500E71E4D /* AttentionPeopleModel.swift in Sources */,
 				F91E42D11EA70DC200CDCE19 /* ContentModel.swift in Sources */,
 				A4B2050D1EC01291007DA418 /* StatementCell.m in Sources */,

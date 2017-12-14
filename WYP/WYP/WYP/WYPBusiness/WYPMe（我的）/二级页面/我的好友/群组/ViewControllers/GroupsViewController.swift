@@ -18,6 +18,7 @@ class GroupsViewController: BaseViewController {
     var myManageGroupViewLetfImage:UIImageView?
     var myJoinGroupViewLetfImage:UIImageView?
     
+    
     //我管理的群tableview的高度
     var ManagerTableViewHeight = 200
     //我加入的群tableview的高度
