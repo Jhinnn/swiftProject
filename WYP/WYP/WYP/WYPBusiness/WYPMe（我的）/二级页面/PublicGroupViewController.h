@@ -19,6 +19,8 @@
 @property (copy, nonatomic) NSString * uid;
 
 @property (copy, nonatomic) NSString * userToken;
+//作为发布话题需要的布局以及方法 默认为1
+@property (copy, nonatomic) NSString * post_topic;
 
 // 判断是否含有表情
 - (BOOL)stringContainsEmoji:(NSString *)string;

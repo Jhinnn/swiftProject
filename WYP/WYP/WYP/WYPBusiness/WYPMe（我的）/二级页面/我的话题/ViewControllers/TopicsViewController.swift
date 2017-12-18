@@ -18,7 +18,8 @@ class TopicsViewController: BaseViewController {
         super.viewDidLoad()
         
         title = "我的话题"
-        
+        let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
+        navigationItem.rightBarButtonItem = releaseBtn
         setupUI()
     }
     
@@ -98,14 +99,24 @@ class TopicsViewController: BaseViewController {
         noDataButton.layer.cornerRadius = 5.0
         noDataButton.layer.borderWidth = 1
         noDataButton.layer.borderColor = UIColor.themeColor.cgColor
-        noDataButton.addTarget(self, action: #selector(pushToIssueTopic(sender:)), for: .touchUpInside)
+        noDataButton.addTarget(self, action: #selector(releaseDynamic ), for: .touchUpInside)
         return noDataButton
     }()
     
-    func pushToIssueTopic(sender: UIButton) {
-        let board = UIStoryboard.init(name: "Main", bundle: nil)
-        let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
-        navigationController?.pushViewController(issue, animated: true)
+//    func pushToIssueTopic(sender: UIButton) {
+//        let board = UIStoryboard.init(name: "Main", bundle: nil)
+//        let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
+//        navigationController?.pushViewController(issue, animated: true)
+//    }
+    func releaseDynamic() {
+        UserDefaults.standard.set(AppInfo.shared.user?.token ?? "", forKey: "token")
+        var releaseVC = PublicGroupViewController()
+        releaseVC = PublicGroupViewController.init()
+        releaseVC.userToken = AppInfo.shared.user?.token ?? ""
+        releaseVC.uid = AppInfo.shared.user?.userId ?? ""
+        releaseVC.post_topic = "1"
+        print(releaseVC.post_topic)
+        navigationController?.pushViewController(releaseVC, animated: true)
     }
     
     func loadNetData(requestType: RequestType) {

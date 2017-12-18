@@ -50,8 +50,11 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"发布社区动态";
-    
+    if ([self.post_topic isEqualToString:@"1"]) {
+        self.title = @"发布话题";
+    }else{
+        self.title = @"发布社区动态";
+    }
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -71,15 +74,10 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     [bgScrollView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
+  
+
     UIView *bgView = [[UIView alloc]init];
     [bgScrollView addSubview:bgView];
-    [bgView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.top.equalTo(0);
-        make.width.equalTo(kScreen_width);
-        //make.height.equalTo(kScreen_height);
-    }];
     
     //文本输入
     _topTextView = [[LPlaceholderTextView alloc]init];
@@ -88,16 +86,81 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     _topTextView.keyboardType = UIKeyboardTypeDefault;
     _topTextView.delegate = self;
     _topTextView.scrollEnabled = YES;
-    _topTextView.placeholderText = @"分享身边对我的新鲜事...";
-
-    [bgView addSubview:_topTextView];
-    [_topTextView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.width.equalTo(self.view);
-        make.top.equalTo(64);
-        make.height.equalTo(kScreen_height/3);
-    }];
     
+    CGFloat  btn_with = 97 * kScreen_width/750;
+    CGFloat btn_x= 124* kScreen_width/750 ;
+    CGFloat btn_x_x =  17* kScreen_width/750 ;
+    
+    
+    if ([self.post_topic isEqualToString:@"1"]) {
+        
+//        分类？
+        UILabel * class_title = [[UILabel  alloc]init];
+        class_title.textColor = [self colorWithHexString:@"666666" alpha:1.0 ];
+        class_title.font = [UIFont systemFontOfSize:20] ;
+        class_title.text = @"分类";
+        class_title.textAlignment = NSTextAlignmentLeft;
+        class_title.frame=CGRectMake(15, 0, 54, btn_with);
+        [self.view addSubview:class_title];
+        
+        NSArray  * title_array=[NSArray arrayWithObjects:@"演出文化",@"旅游文化",@"体育文化",@"电影文化",@"会展文化",@"饮食文化", nil];
+         for (int a=0; a<6; a++) {
+            UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(btn_x_x+btn_x * a, btn_with, btn_with, btn_with)];
+            btn.titleLabel.numberOfLines=2;
+            [btn setBackgroundImage:[UIImage imageNamed:@"theme_icon_option_normal"] forState:UIControlStateNormal];
+            [btn setTintColor:[UIColor blackColor]];
+            [btn setTitle:title_array[a] forState:UIControlStateNormal];
+             btn.tag=10013+a;
+            [bgView addSubview:btn];
+        }
+        UILabel * class_underline = [[UILabel  alloc]init];
+        class_underline.backgroundColor = [self colorWithHexString:@"EAEAEA" alpha:1.0 ];
+        class_underline.frame=CGRectMake(26, btn_with*3, kScreen_width-26, 1);
+        [bgView addSubview:class_underline];
+//        话题？
+        UILabel * topic_title = [[UILabel  alloc]init];
+        topic_title.textColor = [self colorWithHexString:@"666666" alpha:1.0 ];
+        topic_title.font = [UIFont systemFontOfSize:20] ;
+        topic_title.text = @"话题";
+        topic_title.textAlignment = NSTextAlignmentLeft;
+        topic_title.frame=CGRectMake(15, CGRectGetMaxY(class_underline.frame), 54, btn_with);
+        [bgView addSubview:topic_title];
+        [bgView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(0);
+            make.top.equalTo(0);
+            make.width.equalTo(kScreen_width);
+            //make.height.equalTo(kScreen_height);
+        }];
+        [_topTextView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(0);
+            make.width.equalTo(CGRectGetMaxY(topic_title.frame));
+            make.top.equalTo(64);
+            make.height.equalTo(kScreen_height/3);
+        }];
+        _topTextView.placeholderText = @"添加描述和配图（选填）";
+
+    }else{
+        [bgView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(0);
+            make.top.equalTo(0);
+            make.width.equalTo(kScreen_width);
+            //make.height.equalTo(kScreen_height);
+        }];
+        [_topTextView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(0);
+            make.width.equalTo(self.view);
+            make.top.equalTo(64);
+            make.height.equalTo(kScreen_height/3);
+        }];
+        _topTextView.placeholderText = @"分享身边对我的新鲜事...";
+
+    }
+   
+    
+
+  
+    [bgView addSubview:_topTextView];
+
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 3;
@@ -538,5 +601,52 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+//颜色十六进制转二进制+
+- (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha {
+    // 删除字符串中的空格
+    NSString * colorStr = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([colorStr length] < 6) {
+        return [UIColor clearColor];
+    }
+    
+    // strip 0X if it appears
+    // 如果是0x开头的，那么截取字符串，字符串从索引为2的位置开始，一直到末尾
+    if ([colorStr hasPrefix:@"0X"]) {
+        colorStr = [colorStr substringFromIndex:2];
+    }
+    
+    // 如果是#开头的，那么截取字符串，字符串从索引为1的位置开始，一直到末尾
+    if ([colorStr hasPrefix:@"#"]) {
+        colorStr = [colorStr substringFromIndex:1];
+    }
+    
+    // 除去所有开头字符后 再判断字符串长度
+    if ([colorStr length] != 6) {
+        return [UIColor clearColor];
+    }
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    //red
+    NSString * redStr = [colorStr substringWithRange:range];
+    //green
+    range.location = 2;
+    NSString * greenStr = [colorStr substringWithRange:range];
+    //blue
+    range.location = 4;
+    NSString * blueStr = [colorStr substringWithRange:range];
+    
+    // Scan values 将十六进制转换成二进制
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:redStr] scanHexInt:&r];
+    [[NSScanner scannerWithString:greenStr] scanHexInt:&g];
+    [[NSScanner scannerWithString:blueStr] scanHexInt:&b];
+    return [UIColor colorWithRed:((float)r / 255.0f) green:((float)g / 255.0f) blue:((float)b / 255.0f) alpha:alpha];
+}
+
 
 @end
