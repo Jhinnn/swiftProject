@@ -42,8 +42,15 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - setter and getter
+    
+    
+    
     lazy var memberImageView: UIImageView = {
         let memberImageView = UIImageView()
+        memberImageView.layer.cornerRadius = 27.5
+        memberImageView.layer.masksToBounds = true
+        memberImageView.backgroundColor = UIColor.init(hexColor: "a1a1a1")
+        
         return memberImageView
     }()
     lazy var memberNameLabel: UILabel = {

@@ -16,7 +16,7 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "我的消息"
+        
         
         setupUI()
         

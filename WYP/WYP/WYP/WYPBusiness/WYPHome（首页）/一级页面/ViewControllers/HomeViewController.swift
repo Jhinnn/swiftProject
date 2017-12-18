@@ -75,7 +75,6 @@ class HomeViewController: BaseViewController {
             if self.navOffset == 0 {
                 self.searchTitleView.alpha = 0.5
                 self.navigationController?.navigationBar.isTranslucent = true
-                self.navigationController?.navBarTintColor = UIColor.blue
                 self.navigationController?.navigationBar.subviews.first?.alpha = 0
             
                 if self.view.frame.size.height == 812.0{

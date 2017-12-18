@@ -19,6 +19,8 @@ class GroupDeailsViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         setupUIFrame()
+        tableview.dataSource = self
+        tableview.delegate = self
        
     
         // Do any additional setup after loading the view.
@@ -31,7 +33,8 @@ class GroupDeailsViewController: BaseViewController {
         // 设置导航条透明度
         DispatchQueue.main.async {
             self.navBarBgAlpha = 0
-            //            self.navigationController?.navigationBar.alpha = 0
+            
+          
         }
         
     }
@@ -42,12 +45,11 @@ class GroupDeailsViewController: BaseViewController {
     }
     func setupUIFrame() {
         view.addSubview(tableview)
-        self.navBarBgAlpha = 0
-        self.navBarTintColor = UIColor.blue
+       
         self.navigationController?.setToolbarHidden(true, animated: false)
         
         tableview.snp.makeConstraints({ (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 50, 0))
+            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
         })
         
         headerImgView.snp.makeConstraints { (make) in
@@ -90,16 +92,28 @@ class GroupDeailsViewController: BaseViewController {
 }
 extension GroupDeailsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let call = UITableViewCell()
-        call.textLabel?.text = "测试"
+        let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
+        cell.textLabel?.text = "测试"
         
-        return call
+        return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return 10
     }
     func numberOfSections(in tableView: UITableView) -> Int{
         return 3
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var tatle: String?
+        if section == 0 {
+            tatle = "北京"
+        
+        }
+        if section == 1 {
+            tatle = "上海"
+        }
+        return tatle
     }
     
 }

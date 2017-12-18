@@ -133,19 +133,19 @@ class ChatDeatilViewController: RCConversationViewController {
     
     // 查看群成员
     func checkGroupMember(sender: UIBarButtonItem) {
-//        let groupsMember = GroupsMemberListViewController()
-//        groupsMember.groupId = self.targetId
-//        groupsMember.title = self.title
-//        navigationController?.pushViewController(groupsMember, animated: true)
-        
+        let groupsMember = GroupsMemberListViewController()
+        groupsMember.groupId = self.targetId
+        groupsMember.title = self.title
+        navigationController?.pushViewController(groupsMember, animated: true)
+
        
         
-        let groupdetail = GroupDeailsViewController()
-        groupdetail.title = self.title
-        groupdetail.groupId = self.targetId
-       
-        
-        navigationController?.pushViewController(groupdetail, animated: true)
+//        let groupdetail = GroupDeailsViewController()
+//        groupdetail.title = self.title
+//        groupdetail.groupId = self.targetId
+//
+//
+//        navigationController?.pushViewController(groupdetail, animated: true)
         
     }
     

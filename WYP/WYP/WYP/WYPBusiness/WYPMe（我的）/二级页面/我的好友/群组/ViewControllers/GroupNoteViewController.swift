@@ -12,24 +12,65 @@ class GroupNoteViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+       
+        setupUI()
+        layoutPageSubviews()
+        
 
         // Do any additional setup after loading the view.
     }
+    
+  
+    
+    func setupUI(){
+        
+        self.title = "群公告"
+        tableView.delegate = self
+        view.addSubview(tableView)
+        tableView.delegate = self
+       
+        
+    }
+    
+    func layoutPageSubviews(){
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+          
+        }
+    }
+   
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+    lazy var tableView: UITableView = {
+    let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "groupNoteCellIdentifier")
+    return tableView
+  
+    }()
+
+}
+
+extension GroupNoteViewController: UITableViewDelegate, UITableViewDataSource{
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+        
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = GroupNoteTableViewCell(style: .default, reuseIdentifier: "groupNoteCellIdentifier")
+        
+        
+        return cell
+        
+        
+    }
+    
+    
 }

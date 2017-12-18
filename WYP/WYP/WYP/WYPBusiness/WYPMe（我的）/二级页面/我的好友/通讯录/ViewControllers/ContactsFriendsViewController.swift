@@ -23,9 +23,6 @@ class ContactsFriendsViewController: BaseViewController {
     // 搜索结果
     var searchResult: [AttentionPeopleModel]?
     
-    
-    
-    
     /// 联系人模型数组
     var dataSourceArray = [PersonModel]()
     

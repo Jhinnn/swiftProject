@@ -21,14 +21,30 @@ class GroupsMemberListViewController: BaseViewController {
         
         viewConfig()
         layoutPageSubviews()
-        
+  
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+  
         loadGroupMember()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 设置导航条透明度
+        DispatchQueue.main.async {
+            self.navBarBgAlpha = 0
+            
+            
+        }
+        
+        
+    }
+
+    
     
     // MARK: - private method
     func viewConfig() {
@@ -36,13 +52,28 @@ class GroupsMemberListViewController: BaseViewController {
         let rightButton = UIBarButtonItem(title: "推荐", style: .done, target: self, action: #selector(recommendToFriends(sender:)))
         navigationItem.rightBarButtonItem = rightButton
         
+     
         view.addSubview(memberCollectionView)
+      
+       
+        
+        self.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     func layoutPageSubviews() {
+        
+       
+   
         memberCollectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            
+            make.top.equalTo(view.snp.top).offset(-64)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.bottom.equalTo(view.snp.bottom)
+            
         }
+       
+        
     }
     
     func loadGroupMember() {
@@ -66,6 +97,8 @@ class GroupsMemberListViewController: BaseViewController {
     lazy var memberCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScreen_width / 5 - 10, height: 75)
+        
+        
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let memberCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -74,6 +107,10 @@ class GroupsMemberListViewController: BaseViewController {
         memberCollectionView.dataSource = self
         memberCollectionView.register(GroupMemberCollectionViewCell.self, forCellWithReuseIdentifier: "groupMemberCell")
         memberCollectionView.register(GroupsMemberListCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "groupMemberFooter")
+        memberCollectionView.register(GroupMemberListHeadCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "groupMemberhead")
+        
+        
+     
         return memberCollectionView
     }()
 }
@@ -91,11 +128,14 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupMemberCell", for: indexPath) as! GroupMemberCollectionViewCell
         cell.groupModel = groupDetail?.groupMember?[indexPath.row]
+        
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(25, 17, 25, 17)
     }
+   
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberFooter", for: indexPath) as! GroupsMemberListCollectionReusableView
@@ -108,33 +148,59 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
 
             footerView.delegate = self
             return footerView
+        }else{
+             let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberhead", for: indexPath) as! GroupMemberListHeadCollectionReusableView
+            headView.delegate = self
+            return headView
         }
+    
         return UICollectionReusableView()
     }
+    
+   
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: kScreen_width, height: 200)
+        return CGSize(width: kScreen_width, height: 800)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: kScreen_width, height: 220)
+    }
+    
+   
+  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let community = MyCommunityViewController()
-        community.title = "个人主页"
-        community.userId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
-        community.headImageUrl = groupDetail?.groupMember?[indexPath.item].userImage ?? ""
-        community.nickName = groupDetail?.groupMember?[indexPath.item].name
-        let fans = groupDetail?.groupMember?[indexPath.item].peopleFans ?? "0"
-        let friends = groupDetail?.groupMember?[indexPath.item].peopleFriends ?? "0"
-        community.fansCount = String.init(format: "粉丝:%@人", fans)
-        community.friendsCountLabel.text = String.init(format: "好友:%@人", friends)
-        community.type = "2"
-        if groupDetail?.groupMember?[indexPath.item].peopleId == AppInfo.shared.user?.userId {
-            community.userType = "200"
-        }
-        // 判断是否关注
-        if groupDetail?.groupMember?[indexPath.item].isFollow == "0" {
-            community.isFollowed = false
-        } else {
-            community.isFollowed = true
-        }
-        navigationController?.pushViewController(community, animated: true)
+//        let community = MyCommunityViewController()
+//        community.title = "个人主页"
+//        community.userId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
+//        community.headImageUrl = groupDetail?.groupMember?[indexPath.item].userImage ?? ""
+//        community.nickName = groupDetail?.groupMember?[indexPath.item].name
+//        let fans = groupDetail?.groupMember?[indexPath.item].peopleFans ?? "0"
+//        let friends = groupDetail?.groupMember?[indexPath.item].peopleFriends ?? "0"
+//        community.fansCount = String.init(format: "粉丝:%@人", fans)
+//        community.friendsCountLabel.text = String.init(format: "好友:%@人", friends)
+//        community.type = "2"
+//        if groupDetail?.groupMember?[indexPath.item].peopleId == AppInfo.shared.user?.userId {
+//            community.userType = "200"
+//        }
+//        // 判断是否关注
+//        if groupDetail?.groupMember?[indexPath.item].isFollow == "0" {
+//            community.isFollowed = false
+//        } else {
+//            community.isFollowed = true
+//        }
+//        navigationController?.pushViewController(community, animated: true)
+        
+          let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
+        personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+        personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
+        
+         navigationController?.pushViewController(personalInformationVC, animated: true)
+     
+        
+        
+        
     }
 }
 
@@ -150,6 +216,11 @@ extension GroupsMemberListViewController: GroupsMemberListCollectionDelegate {
                 SVProgressHUD.showError(withStatus: info!)
             }
         }
+    }
+    
+    func putGroupNote() {
+        let groupNoteVc = GroupNoteViewController()
+        self.navigationController?.pushViewController(groupNoteVc, animated: true)
     }
     
     func noDisturbing(sender: UISwitch) {
