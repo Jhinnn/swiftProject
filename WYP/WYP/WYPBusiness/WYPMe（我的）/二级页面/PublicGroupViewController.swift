@@ -207,5 +207,6 @@ extension PublicGroupViewController: HXPhotoViewDelegate{
     
     func photoViewUpdateFrame(_ frame: CGRect, with view: UIView!) {
         
+        
     }
 }
