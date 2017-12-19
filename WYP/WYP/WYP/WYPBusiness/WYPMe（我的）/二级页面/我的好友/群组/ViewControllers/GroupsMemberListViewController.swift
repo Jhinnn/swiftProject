@@ -79,6 +79,9 @@ class GroupsMemberListViewController: BaseViewController {
     func loadGroupMember() {
         NetRequest.groupInfoNetRequest(uid: AppInfo.shared.user?.userId ?? "", groupId: groupId ?? "") { (success, info, result) in
             if success {
+//                print(success)
+//                print(info!)
+//                print(result!)
                 self.groupDetail = ApplyGroupModel.deserialize(from: result)
                 self.memberCollectionView.reloadData()
             } else {
@@ -145,12 +148,16 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
             } else if notification == "1" {
                 footerView.switchBtn.isOn = true
             }
-
+            footerView.groupNoteConten.text = self.groupDetail?.board
+            footerView.groupDetalConten.text = self.groupDetail?.groupDetail
             footerView.delegate = self
             return footerView
         }else{
              let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberhead", for: indexPath) as! GroupMemberListHeadCollectionReusableView
             headView.delegate = self
+            let imgURL = URL.init(string: (self.groupDetail?.cover_url ?? "")!)
+            headView.headerImgView.sd_setImage(with: imgURL)
+            headView.groupNumb.text = "群编号:" + self.groupId!
             return headView
         }
     
@@ -220,6 +227,7 @@ extension GroupsMemberListViewController: GroupsMemberListCollectionDelegate {
     
     func putGroupNote() {
         let groupNoteVc = GroupNoteViewController()
+        groupNoteVc.groupId = self.groupId
         self.navigationController?.pushViewController(groupNoteVc, animated: true)
     }
     
