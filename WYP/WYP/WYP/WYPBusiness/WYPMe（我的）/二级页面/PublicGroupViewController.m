@@ -13,7 +13,7 @@
 
 #define kScreen_width UIScreen.mainScreen.bounds.size.width
 #define kScreen_height UIScreen.mainScreen.bounds.size.height
-
+#define MC_NavHeight (iPhoneX ? 88.f : 64.f)
 #import <Photos/Photos.h>
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVMediaFormat.h>
@@ -100,12 +100,12 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         class_title.font = [UIFont systemFontOfSize:20] ;
         class_title.text = @"分类";
         class_title.textAlignment = NSTextAlignmentLeft;
-        class_title.frame=CGRectMake(15, 0, 54, btn_with);
-        [self.view addSubview:class_title];
+        class_title.frame=CGRectMake(15, 88, 54, btn_with);
+        [bgView addSubview:class_title];
         
         NSArray  * title_array=[NSArray arrayWithObjects:@"演出文化",@"旅游文化",@"体育文化",@"电影文化",@"会展文化",@"饮食文化", nil];
          for (int a=0; a<6; a++) {
-            UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(btn_x_x+btn_x * a, btn_with, btn_with, btn_with)];
+            UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(btn_x_x+btn_x * a, CGRectGetMaxY(class_title.frame), btn_with, btn_with)];
             btn.titleLabel.numberOfLines=2;
             [btn setBackgroundImage:[UIImage imageNamed:@"theme_icon_option_normal"] forState:UIControlStateNormal];
             [btn setTintColor:[UIColor blackColor]];
@@ -115,7 +115,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         }
         UILabel * class_underline = [[UILabel  alloc]init];
         class_underline.backgroundColor = [self colorWithHexString:@"EAEAEA" alpha:1.0 ];
-        class_underline.frame=CGRectMake(26, btn_with*3, kScreen_width-26, 1);
+        class_underline.frame=CGRectMake(26,CGRectGetMaxY(class_title.frame)+ btn_with*2, kScreen_width-26, 1);
         [bgView addSubview:class_underline];
 //        话题？
         UILabel * topic_title = [[UILabel  alloc]init];
@@ -131,12 +131,14 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
             make.width.equalTo(kScreen_width);
             //make.height.equalTo(kScreen_height);
         }];
-        [_topTextView makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(0);
-            make.width.equalTo(CGRectGetMaxY(topic_title.frame));
-            make.top.equalTo(64);
-            make.height.equalTo(kScreen_height/3);
-        }];
+        CGFloat maxy=CGRectGetMaxY(topic_title.frame);
+        _topTextView.frame=CGRectMake(13, maxy, kScreen_width-26, 200);
+//        [_topTextView makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(0);
+//            make.width.equalTo(self.view);
+//            make.top.equalTo(64);
+//            make.height.equalTo(/3);
+//        }];
         _topTextView.placeholderText = @"添加描述和配图（选填）";
 
     }else{
