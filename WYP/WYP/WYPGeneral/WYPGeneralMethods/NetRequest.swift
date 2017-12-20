@@ -2081,66 +2081,6 @@ class NetRequest {
         }
     }
     
-    // 群组公告列表
-    class  func getGroupNoteListNetRequest(page: String, groupId: String, complete: @escaping ((Bool, String?, String?) -> Void)) {
-        let parameters: Parameters = ["access_token": access_token,
-                                      "method": "GET",
-                                      "rid": groupId,
-                                      "page": page,
-                                      "limit": "10"]
-        Alamofire.request(kApi_groupNoteList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
-            switch response.result {
-            case .success:
-                let json = JSON(response.result.value!)
-                // 获取code码
-                let code = json["code"].intValue
-                // 获取info信息
-                let info = json["info"].stringValue
-                if code == 400 {
-                    complete(false, info, nil)
-                } else {
-                    let array = json.dictionary?["data"]?.rawValue as? [[NSObject: AnyObject]]
-                    let data = try? JSONSerialization.data(withJSONObject: array as Any, options: JSONSerialization.WritingOptions.prettyPrinted)
-                    let strJson = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                    complete(true, info, strJson! as String)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    // 发布群组公告
-    class func publishGroupNoteNetRequest(rid: String?, open_id: String?, title: String?, content: String?, images: [String]?, complete: @escaping((Bool, String) -> Void)) {
-        let parameters : Parameters = ["access_token": access_token,
-                                       "method": "POST",
-                                       "rid": rid!,
-                                       "open_id": open_id!,
-                                       "title": title!,
-                                       "description": content!,
-                                       "baseImg1": images?[0] ?? "",
-                                       "baseImg2": images?[1] ?? "",
-                                       "baseImg3": images?[2] ?? ""]
-        Alamofire.request(kApi_publishGroupNote, method: .post, parameters: parameters, encoding: URLEncoding.default
-            , headers: nil).responseJSON { (response) in
-                switch response.result {
-                case .success:
-                    let json = JSON(response.result.value!)
-                    // 获取code码
-                    let code = json["code"].intValue
-                    // 获取info信息
-                    let info = json["info"].stringValue
-                    if code == 400 {
-                        complete(false, info)
-                    } else {
-                        complete(true, info)
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-        }
-    }
-    
     // 群组 - 申请入群
     class func enterGroupNetRequest(type: String, openId: String, groupId: String, comment: String, complete: @escaping ((Bool, String?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,

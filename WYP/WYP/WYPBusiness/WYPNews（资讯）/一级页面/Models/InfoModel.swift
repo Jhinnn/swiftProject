@@ -47,6 +47,8 @@ class InfoModel: HandyJSON {
     var advLink: String?
     // 资讯状态
     var status: String?
+    //话题类别
+    var topic: String?
     
     
     func mapping(mapper: HelpingMapper) {
@@ -68,6 +70,7 @@ class InfoModel: HandyJSON {
         mapper <<< self.isFollow <-- "is_follow"
         mapper <<< self.advLink <-- "adv_url"
         mapper <<< self.status <-- "status"
+        mapper <<< self.topic <-- "topic"
     }
     
     required init() {}

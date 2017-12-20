@@ -459,30 +459,30 @@ extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             return commentFrame.cellHeight ?? 0
         }
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 40))
-        headerView.backgroundColor = UIColor.white
-        // 图标视图
-        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
-        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
-        headerView.addSubview(iconView)
-        let hotCommentLabel = UILabel(frame: CGRect(x: 13, y: 10, width: 100, height: 30))
-        hotCommentLabel.text = "最新评论"
-        hotCommentLabel.font = UIFont.systemFont(ofSize: 15)
-        headerView.addSubview(hotCommentLabel)
-        
-        let commentNumLabel = UILabel()
-        commentNumLabel.frame = CGRect(x: kScreen_width - 50, y: 0, width: 60, height: 40)
-        commentNumLabel.font = UIFont.systemFont(ofSize: 10)
-        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
-        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
-        headerView.addSubview(commentNumLabel)
-        
-        return headerView
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 40))
+//        headerView.backgroundColor = UIColor.white
+//        // 图标视图
+//        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
+//        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
+//        headerView.addSubview(iconView)
+//        let hotCommentLabel = UILabel(frame: CGRect(x: 13, y: 10, width: 100, height: 30))
+//        hotCommentLabel.text = "最新评论"
+//        hotCommentLabel.font = UIFont.systemFont(ofSize: 15)
+//        headerView.addSubview(hotCommentLabel)
+//
+//        let commentNumLabel = UILabel()
+//        commentNumLabel.frame = CGRect(x: kScreen_width - 50, y: 0, width: 60, height: 40)
+//        commentNumLabel.font = UIFont.systemFont(ofSize: 10)
+//        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
+//        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
+//        headerView.addSubview(commentNumLabel)
+//
+//        return headerView
+//    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if commentData.count > 0 {
             let commentReply = CommentReplyViewController()

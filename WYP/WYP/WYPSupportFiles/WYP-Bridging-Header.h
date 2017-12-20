@@ -20,7 +20,8 @@
 
 #endif /* WYP_Bridging_Header_h */
 
-#import "SVProgressHUD.h"
+//#import "SVProgressHUD.h"
+@import SVProgressHUD;
 #import "MJRefresh.h"
 #import "IQKeyboardManager.h"
 #import <RongIMKit/RongIMKit.h>

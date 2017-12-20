@@ -15,12 +15,6 @@ class ApplyGroupModel: HandyJSON {
     var groupMember: [PersonModel]?
     // 群简介
     var groupDetail: String?
-    // 群头像
-    var group_avatar : String?
-    // 群公告
-    var board : String?
-    // 成员等级
-    var rank : String?
     
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.groupMember <-- "user"

@@ -183,8 +183,11 @@ class PublicGroupViewController: BaseViewController{
         
         NetRequest.publishTopicNetRequest(open_id: AppInfo.shared.user?.token ?? "", type: type, title: self.textView.text, images: uploadImageArray) { (success, info, userDic) in
             if success {
-                // 发布成功
                 SVProgressHUD.showSuccess(withStatus: info)
+                let time: TimeInterval = 0.8
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }else {
                 SVProgressHUD.showError(withStatus: info)
             }
@@ -206,7 +209,6 @@ extension PublicGroupViewController: HXPhotoViewDelegate{
     }
     
     func photoViewUpdateFrame(_ frame: CGRect, with view: UIView!) {
-        
         
     }
 }

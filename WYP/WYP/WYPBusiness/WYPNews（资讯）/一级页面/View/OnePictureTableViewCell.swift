@@ -28,7 +28,7 @@ class OnePictureTableViewCell: UITableViewCell {
         contentView.addSubview(infoLabel)
         contentView.addSubview(hotImageView)
         contentView.addSubview(infoSourceLabel)
-//        contentView.addSubview(infoTimeLabel)
+        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoCommentLabel)
         contentView.addSubview(infoLookLabel)
         contentView.addSubview(adButton)
@@ -68,21 +68,22 @@ class OnePictureTableViewCell: UITableViewCell {
         }
         infoSourceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(topButton.snp.right).offset(3.5)
+            make.bottom.equalTo(contentView).offset(-18)
+            make.height.equalTo(16)
+            make.width.equalTo(50)
+        }
+        infoTimeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
             make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
             make.height.equalTo(10)
         }
-//        infoTimeLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
-//            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
-//            make.height.equalTo(10)
-//        }
         infoLookLabel.snp.makeConstraints { (make) in
             make.left.equalTo(infoSourceLabel.snp.right).offset(10)
             make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
             make.height.equalTo(10)
         }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoLookLabel.snp.right).offset(10)
+            make.left.equalTo(infoTimeLabel.snp.right).offset(40)
             make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
             make.height.equalTo(10)
         }
@@ -114,7 +115,12 @@ class OnePictureTableViewCell: UITableViewCell {
     lazy var infoSourceLabel: UILabel = {
         let infoSourceLabel = UILabel()
         infoSourceLabel.font = grayTextFont
-        infoSourceLabel.textColor = UIColor.viewGrayColor
+        infoSourceLabel.font = UIFont.systemFont(ofSize: 10)
+        infoSourceLabel.backgroundColor = UIColor.init(hexColor: "666666")
+        infoSourceLabel.layer.masksToBounds = true
+        infoSourceLabel.layer.cornerRadius = 9
+        infoSourceLabel.textAlignment = NSTextAlignment.center
+        infoSourceLabel.textColor = UIColor.white
         return infoSourceLabel
     }()
     lazy var infoTimeLabel: UILabel = {
@@ -163,12 +169,34 @@ class OnePictureTableViewCell: UITableViewCell {
     // 数据模型
     var infoModel: InfoModel? {
         willSet {
-            infoLabel.text = newValue?.infoTitle ?? ""
-            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
             
-//            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@评论", newValue?.infoComment ?? "0")
-            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
+           
+                if newValue?.topic == "13" {
+                    infoSourceLabel.text = "演出文化"
+                }else if newValue?.topic == "14" {
+                    infoSourceLabel.text = "旅游文化"
+                }else if newValue?.topic == "15" {
+                    infoSourceLabel.text = "体育文化"
+                }else if newValue?.topic == "16" {
+                    infoSourceLabel.text = "电影文化"
+                }else if newValue?.topic == "17" {
+                    infoSourceLabel.text = "会展文化"
+                }else if newValue?.topic == "18" {
+                    infoSourceLabel.text = "饮食文化"
+                }else {
+                    infoSourceLabel.text = "演出文化"
+                }
+            
+            
+            infoLabel.text = newValue?.infoTitle ?? ""
+            
+          
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+
+            
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
+//            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
             let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
             infoImageView.kf.setImage(with: imageUrl)
             if newValue?.isTop == "1" {

@@ -34,7 +34,7 @@ class ThreePictureTableViewCell: UITableViewCell {
         contentView.addSubview(adButton)
         contentView.addSubview(topButton)
         contentView.addSubview(infoSourceLabel)
-//        contentView.addSubview(infoTimeLabel)
+        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
         contentView.addSubview(hotImageView)
@@ -55,16 +55,17 @@ class ThreePictureTableViewCell: UITableViewCell {
         }
         infoSourceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(topButton.snp.right).offset(2)
+            make.bottom.equalTo(contentView).offset(-10)
+            make.height.equalTo(16)
+            make.width.equalTo(50)
+        }
+        infoTimeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
             make.bottom.equalTo(contentView).offset(-14)
             make.height.equalTo(10)
         }
-//        infoTimeLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
-//            make.bottom.equalTo(contentView).offset(-14)
-//            make.height.equalTo(10)
-//        }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
+            make.right.equalTo(self.contentView).offset(-18)
             make.bottom.equalTo(contentView).offset(-14)
             make.height.equalTo(10)
         }
@@ -144,8 +145,12 @@ class ThreePictureTableViewCell: UITableViewCell {
     lazy var infoSourceLabel: UILabel = {
         let infoSourceLabel = UILabel()
         infoSourceLabel.text = "凤凰娱乐"
-        infoSourceLabel.font = grayTextFont
-        infoSourceLabel.textColor = UIColor.viewGrayColor
+        infoSourceLabel.backgroundColor = UIColor.init(hexColor: "666666")
+        infoSourceLabel.font = UIFont.systemFont(ofSize: 10)
+        infoSourceLabel.layer.masksToBounds = true
+        infoSourceLabel.layer.cornerRadius = 9
+        infoSourceLabel.textAlignment = NSTextAlignment.center
+        infoSourceLabel.textColor = UIColor.white
         return infoSourceLabel
     }()
     lazy var infoTimeLabel: UILabel = {
@@ -157,7 +162,7 @@ class ThreePictureTableViewCell: UITableViewCell {
     }()
     lazy var infoLookLabel: UILabel = {
         let infoLookLabel = UILabel()
-        infoLookLabel.text = "6666浏览"
+//        infoLookLabel.text = "6666浏览"
         infoLookLabel.textAlignment = .right
         infoLookLabel.font = grayTextFont
         infoLookLabel.textColor = UIColor.viewGrayColor
@@ -196,10 +201,28 @@ class ThreePictureTableViewCell: UITableViewCell {
     var infoModel: InfoModel? {
         willSet {
             infoLabel.text = newValue?.infoTitle ?? ""
-            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+            
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
+            }
+            //            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
 //            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoComment ?? "0")
-            infoCommentLabel.text = String.init(format: "%@人浏览", newValue?.infoLook ?? "0")
+//            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoComment ?? "0")
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.infoLook ?? "0")
             let imageUrl1 = URL(string: newValue?.infoImageArr?[0] ?? "")
             let imageUrl2 = URL(string: newValue?.infoImageArr?[1] ?? "")
             let imageUrl3 = URL(string: newValue?.infoImageArr?[2] ?? "")

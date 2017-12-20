@@ -323,11 +323,12 @@ class TallkViewController: BaseViewController {
             GeneralMethod.alertToLogin(viewController: self)
             return
         } else {
-            let board = UIStoryboard.init(name: "Main", bundle: nil)
-            let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
-            
-            issue.delegate = self
-            navigationController?.pushViewController(issue, animated: true)
+//            let board = UIStoryboard.init(name: "Main", bundle: nil)
+//            let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
+//
+//            issue.delegate = self
+//            navigationController?.pushViewController(issue, animated: true)
+            navigationController?.pushViewController(PublicGroupViewController(), animated: true)
         }
     }
     

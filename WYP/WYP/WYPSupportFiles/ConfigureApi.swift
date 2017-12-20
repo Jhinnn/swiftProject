@@ -484,16 +484,6 @@ public var kApi_getGroupInfo: String {
     return kApi_baseUrl(path: "api/groupInfo")
 }
 
-// 群公告列表
-public var kApi_groupNoteList: String {
-    return kApi_baseUrl(path: "api/get_group_board_list")
-}
-
-// 发布群公告
-public var kApi_publishGroupNote: String {
-    return kApi_baseUrl(path: "api/add_group_board")
-}
-
 // 群组 - 申请入群
 public var kApi_enterGroup: String {
     return kApi_baseUrl(path: "api/jionqunzu")
