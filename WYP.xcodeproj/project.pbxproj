@@ -37,14 +37,10 @@
 		8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC01FE7B5B300A453BB /* HXCircleProgressView.m */; };
 		8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC31FE7B5B300A453BB /* HXPhotoPreviewViewCell.m */; };
 		8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AE41FE8F52C00A453BB /* WYPContain.m */; };
-		8EBE8B2F1FE76F97001A05D7 /* GroupMemberListHeadCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */; };
-		8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */; };
-		8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */; };
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
-		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
 		9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */; };
 		9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
@@ -118,7 +114,6 @@
 		A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F790E31E8147D500B3EA57 /* AppDelegate+Extension.swift */; };
 		A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */; };
 		EF33619A1FDD0BBA00F85954 /* TallkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3361991FDD0BBA00F85954 /* TallkViewController.swift */; };
-		EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */; };
 		F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */; };
 		F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307F1EC18DD800DF5E47 /* RecordModel.swift */; };
 		F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91330821EC1B89000DF5E47 /* RecordsTableViewCell.swift */; };
@@ -145,10 +140,6 @@
 		F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94096631ED6DF7B00DD4523 /* ShowRoomCommentCell.swift */; };
 		F94096661ED6FAA300DD4523 /* CommentReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94096651ED6FAA300DD4523 /* CommentReplyViewController.swift */; };
 		F94351B91EDFBC6C00FB4831 /* ChatDeatilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351B81EDFBC6C00FB4831 /* ChatDeatilViewController.swift */; };
-		F94351BB1EDFBE0600FB4831 /* GroupsMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */; };
-		F94351BD1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */; };
-		F94351BF1EDFDDE700FB4831 /* RecommendFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */; };
-		F94351C11EDFDEAF00FB4831 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */; };
 		F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351C81EDFFEF300FB4831 /* UIButton+Extension.swift */; };
 		F9438E831EB814DB006AA065 /* ApplyToEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9438E821EB814DB006AA065 /* ApplyToEnterViewController.swift */; };
 		F9438E871EB8677C006AA065 /* TicketBaseNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9438E861EB8677C006AA065 /* TicketBaseNaviViewController.swift */; };
@@ -232,10 +223,6 @@
 		F9986A161EA61C2B002C502B /* AttentionTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869541EA61C2B002C502B /* AttentionTicketViewController.swift */; };
 		F9986A171EA61C2B002C502B /* AttentionNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869571EA61C2B002C502B /* AttentionNewsViewController.swift */; };
 		F9986A181EA61C2B002C502B /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869591EA61C2B002C502B /* MyFriendsViewController.swift */; };
-		F9986A1B1EA61C2B002C502B /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869611EA61C2B002C502B /* GroupsModel.swift */; };
-		F9986A1C1EA61C2B002C502B /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869631EA61C2B002C502B /* GroupsViewController.swift */; };
-		F9986A1D1EA61C2B002C502B /* VerifyApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */; };
-		F9986A1E1EA61C2B002C502B /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */; };
 		F9986A1F1EA61C2B002C502B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869691EA61C2B002C502B /* ChatViewController.swift */; };
 		F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998696C1EA61C2B002C502B /* AddressBookHandle.swift */; };
 		F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998696D1EA61C2B002C502B /* GetAddressBook.swift */; };
@@ -343,6 +330,23 @@
 		F9FE905B1F9F024800D31F3C /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90521F9F024800D31F3C /* SGQRCodeHelperTool.m */; };
 		F9FE905C1F9F024800D31F3C /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90541F9F024800D31F3C /* SGQRCodeScanManager.m */; };
 		F9FE905D1F9F024800D31F3C /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90561F9F024800D31F3C /* SGQRCodeScanningView.m */; };
+		FBD817131FEA9101002CF614 /* GroupNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD816FE1FEA9101002CF614 /* GroupNoteModel.swift */; };
+		FBD817141FEA9101002CF614 /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD816FF1FEA9101002CF614 /* GroupsModel.swift */; };
+		FBD817151FEA9101002CF614 /* ChatRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817011FEA9101002CF614 /* ChatRecordViewController.swift */; };
+		FBD817161FEA9101002CF614 /* GroupDeailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817021FEA9101002CF614 /* GroupDeailsViewController.swift */; };
+		FBD817171FEA9101002CF614 /* GroupNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817031FEA9101002CF614 /* GroupNoteViewController.swift */; };
+		FBD817181FEA9101002CF614 /* GroupsMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817041FEA9101002CF614 /* GroupsMemberListViewController.swift */; };
+		FBD817191FEA9101002CF614 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817051FEA9101002CF614 /* GroupsViewController.swift */; };
+		FBD8171A1FEA9101002CF614 /* PublishGroupNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817061FEA9101002CF614 /* PublishGroupNoticeViewController.swift */; };
+		FBD8171B1FEA9101002CF614 /* RecommendFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817071FEA9101002CF614 /* RecommendFriendsViewController.swift */; };
+		FBD8171C1FEA9101002CF614 /* VerifyApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD817081FEA9101002CF614 /* VerifyApplicationViewController.swift */; };
+		FBD8171D1FEA9101002CF614 /* GroupMemberListHeadCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170A1FEA9101002CF614 /* GroupMemberListHeadCollectionReusableView.swift */; };
+		FBD8171E1FEA9101002CF614 /* GroupNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170B1FEA9101002CF614 /* GroupNoteTableViewCell.swift */; };
+		FBD8171F1FEA9101002CF614 /* GroupsMemberListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170C1FEA9101002CF614 /* GroupsMemberListCollectionReusableView.swift */; };
+		FBD817201FEA9101002CF614 /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170D1FEA9101002CF614 /* GroupsTableViewCell.swift */; };
+		FBD817211FEA9101002CF614 /* PublishGroupNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170E1FEA9101002CF614 /* PublishGroupNoteTableViewCell.swift */; };
+		FBD817221FEA9101002CF614 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD8170F1FEA9101002CF614 /* RecommendTableViewCell.swift */; };
+		FBD817231FEA9101002CF614 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FBD817121FEA9101002CF614 /* LSXPopMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -422,15 +426,10 @@
 		8E650AC61FE7B5B300A453BB /* HXAlbumTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumTitleButton.h; sourceTree = "<group>"; };
 		8E650AE31FE8F52C00A453BB /* WYPContain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYPContain.h; sourceTree = "<group>"; };
 		8E650AE41FE8F52C00A453BB /* WYPContain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYPContain.m; sourceTree = "<group>"; };
-		8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupMemberListHeadCollectionReusableView.swift; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的好友/群组/Views/GroupMemberListHeadCollectionReusableView.swift"; sourceTree = SOURCE_ROOT; };
-		8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteViewController.swift; sourceTree = "<group>"; };
-		8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupNoteTableViewCell.swift; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的好友/群组/Views/GroupNoteTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
-		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
-		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvisorySearchTitleView.swift; sourceTree = "<group>"; };
 		9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
@@ -549,7 +548,6 @@
 		A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
 		B6C9247D1A1409A06196536E /* Pods-WYP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.debug.xcconfig"; sourceTree = "<group>"; };
 		EF3361991FDD0BBA00F85954 /* TallkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallkViewController.swift; sourceTree = "<group>"; };
-		EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDeailsViewController.swift; sourceTree = "<group>"; };
 		F90563211F46D1FC00C396DD /* WYP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYP.entitlements; sourceTree = "<group>"; };
 		F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackRecordViewController.swift; sourceTree = "<group>"; };
 		F913307F1EC18DD800DF5E47 /* RecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -578,10 +576,6 @@
 		F94096631ED6DF7B00DD4523 /* ShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowRoomCommentCell.swift; sourceTree = "<group>"; };
 		F94096651ED6FAA300DD4523 /* CommentReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentReplyViewController.swift; sourceTree = "<group>"; };
 		F94351B81EDFBC6C00FB4831 /* ChatDeatilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDeatilViewController.swift; sourceTree = "<group>"; };
-		F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListViewController.swift; sourceTree = "<group>"; };
-		F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListCollectionReusableView.swift; sourceTree = "<group>"; };
-		F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendFriendsViewController.swift; sourceTree = "<group>"; };
-		F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
 		F94351C81EDFFEF300FB4831 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		F9438E821EB814DB006AA065 /* ApplyToEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToEnterViewController.swift; sourceTree = "<group>"; };
 		F9438E861EB8677C006AA065 /* TicketBaseNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketBaseNaviViewController.swift; sourceTree = "<group>"; };
@@ -669,10 +663,6 @@
 		F99869541EA61C2B002C502B /* AttentionTicketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTicketViewController.swift; sourceTree = "<group>"; };
 		F99869571EA61C2B002C502B /* AttentionNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionNewsViewController.swift; sourceTree = "<group>"; };
 		F99869591EA61C2B002C502B /* MyFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsViewController.swift; sourceTree = "<group>"; };
-		F99869611EA61C2B002C502B /* GroupsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
-		F99869631EA61C2B002C502B /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
-		F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyApplicationViewController.swift; sourceTree = "<group>"; };
-		F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		F99869691EA61C2B002C502B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F998696C1EA61C2B002C502B /* AddressBookHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookHandle.swift; sourceTree = "<group>"; };
 		F998696D1EA61C2B002C502B /* GetAddressBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAddressBook.swift; sourceTree = "<group>"; };
@@ -790,6 +780,24 @@
 		F9FE90541F9F024800D31F3C /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		F9FE90551F9F024800D31F3C /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		F9FE90561F9F024800D31F3C /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
+		FBD816FE1FEA9101002CF614 /* GroupNoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteModel.swift; sourceTree = "<group>"; };
+		FBD816FF1FEA9101002CF614 /* GroupsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
+		FBD817011FEA9101002CF614 /* ChatRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRecordViewController.swift; sourceTree = "<group>"; };
+		FBD817021FEA9101002CF614 /* GroupDeailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDeailsViewController.swift; sourceTree = "<group>"; };
+		FBD817031FEA9101002CF614 /* GroupNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteViewController.swift; sourceTree = "<group>"; };
+		FBD817041FEA9101002CF614 /* GroupsMemberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListViewController.swift; sourceTree = "<group>"; };
+		FBD817051FEA9101002CF614 /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		FBD817061FEA9101002CF614 /* PublishGroupNoticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishGroupNoticeViewController.swift; sourceTree = "<group>"; };
+		FBD817071FEA9101002CF614 /* RecommendFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendFriendsViewController.swift; sourceTree = "<group>"; };
+		FBD817081FEA9101002CF614 /* VerifyApplicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyApplicationViewController.swift; sourceTree = "<group>"; };
+		FBD8170A1FEA9101002CF614 /* GroupMemberListHeadCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberListHeadCollectionReusableView.swift; sourceTree = "<group>"; };
+		FBD8170B1FEA9101002CF614 /* GroupNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteTableViewCell.swift; sourceTree = "<group>"; };
+		FBD8170C1FEA9101002CF614 /* GroupsMemberListCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListCollectionReusableView.swift; sourceTree = "<group>"; };
+		FBD8170D1FEA9101002CF614 /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
+		FBD8170E1FEA9101002CF614 /* PublishGroupNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishGroupNoteTableViewCell.swift; sourceTree = "<group>"; };
+		FBD8170F1FEA9101002CF614 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
+		FBD817111FEA9101002CF614 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
+		FBD817121FEA9101002CF614 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -894,15 +902,6 @@
 				8E650AE41FE8F52C00A453BB /* WYPContain.m */,
 			);
 			path = WYPContain;
-			sourceTree = "<group>";
-		};
-		9E22D42F1FACD4C700846374 /* ScanAddFriendView */ = {
-			isa = PBXGroup;
-			children = (
-				9E22D4301FACD50000846374 /* LSXPopMenu.h */,
-				9E22D4311FACD50000846374 /* LSXPopMenu.m */,
-			);
-			path = ScanAddFriendView;
 			sourceTree = "<group>";
 		};
 		A41CE6731EBABCFD000BCDE9 /* 我的社区 */ = {
@@ -1986,55 +1985,11 @@
 			isa = PBXGroup;
 			children = (
 				F99869591EA61C2B002C502B /* MyFriendsViewController.swift */,
-				F998695F1EA61C2B002C502B /* 群组 */,
+				FBD816FC1FEA9101002CF614 /* 群组 */,
 				F99869671EA61C2B002C502B /* 聊天 */,
 				F998696A1EA61C2B002C502B /* 通讯录 */,
 			);
 			path = "我的好友";
-			sourceTree = "<group>";
-		};
-		F998695F1EA61C2B002C502B /* 群组 */ = {
-			isa = PBXGroup;
-			children = (
-				F99869601EA61C2B002C502B /* Models */,
-				F99869621EA61C2B002C502B /* ViewControllers */,
-				F99869651EA61C2B002C502B /* Views */,
-			);
-			path = "群组";
-			sourceTree = "<group>";
-		};
-		F99869601EA61C2B002C502B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F99869611EA61C2B002C502B /* GroupsModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		F99869621EA61C2B002C502B /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */,
-				EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */,
-				F99869631EA61C2B002C502B /* GroupsViewController.swift */,
-				F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */,
-				F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */,
-				F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		F99869651EA61C2B002C502B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				9E22D42F1FACD4C700846374 /* ScanAddFriendView */,
-				F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */,
-				F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */,
-				F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */,
-				8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */,
-				8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		F99869671EA61C2B002C502B /* 聊天 */ = {
@@ -2707,6 +2662,64 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		FBD816FC1FEA9101002CF614 /* 群组 */ = {
+			isa = PBXGroup;
+			children = (
+				FBD816FD1FEA9101002CF614 /* Models */,
+				FBD817001FEA9101002CF614 /* ViewControllers */,
+				FBD817091FEA9101002CF614 /* Views */,
+			);
+			name = "群组";
+			path = "../../../../../../../群组";
+			sourceTree = "<group>";
+		};
+		FBD816FD1FEA9101002CF614 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FBD816FE1FEA9101002CF614 /* GroupNoteModel.swift */,
+				FBD816FF1FEA9101002CF614 /* GroupsModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FBD817001FEA9101002CF614 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FBD817011FEA9101002CF614 /* ChatRecordViewController.swift */,
+				FBD817021FEA9101002CF614 /* GroupDeailsViewController.swift */,
+				FBD817031FEA9101002CF614 /* GroupNoteViewController.swift */,
+				FBD817041FEA9101002CF614 /* GroupsMemberListViewController.swift */,
+				FBD817051FEA9101002CF614 /* GroupsViewController.swift */,
+				FBD817061FEA9101002CF614 /* PublishGroupNoticeViewController.swift */,
+				FBD817071FEA9101002CF614 /* RecommendFriendsViewController.swift */,
+				FBD817081FEA9101002CF614 /* VerifyApplicationViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FBD817091FEA9101002CF614 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FBD8170A1FEA9101002CF614 /* GroupMemberListHeadCollectionReusableView.swift */,
+				FBD8170B1FEA9101002CF614 /* GroupNoteTableViewCell.swift */,
+				FBD8170C1FEA9101002CF614 /* GroupsMemberListCollectionReusableView.swift */,
+				FBD8170D1FEA9101002CF614 /* GroupsTableViewCell.swift */,
+				FBD8170E1FEA9101002CF614 /* PublishGroupNoteTableViewCell.swift */,
+				FBD8170F1FEA9101002CF614 /* RecommendTableViewCell.swift */,
+				FBD817101FEA9101002CF614 /* ScanAddFriendView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBD817101FEA9101002CF614 /* ScanAddFriendView */ = {
+			isa = PBXGroup;
+			children = (
+				FBD817111FEA9101002CF614 /* LSXPopMenu.h */,
+				FBD817121FEA9101002CF614 /* LSXPopMenu.m */,
+			);
+			path = ScanAddFriendView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2928,12 +2941,11 @@
 				F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */,
 				F9986A141EA61C2B002C502B /* AttentionRoomViewController.swift in Sources */,
 				38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */,
-				F94351BB1EDFBE0600FB4831 /* GroupsMemberListViewController.swift in Sources */,
+				FBD8171A1FEA9101002CF614 /* PublishGroupNoticeViewController.swift in Sources */,
 				F96FEEBA1F14A9C70003C58F /* WBImageBrowserView.m in Sources */,
 				A4B205011EC01291007DA418 /* JFPhotoView.m in Sources */,
 				F956CE821EDEBE6800B751D4 /* FirstScrambleForTicketView.swift in Sources */,
 				F9986A331EA61C2B002C502B /* CouponModel.swift in Sources */,
-				F94351C11EDFDEAF00FB4831 /* RecommendTableViewCell.swift in Sources */,
 				F9986A0B1EA61C2B002C502B /* IssueTopicViewController.swift in Sources */,
 				8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */,
 				F91E42CF1EA70C7100CDCE19 /* MemberModel.swift in Sources */,
@@ -2941,7 +2953,6 @@
 				F9599BB61EB1F67500440E66 /* TicketTimeModel.swift in Sources */,
 				F984BDD31E97871900FD3E0B /* pinyin.m in Sources */,
 				F9986A571EA61C2B002C502B /* CompanyCertificationModel.swift in Sources */,
-				F94351BD1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift in Sources */,
 				A43C2A3E1E8101D90037BB5A /* UIColor+Extension.swift in Sources */,
 				A4B205041EC01291007DA418 /* CXBaseModel.m in Sources */,
 				F9986A0E1EA61C2B002C502B /* TopicsReplyFrameModel.swift in Sources */,
@@ -3004,6 +3015,7 @@
 				F92ABBF61EA8F0C4006A41A5 /* MediaModel.swift in Sources */,
 				F9A47A421F5CE49E00C313F2 /* SYBannerView.swift in Sources */,
 				A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */,
+				FBD8171F1FEA9101002CF614 /* GroupsMemberListCollectionReusableView.swift in Sources */,
 				8E650ADC1FE7B5B300A453BB /* HXPhotoSubViewCell.m in Sources */,
 				F9986A2B1EA61C2B002C502B /* OrdersModel.swift in Sources */,
 				A4B204FC1EC01291007DA418 /* JFImageGroupTableViewController.m in Sources */,
@@ -3036,6 +3048,7 @@
 				F9986A511EA61C2B002C502B /* VoteViewController.swift in Sources */,
 				F9986A231EA61C2B002C502B /* AddFriendsTableViewCell.swift in Sources */,
 				F9986A311EA61C2B002C502B /* TopicsViewController.swift in Sources */,
+				FBD8171B1FEA9101002CF614 /* RecommendFriendsViewController.swift in Sources */,
 				F9986A5E1EA61C2B002C502B /* ProjectCertificationViewController.swift in Sources */,
 				F9986A321EA61C2B002C502B /* TopicsCell.swift in Sources */,
 				A4B204FB1EC01291007DA418 /* JFImageCollectionViewController.m in Sources */,
@@ -3045,8 +3058,6 @@
 				F98935281EC06614002590AE /* AttentionRoomModel.swift in Sources */,
 				F9599BBA1EB1FD3C00440E66 /* TicketVernveModel.swift in Sources */,
 				F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */,
-				8EBE8B2F1FE76F97001A05D7 /* GroupMemberListHeadCollectionReusableView.swift in Sources */,
-				F9986A1B1EA61C2B002C502B /* GroupsModel.swift in Sources */,
 				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
 				F9986A671EA61C2B002C502B /* RoomVideoTableViewCell.swift in Sources */,
 				8E650ACD1FE7B5B300A453BB /* HXCollectionView.m in Sources */,
@@ -3055,6 +3066,7 @@
 				F9986A271EA61C2B002C502B /* NotificationModel.swift in Sources */,
 				F99869FF1EA61C2B002C502B /* TheaterGroupTableViewCell.swift in Sources */,
 				F9986A4C1EA61C2B002C502B /* TicketCategoryTableViewCell.swift in Sources */,
+				FBD8171C1FEA9101002CF614 /* VerifyApplicationViewController.swift in Sources */,
 				F93D06FF1EC402D0002EFE30 /* AttributionModel.swift in Sources */,
 				F9986A4A1EA61C2B002C502B /* ScrambleForTicketCell.swift in Sources */,
 				F9993E0D1F7906E30077A4DD /* SearchTitleView.swift in Sources */,
@@ -3067,12 +3079,11 @@
 				F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */,
 				F972F3DF1ECC6F370078B423 /* ApplyGroupModel.swift in Sources */,
 				F9986A2F1EA61C2B002C502B /* TopicsModel.swift in Sources */,
-				F9986A1E1EA61C2B002C502B /* GroupsTableViewCell.swift in Sources */,
 				F9B1878B1F61184C00394D44 /* ClassifyTableViewCell.swift in Sources */,
 				F94756D51F6E7518008EA8F3 /* HeadModel.swift in Sources */,
 				8E650ACF1FE7B5B300A453BB /* HXVideoPreviewViewController.m in Sources */,
 				F9986A441EA61C2B002C502B /* NewsVideosViewController.swift in Sources */,
-				EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */,
+				FBD817221FEA9101002CF614 /* RecommendTableViewCell.swift in Sources */,
 				F9FA08ED1EB9863500E71E4D /* AttentionPeopleModel.swift in Sources */,
 				F91E42D11EA70DC200CDCE19 /* ContentModel.swift in Sources */,
 				A4B2050D1EC01291007DA418 /* StatementCell.m in Sources */,
@@ -3090,7 +3101,6 @@
 				F9FE905B1F9F024800D31F3C /* SGQRCodeHelperTool.m in Sources */,
 				F91AD0E81EBB303500F70C82 /* TicketModel.swift in Sources */,
 				F984BDD51E97875200FD3E0B /* SYAlertController.swift in Sources */,
-				F94351BF1EDFDDE700FB4831 /* RecommendFriendsViewController.swift in Sources */,
 				A4A134F51EA4AF7500FC4D67 /* CCPScrollView.m in Sources */,
 				A419E7421EC1CF2C00C277D8 /* PrivacyViewController.swift in Sources */,
 				F95EA8561F78EC1D008AE547 /* navTitleView.swift in Sources */,
@@ -3102,31 +3112,34 @@
 				F9986A251EA61C2B002C502B /* ContactsViewController.swift in Sources */,
 				8E650AD31FE7B5B300A453BB /* HXPhotoViewController.m in Sources */,
 				F99869F91EA61C2B002C502B /* CityButton.swift in Sources */,
+				FBD817211FEA9101002CF614 /* PublishGroupNoteTableViewCell.swift in Sources */,
 				F924684E1EE790530078FB14 /* SearchHomeTicketsViewController.swift in Sources */,
 				F9986A591EA61C2B002C502B /* PhotosViewController.swift in Sources */,
+				FBD817151FEA9101002CF614 /* ChatRecordViewController.swift in Sources */,
 				A4B204FF1EC01291007DA418 /* JFImagePickerViewCell.m in Sources */,
 				8E650AC91FE7B5B300A453BB /* HXPresentTransition.m in Sources */,
 				F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */,
-				8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */,
 				A49DA1F71EA9A3AB000E4AFA /* ShowroomMemberCell.swift in Sources */,
 				F9986A101EA61C2B002C502B /* UserSettingsViewController.swift in Sources */,
 				9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */,
+				FBD817231FEA9101002CF614 /* LSXPopMenu.m in Sources */,
 				F9F5BE201ECED1A000F6C9C3 /* MapViewController.swift in Sources */,
 				F99869F81EA61C2B002C502B /* ButtonGroupView.swift in Sources */,
 				F9D92ADD1EE6506300AA1CC6 /* RoomNewsDetailViewController.swift in Sources */,
 				F92ABBF41EA8EDBC006A41A5 /* CommentModel.swift in Sources */,
 				A42EDE131EDEB21D00C0B500 /* FYLCityPickView.m in Sources */,
 				A4B205001EC01291007DA418 /* JFPhotoBrowserViewController.m in Sources */,
-				F9986A1C1EA61C2B002C502B /* GroupsViewController.swift in Sources */,
 				F9E9B8A31ED8520A00D5BAFB /* ComplaintViewController.swift in Sources */,
 				8E650ACE1FE7B5B300A453BB /* HXPhotoModel.m in Sources */,
 				8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */,
-				F9986A1D1EA61C2B002C502B /* VerifyApplicationViewController.swift in Sources */,
+				FBD8171E1FEA9101002CF614 /* GroupNoteTableViewCell.swift in Sources */,
 				A4118D801F061F29009B57FB /* LYExtension.swift in Sources */,
 				8E28E6E21FE7AC3800B43A6E /* View(Extension).swift in Sources */,
+				FBD817141FEA9101002CF614 /* GroupsModel.swift in Sources */,
 				8E650ADA1FE7B5B300A453BB /* HXPhotoView.m in Sources */,
 				F9549A461F2F31EB00C3B5E4 /* CitySearchViewController.swift in Sources */,
 				F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */,
+				FBD817201FEA9101002CF614 /* GroupsTableViewCell.swift in Sources */,
 				F9986A481EA61C2B002C502B /* ScrambleForTicketNaviViewController.swift in Sources */,
 				F972F3E11ECC75700078B423 /* MemberCollectionReusableView.swift in Sources */,
 				F9986A491EA61C2B002C502B /* ScrambleForTicketViewController.swift in Sources */,
@@ -3135,6 +3148,8 @@
 				F99869FB1EA61C2B002C502B /* SearchResultViewController.swift in Sources */,
 				A4B205061EC01291007DA418 /* StatementFrameModel.m in Sources */,
 				F9986A3C1EA61C2B002C502B /* InfoModel.swift in Sources */,
+				FBD817161FEA9101002CF614 /* GroupDeailsViewController.swift in Sources */,
+				FBD817191FEA9101002CF614 /* GroupsViewController.swift in Sources */,
 				F9986A0C1EA61C2B002C502B /* TopicReplyTableViewCell.swift in Sources */,
 				F9986A581EA61C2B002C502B /* MemberViewController.swift in Sources */,
 				A4B205091EC01291007DA418 /* AlbumViewController.m in Sources */,
@@ -3146,7 +3161,6 @@
 				F9986A6D1EA61DFF002C502B /* SYNavTabBar.swift in Sources */,
 				F99869F61EA61C2B002C502B /* GroupMemberCollectionViewCell.swift in Sources */,
 				F9986A151EA61C2B002C502B /* AttentionRoomTableViewCell.swift in Sources */,
-				9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */,
 				9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */,
 				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
 				F9986A2C1EA61C2B002C502B /* MyOrdersViewController.swift in Sources */,
@@ -3206,6 +3220,7 @@
 				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
 				F9DA8C781F00B53D00AE66BC /* KTabbarAnimation.swift in Sources */,
 				F933534D1ED59C3200E67DD2 /* SearchView.swift in Sources */,
+				FBD817171FEA9101002CF614 /* GroupNoteViewController.swift in Sources */,
 				F9761C1E1F03AC28009CAE49 /* UMSocialSwiftInterface.swift in Sources */,
 				F9986A5A1EA61C2B002C502B /* VideosViewController.swift in Sources */,
 				8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */,
@@ -3220,8 +3235,10 @@
 				F99869F51EA61C2B002C502B /* GroupMemberListViewController.swift in Sources */,
 				F9986A171EA61C2B002C502B /* AttentionNewsViewController.swift in Sources */,
 				F9986A4E1EA61C2B002C502B /* TicketsShowViewController.swift in Sources */,
+				FBD8171D1FEA9101002CF614 /* GroupMemberListHeadCollectionReusableView.swift in Sources */,
 				F9986A2D1EA61C2B002C502B /* MyOrdersTableViewCell.swift in Sources */,
 				F9986A161EA61C2B002C502B /* AttentionTicketViewController.swift in Sources */,
+				FBD817181FEA9101002CF614 /* GroupsMemberListViewController.swift in Sources */,
 				F94096661ED6FAA300DD4523 /* CommentReplyViewController.swift in Sources */,
 				F992EAA41ED2E231004E0CF8 /* SeatMapViewController.swift in Sources */,
 				F933534B1ED570A400E67DD2 /* AdvViewController.swift in Sources */,
@@ -3230,8 +3247,8 @@
 				F94DB8371EB322A100B014AD /* VideoDetailModel.swift in Sources */,
 				F9986A3B1EA61C2B002C502B /* InviteFriendsViewController.swift in Sources */,
 				F9986A371EA61C2B002C502B /* GoodsAddressController.swift in Sources */,
+				FBD817131FEA9101002CF614 /* GroupNoteModel.swift in Sources */,
 				F91E42CD1EA70B2100CDCE19 /* TheaterGroupModel.swift in Sources */,
-				8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */,
 				A43C2A461E8101D90037BB5A /* BaseNavigationController.swift in Sources */,
 				A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */,
 				A42EDDF91EDEA0C000C0B500 /* UITableViewCell+Extension.swift in Sources */,
