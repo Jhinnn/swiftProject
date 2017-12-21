@@ -13,12 +13,15 @@ protocol GroupsMemberListCollectionDelegate: NSObjectProtocol {
     func quiteGroup()
     func putGroupNote()
     func noDisturbing(sender: UISwitch)
-    
+    func codeImageViewClicked()
+    func chatRecordBtnClicked()
 }
 
 class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     
     weak var delegate: GroupsMemberListCollectionDelegate?
+    
+//    var : (() -> Void)?
     
     // MARK: - life cycle
     override init(frame: CGRect) {
@@ -50,6 +53,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         self.addSubview(groupNoteConten)
         self.addSubview(grayLine5)
         self.addSubview(groupDetalConten)
+        self.addSubview(chatRecordBtn)
     }
     func layoutPageSubviews() {
         grayLine.snp.makeConstraints { (make) in
@@ -90,6 +94,11 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.right.equalTo(self)
             make.left.equalTo(self).offset(13)
             make.height.equalTo(15)
+        }
+        
+        chatRecordBtn.snp.makeConstraints { (make) in
+            make.size.equalTo(Chatrecord)
+            make.centerY.equalTo(Chatrecord)
         }
         
         grayLine3.snp.makeConstraints { (make) in
@@ -236,7 +245,17 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         
     }()
     
-   
+    lazy var chatRecordBtn: UIButton = {
+        let chatRecordBtn = UIButton()
+        chatRecordBtn.setImage(UIImage(named: "chat_icon_advance_normalmore"), for: .normal)
+        chatRecordBtn.imageEdgeInsets = UIEdgeInsetsMake(0, kScreen_width - 30, 0, 0)
+        chatRecordBtn.addTarget(self, action: #selector(chatRecordBtnClicked(sender:)), for: .touchUpInside)
+        return chatRecordBtn
+    }()
+    
+    func chatRecordBtnClicked(sender: UIButton) {
+        delegate?.chatRecordBtnClicked()
+    }
     
     lazy var noDisturbingLabel: UILabel = {
         let noDisturbingLabel = UILabel()
@@ -269,8 +288,6 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         groupDetalConten.textColor = UIColor.init(hexColor: "333333")
         groupDetalConten.font = UIFont.systemFont(ofSize: 12)
         groupDetalConten.text = "不得在群内骂人斗嘴等具有人身攻击性质行为，可私下单挑解决。如被暴打请拨打110或向管理员求助，但管理员不负责替你出头。"
-        
-        
         
         return groupDetalConten
     }()

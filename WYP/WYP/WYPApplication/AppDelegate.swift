@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = UIColor.themeColor
         
-        print("屏目尺寸\(self.window?.bounds)")
+        print("屏目尺寸\(String(describing: self.window?.bounds))")
 
         // MARK: - 设置导航条样式
         UINavigationBar.appearance().tintColor = UIColor.white

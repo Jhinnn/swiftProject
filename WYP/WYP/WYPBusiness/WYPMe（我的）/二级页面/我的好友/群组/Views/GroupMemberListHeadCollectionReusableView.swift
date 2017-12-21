@@ -71,11 +71,14 @@ class GroupMemberListHeadCollectionReusableView: UICollectionReusableView {
         let codeImgView = UIImageView()
         codeImgView.sizeToFit()
         codeImgView.image = UIImage(named: "datum_icon_dimension_normal")
-
+        codeImgView.isUserInteractionEnabled = true
+        codeImgView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapCodeImageView(sender:))))
         return codeImgView
     }()
     
-    
+    func tapCodeImageView(sender: UITapGestureRecognizer) {
+        delegate?.codeImageViewClicked()
+    }
     
     
     func layoutPageSubviews() {

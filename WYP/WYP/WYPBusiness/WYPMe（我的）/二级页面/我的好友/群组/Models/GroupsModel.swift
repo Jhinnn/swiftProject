@@ -15,7 +15,6 @@ class GroupsModel: HandyJSON {
     var groupIconName: String?
     // 群组名称
     var groupTitleName: String?
-    
     // 群组id
     var groupId: String?
     // 群组类型
