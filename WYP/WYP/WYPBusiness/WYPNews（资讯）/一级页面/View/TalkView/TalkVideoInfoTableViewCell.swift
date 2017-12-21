@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoInfoTableViewCell: UITableViewCell {
+class TalkVideoInfoTableViewCell: UITableViewCell {
     
     //MARK: - life cycle
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -31,7 +31,7 @@ class VideoInfoTableViewCell: UITableViewCell {
         contentView.addSubview(adButton)
         contentView.addSubview(topButton)
         contentView.addSubview(infoSourceLabel)
-//        contentView.addSubview(infoTimeLabel)
+        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
         contentView.addSubview(hotImageView)
@@ -51,18 +51,19 @@ class VideoInfoTableViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 20, height: 12))
         }
         infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(topButton.snp.right).offset(2)
-            make.bottom.equalTo(contentView).offset(-17)
+            make.left.equalTo(infoImageView.snp.left)
+            make.bottom.equalTo(contentView).offset(-10)
+            make.height.equalTo(18)
+            make.width.equalTo(50)
+        }
+        infoTimeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
+            make.centerY.equalTo(infoSourceLabel.snp.centerY)
             make.height.equalTo(10)
         }
-//        infoTimeLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(infoSourceLabel.snp.right).offset(22)
-//            make.bottom.equalTo(contentView).offset(-17)
-//            make.height.equalTo(10)
-//        }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-17)
+            make.right.equalTo(infoImageView.snp.right)
+            make.centerY.equalTo(infoSourceLabel.snp.centerY)
             make.height.equalTo(10)
         }
         infoLookLabel.snp.makeConstraints { (make) in
@@ -121,13 +122,13 @@ class VideoInfoTableViewCell: UITableViewCell {
     }()
     lazy var playImageView: UIImageView = {
         let playImageView = UIImageView()
-        playImageView.image = UIImage(named: "info_play_button_normal_iPhone")
+//        playImageView.image = UIImage(named: "info_play_button_normal_iPhone")
         return playImageView
     }()
     lazy var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.alpha = 0.7
-        infoLabel.backgroundColor = UIColor.black
+        infoLabel.backgroundColor = UIColor.clear
         infoLabel.textColor = UIColor.white
         infoLabel.font = UIFont.systemFont(ofSize: 12)
         infoLabel.textAlignment = .center
@@ -137,8 +138,13 @@ class VideoInfoTableViewCell: UITableViewCell {
     }()
     lazy var infoSourceLabel: UILabel = {
         let infoSourceLabel = UILabel()
-        infoSourceLabel.font = grayTextFont
-        infoSourceLabel.textColor = UIColor.viewGrayColor
+        infoSourceLabel.text = "凤凰娱乐"
+        infoSourceLabel.backgroundColor = UIColor.init(hexColor: "666666")
+        infoSourceLabel.font = UIFont.systemFont(ofSize: 10)
+        infoSourceLabel.layer.masksToBounds = true
+        infoSourceLabel.layer.cornerRadius = 9
+        infoSourceLabel.textAlignment = NSTextAlignment.center
+        infoSourceLabel.textColor = UIColor.white
         return infoSourceLabel
     }()
     lazy var infoTimeLabel: UILabel = {
@@ -158,7 +164,7 @@ class VideoInfoTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.viewGrayColor
+        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
         return infoCommentLabel
     }()
     lazy var adButton: UIButton = {
@@ -186,15 +192,27 @@ class VideoInfoTableViewCell: UITableViewCell {
     var infoModel: InfoModel? {
         willSet {
             infoTitleLabel.text = newValue?.infoTitle ?? ""
-            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
-//            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoComment ?? "0")
-            infoCommentLabel.text = String.init(format: "%@人浏览", newValue?.infoLook ?? "0")
-            if newValue?.infoImageArr?.count != 0 {
-                let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
-                infoImageView.kf.setImage(with: imageUrl)
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
             }
-            
+//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+//            infoLookLabel.text = String.init(format: "%@人回答", newValue?.infoLook ?? "0")
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.infoComment ?? "0")
+            let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
+            infoImageView.kf.setImage(with: imageUrl)
             
             switch newValue?.infoType ?? 2  {
             case 4:

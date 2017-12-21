@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnePictureTableViewCell: UITableViewCell {
+class TalkOnePictureTableViewCell: UITableViewCell {
     
     //MARK: - life cycle
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -28,7 +28,7 @@ class OnePictureTableViewCell: UITableViewCell {
         contentView.addSubview(infoLabel)
         contentView.addSubview(hotImageView)
         contentView.addSubview(infoSourceLabel)
-//        contentView.addSubview(infoTimeLabel)
+        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoCommentLabel)
         contentView.addSubview(infoLookLabel)
         contentView.addSubview(adButton)
@@ -46,7 +46,7 @@ class OnePictureTableViewCell: UITableViewCell {
             make.height.equalTo(74 * width_height_ratio)
         }
         infoLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(20)
+            make.top.equalTo(infoImageView.snp.top)
             make.left.equalTo(contentView).offset(13)
             make.right.equalTo(infoImageView.snp.left).offset(-36.5)
         }
@@ -67,23 +67,24 @@ class OnePictureTableViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 20, height: 12))
         }
         infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(topButton.snp.right).offset(3.5)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+            make.left.equalTo(infoLabel.snp.left)
+            make.bottom.equalTo(contentView).offset(-13)
+            make.height.equalTo(18)
+            make.width.equalTo(50)
+        }
+        infoTimeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
+            make.bottom.equalTo(contentView).offset(-17)
             make.height.equalTo(10)
         }
-//        infoTimeLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
-//            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
-//            make.height.equalTo(10)
-//        }
         infoLookLabel.snp.makeConstraints { (make) in
             make.left.equalTo(infoSourceLabel.snp.right).offset(10)
             make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
             make.height.equalTo(10)
         }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoLookLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+            make.right.equalTo(infoLabel.snp.right).offset(-10)
+            make.centerY.equalTo(infoTimeLabel.snp.centerY)
             make.height.equalTo(10)
         }
         line.snp.makeConstraints { (make) in
@@ -107,6 +108,7 @@ class OnePictureTableViewCell: UITableViewCell {
     lazy var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.numberOfLines = 2
+        
         infoLabel.font = UIFont.systemFont(ofSize: 15)
         infoLabel.textColor = UIColor.init(hexColor: "#333333")
         return infoLabel
@@ -114,7 +116,12 @@ class OnePictureTableViewCell: UITableViewCell {
     lazy var infoSourceLabel: UILabel = {
         let infoSourceLabel = UILabel()
         infoSourceLabel.font = grayTextFont
-        infoSourceLabel.textColor = UIColor.viewGrayColor
+        infoSourceLabel.font = UIFont.systemFont(ofSize: 10)
+        infoSourceLabel.backgroundColor = UIColor.init(hexColor: "666666")
+        infoSourceLabel.layer.masksToBounds = true
+        infoSourceLabel.layer.cornerRadius = 9
+        infoSourceLabel.textAlignment = NSTextAlignment.center
+        infoSourceLabel.textColor = UIColor.white
         return infoSourceLabel
     }()
     lazy var infoTimeLabel: UILabel = {
@@ -127,7 +134,7 @@ class OnePictureTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.viewGrayColor
+        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
         return infoCommentLabel
     }()
     lazy var infoLookLabel: UILabel = {
@@ -163,12 +170,34 @@ class OnePictureTableViewCell: UITableViewCell {
     // 数据模型
     var infoModel: InfoModel? {
         willSet {
-            infoLabel.text = newValue?.infoTitle ?? ""
-            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
             
+           
+                if newValue?.topic == "13" {
+                    infoSourceLabel.text = "演出文化"
+                }else if newValue?.topic == "14" {
+                    infoSourceLabel.text = "旅游文化"
+                }else if newValue?.topic == "15" {
+                    infoSourceLabel.text = "体育文化"
+                }else if newValue?.topic == "16" {
+                    infoSourceLabel.text = "电影文化"
+                }else if newValue?.topic == "17" {
+                    infoSourceLabel.text = "会展文化"
+                }else if newValue?.topic == "18" {
+                    infoSourceLabel.text = "饮食文化"
+                }else {
+                    infoSourceLabel.text = "演出文化"
+                }
+            
+            
+            infoLabel.text = newValue?.infoTitle ?? ""
+            
+          
 //            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@评论", newValue?.infoComment ?? "0")
-            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
+
+            
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
+//            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
             let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
             infoImageView.kf.setImage(with: imageUrl)
             if newValue?.isTop == "1" {

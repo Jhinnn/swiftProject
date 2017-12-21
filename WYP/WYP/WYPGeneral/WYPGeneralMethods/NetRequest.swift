@@ -1,4 +1,4 @@
-//
+    //
 //  NetRequest.swift
 //  WYP
 //
@@ -1459,6 +1459,8 @@ class NetRequest {
             }
         }
     }
+    
+    //
     
     // 资讯 - 话题点赞和评论点赞
     class func topicStarNetRequest(openId: String, newsId: String, typeId: String, cid: String, complete: @escaping ((Bool, String?) -> Void)) {

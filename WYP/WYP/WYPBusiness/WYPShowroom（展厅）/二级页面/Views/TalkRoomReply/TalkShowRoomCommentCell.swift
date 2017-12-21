@@ -8,14 +8,15 @@
 
 import UIKit
 
-protocol ShowRoomCommentCellDelegate: NSObjectProtocol {
+protocol TalkShowRoomCommentCellDelegate: NSObjectProtocol {
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel)
     func commentReplyButtonDidSelected(sender: UIButton)
+    func commentFollowButtonDidSelected(sender: UIButton, comments: CommentModel)
 }
 
-class ShowRoomCommentCell: UITableViewCell {
+class TalkShowRoomCommentCell: UITableViewCell {
 
-    weak var delegate: ShowRoomCommentCellDelegate?
+    weak var delegate: TalkShowRoomCommentCellDelegate?
     
     // MARK: - life cycle
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -34,19 +35,21 @@ class ShowRoomCommentCell: UITableViewCell {
         contentView.addSubview(nickNameLablel)
         contentView.addSubview(contentLabel)
         contentView.addSubview(timeLabel)
+        contentView.addSubview(isFollowButton)
         contentView.addSubview(starCountButton)
         contentView.addSubview(replyCountLabel)
         contentView.addSubview(replyButton)
     }
     
-    func setupUIFrame(replyFrame: RoomCommentFrameModel) {
+    func setupUIFrame(replyFrame: TalkRoomCommentFrameModel) {
         headImgView.frame = (replyFrame.headImgUrlF)!
         nickNameLablel.frame = (replyFrame.nickNameF)!
         contentLabel.frame = (replyFrame.contentF)!
         timeLabel.frame = (replyFrame.timeF)!
+        isFollowButton.frame = (replyFrame.followF)!
         starCountButton.frame = (replyFrame.starCountF)!
-        replyCountLabel.frame = (replyFrame.replyCountF)!
-        replyButton.frame = (replyFrame.replyButtonF)!
+//        replyCountLabel.frame = (replyFrame.replyCountF)!
+//        replyButton.frame = (replyFrame.replyButtonF)!
     }
     
     // MARK: - event response
@@ -56,6 +59,10 @@ class ShowRoomCommentCell: UITableViewCell {
     
     func clickReplyButton(sender: UIButton) {
         delegate?.commentReplyButtonDidSelected(sender: sender)
+    }
+    
+    func clickFollowButton(sender: UIButton) {
+        delegate?.commentFollowButtonDidSelected(sender: sender, comments: (commentFrame?.comment)!)
     }
     
     // MARK: - setter and getter
@@ -72,8 +79,8 @@ class ShowRoomCommentCell: UITableViewCell {
     // 昵称
     lazy var nickNameLablel: UILabel = {
         let nickNameLablel = UILabel()
-        nickNameLablel.textColor = UIColor.init(hexColor: "#507bab")
-        nickNameLablel.font = UIFont.systemFont(ofSize: 11)
+        nickNameLablel.textColor = UIColor.init(hexColor: "898989")
+        nickNameLablel.font = UIFont.systemFont(ofSize: 14)
         
         return nickNameLablel
     }()
@@ -83,15 +90,25 @@ class ShowRoomCommentCell: UITableViewCell {
         let contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.numberOfLines = 0
-        
+        contentLabel.textColor = UIColor.init(hexColor: "333333")
         return contentLabel
+    }()
+    
+    // 关注
+    lazy var isFollowButton: UIButton = {
+        let followButton = UIButton()
+        followButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        followButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
+        followButton.addTarget(self, action: #selector(clickFollowButton(sender:)), for: .touchUpInside)
+        return followButton
     }()
     
     // 时间
     lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = UIFont.systemFont(ofSize: 10)
-        timeLabel.textColor = UIColor.init(hexColor: "afafaf")
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textAlignment = NSTextAlignment.right
+        timeLabel.textColor = UIColor.init(hexColor: "BDBDBD")
         return timeLabel
     }()
     
@@ -100,7 +117,7 @@ class ShowRoomCommentCell: UITableViewCell {
         let starCountButton = UIButton(type: .custom)
         starCountButton.setImage(UIImage(named: "common_grayStar_button_normal_iPhone"), for: .normal)
         starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
-        starCountButton.setTitleColor(UIColor.black, for: .normal)
+        starCountButton.setTitleColor(UIColor.init(hexColor: "999999"), for: .normal)
         starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
         starCountButton.addTarget(self, action: #selector(clickStarButton(sender:)), for: .touchUpInside)
         return starCountButton
@@ -125,12 +142,27 @@ class ShowRoomCommentCell: UITableViewCell {
         return replyButton
     }()
     
-    public var commentFrame: RoomCommentFrameModel? {
+    public var commentFrame: TalkRoomCommentFrameModel? {
         willSet {
             
             let imageUrl = URL(string: newValue?.comment.userPhoto ?? "")
             headImgView.kf.setImage(with: imageUrl, for: .normal)
             nickNameLablel.text = newValue?.comment.nickName ?? ""
+            
+            if newValue?.comment.is_follow == 0 {  //未关注
+                
+                if newValue?.comment.uid == AppInfo.shared.user?.userId {
+                    isFollowButton.isHidden = true
+                }else {
+                    isFollowButton.isHidden = false
+                    isFollowButton.setTitle("关注", for: .normal)
+                    isFollowButton.setTitleColor(UIColor.init(hexColor: "DC3A20"), for: .normal)
+                }
+            }else {
+                isFollowButton.isHidden = false
+                isFollowButton.setTitle("已关注", for: .normal)
+                isFollowButton.setTitleColor(UIColor.init(hexColor: "898989"), for: .normal)
+            }
             contentLabel.text = newValue?.comment.content ?? ""
             timeLabel.text = Int(newValue!.comment!.createTime!)?.getTimeString()
             replyCountLabel.text = "回复数：\(newValue?.comment.replyCount ?? 0)"

@@ -41,6 +41,19 @@
 		8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */; };
 		8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */; };
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
+		8EC8F01A1FEB5B1A0050A040 /* ThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */; };
+		8EC8F01B1FEB5B1A0050A040 /* VideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */; };
+		8EC8F01C1FEB5B1A0050A040 /* OnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */; };
+		8EC8F01D1FEB5B1A0050A040 /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */; };
+		8EC8F0231FEB5BDE0050A040 /* TalkVideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */; };
+		8EC8F0241FEB5BDE0050A040 /* TalkOnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */; };
+		8EC8F0251FEB5BDE0050A040 /* TalkTravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */; };
+		8EC8F0261FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */; };
+		8EC8F02A1FEB669D0050A040 /* TalkRoomCommentFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */; };
+		8EC8F02B1FEB669D0050A040 /* TalkShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */; };
+		8EC8F02E1FEB6A2D0050A040 /* TalkNewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */; };
+		8EC8F0301FEB9D980050A040 /* TalkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02F1FEB9D970050A040 /* TalkButton.swift */; };
+		8EC8F0331FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
@@ -266,10 +279,6 @@
 		F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A11EA61C2B002C502B /* InviteFriendsTableViewCell.swift */; };
 		F9986A3B1EA61C2B002C502B /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A31EA61C2B002C502B /* InviteFriendsViewController.swift */; };
 		F9986A3C1EA61C2B002C502B /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A71EA61C2B002C502B /* InfoModel.swift */; };
-		F9986A3D1EA61C2B002C502B /* OnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */; };
-		F9986A3E1EA61C2B002C502B /* ThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */; };
-		F9986A3F1EA61C2B002C502B /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */; };
-		F9986A401EA61C2B002C502B /* VideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */; };
 		F9986A411EA61C2B002C502B /* NewsNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AE1EA61C2B002C502B /* NewsNaviViewController.swift */; };
 		F9986A421EA61C2B002C502B /* NewsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AF1EA61C2B002C502B /* NewsPhotosViewController.swift */; };
 		F9986A431EA61C2B002C502B /* NewsTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869B01EA61C2B002C502B /* NewsTopicViewController.swift */; };
@@ -426,6 +435,19 @@
 		8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteViewController.swift; sourceTree = "<group>"; };
 		8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupNoteTableViewCell.swift; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的好友/群组/Views/GroupNoteTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
+		8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreePictureTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfoTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePictureTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkVideoInfoTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkOnePictureTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkTravelTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkThreePictureTableViewCell.swift; sourceTree = "<group>"; };
+		8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkRoomCommentFrameModel.swift; sourceTree = "<group>"; };
+		8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkShowRoomCommentCell.swift; sourceTree = "<group>"; };
+		8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsViewController.swift; sourceTree = "<group>"; };
+		8EC8F02F1FEB9D970050A040 /* TalkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkButton.swift; sourceTree = "<group>"; };
+		8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsReplyViewController.swift; sourceTree = "<group>"; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
@@ -703,10 +725,6 @@
 		F99869A11EA61C2B002C502B /* InviteFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		F99869A31EA61C2B002C502B /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 		F99869A71EA61C2B002C502B /* InfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
-		F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePictureTableViewCell.swift; sourceTree = "<group>"; };
-		F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreePictureTableViewCell.swift; sourceTree = "<group>"; };
-		F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
-		F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfoTableViewCell.swift; sourceTree = "<group>"; };
 		F99869AE1EA61C2B002C502B /* NewsNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNaviViewController.swift; sourceTree = "<group>"; };
 		F99869AF1EA61C2B002C502B /* NewsPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPhotosViewController.swift; sourceTree = "<group>"; };
 		F99869B01EA61C2B002C502B /* NewsTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTopicViewController.swift; sourceTree = "<group>"; };
@@ -894,6 +912,35 @@
 				8E650AE41FE8F52C00A453BB /* WYPContain.m */,
 			);
 			path = WYPContain;
+			sourceTree = "<group>";
+		};
+		8EC8F01E1FEB5B890050A040 /* TalkView */ = {
+			isa = PBXGroup;
+			children = (
+				8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */,
+				8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */,
+				8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */,
+				8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */,
+			);
+			path = TalkView;
+			sourceTree = "<group>";
+		};
+		8EC8F0271FEB66560050A040 /* TalkRoomReply */ = {
+			isa = PBXGroup;
+			children = (
+				8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */,
+				8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */,
+			);
+			path = TalkRoomReply;
+			sourceTree = "<group>";
+		};
+		8EC8F02C1FEB6A190050A040 /* NewViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */,
+				8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */,
+			);
+			path = NewViewControllers;
 			sourceTree = "<group>";
 		};
 		9E22D42F1FACD4C700846374 /* ScanAddFriendView */ = {
@@ -1149,6 +1196,7 @@
 				F9986A6C1EA61DFF002C502B /* SYNavTabBar.swift */,
 				A424DD411E821D65002F6720 /* LBTextField.swift */,
 				F984BDD41E97875200FD3E0B /* SYAlertController.swift */,
+				8EC8F02F1FEB9D970050A040 /* TalkButton.swift */,
 				F933534C1ED59C3100E67DD2 /* SearchView.swift */,
 				F95EA8551F78EC1C008AE547 /* navTitleView.swift */,
 				F9993E0C1F7906E30077A4DD /* SearchTitleView.swift */,
@@ -2358,10 +2406,11 @@
 		F99869A81EA61C2B002C502B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */,
-				F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */,
-				F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */,
-				F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */,
+				8EC8F01E1FEB5B890050A040 /* TalkView */,
+				8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */,
+				8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */,
+				8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */,
+				8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */,
 				9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */,
 			);
 			path = View;
@@ -2392,6 +2441,7 @@
 		F99869B41EA61C2B002C502B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EC8F02C1FEB6A190050A040 /* NewViewControllers */,
 				F99869B51EA61C2B002C502B /* NewsDetailsViewController.swift */,
 				F94DB8331EB31EEE00B014AD /* VideoDetailViewController.swift */,
 				F9E298171EAB5EC700DFD96F /* NewsSearchResultViewController.swift */,
@@ -2611,6 +2661,7 @@
 		F99869ED1EA61C2B002C502B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8EC8F0271FEB66560050A040 /* TalkRoomReply */,
 				F94096601ED6DF0700DD4523 /* RoomReply */,
 				A49DA1EE1EA9A2CF000E4AFA /* ShowroomDescriptionCell.swift */,
 				A49DA1F01EA9A2ED000E4AFA /* ShowroomNoticeCell.swift */,
@@ -2950,7 +3001,6 @@
 				F9ADA3881EE54E3300289E5E /* PhotosCommentsDetailViewController.swift in Sources */,
 				F956CE801EDEAF0100B751D4 /* ShowNewsListViewController.swift in Sources */,
 				F9986A0F1EA61C2B002C502B /* ThirdAccountViewController.swift in Sources */,
-				F9986A3E1EA61C2B002C502B /* ThreePictureTableViewCell.swift in Sources */,
 				A49DA1F51EA9A356000E4AFA /* ShowroomGroupCell.swift in Sources */,
 				A4B204F91EC01291007DA418 /* CMInputView.m in Sources */,
 				F9A47A401F5CE45700C313F2 /* SYBannerCell.swift in Sources */,
@@ -2983,6 +3033,7 @@
 				F9FE905A1F9F024800D31F3C /* SGQRCodeGenerateManager.m in Sources */,
 				F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */,
 				A4B205111EC01348007DA418 /* MyCommunityViewController.swift in Sources */,
+				8EC8F01D1FEB5B1A0050A040 /* TravelTableViewCell.swift in Sources */,
 				F9986A351EA61C2B002C502B /* CouponCell.swift in Sources */,
 				A43C2A3C1E8101D90037BB5A /* Int+Extension.swift in Sources */,
 				F9986A1F1EA61C2B002C502B /* ChatViewController.swift in Sources */,
@@ -2990,9 +3041,15 @@
 				F9986A061EA61C2B002C502B /* LogInViewController.swift in Sources */,
 				A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */,
 				A43C2A4B1E8101D90037BB5A /* ConfigureHeader.swift in Sources */,
+				8EC8F02B1FEB669D0050A040 /* TalkShowRoomCommentCell.swift in Sources */,
+				8EC8F01A1FEB5B1A0050A040 /* ThreePictureTableViewCell.swift in Sources */,
+				8EC8F0251FEB5BDE0050A040 /* TalkTravelTableViewCell.swift in Sources */,
+				8EC8F0331FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift in Sources */,
 				8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */,
+				8EC8F0241FEB5BDE0050A040 /* TalkOnePictureTableViewCell.swift in Sources */,
 				A43C2A1B1E8101D90037BB5A /* AppDelegate.swift in Sources */,
 				A4B2050A1EC01291007DA418 /* ShowCommentView.m in Sources */,
+				8EC8F01B1FEB5B1A0050A040 /* VideoInfoTableViewCell.swift in Sources */,
 				8E650ADE1FE7B5B300A453BB /* HXAlbumListView.m in Sources */,
 				F9BCAE231ECD31AF0070FE21 /* SearchHomeNewsViewController.swift in Sources */,
 				F9986A051EA61C2B002C502B /* UserModel.swift in Sources */,
@@ -3002,6 +3059,7 @@
 				A43C2A3D1E8101D90037BB5A /* String+Extension.swift in Sources */,
 				8E650AD11FE7B5B300A453BB /* HXPhotoPreviewViewController.m in Sources */,
 				F92ABBF61EA8F0C4006A41A5 /* MediaModel.swift in Sources */,
+				8EC8F02A1FEB669D0050A040 /* TalkRoomCommentFrameModel.swift in Sources */,
 				F9A47A421F5CE49E00C313F2 /* SYBannerView.swift in Sources */,
 				A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */,
 				8E650ADC1FE7B5B300A453BB /* HXPhotoSubViewCell.m in Sources */,
@@ -3012,13 +3070,11 @@
 				F9986A081EA61C2B002C502B /* MeViewController.swift in Sources */,
 				9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */,
 				A42EDE121EDEB21D00C0B500 /* FYLCityModel.m in Sources */,
-				F9986A3F1EA61C2B002C502B /* TravelTableViewCell.swift in Sources */,
 				F9E086671EA9BA630023EA43 /* RoomInfoModel.swift in Sources */,
 				F9986A661EA61C2B002C502B /* ProjectCertificationCollectionViewCell.swift in Sources */,
 				F9986A111EA61C2B002C502B /* ServiceCenterViewController.swift in Sources */,
 				F9986A4F1EA61C2B002C502B /* LotteryViewController.swift in Sources */,
 				A43C2A421E8101D90037BB5A /* LocationManager.swift in Sources */,
-				F9986A401EA61C2B002C502B /* VideoInfoTableViewCell.swift in Sources */,
 				A424DD421E821D65002F6720 /* LBTextField.swift in Sources */,
 				8E650ADD1FE7B5B300A453BB /* HXAlbumModel.m in Sources */,
 				A419E7401EC1B16600C277D8 /* GeneralViewController.swift in Sources */,
@@ -3034,6 +3090,7 @@
 				F95B7E931EC94BB600A3ACBA /* VideoInfoModel.swift in Sources */,
 				F9986A031EA61C2B002C502B /* RegisterViewController.swift in Sources */,
 				F9986A511EA61C2B002C502B /* VoteViewController.swift in Sources */,
+				8EC8F0231FEB5BDE0050A040 /* TalkVideoInfoTableViewCell.swift in Sources */,
 				F9986A231EA61C2B002C502B /* AddFriendsTableViewCell.swift in Sources */,
 				F9986A311EA61C2B002C502B /* TopicsViewController.swift in Sources */,
 				F9986A5E1EA61C2B002C502B /* ProjectCertificationViewController.swift in Sources */,
@@ -3080,6 +3137,7 @@
 				A476BD491E934670009733A5 /* UITextView+Select.m in Sources */,
 				F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */,
 				F9599BC41EB20CE300440E66 /* LotteryDetailsViewController.swift in Sources */,
+				8EC8F0261FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift in Sources */,
 				F9986A121EA61C2B002C502B /* AttentionViewController.swift in Sources */,
 				8E650ADF1FE7B5B300A453BB /* UIButton+HXExtension.m in Sources */,
 				F96139BC1EAD8D970029E22A /* HomeModel.swift in Sources */,
@@ -3149,6 +3207,7 @@
 				9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */,
 				9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */,
 				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
+				8EC8F0301FEB9D980050A040 /* TalkButton.swift in Sources */,
 				F9986A2C1EA61C2B002C502B /* MyOrdersViewController.swift in Sources */,
 				F9CE6F8F1EC56B1200B9B06D /* RecordsDetailModel.swift in Sources */,
 				F9B660B81F04EA5400692DE2 /* WMPlayer.m in Sources */,
@@ -3200,7 +3259,6 @@
 				F9986A551EA61C2B002C502B /* ShowroomCell.swift in Sources */,
 				A4B204FD1EC01291007DA418 /* JFImageManager.m in Sources */,
 				F9FA08F41EB9C9A200E71E4D /* SearchFriendsResultViewController.swift in Sources */,
-				F9986A3D1EA61C2B002C502B /* OnePictureTableViewCell.swift in Sources */,
 				F99869FA1EA61C2B002C502B /* SearchResultNaviViewController.swift in Sources */,
 				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
 				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
@@ -3229,7 +3287,9 @@
 				F9986A2E1EA61C2B002C502B /* TopicsFrameModel.swift in Sources */,
 				F94DB8371EB322A100B014AD /* VideoDetailModel.swift in Sources */,
 				F9986A3B1EA61C2B002C502B /* InviteFriendsViewController.swift in Sources */,
+				8EC8F01C1FEB5B1A0050A040 /* OnePictureTableViewCell.swift in Sources */,
 				F9986A371EA61C2B002C502B /* GoodsAddressController.swift in Sources */,
+				8EC8F02E1FEB6A2D0050A040 /* TalkNewsDetailsViewController.swift in Sources */,
 				F91E42CD1EA70B2100CDCE19 /* TheaterGroupModel.swift in Sources */,
 				8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */,
 				A43C2A461E8101D90037BB5A /* BaseNavigationController.swift in Sources */,

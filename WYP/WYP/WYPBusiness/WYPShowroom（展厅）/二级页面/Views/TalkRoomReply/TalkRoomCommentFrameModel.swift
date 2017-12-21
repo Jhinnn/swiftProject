@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomCommentFrameModel: NSObject {
+class TalkRoomCommentFrameModel: NSObject {
 
     // 头像的frame
     var headImgUrlF: CGRect?
@@ -25,6 +25,9 @@ class RoomCommentFrameModel: NSObject {
     // 时间的frame
     var timeF: CGRect?
     
+    //关注的frame
+    var followF: CGRect?
+    
     // 回复数的frame
     var replyCountF: CGRect?
     
@@ -39,20 +42,24 @@ class RoomCommentFrameModel: NSObject {
         willSet {
             headImgUrlF = CGRect(x: 13, y: 17.5, width: 40, height: 40)
             
-            nickNameF = CGRect(x: (headImgUrlF?.maxX)! + 14, y: 29, width: 100, height: 11)
+            nickNameF = CGRect(x: (headImgUrlF?.maxX)! + 14, y:30 , width: 200, height: 14)
             
-            starCountF = CGRect(x: kScreen_width - 65, y: 24, width: 65, height: 15)
+            followF = CGRect(x: kScreen_width - 95, y: 30, width: 80, height: 14)
             
             // 计算content的Frame
             let contentSize = String().stringSize(text: (newValue.content)!, font: UIFont.systemFont(ofSize: 14), maxSize: CGSize(width: kScreen_width - 40 - 32 - 25, height: 500))
             
-            contentF = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (nickNameF?.maxY)! + 10, width: contentSize.width, height: contentSize.height)
+            contentF = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (nickNameF?.maxY)! + 16, width: contentSize.width, height: contentSize.height)
             
-            timeF = CGRect(x: (contentF?.minX)!, y: (contentF?.maxY)! + 10, width: 65, height: 10.5)
+//            timeF = CGRect(x: (contentF?.minX)!, y: (contentF?.maxY)! + 10, width: 65, height: 10.5)
             
-            replyCountF = CGRect(x: (timeF?.maxX)! + 10, y: (contentF?.maxY)! + 10, width: 80, height: 10.5)
+            starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (contentF?.maxY)! + 14, width: 70, height: 14)
             
-            replyButtonF = CGRect(x: kScreen_width - 45, y: (contentF?.maxY)! + 10, width: 30, height: 10.5)
+//            replyCountF = CGRect(x: (timeF?.maxX)! + 10, y: (contentF?.maxY)! + 10, width: 80, height: 10.5)
+            
+//            replyButtonF = CGRect(x: kScreen_width - 45, y: (contentF?.maxY)! + 10, width: 30, height: 10.5)
+            
+            timeF = CGRect(x: kScreen_width - 95, y: (contentF?.maxY)! + 16, width: 80, height: 14)
             
             cellHeight = (timeF?.maxY)! + 20
         }

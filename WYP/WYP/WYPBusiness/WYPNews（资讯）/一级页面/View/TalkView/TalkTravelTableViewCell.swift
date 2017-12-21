@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TravelTableViewCell: UITableViewCell {
+class TalkTravelTableViewCell: UITableViewCell {
     
     // MARK: - life cycle
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -29,7 +29,7 @@ class TravelTableViewCell: UITableViewCell {
         contentView.addSubview(adButton)
         contentView.addSubview(topButton)
         contentView.addSubview(infoSourceLabel)
-//        contentView.addSubview(infoTimeLabel)
+        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
         contentView.addSubview(line)
@@ -59,17 +59,18 @@ class TravelTableViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 20, height: 12))
         }
         infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(topButton.snp.right).offset(2)
+            make.left.equalTo(travelTitleLabel.snp.left)
+            make.bottom.equalTo(contentView).offset(-13)
+            make.height.equalTo(18)
+            make.width.equalTo(50)
+        }
+        infoTimeLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
             make.bottom.equalTo(contentView).offset(-17)
             make.height.equalTo(10)
         }
-//        infoTimeLabel.snp.makeConstraints { (make) in
-//            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
-//            make.bottom.equalTo(contentView).offset(-17)
-//            make.height.equalTo(10)
-//        }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
+            make.right.equalTo(self.contentView).offset(-10)
             make.bottom.equalTo(contentView).offset(-17)
             make.height.equalTo(10)
         }
@@ -104,8 +105,12 @@ class TravelTableViewCell: UITableViewCell {
     lazy var infoSourceLabel: UILabel = {
         let infoSourceLabel = UILabel()
         infoSourceLabel.text = "凤凰娱乐"
-        infoSourceLabel.font = grayTextFont
-        infoSourceLabel.textColor = UIColor.viewGrayColor
+        infoSourceLabel.backgroundColor = UIColor.init(hexColor: "666666")
+        infoSourceLabel.font = UIFont.systemFont(ofSize: 10)
+        infoSourceLabel.layer.masksToBounds = true
+        infoSourceLabel.layer.cornerRadius = 9
+        infoSourceLabel.textAlignment = NSTextAlignment.center
+        infoSourceLabel.textColor = UIColor.white
         return infoSourceLabel
     }()
     lazy var infoTimeLabel: UILabel = {
@@ -117,7 +122,7 @@ class TravelTableViewCell: UITableViewCell {
     }()
     lazy var infoLookLabel: UILabel = {
         let infoLookLabel = UILabel()
-        infoLookLabel.text = "6666人浏览"
+//        infoLookLabel.text = "6666人浏览"
         infoLookLabel.textAlignment = .right
         infoLookLabel.font = grayTextFont
         infoLookLabel.textColor = UIColor.viewGrayColor
@@ -127,7 +132,7 @@ class TravelTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.viewGrayColor
+        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
         return infoCommentLabel
     }()
     lazy var adButton: UIButton = {
@@ -150,10 +155,26 @@ class TravelTableViewCell: UITableViewCell {
     var infoModel: InfoModel? {
         willSet {
             travelTitleLabel.text = newValue?.infoTitle ?? ""
-            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
-//            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoComment ?? "0")
-            infoCommentLabel.text = String.init(format: "%@人浏览", newValue?.infoLook ?? "0")
+//            ["演出文化","旅游文化","体育文化","电影文化","会展文化","饮食文化"]
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
+            }
+//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+//            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoLook ?? "0")
+            infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
             
             if newValue?.isTop == "1" {
                 topButton.snp.updateConstraints({ (make) in

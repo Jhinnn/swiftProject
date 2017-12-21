@@ -11,6 +11,8 @@ import HandyJSON
 
 class CommentModel: HandyJSON {
 
+    //个人id
+    var uid: String?
     // 评论id
     var commentId: String?
     // 头像
@@ -26,7 +28,7 @@ class CommentModel: HandyJSON {
     // 创建时间
     var createTime: String?
     // 是否关注该用户
-    var isFollow: Int?
+    var is_follow: Int?
     // 该用户的好友数
     var friendsNum: String?
     // 该用户的粉丝数
@@ -36,6 +38,7 @@ class CommentModel: HandyJSON {
 
     
     func mapping(mapper: HelpingMapper) {
+        mapper <<< self.uid <-- "uid"
         mapper <<< self.commentId <-- "id"
         mapper <<< self.userPhoto <-- "avatar128"
         mapper <<< self.nickName <-- "nickname"
@@ -44,6 +47,7 @@ class CommentModel: HandyJSON {
         mapper <<< self.content <-- "content"
         mapper <<< self.createTime <-- "create_time"
         mapper <<< self.replyCount <-- "reply_count"
+        mapper <<< self.is_follow <-- "is_follow"
     }
     
     required init() {}
