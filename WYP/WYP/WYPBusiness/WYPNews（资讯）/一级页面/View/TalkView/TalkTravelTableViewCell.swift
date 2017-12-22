@@ -171,9 +171,8 @@ class TalkTravelTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-//            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoLook ?? "0")
             infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
             
             if newValue?.isTop == "1" {
@@ -200,6 +199,19 @@ class TalkTravelTableViewCell: UITableViewCell {
                 hotImageView.isHidden = false
             }
 
+        }
+    }
+    
+    //数据模型
+    var mineTopicsModel: MineTopicsModel? {
+        willSet {
+            travelTitleLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
+         
+            hotImageView.isHidden = true
         }
     }
 }

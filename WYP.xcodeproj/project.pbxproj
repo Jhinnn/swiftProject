@@ -54,6 +54,9 @@
 		8EC8F02E1FEB6A2D0050A040 /* TalkNewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */; };
 		8EC8F0301FEB9D980050A040 /* TalkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02F1FEB9D970050A040 /* TalkButton.swift */; };
 		8EC8F0331FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */; };
+		8EC8F0361FECD1F40050A040 /* MineTopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */; };
+		8EC8F0381FECE59E0050A040 /* TopicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */; };
+		8EC8F03A1FECE5B90050A040 /* TopicHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
@@ -448,6 +451,9 @@
 		8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsViewController.swift; sourceTree = "<group>"; };
 		8EC8F02F1FEB9D970050A040 /* TalkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkButton.swift; sourceTree = "<group>"; };
 		8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsReplyViewController.swift; sourceTree = "<group>"; };
+		8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTopicsModel.swift; sourceTree = "<group>"; };
+		8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicHeaderView.swift; sourceTree = "<group>"; };
+		8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicHeaderView.xib; sourceTree = "<group>"; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
@@ -2232,6 +2238,7 @@
 			children = (
 				F99869861EA61C2B002C502B /* TopicsFrameModel.swift */,
 				F99869871EA61C2B002C502B /* TopicsModel.swift */,
+				8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2249,6 +2256,8 @@
 			isa = PBXGroup;
 			children = (
 				F998698C1EA61C2B002C502B /* TopicsCell.swift */,
+				8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */,
+				8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2888,6 +2897,7 @@
 				F916E57C1E8DEFB90051F945 /* citydict.plist in Resources */,
 				A4E439231ED28305007532B0 /* FreeShowroomDetails.storyboard in Resources */,
 				F9B660B51F04EA5400692DE2 /* FastForwardView.xib in Resources */,
+				8EC8F03A1FECE5B90050A040 /* TopicHeaderView.xib in Resources */,
 				8E650AD91FE7B5B300A453BB /* HXWeiboPhotoPicker.bundle in Resources */,
 				F9599BC31EB20CE300440E66 /* LotteryDetails.storyboard in Resources */,
 				F9FE90581F9F024800D31F3C /* SGQRCode.bundle in Resources */,
@@ -3031,6 +3041,7 @@
 				F984BDD01E9786FA00FD3E0B /* ChineseString.m in Sources */,
 				F94403AA1F0E047700A8048B /* BannerModel.swift in Sources */,
 				F9FE905A1F9F024800D31F3C /* SGQRCodeGenerateManager.m in Sources */,
+				8EC8F0361FECD1F40050A040 /* MineTopicsModel.swift in Sources */,
 				F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */,
 				A4B205111EC01348007DA418 /* MyCommunityViewController.swift in Sources */,
 				8EC8F01D1FEB5B1A0050A040 /* TravelTableViewCell.swift in Sources */,
@@ -3163,6 +3174,7 @@
 				F924684E1EE790530078FB14 /* SearchHomeTicketsViewController.swift in Sources */,
 				F9986A591EA61C2B002C502B /* PhotosViewController.swift in Sources */,
 				A4B204FF1EC01291007DA418 /* JFImagePickerViewCell.m in Sources */,
+				8EC8F0381FECE59E0050A040 /* TopicHeaderView.swift in Sources */,
 				8E650AC91FE7B5B300A453BB /* HXPresentTransition.m in Sources */,
 				F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */,
 				8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */,

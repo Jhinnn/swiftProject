@@ -217,11 +217,8 @@ class TalkThreePictureTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-            //            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+        
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
-//            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-//            infoLookLabel.text = String.init(format: "%@人评论", newValue?.infoLook ?? "0")
             infoCommentLabel.text = String.init(format: "%@人回答", newValue?.infoComment ?? "0")
             let imageUrl1 = URL(string: newValue?.infoImageArr?[0] ?? "")
             let imageUrl2 = URL(string: newValue?.infoImageArr?[1] ?? "")
@@ -256,4 +253,25 @@ class TalkThreePictureTableViewCell: UITableViewCell {
 
         }
     }
+    
+    //数据模型
+    var mineTopicsModel: MineTopicsModel? {
+        willSet {
+            infoLabel.text = newValue?.content ?? ""
+    
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
+            let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
+            let imageUrl2 = URL(string: newValue?.cover_url?[1] ?? "")
+            let imageUrl3 = URL(string: newValue?.cover_url?[2] ?? "")
+            infoImageView1.kf.setImage(with: imageUrl1)
+            infoImageView2.kf.setImage(with: imageUrl2)
+            infoImageView3.kf.setImage(with: imageUrl3)
+
+            hotImageView.isHidden = true
+        }
+    }
+    
+    
 }

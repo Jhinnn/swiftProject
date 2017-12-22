@@ -49,7 +49,7 @@ class TalkNewsDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "资讯详情"
+        title = "话题详情"
         
         viewConfig()
         layoutPageSubviews()
@@ -310,9 +310,9 @@ class TalkNewsDetailsViewController: BaseViewController {
     // MARK: - setter and getter
 
     lazy var newsWebView: WKWebView = {
-        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height))
-        newsWebView.backgroundColor = UIColor.clear
-        newsWebView.isOpaque = false
+        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0))
+        newsWebView.backgroundColor = UIColor.red
+
         newsWebView.uiDelegate = self
         newsWebView.navigationDelegate = self
         newsWebView.scrollView.isScrollEnabled = false
@@ -438,6 +438,7 @@ extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
         
+        
         //这个方法也可以计算出webView滚动视图滚动的高度
         webView.evaluateJavaScript("document.body.scrollWidth") { (result, error) in
 
@@ -512,9 +513,9 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
             return commentFrame.cellHeight ?? 0
         }
     }
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 40))
-//        headerView.backgroundColor = UIColor.white
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 10))
+        headerView.backgroundColor = UIColor.groupTableViewBackground
 //        // 图标视图
 //        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
 //        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
@@ -530,20 +531,19 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
 //        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
 //        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
 //        headerView.addSubview(commentNumLabel)
-//
-//        return headerView
-//    }
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 50
-//    }
+        return headerView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if commentData.count > 0 {
-            let commentReply = CommentReplyViewController()
-            commentReply.flag = 2
-            commentReply.newsId = newsId ?? ""
-            commentReply.commentData = commentData[indexPath.row]
-            navigationController?.pushViewController(commentReply, animated: true)
-        }
+//        if commentData.count > 0 {
+//            let commentReply = CommentReplyViewController()
+//            commentReply.flag = 2
+//            commentReply.newsId = newsId ?? ""
+//            commentReply.commentData = commentData[indexPath.row]
+//            navigationController?.pushViewController(commentReply, animated: true)
+//        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -619,6 +619,28 @@ extension TalkNewsDetailsViewController: UITextFieldDelegate {
 }
 
 extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
+    
+    func commenPushCenterButtonDidSelected(comments: CommentModel) {
+        let community = MyCommunityViewController()
+        community.title = "个人主页"
+        community.userId = comments.uid ?? ""
+        community.headImageUrl = comments.userPhoto ?? ""
+        community.nickName = comments.nickName ?? ""
+        community.fansCount = String.init(format: "粉丝:%@人", comments.fansNumber ?? "0")
+        community.friendsCountLabel.text = String.init(format: "好友:%@人", comments.friendsNum ?? "0")
+        community.type = "2"
+        if comments.uid == AppInfo.shared.user?.userId {
+            community.userType = "200"
+        }
+        // 判断是否关注
+        if comments.is_follow == 0 {
+            community.isFollowed = false
+        } else if comments.is_follow == 1 {
+            community.isFollowed = true
+        }
+        self.navigationController?.pushViewController(community, animated: true)
+    }
+    
     // 点赞按钮
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel) {
         
@@ -680,6 +702,8 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
             }
         }
         
+        
+     
         
         
        

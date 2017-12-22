@@ -224,5 +224,25 @@ class TalkOnePictureTableViewCell: UITableViewCell {
 //                hotImageView.isHidden = false
 //            }
         }
+        
+        
     }
+    
+    
+    //数据模型
+    var mineTopicsModel: MineTopicsModel? {
+        willSet {
+            infoLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
+            let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
+           
+            infoImageView.kf.setImage(with: imageUrl1)
+           
+            hotImageView.isHidden = true
+        }
+    }
+    
 }

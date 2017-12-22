@@ -194,6 +194,69 @@ class NetRequest {
         }
     }
     
+    //我的话题列表---新
+    class func myNewTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id": token,
+                                      "is_login_uid" : uid,
+                                      "uid" : uid,
+                                      "page": page]
+        Alamofire.request(kApi_my_topicListnew, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+
+                    let dic = json["data"].dictionaryValue
+                
+                    let arr = dic["gambit"]?.rawValue as? [NSDictionary?]
+                    
+                    complete(true, info, arr)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //我的话题列表---新
+    class func myNewTopicMsgListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id": token,
+                                      "is_login_uid" : uid,
+                                      "uid" : uid,
+                                      "page": page]
+        Alamofire.request(kApi_my_topicListnew, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info,dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     // MARK: - 删除我的话题
     
     class func deleteMyTopicNetRequest(token: String, topicId: String, complete: @escaping ((Bool, String?) -> Void)) {
@@ -1491,12 +1554,84 @@ class NetRequest {
     
     // 资讯 - 话题评论
     class func topicsCommentNetRequest(openId: String, topicId: String, content: String, pid: String, complete: @escaping ((Bool, String?) -> Void)) {
+        
+//        var i = 1
+//        var infoDic:[String: String] = [String: String]()
+//        for image in images {
+//            // 压缩图片
+//            let fileData = UIImageJPEGRepresentation(image, 0.4)
+//            let base64String = fileData?.base64EncodedString(options: .endLineWithCarriageReturn)
+//            let imageName = "baseImg\(i)"
+//            infoDic[imageName] = base64String ?? ""
+//            i = i + 1
+//        }
+//        
+//        var parameters: Parameters = ["access_token": access_token,
+//                                      "method": "POST",
+//                                      "open_id": open_id,
+//                                      "type": type,
+//                                      "title":title]
+//        
+//        for (key, value) in infoDic {
+//            print(key,value)
+//            parameters[key] = value
+//        }
+        
+        
+        
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "open_id": openId,
                                       "id": topicId,
                                       "content": content,
                                       "pid": pid]
+        Alamofire.request(kApi_topicsComment, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info)
+                } else {
+                    complete(true, info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    // 资讯 - 话题评论(可附带图片)
+    class func topicsCommentImagesNetRequest(openId: String, topicId: String, content: String, pid: String,images: [UIImage], complete: @escaping ((Bool, String?) -> Void)) {
+        
+        
+        var i = 1
+        var infoDic:[String: String] = [String: String]()
+        for image in images {
+            // 压缩图片
+            let fileData = UIImageJPEGRepresentation(image, 0.4)
+            let base64String = fileData?.base64EncodedString(options: .endLineWithCarriageReturn)
+            let imageName = "baseImg\(i)"
+            infoDic[imageName] = base64String ?? ""
+            i = i + 1
+        }
+
+        var parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "open_id": openId,
+                                      "id": topicId,
+                                      "content": content,
+                                      "pid": pid]
+
+        for (key, value) in infoDic {
+            parameters[key] = value
+        }
+        
+
         Alamofire.request(kApi_topicsComment, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:

@@ -369,6 +369,11 @@ public var kApi_my_topicList: String {
     return kApi_baseUrl(path: "api/Gambit_list")
 }
 
+//我的话题--新
+public var kApi_my_topicListnew: String {
+    return kApi_baseUrl(path: "api/gambit_list_info")
+}
+
 // 发布话题
 public var kApi_issue_Topic: String {
     return kApi_baseUrl(path: "api/sendGambit")

@@ -35,12 +35,15 @@ class CommentModel: HandyJSON {
     var fansNumber: String?
     // 话题回复数
     var replyCount: Int?
+    // 评论图片
+    var cover_url: [String]?
 
     
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.uid <-- "uid"
         mapper <<< self.commentId <-- "id"
         mapper <<< self.userPhoto <-- "avatar128"
+        mapper <<< self.cover_url <-- "cover_url"
         mapper <<< self.nickName <-- "nickname"
         mapper <<< self.zanNumber <-- "like_num"
         mapper <<< self.isStar <-- "is_like"

@@ -12,6 +12,7 @@ protocol TalkShowRoomCommentCellDelegate: NSObjectProtocol {
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel)
     func commentReplyButtonDidSelected(sender: UIButton)
     func commentFollowButtonDidSelected(sender: UIButton, comments: CommentModel)
+    func commenPushCenterButtonDidSelected(comments: CommentModel)
 }
 
 class TalkShowRoomCommentCell: UITableViewCell {
@@ -39,6 +40,9 @@ class TalkShowRoomCommentCell: UITableViewCell {
         contentView.addSubview(starCountButton)
         contentView.addSubview(replyCountLabel)
         contentView.addSubview(replyButton)
+        contentView.addSubview(infoImageView1)
+        contentView.addSubview(infoImageView2)
+        contentView.addSubview(infoImageView3)
     }
     
     func setupUIFrame(replyFrame: TalkRoomCommentFrameModel) {
@@ -48,6 +52,10 @@ class TalkShowRoomCommentCell: UITableViewCell {
         timeLabel.frame = (replyFrame.timeF)!
         isFollowButton.frame = (replyFrame.followF)!
         starCountButton.frame = (replyFrame.starCountF)!
+        infoImageView1.frame = (replyFrame.image1F)!
+        infoImageView2.frame = (replyFrame.image2F)!
+        infoImageView3.frame = (replyFrame.image3F)!
+        
 //        replyCountLabel.frame = (replyFrame.replyCountF)!
 //        replyButton.frame = (replyFrame.replyButtonF)!
     }
@@ -65,6 +73,10 @@ class TalkShowRoomCommentCell: UITableViewCell {
         delegate?.commentFollowButtonDidSelected(sender: sender, comments: (commentFrame?.comment)!)
     }
     
+    func pushCenterAction() {
+        delegate?.commenPushCenterButtonDidSelected(comments: (commentFrame?.comment)!)
+    }
+    
     // MARK: - setter and getter
     // 头像
     lazy var headImgView: UIButton = {
@@ -72,7 +84,9 @@ class TalkShowRoomCommentCell: UITableViewCell {
         headImgView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
         headImgView.layer.masksToBounds = true
         headImgView.layer.cornerRadius = 19.5
-        
+        headImgView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(pushCenterAction))
+        headImgView.addGestureRecognizer(tap)
         return headImgView
     }()
     
@@ -94,6 +108,8 @@ class TalkShowRoomCommentCell: UITableViewCell {
         return contentLabel
     }()
     
+    
+    
     // 关注
     lazy var isFollowButton: UIButton = {
         let followButton = UIButton()
@@ -101,6 +117,32 @@ class TalkShowRoomCommentCell: UITableViewCell {
         followButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
         followButton.addTarget(self, action: #selector(clickFollowButton(sender:)), for: .touchUpInside)
         return followButton
+    }()
+    
+    //MARK: - setter and getter
+    lazy var infoImageView1: UIImageView = {
+        let infoImageView = UIImageView()
+        infoImageView.contentMode = .scaleAspectFill
+        infoImageView.layer.masksToBounds = true
+        infoImageView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
+        
+        return infoImageView
+    }()
+    lazy var infoImageView2: UIImageView = {
+        let infoImageView = UIImageView()
+        infoImageView.contentMode = .scaleAspectFill
+        infoImageView.layer.masksToBounds = true
+        infoImageView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
+        
+        return infoImageView
+    }()
+    lazy var infoImageView3: UIImageView = {
+        let infoImageView = UIImageView()
+        infoImageView.contentMode = .scaleAspectFill
+        infoImageView.layer.masksToBounds = true
+        infoImageView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
+        
+        return infoImageView
     }()
     
     // 时间
@@ -148,6 +190,29 @@ class TalkShowRoomCommentCell: UITableViewCell {
             let imageUrl = URL(string: newValue?.comment.userPhoto ?? "")
             headImgView.kf.setImage(with: imageUrl, for: .normal)
             nickNameLablel.text = newValue?.comment.nickName ?? ""
+            
+            if newValue?.comment.cover_url?.count != 0 {
+                
+                if newValue?.comment.cover_url?.count == 1 {
+                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                    infoImageView1.kf.setImage(with: imageUrl)
+                }else if newValue?.comment.cover_url?.count == 2 {
+                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                    infoImageView1.kf.setImage(with: imageUrl)
+
+                    let imageUrl1 = URL(string: newValue?.comment.cover_url?[1] ?? "")
+                    infoImageView2.kf.setImage(with: imageUrl1)
+                }else if newValue?.comment.cover_url?.count == 3 {
+                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                    infoImageView1.kf.setImage(with: imageUrl)
+                    
+                    let imageUrl1 = URL(string: newValue?.comment.cover_url?[1] ?? "")
+                    infoImageView2.kf.setImage(with: imageUrl1)
+                    
+                    let imageUrl2 = URL(string: newValue?.comment.cover_url?[2] ?? "")
+                    infoImageView3.kf.setImage(with: imageUrl2)
+                }
+            }
             
             if newValue?.comment.is_follow == 0 {  //未关注
                 

@@ -37,6 +37,17 @@ class TalkRoomCommentFrameModel: NSObject {
     // 单元格的高度
     var cellHeight: CGFloat?
     
+    // 图片1高度
+    var image1F: CGRect?
+    
+    // 图片1高度
+    var image2F: CGRect?
+    
+    // 图片1高度
+    var image3F: CGRect?
+    
+    
+    
     // 数据模型
     var comment: CommentModel! {
         willSet {
@@ -49,17 +60,35 @@ class TalkRoomCommentFrameModel: NSObject {
             // 计算content的Frame
             let contentSize = String().stringSize(text: (newValue.content)!, font: UIFont.systemFont(ofSize: 14), maxSize: CGSize(width: kScreen_width - 40 - 32 - 25, height: 500))
             
-            contentF = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (nickNameF?.maxY)! + 16, width: contentSize.width, height: contentSize.height)
+            contentF = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (nickNameF?.maxY)! + 12, width: contentSize.width, height: contentSize.height)
             
-//            timeF = CGRect(x: (contentF?.minX)!, y: (contentF?.maxY)! + 10, width: 65, height: 10.5)
+            if newValue.cover_url?.count != 0 {
+                if newValue.cover_url?.count == 1 {
+                    image1F = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                    image2F = CGRect(x: (headImgUrlF?.maxX)! + 100, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                    image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                }else if newValue.cover_url?.count == 2 {
+                    image1F = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                    image2F = CGRect(x: (headImgUrlF?.maxX)! + 100, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                    image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                }else if newValue.cover_url?.count == 3 {
+                    image1F = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                    image2F = CGRect(x: (headImgUrlF?.maxX)! + 100, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                    image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 80)
+                }
+                starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (image1F?.maxY)! + 14, width: 70, height: 14)
+                timeF = CGRect(x: kScreen_width - 95, y: (image1F?.maxY)! + 16, width: 80, height: 14)
+            }else {
+                
+                image1F = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                image2F = CGRect(x: (headImgUrlF?.maxX)! + 100, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 0)
+                starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (image1F?.maxY)!, width: 70, height: 14)
+                timeF = CGRect(x: kScreen_width - 95, y: (image1F?.maxY)! + 2, width: 80, height: 14)
+            }
+           
+    
             
-            starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (contentF?.maxY)! + 14, width: 70, height: 14)
-            
-//            replyCountF = CGRect(x: (timeF?.maxX)! + 10, y: (contentF?.maxY)! + 10, width: 80, height: 10.5)
-            
-//            replyButtonF = CGRect(x: kScreen_width - 45, y: (contentF?.maxY)! + 10, width: 30, height: 10.5)
-            
-            timeF = CGRect(x: kScreen_width - 95, y: (contentF?.maxY)! + 16, width: 80, height: 14)
             
             cellHeight = (timeF?.maxY)! + 20
         }

@@ -101,7 +101,7 @@ class TallkViewController: BaseViewController {
         }
         
         commentView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(newAllTableView.snp.bottom).offset(-70)
+            make.bottom.equalTo(newAllTableView.snp.bottom).offset(-58)
             make.right.equalTo(newAllTableView.snp.right).offset(-10)
             make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
            
