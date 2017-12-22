@@ -68,9 +68,6 @@ class PublishGroupNoticeViewController: UIViewController {
         view.addSubview(tableView)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightBtn)
     }
-
-    
-
 }
 
 extension PublishGroupNoticeViewController : UITableViewDelegate,UITableViewDataSource {
@@ -90,7 +87,7 @@ extension PublishGroupNoticeViewController : UITableViewDelegate,UITableViewData
             self.contentText = text
         }
         cell.photoChange = { (images) in
-            self.images = images!
+            self.images = images ?? []
         }
         cell.images = self.images
         return cell

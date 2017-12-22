@@ -2060,7 +2060,7 @@ class NetRequest {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
                                       "id": groupId,
-                                      "uid": uid]
+                                      "is_login_uid": uid]
         Alamofire.request(kApi_groupInfo, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -2074,6 +2074,136 @@ class NetRequest {
                 } else {
                     let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
                     complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 获取管理群接口
+    class func managerGroupNetRequest(id: String, open_id: String?, complete: @escaping((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters : Parameters = ["access_token": access_token,
+                                       "method": "GET",
+                                       "id": id,
+                                       "open_id": open_id!]
+        Alamofire.request(kApi_getManagerGroupInfo, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    class func setGroupManagerNetRequest(id: String?, uid: String?, open_id: String?, complete: @escaping((Bool, String?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "id": id!,
+                                      "uid": uid!,
+                                      "open_id": open_id!]
+        Alamofire.request(kApi_setGroupManager, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info)
+                } else {
+                    complete(true, info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 更改入群方式
+    class func changeJoinGroupWayNetRequest(open_id: String?, id: String?, check : String?, complete: @escaping((Bool, String? , NSDictionary?) -> Void)) {
+        let parameters : Parameters = ["access_token": access_token,
+                                       "method": "POST",
+                                       "open_id": open_id!,
+                                       "id": id!,
+                                       "check": check!]
+        Alamofire.request(kApi_changeJoinGroupWay, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 删除群成员
+    class func deleteGroupMemberNetRequest(open_id: String?, uid: String?, gid: String, complete: @escaping ((Bool, String?) -> Void)) {
+        let parameters : Parameters = ["access_token": access_token,
+                                       "method": "POST",
+                                       "open_id": open_id!,
+                                       "uid": uid!,
+                                       "gid": gid]
+        Alamofire.request(kApi_deleteGroupMember, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info)
+                } else {
+                    complete(true, info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 邀请好友加入该群
+    class func invitationJoinGroupNetRequest(open_id: String?, uid: String?, gid: String, complete: @escaping ((Bool, String?) -> Void)) {
+        let parameters : Parameters = ["access_token": access_token,
+                                       "method": "POST",
+                                       "open_id": open_id!,
+                                       "uid": uid!,
+                                       "gid": gid]
+        Alamofire.request(kApi_deleteGroupMember, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info)
+                } else {
+                    complete(true, info)
                 }
             case .failure(let error):
                 print(error)
@@ -2111,16 +2241,18 @@ class NetRequest {
     }
     
     // 发布群组公告
-    class func publishGroupNoteNetRequest(rid: String?, open_id: String?, title: String?, content: String?, images: [String]?, complete: @escaping((Bool, String) -> Void)) {
-        let parameters : Parameters = ["access_token": access_token,
+    class func publishGroupNoteNetRequest(rid: String?, open_id: String?, title: String?, content: String?, images: [String], complete: @escaping((Bool, String) -> Void)) {
+        var parameters : Parameters = ["access_token": access_token,
                                        "method": "POST",
                                        "rid": rid!,
                                        "open_id": open_id!,
                                        "title": title!,
-                                       "description": content!,
-                                       "baseImg1": images?[0] ?? "",
-                                       "baseImg2": images?[1] ?? "",
-                                       "baseImg3": images?[2] ?? ""]
+                                       "description": content!]
+        
+        for imgStr in images {
+            let index = images.index(of: imgStr)
+            parameters["baseImg" + "\(index! + 1)"] = imgStr
+        }
         Alamofire.request(kApi_publishGroupNote, method: .post, parameters: parameters, encoding: URLEncoding.default
             , headers: nil).responseJSON { (response) in
                 switch response.result {

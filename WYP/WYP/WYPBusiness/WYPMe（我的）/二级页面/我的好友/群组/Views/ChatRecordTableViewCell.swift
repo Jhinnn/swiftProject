@@ -47,7 +47,7 @@ class ChatRecordTableViewCell: UITableViewCell {
         }
         
         timeLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-9)
+            make.right.equalTo(self.snp.right).offset(-9)
             make.centerY.equalTo(nameLabel)
         }
         

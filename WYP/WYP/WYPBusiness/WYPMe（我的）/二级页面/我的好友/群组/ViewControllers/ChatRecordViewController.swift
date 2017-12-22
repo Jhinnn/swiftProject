@@ -181,9 +181,9 @@ extension ChatRecordViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ChatRecordTableViewCell(style: .default, reuseIdentifier: "chatRecordCell")
         let message : RCMessage = (self.messages?[indexPath.row])!
-        cell.headImageView.sd_setImage(with: URL.init(string: message.content.senderUserInfo.portraitUri ?? ""))
-        cell.nameLabel.text = message.content.senderUserInfo.name
-        cell.contentLabel.text = message.content.mentionedInfo.mentionedContent
+//        cell.headImageView.sd_setImage(with: URL.init(string: message.content.senderUserInfo.portraitUri ?? ""))
+//        cell.nameLabel.text = message.content.senderUserInfo.name
+//        cell.contentLabel.text = message.content.mentionedInfo.mentionedContent
         cell.timeLabel.text = self.formatterTime(time: message.sentTime)
         return cell
     }

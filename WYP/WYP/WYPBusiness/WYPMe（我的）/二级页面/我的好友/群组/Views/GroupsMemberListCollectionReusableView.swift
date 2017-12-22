@@ -15,6 +15,7 @@ protocol GroupsMemberListCollectionDelegate: NSObjectProtocol {
     func noDisturbing(sender: UISwitch)
     func codeImageViewClicked()
     func chatRecordBtnClicked()
+    func managerGroupBtnClicked()
 }
 
 class GroupsMemberListCollectionReusableView: UICollectionReusableView {
@@ -37,6 +38,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     
     // MARK: - private method
     func viewConfig() {
+        self.addSubview(settingView)
         self.addSubview(grayLine)
         self.addSubview(grayLine2)
         self.addSubview(grayLine3)
@@ -56,8 +58,14 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         self.addSubview(chatRecordBtn)
     }
     func layoutPageSubviews() {
-        grayLine.snp.makeConstraints { (make) in
+        settingView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self)
+            make.height.equalTo(47)
+        }
+        
+        grayLine.snp.makeConstraints { (make) in
+            make.top.equalTo(settingView.snp.bottom)
+            make.left.right.equalTo(self)
             make.height.equalTo(10)
         }
      
@@ -80,15 +88,15 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.left.equalTo(self).offset(100)
             make.right.equalTo(self).offset(-30)
             make.height.equalTo(60)
-            
-            
         }
+        
         grayLine4.snp.makeConstraints { (make) in
             make.top.equalTo(groupNoteConten.snp.bottom).offset(13)
             make.height.equalTo(1)
             make.left.right.equalTo(self)
             
         }
+        
         Chatrecord.snp.makeConstraints { (make) in
             make.top.equalTo(grayLine4.snp.bottom).offset(13)
             make.right.equalTo(self)
@@ -106,9 +114,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.top.equalTo(Chatrecord.snp.bottom).offset(13)
             make.height.equalTo(10)
         }
-        
-        
-       
+
         noDisturbingLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(13)
             make.top.equalTo(grayLine3.snp.bottom).offset(13)
@@ -167,6 +173,48 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     }
     
     // MARK: - setter and getter
+    lazy var settingView: UIView = {
+        let setting = UIView()
+        setting.backgroundColor = UIColor.white
+        let line = UIView()
+        line.backgroundColor = UIColor.vcBgColor
+        setting.addSubview(line)
+        line.snp.makeConstraints({ (make) in
+            make.left.top.right.equalTo(setting)
+            make.height.equalTo(1)
+        })
+        let imageView = UIImageView.init(image: UIImage.init(named: "cluster_icon_install_normalmore"))
+        setting.addSubview(imageView)
+        imageView.snp.makeConstraints({ (make) in
+            make.centerY.equalTo(setting)
+            make.left.equalTo(12)
+            make.size.equalTo(20)
+        })
+        let label = UILabel()
+        label.text = "管理群"
+        label.textColor = UIColor.init(hexColor: "333333")
+        label.font = UIFont.systemFont(ofSize: 13)
+        setting.addSubview(label)
+        label.snp.makeConstraints({ (make) in
+            make.left.equalTo(imageView.snp.right).offset(11)
+            make.centerY.equalTo(imageView)
+        })
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "chat_icon_advance_normalmore"), for: .normal)
+        btn.addTarget(self, action: #selector(managerGroupBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
+        setting.addSubview(btn)
+        btn.snp.makeConstraints({ (make) in
+            make.right.equalTo(setting.snp.right)
+            make.size.equalTo(label)
+            make.centerY.equalTo(label)
+        })
+        return setting
+    }()
+    
+    func managerGroupBtnClicked(sender: UIButton) {
+        delegate?.managerGroupBtnClicked()
+    }
+    
     lazy var grayLine: UIView = {
         let grayLine = UIView()
         grayLine.backgroundColor = UIColor.vcBgColor
@@ -231,9 +279,6 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         groupNoteButton.addTarget(self, action: #selector(putGroupNote(sender:)), for: UIControlEvents.touchUpInside)
         return groupNoteButton
     }()
-    
-    
-    
     
     //聊天记录
     lazy var Chatrecord: UILabel = {

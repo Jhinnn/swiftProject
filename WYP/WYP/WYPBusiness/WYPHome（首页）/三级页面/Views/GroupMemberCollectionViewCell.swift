@@ -26,6 +26,7 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
     func viewConfig() {
         contentView.addSubview(memberImageView)
         contentView.addSubview(memberNameLabel)
+//        contentView.addSubview(chooseBtn)
     }
     func layoutPageSubviews() {
         memberImageView.snp.makeConstraints { (make) in
@@ -39,11 +40,14 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
             make.right.equalTo(contentView).offset(-4)
             make.height.equalTo(12)
         }
+//        chooseBtn.snp.makeConstraints { (make) in
+//            make.centerX.equalTo(contentView)
+//            make.top.equalTo(10)
+//            make.size.equalTo(30)
+//        }
     }
     
     // MARK: - setter and getter
-    
-    
     
     lazy var memberImageView: UIImageView = {
         let memberImageView = UIImageView()
@@ -68,4 +72,17 @@ class GroupMemberCollectionViewCell: UICollectionViewCell {
             memberImageView.kf.setImage(with: imageUrl)
         }
     }
+    
+//    lazy var chooseBtn : UIButton = {
+//       let btn = UIButton()
+//        btn.setImage(UIImage.init(named: "theme_icon_option_normal"), for: .normal)
+//        btn.setImage(UIImage.init(named: "theme_icon_option_pitch"), for: .selected)
+//        return btn
+//    }()
+//    // 判断是否显示选择的图标
+//    var isChoose : Bool {
+//        willSet {
+//            self.chooseBtn.isHidden = isChoose
+//        }
+//    }
 }

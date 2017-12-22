@@ -152,7 +152,7 @@ class PublishGroupNoteTableViewCell: UITableViewCell {
     }()
     
     lazy var contentTextView: UITextView = {
-        let textView = UITextView.init(frame: CGRect.zero)
+        let textView = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_width - 24, height: 200))
         textView.placeholder = "正文（必填），15——500字"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 13)
         textView.font = UIFont.systemFont(ofSize: 13)

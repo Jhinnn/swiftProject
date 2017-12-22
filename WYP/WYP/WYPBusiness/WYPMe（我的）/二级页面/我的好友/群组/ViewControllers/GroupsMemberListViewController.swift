@@ -33,15 +33,10 @@ class GroupsMemberListViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         // 设置导航条透明度
         DispatchQueue.main.async {
             self.navBarBgAlpha = 0
-            
-            
         }
-        
-        
     }
     
     
@@ -52,28 +47,19 @@ class GroupsMemberListViewController: BaseViewController {
         let rightButton = UIBarButtonItem.init(image: UIImage.init(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(recommendToFriends(sender:)))
         navigationItem.rightBarButtonItem = rightButton
         
-        
         view.addSubview(memberCollectionView)
-        
-        
         
         self.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     func layoutPageSubviews() {
-        
-        
-        
         memberCollectionView.snp.makeConstraints { (make) in
             
             make.top.equalTo(view.snp.top).offset(-64)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.bottom.equalTo(view.snp.bottom)
-            
         }
-        
-        
     }
     
     func loadGroupMember() {
@@ -89,9 +75,6 @@ class GroupsMemberListViewController: BaseViewController {
     
     // MARK: - event response
     func recommendToFriends(sender: UIBarButtonItem) {
-//        let recommend = RecommendFriendsViewController()
-//        recommend.groupId = self.groupId
-//        navigationController?.pushViewController(recommend, animated: true)
         shareBarButtonItemAction()
     }
     
@@ -106,7 +89,8 @@ class GroupsMemberListViewController: BaseViewController {
         
         let messageObject = UMSocialMessageObject()
         // 分享链接
-        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1", self.groupId ?? "")
+        let urlString = "http://ald.1001alading.com/mob/Fenxiang/index.html?id=" + self.groupId!
+        let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
         let shareLink = kApi_baseUrl(path: url)
         // 设置文本
         //        messageObject.text = newsTitle! + shareLink
@@ -130,8 +114,6 @@ class GroupsMemberListViewController: BaseViewController {
     lazy var memberCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScreen_width / 5 - 10, height: 75)
-        
-        
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let memberCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -220,14 +202,30 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if groupDetail?.groupMember != nil {
+            if Int((self.groupDetail?.rank)!) != 1 {
+                return ((groupDetail?.groupMember?.count)! + 2)
+            }
             return groupDetail?.groupMember?.count ?? 0
         }
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupMemberCell", for: indexPath) as! GroupMemberCollectionViewCell
-        cell.groupModel = groupDetail?.groupMember?[indexPath.row]
-        
+        if Int((self.groupDetail?.rank)!) != 1 {
+            if indexPath.row == (groupDetail?.groupMember?.count)! {
+                cell.memberImageView.image = UIImage.init(named: "cluster_icon_invite_normal")
+                cell.memberImageView.backgroundColor = UIColor.white
+                cell.memberNameLabel.text = "邀请好友"
+            }else if indexPath.row == (groupDetail?.groupMember?.count)! + 1 {
+                cell.memberImageView.image = UIImage.init(named: "cluster_icon_delete_normalmore")
+                cell.memberImageView.backgroundColor = UIColor.white
+                cell.memberNameLabel.text = "删除好友"
+            }else {
+                cell.groupModel = groupDetail?.groupMember?[indexPath.row]
+            }
+        }else {
+            cell.groupModel = groupDetail?.groupMember?[indexPath.row]
+        }
         return cell
     }
     
@@ -254,6 +252,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
             let imgURL = URL.init(string: (self.groupDetail?.group_avatar ?? "")!)
             headView.headerImgView.sd_setImage(with: imgURL)
             headView.groupNumb.text = "群编号:" + self.groupId!
+            headView.memberNumLabel.text = "群成员 " + "(\(self.groupDetail?.groupMember?.count ?? 0)人)"
             return headView
         }
         
@@ -263,11 +262,11 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: kScreen_width, height: 800)
+        return CGSize(width: kScreen_width, height: 847)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: kScreen_width, height: 220)
+        return CGSize(width: kScreen_width, height: 267)
     }
     
     
@@ -293,20 +292,38 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
         //            community.isFollowed = true
         //        }
         //        navigationController?.pushViewController(community, animated: true)
-        
-        let personalInformationVC = PersonalInformationViewController()
-        personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
-        personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
-        personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
-        
-        navigationController?.pushViewController(personalInformationVC, animated: true)
-        
-        
-        
-        
+        if Int((self.groupDetail?.rank)!) != 1 {
+            if indexPath.row == (groupDetail?.groupMember?.count)! {
+                let recommend = RecommendFriendsViewController()
+                recommend.groupId = self.groupId
+                navigationController?.pushViewController(recommend, animated: true)
+            }else if indexPath.row == (groupDetail?.groupMember?.count)! + 1 {
+                let deleteGroupMemberVC = DeleteGroupMemberViewController()
+                deleteGroupMemberVC.members = self.groupDetail?.groupMember
+                deleteGroupMemberVC.groupId = self.groupId; self.navigationController?.pushViewController(deleteGroupMemberVC, animated: true)
+            }
+        }else {
+            let personalInformationVC = PersonalInformationViewController()
+            personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
+            personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+            personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
+            
+            navigationController?.pushViewController(personalInformationVC, animated: true)
+        }
     }
 }
 extension GroupsMemberListViewController: GroupsMemberListCollectionDelegate {
+    func managerGroupBtnClicked() {
+        if Int((self.groupDetail?.rank)!) != 1 {
+            let managerGroupVC = ManagerGroupViewController()
+            managerGroupVC.groupId = self.groupId
+            managerGroupVC.members = self.groupDetail?.groupMember
+            self.navigationController?.pushViewController(managerGroupVC, animated: true)
+        }else {
+            SVProgressHUD.showError(withStatus: "您没有该权限")
+        }
+    }
+    
     func chatRecordBtnClicked() {
         let chatRecordVC = ChatRecordViewController()
         chatRecordVC.groupId = self.groupId

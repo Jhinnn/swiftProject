@@ -12,13 +12,12 @@ class GroupNoteTableViewCell: UITableViewCell {
     
     var imageUrls : [String]? {
         didSet {
-            if self.imageUrls != nil {
+            if self.imageUrls?.count != 0 {
                 for urlStr in self.imageUrls! {
                     let index = imageUrls?.index(of: urlStr)
                     let imageView = UIImageView()
                     imageView.layer.cornerRadius = 1 < (self.imageUrls?.count)! ? 5 : 10
                     imageView.layer.masksToBounds = true
-//                    imageView.backgroundColor = UIColor.red
                     imageView.sd_setImage(with: URL.init(string: kApi_baseUrl(path: urlStr)))
                     contentView.addSubview(imageView)
                     let size_width = 1 < (self.imageUrls?.count)! ? 63 : 140
@@ -30,7 +29,7 @@ class GroupNoteTableViewCell: UITableViewCell {
                     })
                 }
             }else {
-                contentLabel.snp.updateConstraints({ (make) in
+                contentLabel.snp.makeConstraints({ (make) in
                     make.bottom.equalTo(-10)
                 })
             }
@@ -79,7 +78,7 @@ class GroupNoteTableViewCell: UITableViewCell {
         
         pubTime.snp.makeConstraints { (make) in
             make.centerY.equalTo(people)
-            make.left.equalTo(61.6)
+            make.left.equalTo(people.snp.right).offset(61.6)
         }
         
         numberLabel.snp.makeConstraints { (make) in
@@ -91,13 +90,13 @@ class GroupNoteTableViewCell: UITableViewCell {
             make.top.equalTo(people.snp.bottom).offset(14)
             make.left.equalTo(12)
             make.right.equalTo(0)
-            make.height.equalTo(0.3)
+            make.height.equalTo(0.5)
         }
         
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(12)
             make.top.equalTo(line.snp.bottom).offset(17)
-            make.right.equalTo(20.6)
+            make.right.equalTo(-12)
         }
         
     }

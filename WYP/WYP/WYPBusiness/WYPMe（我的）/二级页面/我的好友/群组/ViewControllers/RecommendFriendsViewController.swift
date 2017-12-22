@@ -76,7 +76,15 @@ class RecommendFriendsViewController: UIViewController {
     // MARK: - event response
     func recommendToFriends(sender: UIButton) {
 
-        NetRequest.recommendFriendsNetRequest(pushid: recommendArr, nickname: AppInfo.shared.user?.nickName ?? "", groupName: groupName ?? "", groupId: groupId ?? "", uid: AppInfo.shared.user?.userId ?? "") { (success, info) in
+//        NetRequest.recommendFriendsNetRequest(pushid: recommendArr, nickname: AppInfo.shared.user?.nickName ?? "", groupName: groupName ?? "", groupId: groupId ?? "", uid: AppInfo.shared.user?.userId ?? "") { (success, info) in
+//            if success {
+//                SVProgressHUD.showSuccess(withStatus: info!)
+//                self.navigationController?.popViewController(animated: true)
+//            } else {
+//                SVProgressHUD.showError(withStatus: info!)
+//            }
+//        }
+        NetRequest.invitationJoinGroupNetRequest(open_id: AppInfo.shared.user?.token, uid: AppInfo.shared.user?.userId, gid: self.groupId!) { (success, info) in
             if success {
                 SVProgressHUD.showSuccess(withStatus: info!)
                 self.navigationController?.popViewController(animated: true)

@@ -348,6 +348,12 @@
 		FB1BE5F81FEB494A003BDC1C /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E51FEB4949003BDC1C /* RecommendTableViewCell.swift */; };
 		FB1BE5F91FEB494A003BDC1C /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */; };
 		FB1BE5FB1FEB6979003BDC1C /* ChatRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */; };
+		FBC511FF1FEC973A0061245E /* DeleteGroupMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */; };
+		FBC512011FECCB750061245E /* ManagerGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512001FECCB750061245E /* ManagerGroupViewController.swift */; };
+		FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512021FECD1450061245E /* DeleteHeaderCollectionReusableView.swift */; };
+		FBC512051FECDD9E0061245E /* ManagerGroupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */; };
+		FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512061FECE4910061245E /* SettingManagerViewController.swift */; };
+		FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -800,6 +806,12 @@
 		FB1BE5E71FEB4949003BDC1C /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRecordTableViewCell.swift; sourceTree = "<group>"; };
+		FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupMemberViewController.swift; sourceTree = "<group>"; };
+		FBC512001FECCB750061245E /* ManagerGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGroupViewController.swift; sourceTree = "<group>"; };
+		FBC512021FECD1450061245E /* DeleteHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGroupInfoModel.swift; sourceTree = "<group>"; };
+		FBC512061FECE4910061245E /* SettingManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerViewController.swift; sourceTree = "<group>"; };
+		FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2679,6 +2691,7 @@
 			children = (
 				FB1BE5D41FEB4949003BDC1C /* GroupNoteModel.swift */,
 				FB1BE5D51FEB4949003BDC1C /* GroupsModel.swift */,
+				FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2694,6 +2707,9 @@
 				FB1BE5DC1FEB4949003BDC1C /* PublishGroupNoticeViewController.swift */,
 				FB1BE5DD1FEB4949003BDC1C /* RecommendFriendsViewController.swift */,
 				FB1BE5DE1FEB4949003BDC1C /* VerifyApplicationViewController.swift */,
+				FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */,
+				FBC512001FECCB750061245E /* ManagerGroupViewController.swift */,
+				FBC512061FECE4910061245E /* SettingManagerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2709,6 +2725,8 @@
 				FB1BE5E51FEB4949003BDC1C /* RecommendTableViewCell.swift */,
 				FB1BE5E61FEB4949003BDC1C /* ScanAddFriendView */,
 				FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */,
+				FBC512021FECD1450061245E /* DeleteHeaderCollectionReusableView.swift */,
+				FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2942,6 +2960,7 @@
 				F9986A531EA61C2B002C502B /* ShowroomNaviViewController.swift in Sources */,
 				F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */,
 				F9986A141EA61C2B002C502B /* AttentionRoomViewController.swift in Sources */,
+				FBC511FF1FEC973A0061245E /* DeleteGroupMemberViewController.swift in Sources */,
 				38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */,
 				FB1BE5F01FEB494A003BDC1C /* PublishGroupNoticeViewController.swift in Sources */,
 				F96FEEBA1F14A9C70003C58F /* WBImageBrowserView.m in Sources */,
@@ -3048,6 +3067,7 @@
 				F95B7E931EC94BB600A3ACBA /* VideoInfoModel.swift in Sources */,
 				F9986A031EA61C2B002C502B /* RegisterViewController.swift in Sources */,
 				F9986A511EA61C2B002C502B /* VoteViewController.swift in Sources */,
+				FBC512011FECCB750061245E /* ManagerGroupViewController.swift in Sources */,
 				F9986A231EA61C2B002C502B /* AddFriendsTableViewCell.swift in Sources */,
 				F9986A311EA61C2B002C502B /* TopicsViewController.swift in Sources */,
 				FB1BE5F11FEB494A003BDC1C /* RecommendFriendsViewController.swift in Sources */,
@@ -3061,6 +3081,7 @@
 				F9599BBA1EB1FD3C00440E66 /* TicketVernveModel.swift in Sources */,
 				F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */,
 				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
+				FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */,
 				F9986A671EA61C2B002C502B /* RoomVideoTableViewCell.swift in Sources */,
 				8E650ACD1FE7B5B300A453BB /* HXCollectionView.m in Sources */,
 				8E650AD81FE7B5B300A453BB /* UIImage+HXExtension.m in Sources */,
@@ -3074,6 +3095,7 @@
 				F9993E0D1F7906E30077A4DD /* SearchTitleView.swift in Sources */,
 				F91AD0E61EBB302400F70C82 /* TicketNumberModel.swift in Sources */,
 				F9986A461EA61C2B002C502B /* NewsDetailsViewController.swift in Sources */,
+				FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */,
 				F956CE7E1EDEA7E600B751D4 /* WYPTableView.swift in Sources */,
 				F99869F31EA61C2B002C502B /* HotShowRoomCell.swift in Sources */,
 				F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */,
@@ -3221,6 +3243,7 @@
 				F99869FA1EA61C2B002C502B /* SearchResultNaviViewController.swift in Sources */,
 				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
 				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
+				FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */,
 				F9DA8C781F00B53D00AE66BC /* KTabbarAnimation.swift in Sources */,
 				F933534D1ED59C3200E67DD2 /* SearchView.swift in Sources */,
 				FB1BE5ED1FEB494A003BDC1C /* GroupNoteViewController.swift in Sources */,
@@ -3255,6 +3278,7 @@
 				A43C2A461E8101D90037BB5A /* BaseNavigationController.swift in Sources */,
 				A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */,
 				A42EDDF91EDEA0C000C0B500 /* UITableViewCell+Extension.swift in Sources */,
+				FBC512051FECDD9E0061245E /* ManagerGroupInfoModel.swift in Sources */,
 				F94096621ED6DF4C00DD4523 /* RoomCommentFrameModel.swift in Sources */,
 				F992EAA21ED2E03E004E0CF8 /* BindingViewController.swift in Sources */,
 				F9FE90461F9ECB3700D31F3C /* MyQRViewController.swift in Sources */,

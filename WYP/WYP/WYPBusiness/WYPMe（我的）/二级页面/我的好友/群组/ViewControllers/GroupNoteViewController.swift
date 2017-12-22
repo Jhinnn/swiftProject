@@ -31,7 +31,6 @@ class GroupNoteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setupUI()
         self.tableView.mj_header = MJRefreshHeader.init(refreshingBlock: {
             self.page = 1
@@ -46,14 +45,11 @@ class GroupNoteViewController: BaseViewController {
         self.tableView.mj_header.beginRefreshing()
     }
     
-    
-    
     func setupUI(){
-        
         self.title = "群公告"
-//        if Int(self.rank!) != 1 {
+        if Int(self.rank!) != 1 {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightBtn)
-//        }
+        }
         view.addSubview(tableView)
         
     }
@@ -68,15 +64,12 @@ class GroupNoteViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        //        tableView.rowHeight = UITableViewAutomaticDimension
-        //        tableView.estimatedRowHeight = 200
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "groupNoteCellIdentifier")
         return tableView
-        
     }()
     
     func sendNetRequest() {
-        NetRequest.getGroupNoteListNetRequest(page: "\(self.page)", groupId: "317") { (success, info, result) in
+        NetRequest.getGroupNoteListNetRequest(page: "\(self.page)", groupId: self.groupId!) { (success, info, result) in
             if success {
                 let array = [GroupNoteModel].deserialize(from: result) as? [GroupNoteModel]
                 if self.page != 1 {
@@ -90,7 +83,6 @@ class GroupNoteViewController: BaseViewController {
             }
         }
     }
-    
 }
 
 extension GroupNoteViewController: UITableViewDelegate, UITableViewDataSource{
@@ -101,7 +93,6 @@ extension GroupNoteViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -114,7 +105,6 @@ extension GroupNoteViewController: UITableViewDelegate, UITableViewDataSource{
         cell.numberLabel.text = model.view! + "人阅读"
         cell.imageUrls = model.path
         cell.moreBtn.addTarget(self, action: #selector(moreBtnClicked(sender:)), for: .touchUpInside)
-        
         return cell
     }
     

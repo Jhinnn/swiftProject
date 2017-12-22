@@ -22,17 +22,15 @@ class GroupMemberListHeadCollectionReusableView: UICollectionReusableView {
     
     // MARK: - private method
     func viewConfig() {
-        
-      
-        
         self.addSubview(HeaderView)
         self.addSubview(headerImgView)
         self.addSubview(groupNumb)
         self.addSubview(codeImgView)
         self.addSubview(grayLine)
-        
+        self.addSubview(memberNumLabel)
     
     }
+    
     lazy var grayLine: UIView = {
         let grayLine = UIView()
         grayLine.backgroundColor = UIColor.vcBgColor
@@ -76,6 +74,13 @@ class GroupMemberListHeadCollectionReusableView: UICollectionReusableView {
         return codeImgView
     }()
     
+    lazy var memberNumLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.init(hexColor: "333333")
+        label.font = UIFont.systemFont(ofSize: 13)
+        return label
+    }()
+    
     func tapCodeImageView(sender: UITapGestureRecognizer) {
         delegate?.codeImageViewClicked()
     }
@@ -108,7 +113,10 @@ class GroupMemberListHeadCollectionReusableView: UICollectionReusableView {
             make.height.equalTo(10)
         }
         
-        
+        memberNumLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(grayLine.snp.bottom).offset(17)
+            make.left.equalTo(11)
+        }
     }
     
     

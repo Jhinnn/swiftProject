@@ -479,9 +479,32 @@ public var kApi_groupInfo: String {
     return kApi_baseUrl(path: "api/qunzuDetail")
 }
 
+// 获取管理群界面接口
+public var kApi_getManagerGroupInfo: String {
+    return kApi_baseUrl(path: "api/manageGroup")
+}
+
+// 设置群管理员
+public var kApi_setGroupManager: String {
+    return kApi_baseUrl(path: "api/set_group_manager")
+}
+
+// 更改入群方式
+public var kApi_changeJoinGroupWay: String {
+    return kApi_baseUrl(path: "api/switchGroupCheck")
+}
+
 // 获取群组信息
 public var kApi_getGroupInfo: String {
     return kApi_baseUrl(path: "api/groupInfo")
+}
+
+public var kApi_deleteGroupMember: String {
+    return kApi_baseUrl(path: "api/del_qun_member")
+}
+
+public var kApi_invitationJoinGroup: String {
+    return kApi_baseUrl(path: "api/friend_join_group")
 }
 
 // 群公告列表
