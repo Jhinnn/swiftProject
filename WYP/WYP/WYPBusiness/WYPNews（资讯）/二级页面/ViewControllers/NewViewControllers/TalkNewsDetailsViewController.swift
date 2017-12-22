@@ -51,6 +51,12 @@ class TalkNewsDetailsViewController: BaseViewController {
 
         title = "话题详情"
         
+        if deviceTypeIPhoneX() {
+            
+        }else {
+            
+        }
+        
         viewConfig()
         layoutPageSubviews()
 //        commentDetailBtn.badgeLabel.frame = CGRect(x: 9, y: -2, width: 15, height: 8)
@@ -219,10 +225,20 @@ class TalkNewsDetailsViewController: BaseViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 59, 0))
         }
         
-        interactionView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(view)
-            make.height.equalTo(59)
+        if deviceTypeIPhoneX() {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.equalTo(view)
+                make.bottom.equalTo(-34)
+                make.height.equalTo(59)
+            }
+        }else {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.bottom.equalTo(view)
+                make.height.equalTo(59)
+            }
         }
+        
+        
         
 //        moreButton.snp.makeConstraints { (make) in
 //            make.left.equalTo(interactionView)
