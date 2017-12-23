@@ -96,12 +96,12 @@ class PublicGroupViewController: BaseViewController{
         let label = UILabel(frame: CGRect(x: 15, y: 190, width: 54, height: 27))
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "内容"
+        label.text = "话题"
         return label
     }()
     
     lazy var textView: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 15, y: 230, width: kScreen_width - 30, height: 100))
+        let textView = UITextView(frame: CGRect(x: 15, y: 230, width: kScreen_width - 30, height: 80))
         textView.placeholder = "添加描述和配图（选填）"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
         textView.font = UIFont.systemFont(ofSize: 16)
@@ -120,7 +120,7 @@ class PublicGroupViewController: BaseViewController{
     
     
     lazy var bgView: UIView = {
-        let view = UIView(frame: CGRect(x: 15, y: 350, width: kScreen_width - 30, height: 100))
+        let view = UIView(frame: CGRect(x: 15, y: 310, width: kScreen_width - 30, height: 100))
         return view
     }()
     

@@ -1,16 +1,16 @@
 //
-//  TopicsModel.swift
+//  MineTopicsModel.swift
 //  WYP
 //
-//  Created by 你个LB on 2017/3/20.
+//  Created by Arthur on 2017/12/22.
 //  Copyright © 2017年 NGeLB. All rights reserved.
 //
 
 import UIKit
 import HandyJSON
 
-class TopicsModel: HandyJSON {
-
+class MineTopicsModel: HandyJSON {
+    
     // 用户头像
     var headImgUrl: String?
     // 用户昵称
@@ -49,7 +49,7 @@ class TopicsModel: HandyJSON {
     var peopleFriends: String?
     
     //话题图片
-    var cover_url: String?
+    var cover_url: [String]?
     
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.headImgUrl <-- "avatar128"

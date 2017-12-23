@@ -9,16 +9,21 @@
 import UIKit
 import WebKit
 
-class NewsDetailsViewController: BaseViewController {
+class TalkNewsDetailsViewController: BaseViewController {
 
+    
+    var collectionButton: UIButton!
     // 新闻id
     var newsId: String?
     // 新闻标题
     var newsTitle: String?
     // 评论数
+    
+
+    
     var commentNumber: String? {
         willSet {
-            commentDetailBtn.badgeLabel.text = newValue ?? "0"
+//            commentDetailBtn.badgeLabel.text = newValue ?? "0"
         }
     }
     // 评论数据
@@ -28,7 +33,7 @@ class NewsDetailsViewController: BaseViewController {
         willSet {
             if newValue == "1" {
                 collectionButton.isSelected = true
-                collectionButton.setImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+                collectionButton.setImage(UIImage(named: "detail_icon_follow_select"), for: .selected)
             }
         }
     }
@@ -44,13 +49,19 @@ class NewsDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "资讯详情"
+        title = "话题详情"
+        
+        if deviceTypeIPhoneX() {
+            
+        }else {
+            
+        }
         
         viewConfig()
         layoutPageSubviews()
-        commentDetailBtn.badgeLabel.frame = CGRect(x: 9, y: -2, width: 15, height: 8)
-        commentDetailBtn.badgeLabel.text = commentNumber ?? "0"
-        commentDetailBtn.addSubview(commentDetailBtn.badgeLabel)
+//        commentDetailBtn.badgeLabel.frame = CGRect(x: 9, y: -2, width: 15, height: 8)
+//        commentDetailBtn.badgeLabel.text = commentNumber ?? "0"
+//        commentDetailBtn.addSubview(commentDetailBtn.badgeLabel)
         request()
 
         // 监听键盘
@@ -149,7 +160,7 @@ class NewsDetailsViewController: BaseViewController {
                 if success {
                     SVProgressHUD.showSuccess(withStatus: info!)
                     sender.isSelected = true
-                    sender.setImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+                    sender.setImage(UIImage(named: "detail_icon_follow_select"), for: .selected)
                 } else {
                     SVProgressHUD.showError(withStatus: info!)
                 }
@@ -173,42 +184,89 @@ class NewsDetailsViewController: BaseViewController {
         view.addSubview(newsTableView)
         newsTableView.isHidden = true
         view.addSubview(interactionView)
-        interactionView.addSubview(shareButton)
-        interactionView.addSubview(collectionButton)
-        interactionView.addSubview(commentDetailBtn)
-        interactionView.addSubview(commentTextField)
+//        interactionView.addSubview(moreButton)
+//        interactionView.addSubview(shareButton)
+//        interactionView.addSubview(collectionButton)
+//        interactionView.addSubview(commentDetailBtn)
+//        interactionView.addSubview(commentTextField)
+        
+        let imageArray = ["theme_icon_more_normal","detail_icon_follow_normal","theme_icon_publish_normal"]
+        let titleArray = ["更多","关注","提问"]
+        
+        for i in 0..<3 {
+            let button: TalkButton = TalkButton()
+            button.backgroundColor = UIColor.white
+            button.frame = CGRect(x: CGFloat(i) * kScreen_width/6, y: 0, width: kScreen_width/6, height: 59)
+            button.setImage(UIImage(named: imageArray[i]), for: .normal)
+            button.tag = 100 + i
+            if i == 1 {
+                collectionButton = button
+            }
+            button.addTarget(self, action: #selector(clickAction(sender:)), for: .touchUpInside)
+            button.setTitle(titleArray[i], for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+            button.setTitleColor(UIColor.init(hexColor: "999999"), for: .normal)
+            button.titleLabel?.textAlignment = NSTextAlignment.center
+            interactionView.addSubview(button)
+        }
+        
+        let button = UIButton()
+        button.frame = CGRect(x: kScreen_width/2, y: 0, width: kScreen_width/2, height: 59)
+        button.backgroundColor = UIColor.init(hexColor: "DC3A20")
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(answerAction(sender:)), for: .touchUpInside)
+        button.setTitle("回复话题", for: .normal)
+        interactionView.addSubview(button)
+        
     }
     
     func layoutPageSubviews() {
         newsTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 49, 0))
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 59, 0))
         }
         
-        interactionView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(view)
-            make.height.equalTo(59)
+        if deviceTypeIPhoneX() {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.equalTo(view)
+                make.bottom.equalTo(-34)
+                make.height.equalTo(59)
+            }
+        }else {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.bottom.equalTo(view)
+                make.height.equalTo(59)
+            }
         }
-        shareButton.snp.makeConstraints { (make) in
-            make.right.equalTo(interactionView).offset(-15)
-            make.bottom.equalTo(interactionView).offset(-24.5)
-            make.size.equalTo(CGSize(width: 9.5, height: 19.5))
-        }
-        collectionButton.snp.makeConstraints { (make) in
-            make.right.equalTo(shareButton.snp.left).offset(-10)
-            make.bottom.equalTo(interactionView).offset(-24.5)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-        }
-        commentDetailBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(collectionButton.snp.left).offset(-10)
-            make.bottom.equalTo(interactionView).offset(-23)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-        }
-        commentTextField.snp.makeConstraints { (make) in
-            make.bottom.equalTo(interactionView).offset(-20)
-            make.left.equalTo(interactionView).offset(13)
-            make.right.equalTo(commentDetailBtn.snp.left).offset(-15)
-            make.height.equalTo(30)
-        }
+        
+        
+        
+//        moreButton.snp.makeConstraints { (make) in
+//            make.left.equalTo(interactionView)
+//            make.top.equalTo(interactionView)
+//            make.width.equalTo(interactionView.width/6)
+//            make.height.equalTo(interactionView)
+//        }
+//        shareButton.snp.makeConstraints { (make) in
+//            make.right.equalTo(interactionView).offset(-15)
+//            make.bottom.equalTo(interactionView).offset(-24.5)
+//            make.size.equalTo(CGSize(width: 9.5, height: 19.5))
+//        }
+//        collectionButton.snp.makeConstraints { (make) in
+//            make.right.equalTo(shareButton.snp.left).offset(-10)
+//            make.bottom.equalTo(interactionView).offset(-24.5)
+//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+//        }
+//        commentDetailBtn.snp.makeConstraints { (make) in
+//            make.right.equalTo(collectionButton.snp.left).offset(-10)
+//            make.bottom.equalTo(interactionView).offset(-23)
+//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+//        }
+//        commentTextField.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(interactionView).offset(-20)
+//            make.left.equalTo(interactionView).offset(13)
+//            make.right.equalTo(commentDetailBtn.snp.left).offset(-15)
+//            make.height.equalTo(30)
+//        }
     }
     
     func request() {
@@ -268,9 +326,9 @@ class NewsDetailsViewController: BaseViewController {
     // MARK: - setter and getter
 
     lazy var newsWebView: WKWebView = {
-        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height))
-        newsWebView.backgroundColor = UIColor.clear
-        newsWebView.isOpaque = false
+        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0))
+        newsWebView.backgroundColor = UIColor.red
+
         newsWebView.uiDelegate = self
         newsWebView.navigationDelegate = self
         newsWebView.scrollView.isScrollEnabled = false
@@ -296,7 +354,7 @@ class NewsDetailsViewController: BaseViewController {
     // 背景
     lazy var interactionView: UIView = {
         let interactionView = UIView()
-        interactionView.backgroundColor = UIColor.white
+//        interactionView.backgroundColor = UIColor.gray
         return interactionView
     }()
     
@@ -316,6 +374,15 @@ class NewsDetailsViewController: BaseViewController {
         return commentTextField
     }()
     
+    
+  
+    
+    
+    
+ 
+    
+    
+    /*
     // 分享
     lazy var shareButton: UIButton = {
         let shareButton = UIButton()
@@ -338,6 +405,8 @@ class NewsDetailsViewController: BaseViewController {
         commentDetailBtn.addTarget(self, action: #selector(chickCommentDetail(sender:)), for: .touchUpInside)
         return commentDetailBtn
     }()
+ 
+ */
     
     // 监听
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -373,7 +442,7 @@ class NewsDetailsViewController: BaseViewController {
     }
 }
 
-extension NewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
+extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         SVProgressHUD.setDefaultMaskType(.none)
         SVProgressHUD.show(withStatus: "加载中")
@@ -384,6 +453,7 @@ extension NewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         SVProgressHUD.dismiss()
+        
         
         //这个方法也可以计算出webView滚动视图滚动的高度
         webView.evaluateJavaScript("document.body.scrollWidth") { (result, error) in
@@ -410,7 +480,7 @@ extension NewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
     }
 }
 
-extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commentData.count == 0 {
             return 1
@@ -438,8 +508,8 @@ extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
         } else {
-            let cell = ShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
-            let commentFrame = RoomCommentFrameModel()
+            let cell = TalkShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
+            let commentFrame = TalkRoomCommentFrameModel()
             commentFrame.comment = commentData[indexPath.row]
             cell.starCountButton.tag = indexPath.row + 180
             cell.replyButton.tag = indexPath.row + 190
@@ -454,43 +524,42 @@ extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         if commentData.count == 0 {
             return 50
         } else {
-            let commentFrame = RoomCommentFrameModel()
+            let commentFrame = TalkRoomCommentFrameModel()
             commentFrame.comment = commentData[indexPath.row]
             return commentFrame.cellHeight ?? 0
         }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 40))
-        headerView.backgroundColor = UIColor.white
-        // 图标视图
-        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
-        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
-        headerView.addSubview(iconView)
-        let hotCommentLabel = UILabel(frame: CGRect(x: 13, y: 10, width: 100, height: 30))
-        hotCommentLabel.text = "最新评论"
-        hotCommentLabel.font = UIFont.systemFont(ofSize: 15)
-        headerView.addSubview(hotCommentLabel)
-
-        let commentNumLabel = UILabel()
-        commentNumLabel.frame = CGRect(x: kScreen_width - 50, y: 0, width: 60, height: 40)
-        commentNumLabel.font = UIFont.systemFont(ofSize: 10)
-        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
-        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
-        headerView.addSubview(commentNumLabel)
-
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 10))
+        headerView.backgroundColor = UIColor.groupTableViewBackground
+//        // 图标视图
+//        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
+//        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
+//        headerView.addSubview(iconView)
+//        let hotCommentLabel = UILabel(frame: CGRect(x: 13, y: 10, width: 100, height: 30))
+//        hotCommentLabel.text = "最新评论"
+//        hotCommentLabel.font = UIFont.systemFont(ofSize: 15)
+//        headerView.addSubview(hotCommentLabel)
+//
+//        let commentNumLabel = UILabel()
+//        commentNumLabel.frame = CGRect(x: kScreen_width - 50, y: 0, width: 60, height: 40)
+//        commentNumLabel.font = UIFont.systemFont(ofSize: 10)
+//        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
+//        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
+//        headerView.addSubview(commentNumLabel)
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 10
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if commentData.count > 0 {
-            let commentReply = CommentReplyViewController()
-            commentReply.flag = 2
-            commentReply.newsId = newsId ?? ""
-            commentReply.commentData = commentData[indexPath.row]
-            navigationController?.pushViewController(commentReply, animated: true)
-        }
+//        if commentData.count > 0 {
+//            let commentReply = CommentReplyViewController()
+//            commentReply.flag = 2
+//            commentReply.newsId = newsId ?? ""
+//            commentReply.commentData = commentData[indexPath.row]
+//            navigationController?.pushViewController(commentReply, animated: true)
+//        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -506,10 +575,32 @@ extension NewsDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             }
         }
     }
+    
+    //三个按钮功能
+    func clickAction(sender: UIButton) {
+        if sender.tag == 100 {
+            self.navigationController?.popViewController(animated: true)
+        }else if sender.tag == 101 {
+            
+            self.collectionNews(sender: sender)
+            
+            
+        }else if sender.tag == 102 {
+            self.navigationController?.pushViewController(PublicGroupViewController(), animated: true)
+        }
+    }
+    
+    
+    //回复话题
+    func answerAction(sender: UIButton) {
+        let vc = TalkNewsDetailsReplyViewController()
+        vc.newsId = self.newsId
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }
 
-extension NewsDetailsViewController: UITextFieldDelegate {
+extension TalkNewsDetailsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let token = AppInfo.shared.user?.token ?? ""
@@ -543,7 +634,29 @@ extension NewsDetailsViewController: UITextFieldDelegate {
     }
 }
 
-extension NewsDetailsViewController: ShowRoomCommentCellDelegate {
+extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
+    
+    func commenPushCenterButtonDidSelected(comments: CommentModel) {
+        let community = MyCommunityViewController()
+        community.title = "个人主页"
+        community.userId = comments.uid ?? ""
+        community.headImageUrl = comments.userPhoto ?? ""
+        community.nickName = comments.nickName ?? ""
+        community.fansCount = String.init(format: "粉丝:%@人", comments.fansNumber ?? "0")
+        community.friendsCountLabel.text = String.init(format: "好友:%@人", comments.friendsNum ?? "0")
+        community.type = "2"
+        if comments.uid == AppInfo.shared.user?.userId {
+            community.userType = "200"
+        }
+        // 判断是否关注
+        if comments.is_follow == 0 {
+            community.isFollowed = false
+        } else if comments.is_follow == 1 {
+            community.isFollowed = true
+        }
+        self.navigationController?.pushViewController(community, animated: true)
+    }
+    
     // 点赞按钮
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel) {
         
@@ -571,5 +684,44 @@ extension NewsDetailsViewController: ShowRoomCommentCellDelegate {
         commentReply.newsId = newsId ?? ""
         commentReply.commentData = commentData[sender.tag - 190]
         navigationController?.pushViewController(commentReply, animated: true)
+    }
+    
+    //关注
+    func commentFollowButtonDidSelected(sender: UIButton, comments: CommentModel) {
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }
+        
+        if comments.is_follow == 0 {
+            NetRequest.addOrCancelAttentionNetRequest(method: "POST", mid: AppInfo.shared.user?.userId ?? "", follow_who: comments.uid!) { (success, info) in
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info!)
+                    self.loadCommentList(requestType: .update)
+                    self.newsTableView.reloadData()
+                    
+                } else {
+                    SVProgressHUD.showError(withStatus: info!)
+                }
+            }
+        }else {
+            NetRequest.addOrCancelAttentionNetRequest(method: "DELETE", mid: AppInfo.shared.user?.userId ?? "", follow_who: comments.uid!) { (success, info) in
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info!)
+                    self.loadCommentList(requestType: .update)
+                    self.newsTableView.reloadData()
+                    
+                } else {
+                    SVProgressHUD.showError(withStatus: info!)
+                }
+            }
+        }
+        
+        
+     
+        
+        
+       
     }
 }

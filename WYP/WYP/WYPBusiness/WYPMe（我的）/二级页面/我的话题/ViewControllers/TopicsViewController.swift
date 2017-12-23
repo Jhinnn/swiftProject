@@ -12,6 +12,8 @@ class TopicsViewController: BaseViewController {
     
     var dataList = [TopicsFrameModel]()
     
+    var newsData = [MineTopicsModel]()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -45,6 +47,11 @@ class TopicsViewController: BaseViewController {
         view.addSubview(tableView)
         
         setupUIFrame()
+        
+        let views = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
+        self.headView.addSubview(views!)
+        tableView.tableHeaderView = headView
+        
     }
     
     // 设置控件frame
@@ -55,21 +62,43 @@ class TopicsViewController: BaseViewController {
         }
     }
     
+    
+    lazy var headView: UIView = {
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 160))
+        
+        return view
+    }()
+  
+    
+  
+    
     // 设置tableView
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.tableFooterView = UIView()
+        
+
+        
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadNetData(requestType: .loadMore)
         })
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.loadNetData(requestType: .update)
         })
-        tableView.rowHeight = 110
+        
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TopicsCellIdentifier")
+        tableView.register(TalkOnePictureTableViewCell.self, forCellReuseIdentifier: "onePicCell")
+        tableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "textCell")
+        tableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
+        tableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
+        
+       
         
         return tableView
     }()
@@ -125,20 +154,23 @@ class TopicsViewController: BaseViewController {
         } else {
             pageNumber = pageNumber + 1
         }
-        NetRequest.myTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "") { (success, info, dataArr) in
+        
+    
+        NetRequest.myNewTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: AppInfo.shared.user?.userId ?? "") { (success, info, dataArr) in
+    
             if success {
-                var models = [TopicsFrameModel]()
-                for dic in dataArr! {
-                    let topics = TopicsModel.deserialize(from: dic)
-                    let topicsFrame = TopicsFrameModel()
-                    topicsFrame.topics = topics
-                    models.append(topicsFrame)
+                var news = [MineTopicsModel]()
+                if dataArr != nil {
+                    let data = try! JSONSerialization.data(withJSONObject: dataArr!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                    news = [MineTopicsModel].deserialize(from: jsonString)! as! [MineTopicsModel]
+                }else {
+                    return
                 }
                 if requestType == .update {
-                    self.dataList = models
-                } else {
-                    // 把新数据添加进去
-                    self.dataList = self.dataList + models
+                    self.newsData = news
+                }else {
+                    self.newsData = self.newsData + news
                 }
                 
                 // 先移除再添加
@@ -204,76 +236,99 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataList.count == 0 {
-            noDataImageView.isHidden = false
+        if newsData.count == 0 {
             noDataLabel.isHidden = false
             noDataButton.isHidden = false
+            noDataImageView.isHidden = false
         } else {
-            noDataImageView.isHidden = true
             noDataLabel.isHidden = true
             noDataButton.isHidden = true
+            noDataImageView.isHidden = true
         }
-        return dataList.count
+        return newsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = TopicsCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
-        cell.delegate = self
-        cell.starCountButton.tag = 110 + indexPath.row
-        cell.topicsFrame = dataList[indexPath.row]
         
-        return cell
+        if newsData[indexPath.row].new_type == "1" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
+            cell.mineTopicsModel = newsData[indexPath.row]
+            return cell
+        }else if newsData[indexPath.row].new_type == "2"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+            cell.mineTopicsModel = newsData[indexPath.row]
+            return cell
+        }else if newsData[indexPath.row].new_type == "3"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
+            cell.mineTopicsModel = newsData[indexPath.row]
+            return cell
+        }else if newsData[indexPath.row].new_type == "4"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
+            cell.mineTopicsModel = newsData[indexPath.row]
+            return cell
+        }
+        
+     
+        
+        return UITableViewCell()
     }
     
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let topicsFrame = dataList[indexPath.row]
-        return topicsFrame.cellHeight!
+        if newsData[indexPath.row].new_type == "1" {
+            return 87.5 * width_height_ratio
+        }else if newsData[indexPath.row].new_type == "2" {
+            return 275 * width_height_ratio
+        }else if newsData[indexPath.row].new_type == "3" {
+            return 109
+        }else if newsData[indexPath.row].new_type == "4" {
+            return 160 * width_height_ratio
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let topicDetails = TopicsDetailsViewController()
-        topicDetails.delegate = self
-        topicDetails.topicId = dataList[indexPath.row].topics.topicId!
-        topicDetails.contentData = dataList[indexPath.row].topics
-        navigationController?.pushViewController(topicDetails, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
+//
+//        let topicDetails = TopicsDetailsViewController()
+//        topicDetails.delegate = self
+//        topicDetails.topicId = dataList[indexPath.row].topics.topicId!
+//        topicDetails.contentData = dataList[indexPath.row].topics
+//        navigationController?.pushViewController(topicDetails, animated: true)
     }
     // 修改删除按钮的文字
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
     // 设置侧滑删除
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
-    }
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return .delete
+//    }
     // 删除cell
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == .delete{
-            let topicId = dataList[indexPath.row].topics.topicId ?? ""
-            
-            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
-                if success {
-                    // 删除成功
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    self.dataList.remove(at: indexPath.row)
-                    tableView.reloadData()
-                    // 删除成功
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    
-                } else {
-                    // 删除失败
-                    SVProgressHUD.showError(withStatus: info)
-                }
-            })
-            //2.刷新单元格
-            tableView.reloadData()
-        }
+//        if editingStyle == .delete{
+//            let topicId = dataList[indexPath.row].topics.topicId ?? ""
+//
+//            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
+//                if success {
+//                    // 删除成功
+//                    SVProgressHUD.showSuccess(withStatus: info)
+//                    self.dataList.remove(at: indexPath.row)
+//                    tableView.reloadData()
+//                    // 删除成功
+//                    SVProgressHUD.showSuccess(withStatus: info)
+//
+//                } else {
+//                    // 删除失败
+//                    SVProgressHUD.showError(withStatus: info)
+//                }
+//            })
+//            //2.刷新单元格
+//            tableView.reloadData()
+//        }
     }
 }
 

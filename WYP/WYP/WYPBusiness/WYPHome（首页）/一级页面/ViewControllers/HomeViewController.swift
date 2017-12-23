@@ -761,7 +761,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
                     cell.line.isHidden = false
                     cell.infoModel = homeNewsData?[indexPath.row]
-                    
+                    cell.infoLabel.isHidden = true
+                    cell.playImageView.isHidden = true
                     return cell
                 case 3: //左文右图
                     let cell = OnePictureTableViewCell(style: .default, reuseIdentifier: "onePicCell")

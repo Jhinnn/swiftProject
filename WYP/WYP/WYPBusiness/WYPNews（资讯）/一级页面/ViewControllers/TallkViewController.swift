@@ -101,7 +101,7 @@ class TallkViewController: BaseViewController {
         }
         
         commentView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(newAllTableView.snp.bottom).offset(-70)
+            make.bottom.equalTo(newAllTableView.snp.bottom).offset(-58)
             make.right.equalTo(newAllTableView.snp.right).offset(-10)
             make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
            
@@ -344,10 +344,10 @@ class TallkViewController: BaseViewController {
         newAllTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.loadNewsData(requestType: .update)
         })
-        newAllTableView.register(OnePictureTableViewCell.self, forCellReuseIdentifier: "onePicCell")
-        newAllTableView.register(TravelTableViewCell.self, forCellReuseIdentifier: "textCell")
-        newAllTableView.register(ThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
-        newAllTableView.register(VideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
+        newAllTableView.register(TalkOnePictureTableViewCell.self, forCellReuseIdentifier: "onePicCell")
+        newAllTableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "textCell")
+        newAllTableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
+        newAllTableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
         return newAllTableView
     }()
     
@@ -395,7 +395,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch newsData[indexPath.row].showType ?? 6 {
         case 0: // 视频
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoInfoTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
@@ -405,7 +405,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         case 1: //只有文字
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TravelTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
             if flag == 2 {
@@ -414,7 +414,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         case 2: //上图下文
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoInfoTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
             if flag == 2 {
@@ -423,7 +423,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         case 3: //左文右图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! OnePictureTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
             if flag == 2 {
@@ -432,7 +432,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         case 4: //三张图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! ThreePictureTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
             if flag == 2 {
@@ -441,7 +441,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
             return cell
         case 5: // 大图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoInfoTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             cell.infoLabel.isHidden = true
             cell.playImageView.isHidden = true
             cell.infoModel = newsData[indexPath.row]
@@ -523,7 +523,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
                     navigationController?.pushViewController(newsDetail, animated: true)
                 }
             } else {
-                let newsDetail = NewsDetailsViewController()
+                let newsDetail = TalkNewsDetailsViewController()
                 newsDetail.newsTitle = newsData[indexPath.row].infoTitle
                 newsDetail.newsId = newsData[indexPath.row].newsId
                 newsDetail.commentNumber = newsData[indexPath.row].infoComment

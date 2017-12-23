@@ -22,9 +22,9 @@ public extension Int {
             if minute < 5 {
                 return "刚刚"
             } else if hour < 1 {
-                return "\(minute)分钟之前"
+                return "\(minute)分钟前"
             } else {
-                return "\(hour)小时之前"
+                return "\(hour)小时前"
             }
         } else if isYesterday {
             return "昨天 \(self.yesterdayTimeStr())"

@@ -45,8 +45,8 @@ class ShowRoomCommentCell: UITableViewCell {
         contentLabel.frame = (replyFrame.contentF)!
         timeLabel.frame = (replyFrame.timeF)!
         starCountButton.frame = (replyFrame.starCountF)!
-//        replyCountLabel.frame = (replyFrame.replyCountF)!
-//        replyButton.frame = (replyFrame.replyButtonF)!
+        replyCountLabel.frame = (replyFrame.replyCountF)!
+        replyButton.frame = (replyFrame.replyButtonF)!
     }
     
     // MARK: - event response
@@ -72,8 +72,8 @@ class ShowRoomCommentCell: UITableViewCell {
     // 昵称
     lazy var nickNameLablel: UILabel = {
         let nickNameLablel = UILabel()
-        nickNameLablel.textColor = UIColor.init(hexColor: "898989")
-        nickNameLablel.font = UIFont.systemFont(ofSize: 14)
+        nickNameLablel.textColor = UIColor.init(hexColor: "#507bab")
+        nickNameLablel.font = UIFont.systemFont(ofSize: 11)
         
         return nickNameLablel
     }()
@@ -83,15 +83,15 @@ class ShowRoomCommentCell: UITableViewCell {
         let contentLabel = UILabel()
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.numberOfLines = 0
-        contentLabel.textColor = UIColor.init(hexColor: "333333")
+        
         return contentLabel
     }()
     
     // 时间
     lazy var timeLabel: UILabel = {
         let timeLabel = UILabel()
-        timeLabel.font = UIFont.systemFont(ofSize: 12)
-        timeLabel.textColor = UIColor.init(hexColor: "BDBDBD")
+        timeLabel.font = UIFont.systemFont(ofSize: 10)
+        timeLabel.textColor = UIColor.init(hexColor: "afafaf")
         return timeLabel
     }()
     
@@ -100,7 +100,7 @@ class ShowRoomCommentCell: UITableViewCell {
         let starCountButton = UIButton(type: .custom)
         starCountButton.setImage(UIImage(named: "common_grayStar_button_normal_iPhone"), for: .normal)
         starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
-        starCountButton.setTitleColor(UIColor.init(hexColor: "999999"), for: .normal)
+        starCountButton.setTitleColor(UIColor.black, for: .normal)
         starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
         starCountButton.addTarget(self, action: #selector(clickStarButton(sender:)), for: .touchUpInside)
         return starCountButton
