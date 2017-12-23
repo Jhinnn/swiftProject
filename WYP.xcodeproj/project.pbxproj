@@ -2811,6 +2811,7 @@
 				TargetAttributes = {
 					A4301C1C1E5FDEB000E8E222 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = JYGJJ26C2T;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -3445,7 +3446,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JYGJJ26C2T;
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
@@ -3475,7 +3476,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JYGJJ26C2T;
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
