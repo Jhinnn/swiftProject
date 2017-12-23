@@ -37,37 +37,10 @@
 		8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC01FE7B5B300A453BB /* HXCircleProgressView.m */; };
 		8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC31FE7B5B300A453BB /* HXPhotoPreviewViewCell.m */; };
 		8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AE41FE8F52C00A453BB /* WYPContain.m */; };
-<<<<<<< .merge_file_CI4Bu4
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
-=======
-		8EBE8B2F1FE76F97001A05D7 /* GroupMemberListHeadCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */; };
-		8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */; };
-		8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */; };
-		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
-		8EC8F01A1FEB5B1A0050A040 /* ThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */; };
-		8EC8F01B1FEB5B1A0050A040 /* VideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */; };
-		8EC8F01C1FEB5B1A0050A040 /* OnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */; };
-		8EC8F01D1FEB5B1A0050A040 /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */; };
-		8EC8F0231FEB5BDE0050A040 /* TalkVideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */; };
-		8EC8F0241FEB5BDE0050A040 /* TalkOnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */; };
-		8EC8F0251FEB5BDE0050A040 /* TalkTravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */; };
-		8EC8F0261FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */; };
-		8EC8F02A1FEB669D0050A040 /* TalkRoomCommentFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */; };
-		8EC8F02B1FEB669D0050A040 /* TalkShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */; };
-		8EC8F02E1FEB6A2D0050A040 /* TalkNewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */; };
-		8EC8F0301FEB9D980050A040 /* TalkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F02F1FEB9D970050A040 /* TalkButton.swift */; };
-		8EC8F0331FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */; };
-		8EC8F0361FECD1F40050A040 /* MineTopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */; };
-		8EC8F0381FECE59E0050A040 /* TopicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */; };
-		8EC8F03A1FECE5B90050A040 /* TopicHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */; };
-		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
-		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
-		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
-		9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E22D4311FACD50000846374 /* LSXPopMenu.m */; };
->>>>>>> .merge_file_hipl9F
 		9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */; };
 		9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */; };
 		A4118D801F061F29009B57FB /* LYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4118D7F1F061F29009B57FB /* LYExtension.swift */; };
@@ -141,10 +114,18 @@
 		A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F790E31E8147D500B3EA57 /* AppDelegate+Extension.swift */; };
 		A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */; };
 		EF33619A1FDD0BBA00F85954 /* TallkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3361991FDD0BBA00F85954 /* TallkViewController.swift */; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */; };
->>>>>>> .merge_file_hipl9F
+		EF751DE21FEDFB7C00C0FD3F /* MineTopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DE11FEDFB7C00C0FD3F /* MineTopicsModel.swift */; };
+		EF751DE41FEDFC2300C0FD3F /* TopicHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF751DE31FEDFC2200C0FD3F /* TopicHeaderView.xib */; };
+		EF751DE61FEDFC3600C0FD3F /* TopicHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DE51FEDFC3500C0FD3F /* TopicHeaderView.swift */; };
+		EF751DEF1FEDFDDE00C0FD3F /* TalkOnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DEB1FEDFDDE00C0FD3F /* TalkOnePictureTableViewCell.swift */; };
+		EF751DF01FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DEC1FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift */; };
+		EF751DF11FEDFDDE00C0FD3F /* TalkTravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DED1FEDFDDE00C0FD3F /* TalkTravelTableViewCell.swift */; };
+		EF751DF21FEDFDDE00C0FD3F /* TalkVideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DEE1FEDFDDE00C0FD3F /* TalkVideoInfoTableViewCell.swift */; };
+		EF751DF51FEDFE2E00C0FD3F /* TalkNewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF31FEDFE2E00C0FD3F /* TalkNewsDetailsViewController.swift */; };
+		EF751DF61FEDFE2E00C0FD3F /* TalkNewsDetailsReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF41FEDFE2E00C0FD3F /* TalkNewsDetailsReplyViewController.swift */; };
+		EF751DF91FEE004100C0FD3F /* TalkShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF71FEE004000C0FD3F /* TalkShowRoomCommentCell.swift */; };
+		EF751DFA1FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF81FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift */; };
+		EF751DFC1FEE01CC00C0FD3F /* TalkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DFB1FEE01CC00C0FD3F /* TalkButton.swift */; };
 		F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */; };
 		F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307F1EC18DD800DF5E47 /* RecordModel.swift */; };
 		F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91330821EC1B89000DF5E47 /* RecordsTableViewCell.swift */; };
@@ -171,13 +152,6 @@
 		F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94096631ED6DF7B00DD4523 /* ShowRoomCommentCell.swift */; };
 		F94096661ED6FAA300DD4523 /* CommentReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94096651ED6FAA300DD4523 /* CommentReplyViewController.swift */; };
 		F94351B91EDFBC6C00FB4831 /* ChatDeatilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351B81EDFBC6C00FB4831 /* ChatDeatilViewController.swift */; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		F94351BB1EDFBE0600FB4831 /* GroupsMemberListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */; };
-		F94351BD1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */; };
-		F94351BF1EDFDDE700FB4831 /* RecommendFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */; };
-		F94351C11EDFDEAF00FB4831 /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */; };
->>>>>>> .merge_file_hipl9F
 		F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94351C81EDFFEF300FB4831 /* UIButton+Extension.swift */; };
 		F9438E831EB814DB006AA065 /* ApplyToEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9438E821EB814DB006AA065 /* ApplyToEnterViewController.swift */; };
 		F9438E871EB8677C006AA065 /* TicketBaseNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9438E861EB8677C006AA065 /* TicketBaseNaviViewController.swift */; };
@@ -261,13 +235,6 @@
 		F9986A161EA61C2B002C502B /* AttentionTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869541EA61C2B002C502B /* AttentionTicketViewController.swift */; };
 		F9986A171EA61C2B002C502B /* AttentionNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869571EA61C2B002C502B /* AttentionNewsViewController.swift */; };
 		F9986A181EA61C2B002C502B /* MyFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869591EA61C2B002C502B /* MyFriendsViewController.swift */; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		F9986A1B1EA61C2B002C502B /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869611EA61C2B002C502B /* GroupsModel.swift */; };
-		F9986A1C1EA61C2B002C502B /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869631EA61C2B002C502B /* GroupsViewController.swift */; };
-		F9986A1D1EA61C2B002C502B /* VerifyApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */; };
-		F9986A1E1EA61C2B002C502B /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */; };
->>>>>>> .merge_file_hipl9F
 		F9986A1F1EA61C2B002C502B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869691EA61C2B002C502B /* ChatViewController.swift */; };
 		F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998696C1EA61C2B002C502B /* AddressBookHandle.swift */; };
 		F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998696D1EA61C2B002C502B /* GetAddressBook.swift */; };
@@ -298,13 +265,10 @@
 		F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A11EA61C2B002C502B /* InviteFriendsTableViewCell.swift */; };
 		F9986A3B1EA61C2B002C502B /* InviteFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A31EA61C2B002C502B /* InviteFriendsViewController.swift */; };
 		F9986A3C1EA61C2B002C502B /* InfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A71EA61C2B002C502B /* InfoModel.swift */; };
-<<<<<<< .merge_file_CI4Bu4
 		F9986A3D1EA61C2B002C502B /* OnePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */; };
 		F9986A3E1EA61C2B002C502B /* ThreePictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */; };
 		F9986A3F1EA61C2B002C502B /* TravelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */; };
 		F9986A401EA61C2B002C502B /* VideoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */; };
-=======
->>>>>>> .merge_file_hipl9F
 		F9986A411EA61C2B002C502B /* NewsNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AE1EA61C2B002C502B /* NewsNaviViewController.swift */; };
 		F9986A421EA61C2B002C502B /* NewsPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869AF1EA61C2B002C502B /* NewsPhotosViewController.swift */; };
 		F9986A431EA61C2B002C502B /* NewsTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99869B01EA61C2B002C502B /* NewsTopicViewController.swift */; };
@@ -378,7 +342,6 @@
 		F9FE905B1F9F024800D31F3C /* SGQRCodeHelperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90521F9F024800D31F3C /* SGQRCodeHelperTool.m */; };
 		F9FE905C1F9F024800D31F3C /* SGQRCodeScanManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90541F9F024800D31F3C /* SGQRCodeScanManager.m */; };
 		F9FE905D1F9F024800D31F3C /* SGQRCodeScanningView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FE90561F9F024800D31F3C /* SGQRCodeScanningView.m */; };
-<<<<<<< .merge_file_CI4Bu4
 		FB1BE5E91FEB494A003BDC1C /* GroupNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5D41FEB4949003BDC1C /* GroupNoteModel.swift */; };
 		FB1BE5EA1FEB494A003BDC1C /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5D51FEB4949003BDC1C /* GroupsModel.swift */; };
 		FB1BE5EB1FEB494A003BDC1C /* ChatRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5D71FEB4949003BDC1C /* ChatRecordViewController.swift */; };
@@ -403,8 +366,6 @@
 		FBC512051FECDD9E0061245E /* ManagerGroupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */; };
 		FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512061FECE4910061245E /* SettingManagerViewController.swift */; };
 		FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */; };
-=======
->>>>>>> .merge_file_hipl9F
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -484,38 +445,10 @@
 		8E650AC61FE7B5B300A453BB /* HXAlbumTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumTitleButton.h; sourceTree = "<group>"; };
 		8E650AE31FE8F52C00A453BB /* WYPContain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYPContain.h; sourceTree = "<group>"; };
 		8E650AE41FE8F52C00A453BB /* WYPContain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYPContain.m; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
-=======
-		8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupMemberListHeadCollectionReusableView.swift; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的好友/群组/Views/GroupMemberListHeadCollectionReusableView.swift"; sourceTree = SOURCE_ROOT; };
-		8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteViewController.swift; sourceTree = "<group>"; };
-		8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupNoteTableViewCell.swift; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的好友/群组/Views/GroupNoteTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
-		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
-		8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreePictureTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfoTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePictureTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkVideoInfoTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkOnePictureTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkTravelTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkThreePictureTableViewCell.swift; sourceTree = "<group>"; };
-		8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkRoomCommentFrameModel.swift; sourceTree = "<group>"; };
-		8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkShowRoomCommentCell.swift; sourceTree = "<group>"; };
-		8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsViewController.swift; sourceTree = "<group>"; };
-		8EC8F02F1FEB9D970050A040 /* TalkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkButton.swift; sourceTree = "<group>"; };
-		8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsReplyViewController.swift; sourceTree = "<group>"; };
-		8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineTopicsModel.swift; sourceTree = "<group>"; };
-		8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicHeaderView.swift; sourceTree = "<group>"; };
-		8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicHeaderView.xib; sourceTree = "<group>"; };
-		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
-		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
-		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
-		9E22D4301FACD50000846374 /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
-		9E22D4311FACD50000846374 /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
->>>>>>> .merge_file_hipl9F
 		9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvisorySearchTitleView.swift; sourceTree = "<group>"; };
 		9EF3DB491FB0B371007952D3 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A4118D7F1F061F29009B57FB /* LYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LYExtension.swift; sourceTree = "<group>"; };
@@ -634,10 +567,18 @@
 		A4FE0E4B1EA8591500F13C8F /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
 		B6C9247D1A1409A06196536E /* Pods-WYP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.debug.xcconfig"; sourceTree = "<group>"; };
 		EF3361991FDD0BBA00F85954 /* TallkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallkViewController.swift; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDeailsViewController.swift; sourceTree = "<group>"; };
->>>>>>> .merge_file_hipl9F
+		EF751DE11FEDFB7C00C0FD3F /* MineTopicsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineTopicsModel.swift; sourceTree = "<group>"; };
+		EF751DE31FEDFC2200C0FD3F /* TopicHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TopicHeaderView.xib; path = "WYP/WYP/WYPBusiness/WYPMe（我的）/二级页面/我的话题/Views/TopicHeaderView.xib"; sourceTree = SOURCE_ROOT; };
+		EF751DE51FEDFC3500C0FD3F /* TopicHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicHeaderView.swift; sourceTree = "<group>"; };
+		EF751DEB1FEDFDDE00C0FD3F /* TalkOnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkOnePictureTableViewCell.swift; path = TalkView/TalkOnePictureTableViewCell.swift; sourceTree = "<group>"; };
+		EF751DEC1FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkThreePictureTableViewCell.swift; path = TalkView/TalkThreePictureTableViewCell.swift; sourceTree = "<group>"; };
+		EF751DED1FEDFDDE00C0FD3F /* TalkTravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkTravelTableViewCell.swift; path = TalkView/TalkTravelTableViewCell.swift; sourceTree = "<group>"; };
+		EF751DEE1FEDFDDE00C0FD3F /* TalkVideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkVideoInfoTableViewCell.swift; path = TalkView/TalkVideoInfoTableViewCell.swift; sourceTree = "<group>"; };
+		EF751DF31FEDFE2E00C0FD3F /* TalkNewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkNewsDetailsViewController.swift; path = NewViewControllers/TalkNewsDetailsViewController.swift; sourceTree = "<group>"; };
+		EF751DF41FEDFE2E00C0FD3F /* TalkNewsDetailsReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TalkNewsDetailsReplyViewController.swift; path = NewViewControllers/TalkNewsDetailsReplyViewController.swift; sourceTree = "<group>"; };
+		EF751DF71FEE004000C0FD3F /* TalkShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkShowRoomCommentCell.swift; sourceTree = "<group>"; };
+		EF751DF81FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkRoomCommentFrameModel.swift; sourceTree = "<group>"; };
+		EF751DFB1FEE01CC00C0FD3F /* TalkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkButton.swift; sourceTree = "<group>"; };
 		F90563211F46D1FC00C396DD /* WYP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYP.entitlements; sourceTree = "<group>"; };
 		F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackRecordViewController.swift; sourceTree = "<group>"; };
 		F913307F1EC18DD800DF5E47 /* RecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -666,13 +607,6 @@
 		F94096631ED6DF7B00DD4523 /* ShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowRoomCommentCell.swift; sourceTree = "<group>"; };
 		F94096651ED6FAA300DD4523 /* CommentReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentReplyViewController.swift; sourceTree = "<group>"; };
 		F94351B81EDFBC6C00FB4831 /* ChatDeatilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDeatilViewController.swift; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListViewController.swift; sourceTree = "<group>"; };
-		F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsMemberListCollectionReusableView.swift; sourceTree = "<group>"; };
-		F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendFriendsViewController.swift; sourceTree = "<group>"; };
-		F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendTableViewCell.swift; sourceTree = "<group>"; };
->>>>>>> .merge_file_hipl9F
 		F94351C81EDFFEF300FB4831 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		F9438E821EB814DB006AA065 /* ApplyToEnterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyToEnterViewController.swift; sourceTree = "<group>"; };
 		F9438E861EB8677C006AA065 /* TicketBaseNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketBaseNaviViewController.swift; sourceTree = "<group>"; };
@@ -760,13 +694,6 @@
 		F99869541EA61C2B002C502B /* AttentionTicketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTicketViewController.swift; sourceTree = "<group>"; };
 		F99869571EA61C2B002C502B /* AttentionNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionNewsViewController.swift; sourceTree = "<group>"; };
 		F99869591EA61C2B002C502B /* MyFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsViewController.swift; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
-=======
-		F99869611EA61C2B002C502B /* GroupsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
-		F99869631EA61C2B002C502B /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
-		F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyApplicationViewController.swift; sourceTree = "<group>"; };
-		F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
->>>>>>> .merge_file_hipl9F
 		F99869691EA61C2B002C502B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F998696C1EA61C2B002C502B /* AddressBookHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookHandle.swift; sourceTree = "<group>"; };
 		F998696D1EA61C2B002C502B /* GetAddressBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAddressBook.swift; sourceTree = "<group>"; };
@@ -797,13 +724,10 @@
 		F99869A11EA61C2B002C502B /* InviteFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		F99869A31EA61C2B002C502B /* InviteFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewController.swift; sourceTree = "<group>"; };
 		F99869A71EA61C2B002C502B /* InfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoModel.swift; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
 		F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnePictureTableViewCell.swift; sourceTree = "<group>"; };
 		F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreePictureTableViewCell.swift; sourceTree = "<group>"; };
 		F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelTableViewCell.swift; sourceTree = "<group>"; };
 		F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInfoTableViewCell.swift; sourceTree = "<group>"; };
-=======
->>>>>>> .merge_file_hipl9F
 		F99869AE1EA61C2B002C502B /* NewsNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNaviViewController.swift; sourceTree = "<group>"; };
 		F99869AF1EA61C2B002C502B /* NewsPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPhotosViewController.swift; sourceTree = "<group>"; };
 		F99869B01EA61C2B002C502B /* NewsTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTopicViewController.swift; sourceTree = "<group>"; };
@@ -887,7 +811,6 @@
 		F9FE90541F9F024800D31F3C /* SGQRCodeScanManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanManager.m; sourceTree = "<group>"; };
 		F9FE90551F9F024800D31F3C /* SGQRCodeScanningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeScanningView.h; sourceTree = "<group>"; };
 		F9FE90561F9F024800D31F3C /* SGQRCodeScanningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeScanningView.m; sourceTree = "<group>"; };
-<<<<<<< .merge_file_CI4Bu4
 		FB1BE5D41FEB4949003BDC1C /* GroupNoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNoteModel.swift; sourceTree = "<group>"; };
 		FB1BE5D51FEB4949003BDC1C /* GroupsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
 		FB1BE5D71FEB4949003BDC1C /* ChatRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRecordViewController.swift; sourceTree = "<group>"; };
@@ -913,8 +836,6 @@
 		FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGroupInfoModel.swift; sourceTree = "<group>"; };
 		FBC512061FECE4910061245E /* SettingManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerViewController.swift; sourceTree = "<group>"; };
 		FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerTableViewCell.swift; sourceTree = "<group>"; };
-=======
->>>>>>> .merge_file_hipl9F
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1021,47 +942,6 @@
 			path = WYPContain;
 			sourceTree = "<group>";
 		};
-<<<<<<< .merge_file_CI4Bu4
-=======
-		8EC8F01E1FEB5B890050A040 /* TalkView */ = {
-			isa = PBXGroup;
-			children = (
-				8EC8F0201FEB5BDD0050A040 /* TalkOnePictureTableViewCell.swift */,
-				8EC8F0221FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift */,
-				8EC8F0211FEB5BDE0050A040 /* TalkTravelTableViewCell.swift */,
-				8EC8F01F1FEB5BDD0050A040 /* TalkVideoInfoTableViewCell.swift */,
-			);
-			path = TalkView;
-			sourceTree = "<group>";
-		};
-		8EC8F0271FEB66560050A040 /* TalkRoomReply */ = {
-			isa = PBXGroup;
-			children = (
-				8EC8F0281FEB669C0050A040 /* TalkRoomCommentFrameModel.swift */,
-				8EC8F0291FEB669D0050A040 /* TalkShowRoomCommentCell.swift */,
-			);
-			path = TalkRoomReply;
-			sourceTree = "<group>";
-		};
-		8EC8F02C1FEB6A190050A040 /* NewViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8EC8F02D1FEB6A2C0050A040 /* TalkNewsDetailsViewController.swift */,
-				8EC8F0311FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift */,
-			);
-			path = NewViewControllers;
-			sourceTree = "<group>";
-		};
-		9E22D42F1FACD4C700846374 /* ScanAddFriendView */ = {
-			isa = PBXGroup;
-			children = (
-				9E22D4301FACD50000846374 /* LSXPopMenu.h */,
-				9E22D4311FACD50000846374 /* LSXPopMenu.m */,
-			);
-			path = ScanAddFriendView;
-			sourceTree = "<group>";
-		};
->>>>>>> .merge_file_hipl9F
 		A41CE6731EBABCFD000BCDE9 /* 我的社区 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1306,14 +1186,11 @@
 				F9986A6C1EA61DFF002C502B /* SYNavTabBar.swift */,
 				A424DD411E821D65002F6720 /* LBTextField.swift */,
 				F984BDD41E97875200FD3E0B /* SYAlertController.swift */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F02F1FEB9D970050A040 /* TalkButton.swift */,
->>>>>>> .merge_file_hipl9F
 				F933534C1ED59C3100E67DD2 /* SearchView.swift */,
 				F95EA8551F78EC1C008AE547 /* navTitleView.swift */,
 				F9993E0C1F7906E30077A4DD /* SearchTitleView.swift */,
 				F92CE34C1F0B6FC9005CB4E8 /* KRefreshDataCount.swift */,
+				EF751DFB1FEE01CC00C0FD3F /* TalkButton.swift */,
 			);
 			path = WYPGeneralViews;
 			sourceTree = "<group>";
@@ -1546,6 +1423,8 @@
 		F94096601ED6DF0700DD4523 /* RoomReply */ = {
 			isa = PBXGroup;
 			children = (
+				EF751DF81FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift */,
+				EF751DF71FEE004000C0FD3F /* TalkShowRoomCommentCell.swift */,
 				F94096611ED6DF4C00DD4523 /* RoomCommentFrameModel.swift */,
 				F94096631ED6DF7B00DD4523 /* ShowRoomCommentCell.swift */,
 			);
@@ -2147,64 +2026,13 @@
 			isa = PBXGroup;
 			children = (
 				F99869591EA61C2B002C502B /* MyFriendsViewController.swift */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5D21FEB4949003BDC1C /* 群组 */,
-=======
-				F998695F1EA61C2B002C502B /* 群组 */,
->>>>>>> .merge_file_hipl9F
 				F99869671EA61C2B002C502B /* 聊天 */,
 				F998696A1EA61C2B002C502B /* 通讯录 */,
 			);
 			path = "我的好友";
 			sourceTree = "<group>";
 		};
-<<<<<<< .merge_file_CI4Bu4
-=======
-		F998695F1EA61C2B002C502B /* 群组 */ = {
-			isa = PBXGroup;
-			children = (
-				F99869601EA61C2B002C502B /* Models */,
-				F99869621EA61C2B002C502B /* ViewControllers */,
-				F99869651EA61C2B002C502B /* Views */,
-			);
-			path = "群组";
-			sourceTree = "<group>";
-		};
-		F99869601EA61C2B002C502B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F99869611EA61C2B002C502B /* GroupsModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		F99869621EA61C2B002C502B /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8EBE8B301FE76FC6001A05D7 /* GroupNoteViewController.swift */,
-				EFB3AE021FE2130E00E8FC5A /* GroupDeailsViewController.swift */,
-				F99869631EA61C2B002C502B /* GroupsViewController.swift */,
-				F99869641EA61C2B002C502B /* VerifyApplicationViewController.swift */,
-				F94351BA1EDFBE0600FB4831 /* GroupsMemberListViewController.swift */,
-				F94351BE1EDFDDE700FB4831 /* RecommendFriendsViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		F99869651EA61C2B002C502B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				9E22D42F1FACD4C700846374 /* ScanAddFriendView */,
-				F99869661EA61C2B002C502B /* GroupsTableViewCell.swift */,
-				F94351BC1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift */,
-				F94351C01EDFDEAF00FB4831 /* RecommendTableViewCell.swift */,
-				8EBE8B2E1FE76F96001A05D7 /* GroupMemberListHeadCollectionReusableView.swift */,
-				8EBE8B321FE77080001A05D7 /* GroupNoteTableViewCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
->>>>>>> .merge_file_hipl9F
 		F99869671EA61C2B002C502B /* 聊天 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2350,12 +2178,9 @@
 		F99869851EA61C2B002C502B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EF751DE11FEDFB7C00C0FD3F /* MineTopicsModel.swift */,
 				F99869861EA61C2B002C502B /* TopicsFrameModel.swift */,
 				F99869871EA61C2B002C502B /* TopicsModel.swift */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F0351FECD1F40050A040 /* MineTopicsModel.swift */,
->>>>>>> .merge_file_hipl9F
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2372,12 +2197,9 @@
 		F998698B1EA61C2B002C502B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF751DE51FEDFC3500C0FD3F /* TopicHeaderView.swift */,
+				EF751DE31FEDFC2200C0FD3F /* TopicHeaderView.xib */,
 				F998698C1EA61C2B002C502B /* TopicsCell.swift */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F0371FECE59E0050A040 /* TopicHeaderView.swift */,
-				8EC8F0391FECE5B90050A040 /* TopicHeaderView.xib */,
->>>>>>> .merge_file_hipl9F
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2535,18 +2357,14 @@
 		F99869A81EA61C2B002C502B /* View */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< .merge_file_CI4Bu4
+				EF751DEB1FEDFDDE00C0FD3F /* TalkOnePictureTableViewCell.swift */,
+				EF751DEC1FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift */,
+				EF751DED1FEDFDDE00C0FD3F /* TalkTravelTableViewCell.swift */,
+				EF751DEE1FEDFDDE00C0FD3F /* TalkVideoInfoTableViewCell.swift */,
 				F99869A91EA61C2B002C502B /* OnePictureTableViewCell.swift */,
 				F99869AA1EA61C2B002C502B /* ThreePictureTableViewCell.swift */,
 				F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */,
 				F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */,
-=======
-				8EC8F01E1FEB5B890050A040 /* TalkView */,
-				8EC8F0181FEB5B190050A040 /* OnePictureTableViewCell.swift */,
-				8EC8F0161FEB5B180050A040 /* ThreePictureTableViewCell.swift */,
-				8EC8F0191FEB5B1A0050A040 /* TravelTableViewCell.swift */,
-				8EC8F0171FEB5B190050A040 /* VideoInfoTableViewCell.swift */,
->>>>>>> .merge_file_hipl9F
 				9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */,
 			);
 			path = View;
@@ -2577,10 +2395,8 @@
 		F99869B41EA61C2B002C502B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F02C1FEB6A190050A040 /* NewViewControllers */,
->>>>>>> .merge_file_hipl9F
+				EF751DF41FEDFE2E00C0FD3F /* TalkNewsDetailsReplyViewController.swift */,
+				EF751DF31FEDFE2E00C0FD3F /* TalkNewsDetailsViewController.swift */,
 				F99869B51EA61C2B002C502B /* NewsDetailsViewController.swift */,
 				F94DB8331EB31EEE00B014AD /* VideoDetailViewController.swift */,
 				F9E298171EAB5EC700DFD96F /* NewsSearchResultViewController.swift */,
@@ -2800,10 +2616,6 @@
 		F99869ED1EA61C2B002C502B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F0271FEB66560050A040 /* TalkRoomReply */,
->>>>>>> .merge_file_hipl9F
 				F94096601ED6DF0700DD4523 /* RoomReply */,
 				A49DA1EE1EA9A2CF000E4AFA /* ShowroomDescriptionCell.swift */,
 				A49DA1F01EA9A2ED000E4AFA /* ShowroomNoticeCell.swift */,
@@ -2900,7 +2712,6 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
-<<<<<<< .merge_file_CI4Bu4
 		FB1BE5D21FEB4949003BDC1C /* 群组 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2965,8 +2776,6 @@
 			path = ScanAddFriendView;
 			sourceTree = "<group>";
 		};
-=======
->>>>>>> .merge_file_hipl9F
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3038,10 +2847,7 @@
 				TargetAttributes = {
 					A4301C1C1E5FDEB000E8E222 = {
 						CreatedOnToolsVersion = 8.2.1;
-<<<<<<< .merge_file_CI4Bu4
 						DevelopmentTeam = JYGJJ26C2T;
-=======
->>>>>>> .merge_file_hipl9F
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -3101,10 +2907,7 @@
 				F916E57C1E8DEFB90051F945 /* citydict.plist in Resources */,
 				A4E439231ED28305007532B0 /* FreeShowroomDetails.storyboard in Resources */,
 				F9B660B51F04EA5400692DE2 /* FastForwardView.xib in Resources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F03A1FECE5B90050A040 /* TopicHeaderView.xib in Resources */,
->>>>>>> .merge_file_hipl9F
+				EF751DE41FEDFC2300C0FD3F /* TopicHeaderView.xib in Resources */,
 				8E650AD91FE7B5B300A453BB /* HXWeiboPhotoPicker.bundle in Resources */,
 				F9599BC31EB20CE300440E66 /* LotteryDetails.storyboard in Resources */,
 				F9FE90581F9F024800D31F3C /* SGQRCode.bundle in Resources */,
@@ -3195,33 +2998,21 @@
 				F9986A531EA61C2B002C502B /* ShowroomNaviViewController.swift in Sources */,
 				F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */,
 				F9986A141EA61C2B002C502B /* AttentionRoomViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FBC511FF1FEC973A0061245E /* DeleteGroupMemberViewController.swift in Sources */,
 				38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */,
 				FB1BE5F01FEB494A003BDC1C /* PublishGroupNoticeViewController.swift in Sources */,
-=======
-				38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */,
-				F94351BB1EDFBE0600FB4831 /* GroupsMemberListViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F96FEEBA1F14A9C70003C58F /* WBImageBrowserView.m in Sources */,
 				A4B205011EC01291007DA418 /* JFPhotoView.m in Sources */,
 				F956CE821EDEBE6800B751D4 /* FirstScrambleForTicketView.swift in Sources */,
 				F9986A331EA61C2B002C502B /* CouponModel.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				F94351C11EDFDEAF00FB4831 /* RecommendTableViewCell.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A0B1EA61C2B002C502B /* IssueTopicViewController.swift in Sources */,
 				8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */,
 				F91E42CF1EA70C7100CDCE19 /* MemberModel.swift in Sources */,
 				F9B660B41F04EA5400692DE2 /* FastForwardView.m in Sources */,
+				EF751DE21FEDFB7C00C0FD3F /* MineTopicsModel.swift in Sources */,
 				F9599BB61EB1F67500440E66 /* TicketTimeModel.swift in Sources */,
 				F984BDD31E97871900FD3E0B /* pinyin.m in Sources */,
 				F9986A571EA61C2B002C502B /* CompanyCertificationModel.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				F94351BD1EDFBFB300FB4831 /* GroupsMemberListCollectionReusableView.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				A43C2A3E1E8101D90037BB5A /* UIColor+Extension.swift in Sources */,
 				A4B205041EC01291007DA418 /* CXBaseModel.m in Sources */,
 				F9986A0E1EA61C2B002C502B /* TopicsReplyFrameModel.swift in Sources */,
@@ -3230,10 +3021,7 @@
 				F9ADA3881EE54E3300289E5E /* PhotosCommentsDetailViewController.swift in Sources */,
 				F956CE801EDEAF0100B751D4 /* ShowNewsListViewController.swift in Sources */,
 				F9986A0F1EA61C2B002C502B /* ThirdAccountViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A3E1EA61C2B002C502B /* ThreePictureTableViewCell.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				A49DA1F51EA9A356000E4AFA /* ShowroomGroupCell.swift in Sources */,
 				A4B204F91EC01291007DA418 /* CMInputView.m in Sources */,
 				F9A47A401F5CE45700C313F2 /* SYBannerCell.swift in Sources */,
@@ -3264,15 +3052,8 @@
 				F984BDD01E9786FA00FD3E0B /* ChineseString.m in Sources */,
 				F94403AA1F0E047700A8048B /* BannerModel.swift in Sources */,
 				F9FE905A1F9F024800D31F3C /* SGQRCodeGenerateManager.m in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */,
 				A4B205111EC01348007DA418 /* MyCommunityViewController.swift in Sources */,
-=======
-				8EC8F0361FECD1F40050A040 /* MineTopicsModel.swift in Sources */,
-				F9986A201EA61C2B002C502B /* AddressBookHandle.swift in Sources */,
-				A4B205111EC01348007DA418 /* MyCommunityViewController.swift in Sources */,
-				8EC8F01D1FEB5B1A0050A040 /* TravelTableViewCell.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A351EA61C2B002C502B /* CouponCell.swift in Sources */,
 				A43C2A3C1E8101D90037BB5A /* Int+Extension.swift in Sources */,
 				F9986A1F1EA61C2B002C502B /* ChatViewController.swift in Sources */,
@@ -3280,21 +3061,10 @@
 				F9986A061EA61C2B002C502B /* LogInViewController.swift in Sources */,
 				A4F790E41E8147D500B3EA57 /* AppDelegate+Extension.swift in Sources */,
 				A43C2A4B1E8101D90037BB5A /* ConfigureHeader.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */,
+				EF751DF61FEDFE2E00C0FD3F /* TalkNewsDetailsReplyViewController.swift in Sources */,
 				A43C2A1B1E8101D90037BB5A /* AppDelegate.swift in Sources */,
 				A4B2050A1EC01291007DA418 /* ShowCommentView.m in Sources */,
-=======
-				8EC8F02B1FEB669D0050A040 /* TalkShowRoomCommentCell.swift in Sources */,
-				8EC8F01A1FEB5B1A0050A040 /* ThreePictureTableViewCell.swift in Sources */,
-				8EC8F0251FEB5BDE0050A040 /* TalkTravelTableViewCell.swift in Sources */,
-				8EC8F0331FEBAA240050A040 /* TalkNewsDetailsReplyViewController.swift in Sources */,
-				8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */,
-				8EC8F0241FEB5BDE0050A040 /* TalkOnePictureTableViewCell.swift in Sources */,
-				A43C2A1B1E8101D90037BB5A /* AppDelegate.swift in Sources */,
-				A4B2050A1EC01291007DA418 /* ShowCommentView.m in Sources */,
-				8EC8F01B1FEB5B1A0050A040 /* VideoInfoTableViewCell.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				8E650ADE1FE7B5B300A453BB /* HXAlbumListView.m in Sources */,
 				F9BCAE231ECD31AF0070FE21 /* SearchHomeNewsViewController.swift in Sources */,
 				F9986A051EA61C2B002C502B /* UserModel.swift in Sources */,
@@ -3304,15 +3074,9 @@
 				A43C2A3D1E8101D90037BB5A /* String+Extension.swift in Sources */,
 				8E650AD11FE7B5B300A453BB /* HXPhotoPreviewViewController.m in Sources */,
 				F92ABBF61EA8F0C4006A41A5 /* MediaModel.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9A47A421F5CE49E00C313F2 /* SYBannerView.swift in Sources */,
 				A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */,
 				FB1BE5F51FEB494A003BDC1C /* GroupsMemberListCollectionReusableView.swift in Sources */,
-=======
-				8EC8F02A1FEB669D0050A040 /* TalkRoomCommentFrameModel.swift in Sources */,
-				F9A47A421F5CE49E00C313F2 /* SYBannerView.swift in Sources */,
-				A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				8E650ADC1FE7B5B300A453BB /* HXPhotoSubViewCell.m in Sources */,
 				F9986A2B1EA61C2B002C502B /* OrdersModel.swift in Sources */,
 				A4B204FC1EC01291007DA418 /* JFImageGroupTableViewController.m in Sources */,
@@ -3321,19 +3085,14 @@
 				F9986A081EA61C2B002C502B /* MeViewController.swift in Sources */,
 				9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */,
 				A42EDE121EDEB21D00C0B500 /* FYLCityModel.m in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A3F1EA61C2B002C502B /* TravelTableViewCell.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				F9E086671EA9BA630023EA43 /* RoomInfoModel.swift in Sources */,
 				F9986A661EA61C2B002C502B /* ProjectCertificationCollectionViewCell.swift in Sources */,
 				F9986A111EA61C2B002C502B /* ServiceCenterViewController.swift in Sources */,
+				EF751DF01FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift in Sources */,
 				F9986A4F1EA61C2B002C502B /* LotteryViewController.swift in Sources */,
 				A43C2A421E8101D90037BB5A /* LocationManager.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A401EA61C2B002C502B /* VideoInfoTableViewCell.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				A424DD421E821D65002F6720 /* LBTextField.swift in Sources */,
 				8E650ADD1FE7B5B300A453BB /* HXAlbumModel.m in Sources */,
 				A419E7401EC1B16600C277D8 /* GeneralViewController.swift in Sources */,
@@ -3343,22 +3102,20 @@
 				F9986A091EA61C2B002C502B /* AboutViewController.swift in Sources */,
 				F9986A501EA61C2B002C502B /* QuestionsViewController.swift in Sources */,
 				8E650AD01FE7B5B300A453BB /* UIView+HXExtension.m in Sources */,
+				EF751DF21FEDFDDE00C0FD3F /* TalkVideoInfoTableViewCell.swift in Sources */,
 				F99869F01EA61C2B002C502B /* GuideViewController.swift in Sources */,
 				F9CE6F8D1EC5640900B9B06D /* RecordsDeatilViewController.swift in Sources */,
+				EF751DE61FEDFC3600C0FD3F /* TopicHeaderView.swift in Sources */,
 				F9986A451EA61C2B002C502B /* NewsViewController.swift in Sources */,
 				F95B7E931EC94BB600A3ACBA /* VideoInfoModel.swift in Sources */,
 				F9986A031EA61C2B002C502B /* RegisterViewController.swift in Sources */,
 				F9986A511EA61C2B002C502B /* VoteViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
+				EF751DEF1FEDFDDE00C0FD3F /* TalkOnePictureTableViewCell.swift in Sources */,
 				FBC512011FECCB750061245E /* ManagerGroupViewController.swift in Sources */,
 				F9986A231EA61C2B002C502B /* AddFriendsTableViewCell.swift in Sources */,
 				F9986A311EA61C2B002C502B /* TopicsViewController.swift in Sources */,
+				EF751DF51FEDFE2E00C0FD3F /* TalkNewsDetailsViewController.swift in Sources */,
 				FB1BE5F11FEB494A003BDC1C /* RecommendFriendsViewController.swift in Sources */,
-=======
-				8EC8F0231FEB5BDE0050A040 /* TalkVideoInfoTableViewCell.swift in Sources */,
-				F9986A231EA61C2B002C502B /* AddFriendsTableViewCell.swift in Sources */,
-				F9986A311EA61C2B002C502B /* TopicsViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A5E1EA61C2B002C502B /* ProjectCertificationViewController.swift in Sources */,
 				F9986A321EA61C2B002C502B /* TopicsCell.swift in Sources */,
 				A4B204FB1EC01291007DA418 /* JFImageCollectionViewController.m in Sources */,
@@ -3368,34 +3125,23 @@
 				F98935281EC06614002590AE /* AttentionRoomModel.swift in Sources */,
 				F9599BBA1EB1FD3C00440E66 /* TicketVernveModel.swift in Sources */,
 				F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
 				FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */,
-=======
-				8EBE8B2F1FE76F97001A05D7 /* GroupMemberListHeadCollectionReusableView.swift in Sources */,
-				F9986A1B1EA61C2B002C502B /* GroupsModel.swift in Sources */,
-				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A671EA61C2B002C502B /* RoomVideoTableViewCell.swift in Sources */,
 				8E650ACD1FE7B5B300A453BB /* HXCollectionView.m in Sources */,
 				8E650AD81FE7B5B300A453BB /* UIImage+HXExtension.m in Sources */,
 				8E650AD51FE7B5B300A453BB /* HXFullScreenCameraViewController.m in Sources */,
+				EF751DF11FEDFDDE00C0FD3F /* TalkTravelTableViewCell.swift in Sources */,
 				F9986A271EA61C2B002C502B /* NotificationModel.swift in Sources */,
 				F99869FF1EA61C2B002C502B /* TheaterGroupTableViewCell.swift in Sources */,
 				F9986A4C1EA61C2B002C502B /* TicketCategoryTableViewCell.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5F21FEB494A003BDC1C /* VerifyApplicationViewController.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				F93D06FF1EC402D0002EFE30 /* AttributionModel.swift in Sources */,
 				F9986A4A1EA61C2B002C502B /* ScrambleForTicketCell.swift in Sources */,
 				F9993E0D1F7906E30077A4DD /* SearchTitleView.swift in Sources */,
 				F91AD0E61EBB302400F70C82 /* TicketNumberModel.swift in Sources */,
 				F9986A461EA61C2B002C502B /* NewsDetailsViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				F956CE7E1EDEA7E600B751D4 /* WYPTableView.swift in Sources */,
 				F99869F31EA61C2B002C502B /* HotShowRoomCell.swift in Sources */,
 				F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */,
@@ -3403,19 +3149,11 @@
 				F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */,
 				F972F3DF1ECC6F370078B423 /* ApplyGroupModel.swift in Sources */,
 				F9986A2F1EA61C2B002C502B /* TopicsModel.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				F9986A1E1EA61C2B002C502B /* GroupsTableViewCell.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9B1878B1F61184C00394D44 /* ClassifyTableViewCell.swift in Sources */,
 				F94756D51F6E7518008EA8F3 /* HeadModel.swift in Sources */,
 				8E650ACF1FE7B5B300A453BB /* HXVideoPreviewViewController.m in Sources */,
 				F9986A441EA61C2B002C502B /* NewsVideosViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5F81FEB494A003BDC1C /* RecommendTableViewCell.swift in Sources */,
-=======
-				EFB3AE031FE2131100E8FC5A /* GroupDeailsViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9FA08ED1EB9863500E71E4D /* AttentionPeopleModel.swift in Sources */,
 				F91E42D11EA70DC200CDCE19 /* ContentModel.swift in Sources */,
 				A4B2050D1EC01291007DA418 /* StatementCell.m in Sources */,
@@ -3423,10 +3161,6 @@
 				A476BD491E934670009733A5 /* UITextView+Select.m in Sources */,
 				F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */,
 				F9599BC41EB20CE300440E66 /* LotteryDetailsViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				8EC8F0261FEB5BDE0050A040 /* TalkThreePictureTableViewCell.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A121EA61C2B002C502B /* AttentionViewController.swift in Sources */,
 				8E650ADF1FE7B5B300A453BB /* UIButton+HXExtension.m in Sources */,
 				F96139BC1EAD8D970029E22A /* HomeModel.swift in Sources */,
@@ -3437,10 +3171,6 @@
 				F9FE905B1F9F024800D31F3C /* SGQRCodeHelperTool.m in Sources */,
 				F91AD0E81EBB303500F70C82 /* TicketModel.swift in Sources */,
 				F984BDD51E97875200FD3E0B /* SYAlertController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
-=======
-				F94351BF1EDFDDE700FB4831 /* RecommendFriendsViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				A4A134F51EA4AF7500FC4D67 /* CCPScrollView.m in Sources */,
 				A419E7421EC1CF2C00C277D8 /* PrivacyViewController.swift in Sources */,
 				F95EA8561F78EC1D008AE547 /* navTitleView.swift in Sources */,
@@ -3452,7 +3182,6 @@
 				F9986A251EA61C2B002C502B /* ContactsViewController.swift in Sources */,
 				8E650AD31FE7B5B300A453BB /* HXPhotoViewController.m in Sources */,
 				F99869F91EA61C2B002C502B /* CityButton.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5F71FEB494A003BDC1C /* PublishGroupNoteTableViewCell.swift in Sources */,
 				F924684E1EE790530078FB14 /* SearchHomeTicketsViewController.swift in Sources */,
 				F9986A591EA61C2B002C502B /* PhotosViewController.swift in Sources */,
@@ -3464,25 +3193,12 @@
 				F9986A101EA61C2B002C502B /* UserSettingsViewController.swift in Sources */,
 				9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */,
 				FB1BE5F91FEB494A003BDC1C /* LSXPopMenu.m in Sources */,
-=======
-				F924684E1EE790530078FB14 /* SearchHomeTicketsViewController.swift in Sources */,
-				F9986A591EA61C2B002C502B /* PhotosViewController.swift in Sources */,
-				A4B204FF1EC01291007DA418 /* JFImagePickerViewCell.m in Sources */,
-				8EC8F0381FECE59E0050A040 /* TopicHeaderView.swift in Sources */,
-				8E650AC91FE7B5B300A453BB /* HXPresentTransition.m in Sources */,
-				F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */,
-				8EBE8B311FE76FC6001A05D7 /* GroupNoteViewController.swift in Sources */,
-				A49DA1F71EA9A3AB000E4AFA /* ShowroomMemberCell.swift in Sources */,
-				F9986A101EA61C2B002C502B /* UserSettingsViewController.swift in Sources */,
-				9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9F5BE201ECED1A000F6C9C3 /* MapViewController.swift in Sources */,
 				F99869F81EA61C2B002C502B /* ButtonGroupView.swift in Sources */,
 				F9D92ADD1EE6506300AA1CC6 /* RoomNewsDetailViewController.swift in Sources */,
 				F92ABBF41EA8EDBC006A41A5 /* CommentModel.swift in Sources */,
 				A42EDE131EDEB21D00C0B500 /* FYLCityPickView.m in Sources */,
 				A4B205001EC01291007DA418 /* JFPhotoBrowserViewController.m in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9E9B8A31ED8520A00D5BAFB /* ComplaintViewController.swift in Sources */,
 				8E650ACE1FE7B5B300A453BB /* HXPhotoModel.m in Sources */,
 				8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */,
@@ -3494,18 +3210,6 @@
 				F9549A461F2F31EB00C3B5E4 /* CitySearchViewController.swift in Sources */,
 				F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */,
 				FB1BE5F61FEB494A003BDC1C /* GroupsTableViewCell.swift in Sources */,
-=======
-				F9986A1C1EA61C2B002C502B /* GroupsViewController.swift in Sources */,
-				F9E9B8A31ED8520A00D5BAFB /* ComplaintViewController.swift in Sources */,
-				8E650ACE1FE7B5B300A453BB /* HXPhotoModel.m in Sources */,
-				8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */,
-				F9986A1D1EA61C2B002C502B /* VerifyApplicationViewController.swift in Sources */,
-				A4118D801F061F29009B57FB /* LYExtension.swift in Sources */,
-				8E28E6E21FE7AC3800B43A6E /* View(Extension).swift in Sources */,
-				8E650ADA1FE7B5B300A453BB /* HXPhotoView.m in Sources */,
-				F9549A461F2F31EB00C3B5E4 /* CitySearchViewController.swift in Sources */,
-				F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A481EA61C2B002C502B /* ScrambleForTicketNaviViewController.swift in Sources */,
 				F972F3E11ECC75700078B423 /* MemberCollectionReusableView.swift in Sources */,
 				F9986A491EA61C2B002C502B /* ScrambleForTicketViewController.swift in Sources */,
@@ -3514,35 +3218,23 @@
 				F99869FB1EA61C2B002C502B /* SearchResultViewController.swift in Sources */,
 				A4B205061EC01291007DA418 /* StatementFrameModel.m in Sources */,
 				F9986A3C1EA61C2B002C502B /* InfoModel.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5EC1FEB494A003BDC1C /* GroupDeailsViewController.swift in Sources */,
 				FB1BE5EF1FEB494A003BDC1C /* GroupsViewController.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				F9986A0C1EA61C2B002C502B /* TopicReplyTableViewCell.swift in Sources */,
+				EF751DFA1FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift in Sources */,
 				F9986A581EA61C2B002C502B /* MemberViewController.swift in Sources */,
 				A4B205091EC01291007DA418 /* AlbumViewController.m in Sources */,
 				A41E87791E9C69B00078DB4D /* NetRequest.swift in Sources */,
 				A42EDE151EDEB21D00C0B500 /* YYClassInfo.m in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5FB1FEB6979003BDC1C /* ChatRecordTableViewCell.swift in Sources */,
-=======
->>>>>>> .merge_file_hipl9F
 				F99869FE1EA61C2B002C502B /* TheaterGroupViewController.swift in Sources */,
 				F9986A391EA61C2B002C502B /* InviteFriendsModel.swift in Sources */,
 				F9CE6F931EC5879900B9B06D /* RecordsDetailTableViewCell.swift in Sources */,
 				F9986A6D1EA61DFF002C502B /* SYNavTabBar.swift in Sources */,
 				F99869F61EA61C2B002C502B /* GroupMemberCollectionViewCell.swift in Sources */,
 				F9986A151EA61C2B002C502B /* AttentionRoomTableViewCell.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */,
 				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
-=======
-				9E22D4321FACD50100846374 /* LSXPopMenu.m in Sources */,
-				9EF3DB4A1FB0B371007952D3 /* QRCodeViewController.swift in Sources */,
-				F9FE90591F9F024800D31F3C /* SGQRCodeAlbumManager.m in Sources */,
-				8EC8F0301FEB9D980050A040 /* TalkButton.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9986A2C1EA61C2B002C502B /* MyOrdersViewController.swift in Sources */,
 				F9CE6F8F1EC56B1200B9B06D /* RecordsDetailModel.swift in Sources */,
 				F9B660B81F04EA5400692DE2 /* WMPlayer.m in Sources */,
@@ -3577,6 +3269,7 @@
 				A49DA1F31EA9A327000E4AFA /* ShowroomMediaCell.swift in Sources */,
 				F9FA08F01EB9A58300E71E4D /* AttentionPeopleTableViewCell.swift in Sources */,
 				A4B205031EC01291007DA418 /* AFNetwork.m in Sources */,
+				EF751DF91FEE004100C0FD3F /* TalkShowRoomCommentCell.swift in Sources */,
 				A476BD481E934670009733A5 /* UITextView+PlaceHolder.m in Sources */,
 				F9438E871EB8677C006AA065 /* TicketBaseNaviViewController.swift in Sources */,
 				F96FEEB91F14A9C70003C58F /* WBImageBrowserCell.m in Sources */,
@@ -3594,7 +3287,6 @@
 				F9986A551EA61C2B002C502B /* ShowroomCell.swift in Sources */,
 				A4B204FD1EC01291007DA418 /* JFImageManager.m in Sources */,
 				F9FA08F41EB9C9A200E71E4D /* SearchFriendsResultViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A3D1EA61C2B002C502B /* OnePictureTableViewCell.swift in Sources */,
 				F99869FA1EA61C2B002C502B /* SearchResultNaviViewController.swift in Sources */,
 				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
@@ -3603,13 +3295,6 @@
 				F9DA8C781F00B53D00AE66BC /* KTabbarAnimation.swift in Sources */,
 				F933534D1ED59C3200E67DD2 /* SearchView.swift in Sources */,
 				FB1BE5ED1FEB494A003BDC1C /* GroupNoteViewController.swift in Sources */,
-=======
-				F99869FA1EA61C2B002C502B /* SearchResultNaviViewController.swift in Sources */,
-				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
-				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
-				F9DA8C781F00B53D00AE66BC /* KTabbarAnimation.swift in Sources */,
-				F933534D1ED59C3200E67DD2 /* SearchView.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F9761C1E1F03AC28009CAE49 /* UMSocialSwiftInterface.swift in Sources */,
 				F9986A5A1EA61C2B002C502B /* VideosViewController.swift in Sources */,
 				8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */,
@@ -3624,23 +3309,18 @@
 				F99869F51EA61C2B002C502B /* GroupMemberListViewController.swift in Sources */,
 				F9986A171EA61C2B002C502B /* AttentionNewsViewController.swift in Sources */,
 				F9986A4E1EA61C2B002C502B /* TicketsShowViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				FB1BE5F31FEB494A003BDC1C /* GroupMemberListHeadCollectionReusableView.swift in Sources */,
 				F9986A2D1EA61C2B002C502B /* MyOrdersTableViewCell.swift in Sources */,
 				F9986A161EA61C2B002C502B /* AttentionTicketViewController.swift in Sources */,
 				FB1BE5EE1FEB494A003BDC1C /* GroupsMemberListViewController.swift in Sources */,
-=======
-				F9986A2D1EA61C2B002C502B /* MyOrdersTableViewCell.swift in Sources */,
-				F9986A161EA61C2B002C502B /* AttentionTicketViewController.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F94096661ED6FAA300DD4523 /* CommentReplyViewController.swift in Sources */,
+				EF751DFC1FEE01CC00C0FD3F /* TalkButton.swift in Sources */,
 				F992EAA41ED2E231004E0CF8 /* SeatMapViewController.swift in Sources */,
 				F933534B1ED570A400E67DD2 /* AdvViewController.swift in Sources */,
 				F9986A011EA61C2B002C502B /* ForgetPwdStep2ViewController.swift in Sources */,
 				F9986A2E1EA61C2B002C502B /* TopicsFrameModel.swift in Sources */,
 				F94DB8371EB322A100B014AD /* VideoDetailModel.swift in Sources */,
 				F9986A3B1EA61C2B002C502B /* InviteFriendsViewController.swift in Sources */,
-<<<<<<< .merge_file_CI4Bu4
 				F9986A371EA61C2B002C502B /* GoodsAddressController.swift in Sources */,
 				FB1BE5E91FEB494A003BDC1C /* GroupNoteModel.swift in Sources */,
 				F91E42CD1EA70B2100CDCE19 /* TheaterGroupModel.swift in Sources */,
@@ -3648,16 +3328,6 @@
 				A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */,
 				A42EDDF91EDEA0C000C0B500 /* UITableViewCell+Extension.swift in Sources */,
 				FBC512051FECDD9E0061245E /* ManagerGroupInfoModel.swift in Sources */,
-=======
-				8EC8F01C1FEB5B1A0050A040 /* OnePictureTableViewCell.swift in Sources */,
-				F9986A371EA61C2B002C502B /* GoodsAddressController.swift in Sources */,
-				8EC8F02E1FEB6A2D0050A040 /* TalkNewsDetailsViewController.swift in Sources */,
-				F91E42CD1EA70B2100CDCE19 /* TheaterGroupModel.swift in Sources */,
-				8EBE8B331FE77081001A05D7 /* GroupNoteTableViewCell.swift in Sources */,
-				A43C2A461E8101D90037BB5A /* BaseNavigationController.swift in Sources */,
-				A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */,
-				A42EDDF91EDEA0C000C0B500 /* UITableViewCell+Extension.swift in Sources */,
->>>>>>> .merge_file_hipl9F
 				F94096621ED6DF4C00DD4523 /* RoomCommentFrameModel.swift in Sources */,
 				F992EAA21ED2E03E004E0CF8 /* BindingViewController.swift in Sources */,
 				F9FE90461F9ECB3700D31F3C /* MyQRViewController.swift in Sources */,
@@ -3824,11 +3494,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< .merge_file_CI4Bu4
 				DEVELOPMENT_TEAM = JYGJJ26C2T;
-=======
-				DEVELOPMENT_TEAM = "";
->>>>>>> .merge_file_hipl9F
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
@@ -3858,11 +3524,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: One thousand and one night Culture Development Co., Ltd. (JYGJJ26C2T)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< .merge_file_CI4Bu4
 				DEVELOPMENT_TEAM = JYGJJ26C2T;
-=======
-				DEVELOPMENT_TEAM = "";
->>>>>>> .merge_file_hipl9F
 				ENABLE_BITCODE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = WYP/Info.plist;
