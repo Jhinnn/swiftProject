@@ -233,7 +233,11 @@ class MeViewController: UITableViewController {
     // MARK: - tableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 3 && indexPath.row == 0 {
+        if indexPath.section == 0 && indexPath.row == 0{
+             self.navigationController?.pushViewController(QRCodeViewController(), animated: true)
+        }
+        else if indexPath.section == 3 && indexPath.row == 0 {
+            
             // 客服中心
             navigationController?.pushViewController(ServiceCenterViewController(), animated: true)
         } else if indexPath.section == 3 && indexPath.row == 2 {
