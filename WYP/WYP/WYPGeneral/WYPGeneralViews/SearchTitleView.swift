@@ -62,6 +62,7 @@ class SearchTitleView: UIView {
         let searchTextField = UITextField()
         searchTextField.backgroundColor = UIColor.white
         searchTextField.placeholder = "可输入关键字进行信息搜索"
+        searchTextField.font = UIFont.systemFont(ofSize: 14)
         searchTextField.tintColor = UIColor.lightGray
         searchTextField.returnKeyType = .search
         let attributeString = NSMutableAttributedString(string: searchTextField.placeholder!)

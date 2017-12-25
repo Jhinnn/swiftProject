@@ -62,7 +62,7 @@ class BaseNavigationController: UINavigationController {
     // 返回按钮
     lazy var backButton: UIButton = {
         let backButton = UIButton(type: .custom)
-        backButton.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        backButton.frame = CGRect(x: 0, y: 0, width: 36, height: 20)
         backButton.setImage(UIImage(named: "common_navback_button_normal_iPhone"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         

@@ -97,18 +97,25 @@ class TallkViewController: BaseViewController {
             make.left.equalTo(commentView)
             make.right.equalTo(commentView)
             make.centerY.equalTo(commentView)
-           
         }
         
-        commentView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(newAllTableView.snp.bottom).offset(-58)
-            make.right.equalTo(newAllTableView.snp.right).offset(-10)
-            make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
-           
+        if deviceTypeIPhoneX() {
+            commentView.snp.makeConstraints { (make) in
+                make.bottom.equalTo(newAllTableView.snp.bottom).offset(-70)
+                make.right.equalTo(newAllTableView.snp.right).offset(-10)
+                make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
+            }
+        }else {
+            commentView.snp.makeConstraints { (make) in
+                make.bottom.equalTo(newAllTableView.snp.bottom).offset(-58)
+                make.right.equalTo(newAllTableView.snp.right).offset(-10)
+                make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
+            }
         }
         
         
-      
+        
+
     }
     private func layoutPageSubviews() {
         switch flag {

@@ -18,22 +18,37 @@ class TopicHeaderView: UIView {
     @IBOutlet weak var attentionLabel: UILabel!
     @IBOutlet weak var fansLabel: UILabel!
     
-
+    @IBOutlet weak var addressImage: UIImageView!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-       
 
         load_init()
         
-        self.imageVie?.layer.masksToBounds = true
-        self.imageVie?.layer.cornerRadius = imageVie.width / 2
+        
     }
+    
+    override func awakeFromNib() {
+        
+        addressImage.isHidden = true
+        
+        self.imageVie?.layer.masksToBounds = true
+        self.imageVie?.layer.cornerRadius = self.imageVie.width / 2
+    }
+    
     
     func load_init(){
         
+        
         NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: AppInfo.shared.user?.userId ?? "") { (success, info, dic) in
             if success {
+                
+                self.addressImage.isHidden = false
+                
+                if info == "暂无发布话题" {
+                    return
+                }
                 
                 let imageStr = dic?["avatar"] as! String
                 let imageUrl = URL(string: imageStr)
@@ -42,6 +57,7 @@ class TopicHeaderView: UIView {
                 self.titleLabel.text = dic?["nickname"] as? String
                 self.addressLabel.text = dic?["address"] as? String
                 self.textLabel.text = dic?["signature"] as? String
+                
                 self.attentionLabel.text = String.init(format: "%@关注", (dic?["follow_num"] as? String)!)
                 self.fansLabel.text = String.init(format: "%@粉丝", (dic?["fans_num"] as? String)!)
             }

@@ -39,7 +39,7 @@ class VerifyApplicationViewController: BaseViewController {
     }
     func layoutPageSubviews() {
         backView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(0)
+            make.top.equalTo(view).offset(64)
             make.left.equalTo(view)
             make.size.equalTo(CGSize(width: kScreen_width, height: 101))
         }
@@ -69,6 +69,10 @@ class VerifyApplicationViewController: BaseViewController {
         if flag == 2 {  //群组
             NetRequest.enterGroupNetRequest(type: "", openId: AppInfo.shared.user?.token ?? "", groupId: groupId ?? "", comment: verifyTextField.text ?? "", complete: { (success, info) in
                 if success {
+                    
+                    //发送通知刷新首页群组信息
+                    NotificationCenter.default.post(name: NSNotification.Name("RefreshQunzhuNotification"), object: self, userInfo: nil)
+                    
                     SVProgressHUD.showSuccess(withStatus: "申请信息已提交，等待群主审核中！")
                     let viewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 3]
                     self.navigationController?.popToViewController(viewController!, animated: true)
@@ -84,6 +88,9 @@ class VerifyApplicationViewController: BaseViewController {
                     groupList.isAdd = true
                     let viewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 4]
                     self.navigationController?.popToViewController(viewController!, animated: true)
+                    
+                    
+                    
                 } else {
                     SVProgressHUD.showError(withStatus: info!)
                 }
@@ -119,4 +126,12 @@ class VerifyApplicationViewController: BaseViewController {
         redLine.backgroundColor = UIColor.themeColor
         return redLine
     }()
+    
+    deinit{
+        
+        //注意由于通知是单例的，所以用了之后需要析构，
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RefreshQunzhuNotification"), object: nil)
+    }
 }
+
+

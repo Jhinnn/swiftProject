@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 10.0, *) {
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (granted, error) in
-                print("request authorization success")
+                
             })
         } else if #available(iOS 8.0, *){
             let setting = UIUserNotificationSettings.init(types: [.badge, .sound, .alert], categories: nil)
@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = UIColor.themeColor
         
-        print("屏目尺寸\(String(describing: self.window?.bounds))")
+        
 
         // MARK: - 设置导航条样式
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -86,10 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         
         // MARK: - 开始获取定位信息
-        LocationManager.shared.starUpdatingLocation()
+//        LocationManager.shared.starUpdatingLocation()
         
         // MARK: - 添加开屏广告
-        self.setupXHLaunchAd()
+//        self.setupXHLaunchAd()
         
         // 注册推送
         registerNotification(application: application)
@@ -123,7 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             JPUSHService.register(forRemoteNotificationTypes: type, categories: nil)
         }
         
-//        JPUSHService.setDebugMode()
         JPUSHService.setup(withOption: launchOptions,
                            appKey: JPushAppKey,
                            channel: "App Store",
@@ -154,16 +153,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 登录
         RCIM.shared().currentUserInfo = RCUserInfo(userId: AppInfo.shared.user?.userId ?? "1", name: AppInfo.shared.user?.nickName ?? "1", portrait: AppInfo.shared.user?.headImgUrl ?? "1")
         RCIM.shared().connect(withToken: AppInfo.shared.user?.rcToken ?? "", success: { (userId) in
-            print("RCIM.userId:\(userId!)")
+            
         }, error: { (status) in
-            print("------------")
+            
             print(status.rawValue)
-            print("------------")
+            
         }) { 
             //token过期或者不正确。
             //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
             //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-            print("token错误")
+            
         }
         
         /**
@@ -174,20 +173,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let pushServiceData = RCIMClient.shared().getPushExtra(fromLaunchOptions: launchOptions)
         if pushServiceData != nil {
-            print("该启动事件包含来自融云的推送服务")
+            
             for (key, _) in pushServiceData! {
                 print(pushServiceData?[key] ?? "")
             }
         } else {
-            print("该启动事件不包含来自融云的推送服务")
-        }
-        
-        for familyName in UIFont.familyNames {
             
-            print("Font FamilyName = \(familyName)")
-            for fontName in UIFont.fontNames(forFamilyName: familyName) {
-                print("fontName:\(fontName)")
-            }
         }
         
         // MARK: - 版本号
@@ -220,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         JPUSHService.registerDeviceToken(deviceToken)
         
         let token = deviceToken.description.replacingOccurrences(of: "<", with: "").replacingOccurrences(of: ">", with: "").replacingOccurrences(of: " ", with: "")
-        print(token)
+        
         RCIMClient.shared().setDeviceToken(token)
     }
     
@@ -243,12 +234,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RCIMClient.shared().recordRemoteNotificationEvent(userInfo)
         let pushServiceData = RCIMClient.shared().getPushExtra(fromRemoteNotification: userInfo)
         if pushServiceData != nil {
-            print("该启动事件包含来自融云的推送服务")
+            
             for (key, _) in pushServiceData! {
                 print(pushServiceData?[key] ?? "")
             }
         } else {
-            print("该启动事件不包含来自融云的推送服务")
+            
         }
     }
     
@@ -264,15 +255,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("获取DeviceToken失败")
-        print(error)
+        
+        
     }
 }
  
  @available(iOS 10.0, *)
  extension AppDelegate : JPUSHRegisterDelegate{
     func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
-        print(">JPUSHRegisterDelegate jpushNotificationCenter willPresent");
+        
         let userInfo = notification.request.content.userInfo
         if (notification.request.trigger?.isKind(of: UNPushNotificationTrigger.self))!{
             JPUSHService.handleRemoteNotification(userInfo)
@@ -281,7 +272,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
-        print(">JPUSHRegisterDelegate jpushNotificationCenter didReceive");
+        
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
         if userInfo["rc"] != nil {
@@ -338,7 +329,7 @@ extension AppDelegate: RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMRece
     }
     
     func onRCIMReceive(_ message: RCMessage!, left: Int32) {
-        print(message.targetId)
+        
     }
 
     func onRCIMCustomLocalNotification(_ message: RCMessage!, withSenderName senderName: String!) -> Bool {

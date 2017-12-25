@@ -189,11 +189,11 @@ class UserSettingsViewController: BaseViewController {
                 user?.userInfo = userInfoDic as NSDictionary?
                 AppInfo.shared.user = user
                 
-                print(AppInfo.shared.user!.signature!)
                 
-                self.infoArray = ["", AppInfo.shared.user!.nickName!, "\(AppInfo.shared.user!.sex!)", AppInfo.shared.user!.signature!]
                 
-                print(self.infoArray)
+                self.infoArray = ["", AppInfo.shared.user!.nickName!, "\(AppInfo.shared.user!.sex!)", AppInfo.shared.user!.signature!,""]
+                
+                
                 
                 self.textView.resignFirstResponder()
                 self.tableView.reloadData()
@@ -223,7 +223,7 @@ extension UserSettingsViewController: UITableViewDataSource, UITableViewDelegate
         // 设置标题
         cell.textLabel?.text = titleArray[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-        print(infoArray[indexPath.row])
+        
         // 设置用户资料
         cell.detailTextLabel?.text = infoArray[indexPath.row]
         cell.detailTextLabel?.textColor = UIColor.init(hexColor: "#333333")
@@ -315,7 +315,7 @@ extension UserSettingsViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
 
         textView.text = ""
-        print("结束编辑")
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -331,8 +331,10 @@ extension UserSettingsViewController: UITextViewDelegate {
         // 判断输入的字是否是回车
         if text == "\n" {
             // 响应return事件
-            if infoKey.characters.count == 0 || textView.text.characters.count == 0 {
-                SVProgressHUD.showError(withStatus: "请正确输入资料")
+       
+            
+            if infoKey == "nickname" && textView.text.characters.count == 0 {
+                SVProgressHUD.showError(withStatus: "昵称不能为空！")
                 return false
             }
             

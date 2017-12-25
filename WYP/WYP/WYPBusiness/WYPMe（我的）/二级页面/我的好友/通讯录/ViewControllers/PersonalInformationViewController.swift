@@ -10,9 +10,11 @@ import UIKit
 
 class PersonalInformationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
     var targetId: String?
     var conversationType: Int?
     var name: String?
+    
     // 记录偏移量
     var navOffset: CGFloat = 0
     

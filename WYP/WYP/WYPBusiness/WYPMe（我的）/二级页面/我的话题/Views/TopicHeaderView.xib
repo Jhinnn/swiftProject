@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,9 +36,8 @@
                         <constraint firstAttribute="height" constant="20" id="NR7-80-tSo"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="      " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8m-gV-n2Q">
-                    <rect key="frame" x="139" y="52" width="25" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="      " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8m-gV-n2Q">
+                    <rect key="frame" x="139" y="53" width="226" height="20"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                     <color key="textColor" red="0.64038705584670053" green="0.64038705584670053" blue="0.64038705584670053" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -75,20 +75,24 @@
                 <constraint firstItem="J2s-8r-WDT" firstAttribute="leading" secondItem="nEc-q4-LMD" secondAttribute="leading" id="34b-Go-V6E"/>
                 <constraint firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Mz-Bv-8mP"/>
                 <constraint firstItem="nEc-q4-LMD" firstAttribute="leading" secondItem="rsl-Bb-udH" secondAttribute="leading" id="MGr-C1-bZU"/>
+                <constraint firstItem="m8m-gV-n2Q" firstAttribute="centerY" secondItem="nEc-q4-LMD" secondAttribute="centerY" id="NKE-Iz-lW8"/>
                 <constraint firstAttribute="trailing" secondItem="gOL-xV-sAd" secondAttribute="trailing" id="NqV-t8-fWk"/>
                 <constraint firstItem="J2s-8r-WDT" firstAttribute="top" secondItem="nEc-q4-LMD" secondAttribute="bottom" constant="10" id="RuT-OL-1ar"/>
                 <constraint firstAttribute="bottom" secondItem="gOL-xV-sAd" secondAttribute="bottom" id="Yyg-ZW-yb1"/>
                 <constraint firstItem="a5R-ni-eP5" firstAttribute="centerY" secondItem="ty2-vU-74f" secondAttribute="centerY" id="Z4Q-VJ-b4H"/>
                 <constraint firstItem="FBq-Zd-RT6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="51" id="iRL-ZW-5A0"/>
+                <constraint firstItem="m8m-gV-n2Q" firstAttribute="leading" secondItem="nEc-q4-LMD" secondAttribute="trailing" constant="10" id="j6j-Ff-pAV"/>
                 <constraint firstItem="ty2-vU-74f" firstAttribute="leading" secondItem="J2s-8r-WDT" secondAttribute="leading" id="jWw-rO-jTp"/>
                 <constraint firstItem="gOL-xV-sAd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qYz-dR-ZdY"/>
                 <constraint firstItem="ty2-vU-74f" firstAttribute="top" secondItem="J2s-8r-WDT" secondAttribute="bottom" constant="20" id="rPy-7n-V8E"/>
+                <constraint firstAttribute="trailing" secondItem="m8m-gV-n2Q" secondAttribute="trailing" constant="10" id="tP2-57-q39"/>
                 <constraint firstItem="FBq-Zd-RT6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="urH-Ka-Cum"/>
                 <constraint firstItem="rsl-Bb-udH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="109" id="w7c-xD-mhr"/>
                 <constraint firstItem="rsl-Bb-udH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="21" id="zIh-dm-fSL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addressImage" destination="nEc-q4-LMD" id="Fnu-hC-h75"/>
                 <outlet property="addressLabel" destination="m8m-gV-n2Q" id="Pz1-wV-2rX"/>
                 <outlet property="attentionLabel" destination="ty2-vU-74f" id="tQc-Wv-IfJ"/>
                 <outlet property="fansLabel" destination="a5R-ni-eP5" id="nqP-xy-XrR"/>

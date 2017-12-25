@@ -51,11 +51,7 @@ class TalkNewsDetailsViewController: BaseViewController {
 
         title = "话题详情"
         
-        if deviceTypeIPhoneX() {
-            
-        }else {
-            
-        }
+     
         
         viewConfig()
         layoutPageSubviews()

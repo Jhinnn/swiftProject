@@ -55,7 +55,7 @@ class SYBannerView: UIView {
         }
     }
     /// 自动滚动间隔时间，默认2秒
-    public var autoScrollTimeInterval: Float = 2 {
+    public var autoScrollTimeInterval: Float = 5 {
         didSet {
             setAutoScroll(isAutoScroll)
         }

@@ -46,7 +46,7 @@ class SearchView: UIView {
     lazy var searchLabel: UILabel = {
         let searchLabel = UILabel()
         searchLabel.textColor = UIColor.init(hexColor: "cbcbcb")
-        searchLabel.font = UIFont.systemFont(ofSize: 13)
+        searchLabel.font = UIFont.systemFont(ofSize: 15)
         return searchLabel
     }()
     

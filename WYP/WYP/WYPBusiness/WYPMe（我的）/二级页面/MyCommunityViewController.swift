@@ -17,6 +17,7 @@ class MyCommunityViewController: BaseViewController {
     var userId: String!
     var nickName: String!
     var friendsCount: String!
+    var addFriendsPhoneNumber: String!
     
 
     var headImageUrl: String? {
@@ -79,6 +80,8 @@ class MyCommunityViewController: BaseViewController {
         
         loadNetData(requestType: .update)
         
+        loadPersonData()
+        
         setupUI()
     }
     
@@ -123,6 +126,8 @@ class MyCommunityViewController: BaseViewController {
     
     func setupUI() {
         view.addSubview(tableView)
+        
+        
         
         tableView.tableHeaderView = tableViewHeaderView
         tableViewHeaderView.addSubview(headerImgView)
@@ -257,7 +262,7 @@ class MyCommunityViewController: BaseViewController {
         let tableViewHeaderView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 180))
         tableViewHeaderView.backgroundColor = UIColor.yellow
         tableViewHeaderView.image = UIImage(named: "grzy_porfile_bg")
-        
+        tableViewHeaderView.isUserInteractionEnabled = true
         return tableViewHeaderView
     }()
     
@@ -306,13 +311,12 @@ class MyCommunityViewController: BaseViewController {
     // 关注
     lazy var followBtn: UIButton = {
         let followBtn = UIButton(type: .custom)
-        followBtn.addTarget(self, action: #selector(followBtnAction), for: .touchUpInside)
+        followBtn.addTarget(self, action: #selector(founcDynamic(sender:)), for: .touchUpInside)
         followBtn.setTitleColor(UIColor.white, for: .normal)
         followBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         followBtn.layer.cornerRadius = 3
         followBtn.layer.borderWidth = 1
         followBtn.layer.borderColor = UIColor.white.cgColor
-        
         return followBtn
     }()
     
@@ -365,10 +369,7 @@ class MyCommunityViewController: BaseViewController {
         return noDataButton
     }()
     
-    lazy var addFriendsPhoneNumber:String = {
-        let addFriendsPhoneNumber = String()
-        return addFriendsPhoneNumber
-    }()
+  
     
     func keyboardWillShow(note: NSNotification) {
         let userInfo = note.userInfo!
@@ -398,19 +399,38 @@ class MyCommunityViewController: BaseViewController {
         commentInputView.isHidden = true
     }
     
+    //加载个人信息
+    func loadPersonData() {
+        
+        NetRequest.getPersonCommunityNetRequest(uid: userId, mid: AppInfo.shared.user?.userId ?? "") { (success, info, dic) in
+            self.fansCountLabel.text = String.init(format: "粉丝:%@人", (dic?["fans_num"] as? String)!)
+            self.friendsCountLabel.text = String.init(format: "好友:%@人", (dic?["friend_num"] as? String)!)
+            
+            
+            self.addFriendsPhoneNumber = (dic?["mobile"] as? String)!
+            
+            if (dic?["is_follow"] as? String)! == "0" {
+                
+                self.followBtn.setTitle("关注", for: .normal)
+                self.followBtn.isSelected = false
+            }else {
+                self.followBtn.setTitle("已关注", for: .normal)
+                self.followBtn.isSelected = true
+            }
+            
+        }
+    }
+    
     // 添加取消关注
-    func followBtnAction(sender: UIButton) {
+    func founcDynamic(sender: UIButton) {
+        
         if sender.isSelected == false {
             NetRequest.addOrCancelAttentionNetRequest(method: "POST", mid: AppInfo.shared.user?.userId ?? "", follow_who: userId) { (success, info) in
                 
                 if success {
                     SVProgressHUD.showSuccess(withStatus: info)
                     self.isFollowed = true
-                    let subIndex1: String.Index = self.fansCount.index(self.fansCount.startIndex, offsetBy: 3)
-                    let subIndex2: String.Index = self.fansCount.index(self.fansCount.endIndex, offsetBy: -1)
-                    let fans = self.fansCount.substring(with: subIndex1..<subIndex2)
-                    self.fansCountLabel.text = String.init(format: "粉丝:%d人", Int(fans)! + 1)
-                    self.fansCount = self.fansCountLabel.text
+                    self .loadPersonData()
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)
@@ -422,11 +442,7 @@ class MyCommunityViewController: BaseViewController {
                 if success {
                     SVProgressHUD.showSuccess(withStatus: info)
                     self.isFollowed = false
-                    let subIndex1: String.Index = self.fansCount.index(self.fansCount.startIndex, offsetBy: 3)
-                    let subIndex2: String.Index = self.fansCount.index(self.fansCount.endIndex, offsetBy: -1)
-                    let fans = self.fansCount.substring(with: subIndex1..<subIndex2)
-                    self.fansCountLabel.text = String.init(format: "粉丝:%d人", Int(fans)! - 1 >= 0 ? Int(fans)! - 1 : 0)
-                    self.fansCount = self.fansCountLabel.text
+                    self.loadPersonData()
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)
@@ -532,7 +548,6 @@ class MyCommunityViewController: BaseViewController {
         
         let vc = VerifyApplicationViewController()
         vc.applyMobile = self.addFriendsPhoneNumber
-        print(vc.applyMobile)
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

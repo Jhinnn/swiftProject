@@ -31,16 +31,7 @@ class TopicsViewController: BaseViewController {
         // 加载网络数据
         loadNetData(requestType: .update)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Public Methods
-    
-    
-    // MARK: - Private Methods
+
     
     // 设置所有控件
     fileprivate func setupUI() {
@@ -62,17 +53,12 @@ class TopicsViewController: BaseViewController {
         }
     }
     
-    
     lazy var headView: UIView = {
-        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 160))
-        
         return view
     }()
   
-    
-  
-    
+
     // 设置tableView
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -132,11 +118,6 @@ class TopicsViewController: BaseViewController {
         return noDataButton
     }()
     
-//    func pushToIssueTopic(sender: UIButton) {
-//        let board = UIStoryboard.init(name: "Main", bundle: nil)
-//        let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
-//        navigationController?.pushViewController(issue, animated: true)
-//    }
     func releaseDynamic() {
         UserDefaults.standard.set(AppInfo.shared.user?.token ?? "", forKey: "token")
         var releaseVC = PublicGroupViewController()
@@ -154,7 +135,6 @@ class TopicsViewController: BaseViewController {
         } else {
             pageNumber = pageNumber + 1
         }
-        
     
         NetRequest.myNewTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: AppInfo.shared.user?.userId ?? "") { (success, info, dataArr) in
     
@@ -164,8 +144,6 @@ class TopicsViewController: BaseViewController {
                     let data = try! JSONSerialization.data(withJSONObject: dataArr!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
                     news = [MineTopicsModel].deserialize(from: jsonString)! as! [MineTopicsModel]
-                }else {
-                    return
                 }
                 if requestType == .update {
                     self.newsData = news
@@ -209,26 +187,7 @@ class TopicsViewController: BaseViewController {
             }
         }
     }
-    
-    // MARK: - IBActions
-    
-    
-    // MARK: - Getter
-    
-    
-    // MARK: - Setter
-    
-    
-    // MARK: - UITableViewDataSource
-    
-    
-    // MARK: - UITableViewDelegate
-    
-    
-    // MARK: - Other Delegate
-    
-    
-    // MARK: - NSCopying
+
 }
 
 extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -268,9 +227,6 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.mineTopicsModel = newsData[indexPath.row]
             return cell
         }
-        
-     
-        
         return UITableViewCell()
     }
     
@@ -290,45 +246,44 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//        let topicDetails = TopicsDetailsViewController()
-//        topicDetails.delegate = self
-//        topicDetails.topicId = dataList[indexPath.row].topics.topicId!
-//        topicDetails.contentData = dataList[indexPath.row].topics
-//        navigationController?.pushViewController(topicDetails, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        let newsDetail = TalkNewsDetailsViewController()
+        
+        newsDetail.newsId = newsData[indexPath.row].topicId
+        
+        navigationController?.pushViewController(newsDetail, animated: true)
     }
     // 修改删除按钮的文字
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "删除"
     }
     // 设置侧滑删除
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//        return .delete
-//    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
     // 删除cell
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-//        if editingStyle == .delete{
-//            let topicId = dataList[indexPath.row].topics.topicId ?? ""
-//
-//            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
-//                if success {
-//                    // 删除成功
-//                    SVProgressHUD.showSuccess(withStatus: info)
-//                    self.dataList.remove(at: indexPath.row)
-//                    tableView.reloadData()
-//                    // 删除成功
-//                    SVProgressHUD.showSuccess(withStatus: info)
-//
-//                } else {
-//                    // 删除失败
-//                    SVProgressHUD.showError(withStatus: info)
-//                }
-//            })
-//            //2.刷新单元格
-//            tableView.reloadData()
-//        }
+        if editingStyle == .delete{
+            let topicId = self.newsData[indexPath.row].topicId ?? ""
+
+            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
+                if success {
+                    // 删除成功
+                    SVProgressHUD.showSuccess(withStatus: info)
+                    self.newsData.remove(at: indexPath.row)
+                    tableView.reloadData()
+                    // 删除成功
+                    SVProgressHUD.showSuccess(withStatus: info)
+
+                } else {
+                    // 删除失败
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            })
+            //2.刷新单元格
+            tableView.reloadData()
+        }
     }
 }
 

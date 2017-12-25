@@ -95,24 +95,10 @@ class TopicsCell: UITableViewCell {
     }
     
     func clickHeadImageView(sender: UIButton) {
-        let community = MyCommunityViewController()
-        community.title = "个人主页"
-        community.userId = topicsFrame?.topics.peopleId ?? ""
-        community.headImageUrl = topicsFrame?.topics.headImgUrl ?? ""
-        community.nickName = topicsFrame?.topics.nickName ?? ""
-        community.fansCount = String.init(format: "粉丝:%@人", topicsFrame?.topics.peopleFans ?? "")
-        community.friendsCountLabel.text = String.init(format: "好友:%@人", topicsFrame?.topics.peopleFriends ?? "")
-        community.type = "2"
-        if topicsFrame?.topics.peopleId == AppInfo.shared.user?.userId {
-            community.userType = "200"
-        }
-        // 判断是否关注
-        if topicsFrame?.topics.isFollow == "0" {
-            community.isFollowed = false
-        } else if topicsFrame?.topics.isFollow == "1" {
-            community.isFollowed = true
-        }
-        self.viewController()?.navigationController?.pushViewController(community, animated: true)
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = topicsFrame?.topics.peopleId ?? ""
+        personalInformationVC.name = topicsFrame?.topics.nickName ?? ""
+        self.viewController()?.navigationController?.pushViewController(personalInformationVC, animated: true)
     }
     
     // 头像

@@ -70,6 +70,11 @@ public var kApi_getUserInfo: String {
     return kApi_baseUrl(path: "api/userInfo")
 }
 
+// 是否加群
+public var kApi_getIsJoinGroup: String {
+    return kApi_baseUrl(path: "api/qunid")
+}
+
 // 获取用户资料
 public var kApi_get_user_info: String {
     return kApi_baseUrl(path: "api/PersonalInfo")
@@ -628,3 +633,7 @@ public var kApi_publicTopic: String {
     return kApi_baseUrl(path: "api/pubGambit")
 }
 
+//个人社区
+public var kApi_getPersonCommunity: String {
+    return kApi_baseUrl(path: "api/follow_fans_num")
+}

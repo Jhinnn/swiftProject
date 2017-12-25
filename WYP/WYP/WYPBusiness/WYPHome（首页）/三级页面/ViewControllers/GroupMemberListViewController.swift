@@ -84,7 +84,6 @@ class GroupMemberListViewController: BaseViewController {
                 self.groupNumber = self.groupDetail?.groupMember?.count ?? 0
                 self.setTitle()
                 self.memberCollectionView.reloadData()
-    
             } else {
                 SVProgressHUD.showError(withStatus: info!)
             }

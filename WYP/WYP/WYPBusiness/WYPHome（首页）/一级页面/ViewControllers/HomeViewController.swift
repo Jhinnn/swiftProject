@@ -8,7 +8,8 @@
 
 import UIKit
 import ReachabilitySwift
-
+import Alamofire
+import SwiftyJSON
 class HomeViewController: BaseViewController {
     
     // 首页数据
@@ -28,6 +29,8 @@ class HomeViewController: BaseViewController {
     var singleTimer: Timer?
     // 跳转至AppStore
     var trackViewUrl: String?
+    
+    
     
     // banner图片
     var bannerImages: [String]? {
@@ -355,6 +358,11 @@ class HomeViewController: BaseViewController {
         self.navigationItem.titleView = searchTitleView
     
     }
+    
+    
+
+    
+    
     // 消息铃铛
     lazy var notificationBarButtonItem: SYButton = {
         let notificationBarButtonItem = SYButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -431,7 +439,7 @@ class HomeViewController: BaseViewController {
                 self.headlineArray.append(self.homeData?.headLine?[0].text ?? "")
                 self.headlineArray.append(self.homeData?.headLine?[1].text ?? "")
                 self.upnumb = self.upnumb + 1
-                print(self.upnumb)
+                
                 
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
@@ -474,8 +482,7 @@ class HomeViewController: BaseViewController {
     // 导航栏上的view
     lazy var searchTitleView: commonSearchView = {
         let searchTitleView = commonSearchView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 34))
-        
-        
+
         // 添加手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(searchNews(sender:)))
         tap.numberOfTapsRequired = 1
@@ -503,13 +510,16 @@ class HomeViewController: BaseViewController {
         let searchViewController = PYSearchViewController(hotSearches: hotSearchArray, searchBarPlaceholder: "可输入关键字进行信息搜索") { (searchViewController, searchBar, searchText) in
             let result = SearchResultNaviViewController()
             result.searchView.searchTextField.text = searchText
+            
             self.navigationController?.pushViewController(result, animated: true)
         }
         searchViewController?.delegate = self
         searchViewController?.hotSearchStyle = .rankTag
         searchViewController?.searchHistoryStyle = .normalTag
 //        searchViewController?.naviItemHidesBackButton = true
+        
         let searchBtn = UIButton(type: .custom)
+        searchBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 24)
         searchBtn.setTitle("搜索", for: .normal)
         searchBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         searchBtn.setTitleColor(UIColor.white, for: .normal)
@@ -690,7 +700,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1090,28 +1100,39 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             navigationController?.pushViewController(showroomDetailsViewController, animated: true)
         case 301:
+            
+    
             let groupModel = homeData?.hotGroup?[indexPath.item]
-            let isJoin = groupModel?.isJoin ?? ""
-            if isJoin == "0" {
-                // 未加入
-                let group = GroupMemberListViewController()
-                group.groupId = groupModel?.groupId ?? ""
-                group.roomName = groupModel?.roomName ?? ""
-                group.groupName = groupModel?.groupName ?? ""
-                navigationController?.pushViewController(group, animated: false)
-            } else {
-                // 已加入
-                let conversationVC = ChatDeatilViewController()
-                conversationVC.conversationType = RCConversationType.ConversationType_GROUP
-                conversationVC.targetId = groupModel?.groupId ?? "0"
-                conversationVC.roomName = groupModel?.roomName ?? ""
-                conversationVC.groupName = groupModel?.groupName ?? ""
-                navigationController?.pushViewController(conversationVC, animated: true)
+    
+            Alamofire.request(kApi_getIsJoinGroup, method: .post, parameters: ["access_token":access_token,"method" : "POST","uid":AppInfo.shared.user?.userId ?? "","qunid": groupModel?.groupId ?? ""], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+                
+                let json = JSON(response.result.value!)
+                let dic = json.dictionary
+                let str = dic!["is_join"]!
+              
+                
+                if str == "0" {
+                    let group = GroupMemberListViewController()
+                    group.groupId = groupModel?.groupId ?? ""
+                    group.roomName = groupModel?.roomName ?? ""
+                    group.groupName = groupModel?.groupName ?? ""
+                    self.navigationController?.pushViewController(group, animated: false)
+                }else {
+                    let conversationVC = ChatDeatilViewController()
+                    conversationVC.conversationType = RCConversationType.ConversationType_GROUP
+                    conversationVC.targetId = groupModel?.groupId ?? "0"
+                    conversationVC.roomName = groupModel?.roomName ?? ""
+                    conversationVC.groupName = groupModel?.groupName ?? ""
+                    self.navigationController?.pushViewController(conversationVC, animated: true)
+                }
+                
             }
         default:
             break
         }
     }
+    
+    
 }
 
 extension HomeViewController: SYBannerViewDelegate {
