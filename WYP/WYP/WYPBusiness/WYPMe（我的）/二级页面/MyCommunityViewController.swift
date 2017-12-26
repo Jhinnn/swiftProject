@@ -13,7 +13,7 @@ import SVProgressHUD
 
 class MyCommunityViewController: BaseViewController {
     
-
+    
     var userId: String!
     var nickName: String!
     var friendsCount: String!
@@ -126,8 +126,7 @@ class MyCommunityViewController: BaseViewController {
     
     func setupUI() {
         view.addSubview(tableView)
-        
-        
+    
         
         tableView.tableHeaderView = tableViewHeaderView
         tableViewHeaderView.addSubview(headerImgView)
@@ -161,7 +160,7 @@ class MyCommunityViewController: BaseViewController {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(-64)
             make.left.right.equalTo(view)
-            make.height.equalTo(180)
+            make.height.equalTo(kScreen_height)
         }
         
         headerImgView.snp.makeConstraints { (make) in
@@ -538,7 +537,7 @@ class MyCommunityViewController: BaseViewController {
     
     func releaseDynamic() {
         UserDefaults.standard.set(AppInfo.shared.user?.token ?? "", forKey: "token")
-        let releaseVC = PublicGroupViewController()
+        let releaseVC = PublicCommunViewController()
         releaseVC.userToken = AppInfo.shared.user?.token ?? ""
         releaseVC.uid = AppInfo.shared.user?.userId ?? ""
         navigationController?.pushViewController(releaseVC, animated: true)

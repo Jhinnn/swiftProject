@@ -37,6 +37,7 @@
 		8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC01FE7B5B300A453BB /* HXCircleProgressView.m */; };
 		8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC31FE7B5B300A453BB /* HXPhotoPreviewViewCell.m */; };
 		8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AE41FE8F52C00A453BB /* WYPContain.m */; };
+		8E82B8631FF247AE00617220 /* PublicCommunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */; };
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
 		8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */; };
 		8EC74C211FF228B200839A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC74C1F1FF228B200839A6F /* Main.storyboard */; };
@@ -447,6 +448,7 @@
 		8E650AC61FE7B5B300A453BB /* HXAlbumTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumTitleButton.h; sourceTree = "<group>"; };
 		8E650AE31FE8F52C00A453BB /* WYPContain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYPContain.h; sourceTree = "<group>"; };
 		8E650AE41FE8F52C00A453BB /* WYPContain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYPContain.m; sourceTree = "<group>"; };
+		8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicCommunViewController.swift; sourceTree = "<group>"; };
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
 		8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTopicViewController.swift; sourceTree = "<group>"; };
 		8EC74C201FF228B200839A6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
@@ -978,6 +980,7 @@
 				A4B2050E1EC01348007DA418 /* MyCommunityViewController.swift */,
 				A4185DFF1EF22EA800930D56 /* MoreCommunityViewController.swift */,
 				8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */,
+				8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -3029,6 +3032,7 @@
 				F9986A331EA61C2B002C502B /* CouponModel.swift in Sources */,
 				F9986A0B1EA61C2B002C502B /* IssueTopicViewController.swift in Sources */,
 				8E650AE01FE7B5B400A453BB /* HXCircleProgressView.m in Sources */,
+				8E82B8631FF247AE00617220 /* PublicCommunViewController.swift in Sources */,
 				F91E42CF1EA70C7100CDCE19 /* MemberModel.swift in Sources */,
 				F9B660B41F04EA5400692DE2 /* FastForwardView.m in Sources */,
 				EF751DE21FEDFB7C00C0FD3F /* MineTopicsModel.swift in Sources */,

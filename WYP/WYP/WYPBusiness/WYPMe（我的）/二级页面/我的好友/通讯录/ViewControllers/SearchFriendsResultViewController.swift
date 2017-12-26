@@ -18,6 +18,7 @@ class SearchFriendsResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "搜索结果"
         viewConfig()
     }
     

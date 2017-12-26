@@ -3451,6 +3451,47 @@ class NetRequest {
             }
         }
     }
+
+    
+    //发布社区动态
+    class func publishCommunityNetRequest(open_id: String,title: String, images: [UIImage],complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        
+        
+        var infoArr:[String] = [String]()
+        for image in images {
+            // 压缩图片
+            let fileData = UIImageJPEGRepresentation(image, 0.8)
+            let base64String = fileData?.base64EncodedString(options: .endLineWithCarriageReturn)
+            infoArr.append(base64String!)
+        }
+        
+        let str = infoArr.joined(separator: ",")
+        
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "uid": open_id,
+                                      "base64": str,
+                                      "content":title]
+            
+        Alamofire.request(kApi_publicCommunity, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     //个人社区
     class func getPersonCommunityNetRequest(uid: String,mid: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {

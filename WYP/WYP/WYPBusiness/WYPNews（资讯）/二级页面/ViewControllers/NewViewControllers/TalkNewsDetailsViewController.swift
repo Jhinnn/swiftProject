@@ -636,7 +636,7 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
         
         let personInfo = PersonalInformationViewController()
         personInfo.targetId = comments.uid ?? ""
-        
+        personInfo.name = comments.nickName ?? ""
 //        let community = MyCommunityViewController()
 //        community.title = "个人主页"
 //        community.userId = comments.uid ?? ""

@@ -642,10 +642,19 @@ public var kApi_weChatPay: String {
     return kApi_baseUrl(path: "api/weixin")
 }
 
+
+
 //发布话题
 public var kApi_publicTopic: String {
     return kApi_baseUrl(path: "api/pubGambit")
 }
+
+//发布社区
+public var kApi_publicCommunity: String {
+    return kApi_baseUrl(path: "api/community_release")
+}
+
+
 
 //个人社区
 public var kApi_getPersonCommunity: String {
