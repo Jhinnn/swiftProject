@@ -31,6 +31,8 @@ class GroupsViewController: BaseViewController {
     //新增--end
     
     var dataSource: [GroupsModel]?
+    
+    var dataSource0: [GroupsModel]?
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -38,7 +40,8 @@ class GroupsViewController: BaseViewController {
 
         viewConfig()
         layoutPageSubviews()
-        loadGroupsData(requestType: .update)
+        loadGroupsInData(requestType: .update)
+        loadGroupsChangeData(requestType: .update)
     }
     
     // MARK: - private method
@@ -77,12 +80,69 @@ class GroupsViewController: BaseViewController {
 //        }
     }
     
-    func loadGroupsData(requestType: RequestType) {
+    func loadGroupsChangeData(requestType: RequestType) {
         if requestType == .update {
             pageNumber = 1
         } else {
             pageNumber = pageNumber + 1
         }
+        
+        NetRequest.myGroupsListChangeNetRequest(openId: AppInfo.shared.user?.token ?? "", page: "\(pageNumber)") { (success, info, result) in
+            if success {
+                let array = result!.value(forKey: "data")
+                let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                
+                
+                if requestType == .update {
+                    self.dataSource0 = [GroupsModel].deserialize(from: jsonString) as? [GroupsModel]
+                } else {
+                    let group = [GroupsModel].deserialize(from: jsonString) as? [GroupsModel]
+                    self.dataSource0 = self.dataSource0! + group!
+                }
+                
+                // 先移除再添加
+                self.noDataImageView.removeFromSuperview()
+                self.noDataLabel.removeFromSuperview()
+                // 没有数据的时候
+                self.view.addSubview(self.noDataImageView)
+                self.view.addSubview(self.noDataLabel)
+                self.noDataImageView.snp.makeConstraints { (make) in
+                    if deviceTypeIphone5() || deviceTypeIPhone4() {
+                        make.top.equalTo(self.view).offset(130)
+                    }
+                    make.top.equalTo(self.view).offset(180)
+                    make.centerX.equalTo(self.view)
+                    make.size.equalTo(CGSize(width: 100, height: 147))
+                }
+                self.noDataLabel.snp.makeConstraints { (make) in
+                    make.top.equalTo(self.noDataImageView.snp.bottom).offset(10)
+                    make.centerX.equalTo(self.view)
+                    make.height.equalTo(11)
+                }
+                
+//                self.groupTableview.reloadData()
+                self.myManageGroupTableView?.reloadData()
+//                self.myJoinGroupTableView?.reloadData()
+            } else {
+                print(info!)
+            }
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
+    func loadGroupsInData(requestType: RequestType) {
+        if requestType == .update {
+            pageNumber = 1
+        } else {
+            pageNumber = pageNumber + 1
+        }
+    
         NetRequest.myGroupsListNetRequest(openId: AppInfo.shared.user?.token ?? "", page: "\(pageNumber)") { (success, info, result) in
             if success {
                let array = result!.value(forKey: "data")
@@ -118,7 +178,7 @@ class GroupsViewController: BaseViewController {
                }
                 
 //               self.groupTableview.reloadData()
-                self.myManageGroupTableView?.reloadData()
+//                self.myManageGroupTableView?.reloadData()
                 self.myJoinGroupTableView?.reloadData()
             } else {
                 print(info!)
@@ -138,10 +198,11 @@ class GroupsViewController: BaseViewController {
         groupTableView.tableFooterView = UIView()
         
         groupTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            self.loadGroupsData(requestType: .loadMore)
+            self.loadGroupsChangeData(requestType: .loadMore)
+            
         })
         groupTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.loadGroupsData(requestType: .update)
+            self.loadGroupsChangeData(requestType: .update)
         })
         
         //注册
@@ -158,10 +219,10 @@ class GroupsViewController: BaseViewController {
         secondGroupTableView.tableFooterView = UIView()
         
         secondGroupTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            self.loadGroupsData(requestType: .loadMore)
+            self.loadGroupsInData(requestType: .loadMore)
         })
         secondGroupTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.loadGroupsData(requestType: .update)
+            self.loadGroupsInData(requestType: .update)
         })
         
         //注册
@@ -260,7 +321,7 @@ class GroupsViewController: BaseViewController {
         if ManagerGroupClickStatus == 0 {
             ManagerGroupClickStatus = 1
             //计算我管理群组tableView的高度
-            let myManageGroupTableViewHeight = (dataSource?.count)! * 60
+            let myManageGroupTableViewHeight = (dataSource0?.count)! * 60
             let referenceHeight1 = view.frame.maxY
             let referenceHeight2 = myManageGroupViewGlobal?.frame.maxY
             let referenceHeight = referenceHeight1 - referenceHeight2!
@@ -327,20 +388,30 @@ class GroupsViewController: BaseViewController {
 
 extension GroupsViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if dataSource?.count == 0 {
+        
+        if dataSource?.count == 0 && dataSource0?.count == 0 {
             noDataImageView.isHidden = false
             noDataLabel.isHidden = false
-        } else {
+        }else {
             noDataImageView.isHidden = true
             noDataLabel.isHidden = true
-            
+        }
+        
+        
+        if tableView.isEqual(myManageGroupTableView) {
+                return dataSource0?.count ?? 0
         }
         return dataSource?.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupsCell", for: indexPath) as! GroupsTableViewCell
-        cell.groupsModel = dataSource?[indexPath.row]
+        if tableView.isEqual(myManageGroupTableView) {
+            cell.groupsModel = dataSource0?[indexPath.row]
+        }else if tableView.isEqual(myJoinGroupTableView) {
+            cell.groupsModel = dataSource?[indexPath.row]
+        }
         return cell
     }
     

@@ -80,12 +80,22 @@ class HomeViewController: BaseViewController {
                 self.navigationController?.navigationBar.isTranslucent = true
                 self.navigationController?.navigationBar.subviews.first?.alpha = 0
             
-                if self.view.frame.size.height == 812.0{
-        
-                    self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
-                 
+                if deviceTypeIPhoneX() {
+                    if #available(iOS 11.0, *) {
+                        self.tableView.contentInsetAdjustmentBehavior = .never
+                        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 32, 0)
+                        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+                    }else {
+                        self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
+                    }
                 }else{
-                    self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+                    if #available(iOS 11.0, *) {
+                        self.tableView.contentInsetAdjustmentBehavior = .never
+                        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+                        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+                    }else {
+                        self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+                    }
                     
                 }
                 self.tableView.snp.makeConstraints({ (make) in
@@ -376,10 +386,11 @@ class HomeViewController: BaseViewController {
     
     private func setupUI() {
         
-      
         view.addSubview(tableView)
         // 设置表视图的头视图
         tableView.tableHeaderView = syBanner
+        
+       
         
         // 添加刷新的头
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { 

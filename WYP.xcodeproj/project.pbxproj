@@ -38,6 +38,8 @@
 		8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC31FE7B5B300A453BB /* HXPhotoPreviewViewCell.m */; };
 		8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AE41FE8F52C00A453BB /* WYPContain.m */; };
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
+		8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */; };
+		8EC74C211FF228B200839A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC74C1F1FF228B200839A6F /* Main.storyboard */; };
 		9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */; };
 		9E16EF031FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */; };
 		9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */; };
@@ -74,7 +76,6 @@
 		A43C2A4B1E8101D90037BB5A /* ConfigureHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43C2A121E8101D90037BB5A /* ConfigureHeader.swift */; };
 		A43C2A4C1E8101D90037BB5A /* ConfigureKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43C2A131E8101D90037BB5A /* ConfigureKey.swift */; };
 		A43C2A551E8102F70037BB5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43C2A511E8102F70037BB5A /* LaunchScreen.storyboard */; };
-		A43C2A561E8102F70037BB5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A43C2A531E8102F70037BB5A /* Main.storyboard */; };
 		A44B22791EA628CA001A02AC /* fzjzjw.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A44B22781EA628CA001A02AC /* fzjzjw.ttf */; };
 		A4567B0D1ECE854D00413CA8 /* UseExplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4567B0C1ECE854D00413CA8 /* UseExplainViewController.swift */; };
 		A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = A476BD421E934670009733A5 /* UITextView+PinchZoom.m */; };
@@ -446,6 +447,8 @@
 		8E650AE31FE8F52C00A453BB /* WYPContain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYPContain.h; sourceTree = "<group>"; };
 		8E650AE41FE8F52C00A453BB /* WYPContain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYPContain.m; sourceTree = "<group>"; };
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
+		8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTopicViewController.swift; sourceTree = "<group>"; };
+		8EC74C201FF228B200839A6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		9E16EF001FAEE8AD008B5B3C /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		9E16EF021FAEF0B2008B5B3C /* CategoryAddFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryAddFriendsTableViewCell.swift; sourceTree = "<group>"; };
 		9E16EF081FAF907D008B5B3C /* ScanOneScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanOneScanViewController.swift; sourceTree = "<group>"; };
@@ -493,7 +496,6 @@
 		A43C2A131E8101D90037BB5A /* ConfigureKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigureKey.swift; sourceTree = "<group>"; };
 		A43C2A141E8101D90037BB5A /* WYP-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WYP-Bridging-Header.h"; sourceTree = "<group>"; };
 		A43C2A521E8102F70037BB5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A43C2A541E8102F70037BB5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		A44B22781EA628CA001A02AC /* fzjzjw.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fzjzjw.ttf; sourceTree = "<group>"; };
 		A4567B0C1ECE854D00413CA8 /* UseExplainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseExplainViewController.swift; sourceTree = "<group>"; };
 		A476BD411E934670009733A5 /* UITextView+PinchZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+PinchZoom.h"; sourceTree = "<group>"; };
@@ -942,6 +944,22 @@
 			path = WYPContain;
 			sourceTree = "<group>";
 		};
+		8EC74C1B1FF1EAB000839A6F /* 话题 */ = {
+			isa = PBXGroup;
+			children = (
+				8EC74C1C1FF1EAE400839A6F /* ViewController */,
+			);
+			path = "话题";
+			sourceTree = "<group>";
+		};
+		8EC74C1C1FF1EAE400839A6F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A41CE6731EBABCFD000BCDE9 /* 我的社区 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1222,7 +1240,7 @@
 			isa = PBXGroup;
 			children = (
 				A43C2A511E8102F70037BB5A /* LaunchScreen.storyboard */,
-				A43C2A531E8102F70037BB5A /* Main.storyboard */,
+				8EC74C1F1FF228B200839A6F /* Main.storyboard */,
 			);
 			path = Base.lproj;
 			sourceTree = "<group>";
@@ -1938,6 +1956,7 @@
 			isa = PBXGroup;
 			children = (
 				F99869491EA61C2B002C502B /* AttentionViewController.swift */,
+				8EC74C1B1FF1EAB000839A6F /* 话题 */,
 				F998694A1EA61C2B002C502B /* 关注的人 */,
 				F998694D1EA61C2B002C502B /* 展厅 */,
 				F99869521EA61C2B002C502B /* 票务 */,
@@ -2914,7 +2933,6 @@
 				F9B660B71F04EA5400692DE2 /* WMPlayer.bundle in Resources */,
 				F985615C1EF8FE2000965183 /* image1.jpg in Resources */,
 				F9761C1B1F03AA6F009CAE49 /* Info.plist in Resources */,
-				A43C2A561E8102F70037BB5A /* Main.storyboard in Resources */,
 				A44B22791EA628CA001A02AC /* fzjzjw.ttf in Resources */,
 				A4301C281E5FDEB000E8E222 /* Assets.xcassets in Resources */,
 				F9BF0BD11F09E95E002C0108 /* cityList.json in Resources */,
@@ -2922,6 +2940,7 @@
 				F9986A681EA61C2B002C502B /* ShowroomDetails.storyboard in Resources */,
 				A43C2A551E8102F70037BB5A /* LaunchScreen.storyboard in Resources */,
 				F9360B881F163086002C6771 /* hotCityList.json in Resources */,
+				8EC74C211FF228B200839A6F /* Main.storyboard in Resources */,
 				F973D4371F1C9A6D00F011A6 /* PayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3267,6 +3286,7 @@
 				F9FE905C1F9F024800D31F3C /* SGQRCodeScanManager.m in Sources */,
 				F9986A241EA61C2B002C502B /* ContactsFriendsViewController.swift in Sources */,
 				A49DA1F31EA9A327000E4AFA /* ShowroomMediaCell.swift in Sources */,
+				8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */,
 				F9FA08F01EB9A58300E71E4D /* AttentionPeopleTableViewCell.swift in Sources */,
 				A4B205031EC01291007DA418 /* AFNetwork.m in Sources */,
 				EF751DF91FEE004100C0FD3F /* TalkShowRoomCommentCell.swift in Sources */,
@@ -3367,20 +3387,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8EC74C1F1FF228B200839A6F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8EC74C201FF228B200839A6F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		A43C2A511E8102F70037BB5A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A43C2A521E8102F70037BB5A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		A43C2A531E8102F70037BB5A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A43C2A541E8102F70037BB5A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

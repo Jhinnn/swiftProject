@@ -46,10 +46,6 @@ class TopicHeaderView: UIView {
                 
                 self.addressImage.isHidden = false
                 
-                if info == "暂无发布话题" {
-                    return
-                }
-                
                 let imageStr = dic?["avatar"] as! String
                 let imageUrl = URL(string: imageStr)
                 self.imageVie.kf.setImage(with: imageUrl)

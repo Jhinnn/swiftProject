@@ -633,24 +633,28 @@ extension TalkNewsDetailsViewController: UITextFieldDelegate {
 extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
     
     func commenPushCenterButtonDidSelected(comments: CommentModel) {
-        let community = MyCommunityViewController()
-        community.title = "个人主页"
-        community.userId = comments.uid ?? ""
-        community.headImageUrl = comments.userPhoto ?? ""
-        community.nickName = comments.nickName ?? ""
-        community.fansCount = String.init(format: "粉丝:%@人", comments.fansNumber ?? "0")
-        community.friendsCountLabel.text = String.init(format: "好友:%@人", comments.friendsNum ?? "0")
-        community.type = "2"
-        if comments.uid == AppInfo.shared.user?.userId {
-            community.userType = "200"
-        }
-        // 判断是否关注
-        if comments.is_follow == 0 {
-            community.isFollowed = false
-        } else if comments.is_follow == 1 {
-            community.isFollowed = true
-        }
-        self.navigationController?.pushViewController(community, animated: true)
+        
+        let personInfo = PersonalInformationViewController()
+        personInfo.targetId = comments.uid ?? ""
+        
+//        let community = MyCommunityViewController()
+//        community.title = "个人主页"
+//        community.userId = comments.uid ?? ""
+//        community.headImageUrl = comments.userPhoto ?? ""
+//        community.nickName = comments.nickName ?? ""
+//        community.fansCount = String.init(format: "粉丝:%@人", comments.fansNumber ?? "0")
+//        community.friendsCountLabel.text = String.init(format: "好友:%@人", comments.friendsNum ?? "0")
+//        community.type = "2"
+//        if comments.uid == AppInfo.shared.user?.userId {
+//            community.userType = "200"
+//        }
+//        // 判断是否关注
+//        if comments.is_follow == 0 {
+//            community.isFollowed = false
+//        } else if comments.is_follow == 1 {
+//            community.isFollowed = true
+//        }
+        self.navigationController?.pushViewController(personInfo, animated: true)
     }
     
     // 点赞按钮

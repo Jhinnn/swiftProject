@@ -43,22 +43,25 @@ class AttentionViewController: BaseViewController {
     private func initControl() {
         
         // 视图控制器的设置
+        let topicView = AttentionTopicViewController()
         let newsView = AttentionNewsViewController()
         let roomView = AttentionRoomViewController()
         let ticketView = AttentionTicketViewController()
         let personView = AttentionPersonViewController()
         
+        
         if deviceTypeIphone5() || deviceTypeIPhone4() {
-            newsView.title = "    资讯"
+            topicView.title = "    话题"
         } else {
-            newsView.title = "资讯"
+            topicView.title = "话题"
         }
+        newsView.title = "资讯"
         roomView.title = "发现"
         ticketView.title = "票务"
-        personView.title = "关注的人     "
+        personView.title = "关注的人"
 
         // 添加到控制器数组
-        subViewControllers = [newsView,roomView,ticketView,personView]
+        subViewControllers = [topicView,newsView,roomView,ticketView,personView]
         
         // 视图控制器索引和标题的设置
         currentIndex = 0

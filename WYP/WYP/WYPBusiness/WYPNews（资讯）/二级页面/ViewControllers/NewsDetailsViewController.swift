@@ -191,7 +191,7 @@ class NewsDetailsViewController: BaseViewController {
         shareButton.snp.makeConstraints { (make) in
             make.right.equalTo(interactionView).offset(-15)
             make.bottom.equalTo(interactionView).offset(-24.5)
-            make.size.equalTo(CGSize(width: 9.5, height: 19.5))
+            make.size.equalTo(CGSize(width: 12.5, height: 16))
         }
         collectionButton.snp.makeConstraints { (make) in
             make.right.equalTo(shareButton.snp.left).offset(-10)
@@ -310,7 +310,7 @@ class NewsDetailsViewController: BaseViewController {
         commentTextField.returnKeyType = .send
         
         let imageView = UIImageView(frame: CGRect(x: 5, y: 8.25, width: 13.5, height: 13.5))
-        imageView.image = UIImage(named: "common_editorGary_button_normal_iPhone")
+        imageView.image = UIImage(named: "community_icon_edit_normal")
         commentTextField.addSubview(imageView)
         
         return commentTextField
@@ -319,7 +319,7 @@ class NewsDetailsViewController: BaseViewController {
     // 分享
     lazy var shareButton: UIButton = {
         let shareButton = UIButton()
-        shareButton.setBackgroundImage(UIImage(named: "news_share_button_normal_iPhone"), for: .normal)
+        shareButton.setBackgroundImage(UIImage(named: "community_icon_share_normal"), for: .normal)
         shareButton.addTarget(self, action: #selector(shareBarButtonItemAction), for: .touchUpInside)
         return shareButton
     }()

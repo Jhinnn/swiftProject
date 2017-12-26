@@ -414,6 +414,11 @@ public var kApi_attentionNews: String {
     return kApi_baseUrl(path: "api/myFollowNews")
 }
 
+// 我的 - 关注的话题
+public var kApi_attentionTopic: String {
+    return kApi_baseUrl(path: "api/my_follow_topic")
+}
+
 // 我的 - 取消关注资讯
 public var kApi_newsCancelAttention: String {
     return kApi_baseUrl(path: "api/cancelFollowNews")
@@ -423,6 +428,12 @@ public var kApi_newsCancelAttention: String {
 public var kApi_myGroupsList: String {
     return kApi_baseUrl(path: "api/qunList")
 }
+
+// 我的 - 管理群组
+public var kApi_myGroupsChangeList: String {
+    return kApi_baseUrl(path: "api/qunzu_manage_list")
+}
+
 
 // 我的 - 关注的展厅
 public var kApi_attentionRooms: String {

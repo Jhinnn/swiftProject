@@ -1130,6 +1130,35 @@ class NetRequest {
             }
         }
     }
+    
+    
+    // 我的 - 关注的话题 kApi_attentionNews
+    class func attentionTopicNetRequest(page: String, openId: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id": openId,
+                                      "page": page]
+        Alamofire.request(kApi_attentionTopic, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 
     // 我的 - 取消关注资讯
     class func cancelAttentionNetRequest(openId: String, newsId: String, complete: @escaping ((Bool, String?) -> Void)) {
@@ -1625,13 +1654,39 @@ class NetRequest {
     
   
     
-    // 我的 - 群组
+    // 我的 -加入群组
     class func myGroupsListNetRequest(openId: String, page: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "open_id": openId,
                                       "page": page]
         Alamofire.request(kApi_myGroupsList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 我的 -管理群组
+    class func myGroupsListChangeNetRequest(openId: String, page: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "open_id": openId,
+                                      "page": page]
+        Alamofire.request(kApi_myGroupsChangeList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)

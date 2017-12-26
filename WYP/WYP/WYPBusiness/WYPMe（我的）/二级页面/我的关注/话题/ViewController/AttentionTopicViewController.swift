@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttentionNewsViewController: BaseViewController {
+class AttentionTopicViewController: BaseViewController {
     
     // 数据源
     var newsData = [InfoModel]()
@@ -46,7 +46,7 @@ class AttentionNewsViewController: BaseViewController {
         } else {
             pageNumber = pageNumber + 1
         }
-        NetRequest.attentionNewsNetRequest(page: "\(pageNumber)", openId: AppInfo.shared.user?.token ?? "") { (success, info, result) in
+        NetRequest.attentionTopicNetRequest(page: "\(pageNumber)", openId: AppInfo.shared.user?.token ?? "") { (success, info, result) in
             if success {
                 
                 let array = result!.value(forKey: "data")
@@ -127,7 +127,7 @@ class AttentionNewsViewController: BaseViewController {
     }()
 }
 
-extension AttentionNewsViewController: UITableViewDelegate,UITableViewDataSource {
+extension AttentionTopicViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if newsData.count == 0 {

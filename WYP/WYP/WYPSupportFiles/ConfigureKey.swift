@@ -86,7 +86,18 @@ public var kScreen_size: CGSize {
 
 // 
 public var width_height_ratio: CGFloat {
-    return kScreen_width / 375
+    
+   return kScreen_width / 375
+}
+
+public var NAVIGATION_BAR_HEIGHT: CGFloat {
+    
+    
+    
+    if deviceTypeIPhoneX() {
+        return 88
+    }
+    return 64
 }
 
 // 当前设备系统版本

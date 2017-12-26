@@ -10,6 +10,8 @@ import UIKit
 
 class TopicsViewController: BaseViewController {
     
+    var targId: String?
+    
     var dataList = [TopicsFrameModel]()
     
     var newsData = [MineTopicsModel]()
@@ -135,8 +137,8 @@ class TopicsViewController: BaseViewController {
         } else {
             pageNumber = pageNumber + 1
         }
-    
-        NetRequest.myNewTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: AppInfo.shared.user?.userId ?? "") { (success, info, dataArr) in
+        
+        NetRequest.myNewTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dataArr) in
     
             if success {
                 var news = [MineTopicsModel]()
