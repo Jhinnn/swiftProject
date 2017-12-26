@@ -127,6 +127,7 @@
 		EF751DF91FEE004100C0FD3F /* TalkShowRoomCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF71FEE004000C0FD3F /* TalkShowRoomCommentCell.swift */; };
 		EF751DFA1FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DF81FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift */; };
 		EF751DFC1FEE01CC00C0FD3F /* TalkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DFB1FEE01CC00C0FD3F /* TalkButton.swift */; };
+		EF751DFE1FEE318500C0FD3F /* PersonalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF751DFD1FEE318500C0FD3F /* PersonalModel.swift */; };
 		F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */; };
 		F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F913307F1EC18DD800DF5E47 /* RecordModel.swift */; };
 		F91330831EC1B89000DF5E47 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91330821EC1B89000DF5E47 /* RecordsTableViewCell.swift */; };
@@ -581,6 +582,7 @@
 		EF751DF71FEE004000C0FD3F /* TalkShowRoomCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkShowRoomCommentCell.swift; sourceTree = "<group>"; };
 		EF751DF81FEE004100C0FD3F /* TalkRoomCommentFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkRoomCommentFrameModel.swift; sourceTree = "<group>"; };
 		EF751DFB1FEE01CC00C0FD3F /* TalkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkButton.swift; sourceTree = "<group>"; };
+		EF751DFD1FEE318500C0FD3F /* PersonalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalModel.swift; sourceTree = "<group>"; };
 		F90563211F46D1FC00C396DD /* WYP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WYP.entitlements; sourceTree = "<group>"; };
 		F913307C1EC188CE00DF5E47 /* FeedBackRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackRecordViewController.swift; sourceTree = "<group>"; };
 		F913307F1EC18DD800DF5E47 /* RecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -2086,6 +2088,7 @@
 				F998696C1EA61C2B002C502B /* AddressBookHandle.swift */,
 				F998696D1EA61C2B002C502B /* GetAddressBook.swift */,
 				F998696E1EA61C2B002C502B /* PersonModel.swift */,
+				EF751DFD1FEE318500C0FD3F /* PersonalModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3163,6 +3166,7 @@
 				FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */,
 				F956CE7E1EDEA7E600B751D4 /* WYPTableView.swift in Sources */,
 				F99869F31EA61C2B002C502B /* HotShowRoomCell.swift in Sources */,
+				EF751DFE1FEE318500C0FD3F /* PersonalModel.swift in Sources */,
 				F94096641ED6DF7B00DD4523 /* ShowRoomCommentCell.swift in Sources */,
 				9E16EF011FAEE8AD008B5B3C /* AddFriendsViewController.swift in Sources */,
 				F913307D1EC188CE00DF5E47 /* FeedBackRecordViewController.swift in Sources */,

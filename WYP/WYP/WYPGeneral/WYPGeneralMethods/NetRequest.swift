@@ -1468,6 +1468,34 @@ class NetRequest {
         }
     }
     
+    //个人资料
+    
+    
+    class func requestMyhome(tarUId: String ,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "uid": tarUId]
+        Alamofire.request(kApi_my_home, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     // 我的 - 取消关注的人
     class func peopleCancelAttentionNetRequest(openId: String, peopleId: String, complete: @escaping ((Bool, String?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
