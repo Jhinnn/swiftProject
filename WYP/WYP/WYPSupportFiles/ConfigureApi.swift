@@ -453,7 +453,10 @@ public var kApi_feedBackRecord: String {
 public var kApi_myOrders: String {
     return kApi_baseUrl(path: "api/myOrder")
 }
-
+// 我的 - 个人资料
+public var kApi_my_home: String {
+    return kApi_baseUrl(path: "api/my_home")
+}
 // 我的 - 订单详情
 public var kApi_orderDeatil: String {
     return kApi_baseUrl(path: "api/orderxiangxi")

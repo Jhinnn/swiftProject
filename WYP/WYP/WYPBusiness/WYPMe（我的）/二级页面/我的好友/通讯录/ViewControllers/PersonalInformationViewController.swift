@@ -10,10 +10,16 @@ import UIKit
 
 class PersonalInformationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
     var targetId: String?
     var conversationType: Int?
     var name: String?
+
+    
+    var gambit_cover: [String] = []
+    var community_cover: [String] = []
+    
+    
+    
     
     // 记录偏移量
     var navOffset: CGFloat = 0
@@ -21,15 +27,21 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     var tableView: UITableView!
     
     
+    var personalModel: PersonalModel?
     
+   
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+  
+        
         
         self.title = "个人资料"
         self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
         
         self.tableView = UITableView.init(frame: CGRect(x:0, y:-64, width:UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height-70), style: UITableViewStyle.plain)
+      
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -39,10 +51,19 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         self.navigationItem.rightBarButtonItem = rightItem
         
         let messageB = UIButton(frame:CGRect(x:50, y:UIScreen.main.bounds.size.height-60-70, width:UIScreen.main.bounds.size.width-100, height:50))
+        if kScreen_height == 812 {
+            self.tableView.frame = CGRect(x:0, y:-88, width:UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height-70)
+            messageB.frame = CGRect(x:50, y:UIScreen.main.bounds.size.height-60-100, width:UIScreen.main.bounds.size.width-100, height:50)
+            
+        }
         messageB.backgroundColor = UIColor.themeColor
         messageB.layer.cornerRadius = 15
         messageB.clipsToBounds = true
-        messageB.setTitle("发消息", for: UIControlState.normal)
+        if self.personalModel?.varis_follow != "1" {
+         messageB.setTitle("添加好友", for: UIControlState.normal)
+        }else{
+             messageB.setTitle("发消息", for: UIControlState.normal)
+        }
         messageB.addTarget(self, action: #selector(messageBAction(button:)), for: .touchUpInside)
         self.view.addSubview(messageB)
         
@@ -54,11 +75,12 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         netRequestAction()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+       
         // 设置导航条透明度
         DispatchQueue.main.async {
             self.navBarBgAlpha = self.navOffset
@@ -94,7 +116,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+      
         //        let cellid = "cellID" + String.init(format: "%.2f", indexPath.section) + String.init(format: "%.2f", indexPath.row)
         let cellid = "cellID"
         var cell = tableView.cellForRow(at: indexPath)
@@ -108,16 +130,18 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         switch indexPath.section {
         case 0:
             let headIV = UIImageView(image:UIImage(named:"grzy_porfile_bg"))
-            headIV.frame = CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height:260)
+            headIV.frame = CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height:220)
             cell?.addSubview(headIV)
             
-            let circleIV = UIImageView(image:UIImage(named:"0001"))
-            circleIV.frame = CGRect(x:15, y:260-248/6, width:248/3, height:248/3)
+            let circleIV = UIImageView()
+            let avatarPath = URL(string: self.personalModel?.avatar ?? "")
+            circleIV.kf.setImage(with: avatarPath)
+            circleIV.frame = CGRect(x:15, y:220-248/6, width:248/3, height:248/3)
             circleIV.layer.cornerRadius = 248/6
             circleIV.clipsToBounds = true
             cell?.addSubview(circleIV)
             
-            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:260-35, width:90, height:30))
+            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:90, height:30))
             label1.layer.cornerRadius = 10
             label1.clipsToBounds = true
             label1.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
@@ -127,10 +151,10 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             label1.textAlignment = .center
             cell?.addSubview(label1)
             
-            let label2 = UILabel(frame:CGRect(x:248/3+15+20, y:260+5, width:180, height:30))
+            let label2 = UILabel(frame:CGRect(x:248/3+15+30, y:220+5, width:180, height:30))
             label2.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
             label2.font = UIFont.systemFont(ofSize: 15)
-            label2.text = "15011142323"
+            label2.text = personalModel?.aldid
             cell?.addSubview(label2)
             
         case 1:
@@ -144,11 +168,16 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             cell?.addSubview(label2)
             if indexPath.row == 0 {
                 label1.text = "性别："
-                label2.text = "男"
+                if personalModel?.sex == "1"{
+                    label2.text = "女"
+                }else{
+                    label2.text = "男"
+                }
+                
             }
             if indexPath.row == 1 {
                 label1.text = "地址："
-                label2.text = "北京市海淀区"
+                label2.text = self.personalModel?.address
                 let presonIV = UIImageView(image:UIImage(named:"datum_icon_Information_normalmore"))
                 presonIV.frame = CGRect(x:15, y:15, width:20, height:20)
                 cell?.addSubview(presonIV)
@@ -158,7 +187,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             }
             if indexPath.row == 2 {
                 label1.text = "签名："
-                label2.text = "欲望就该像匹野马"
+                label2.text = self.personalModel?.signature
             }
             
         case 2:
@@ -169,28 +198,81 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             arrowIV.frame = CGRect(x:UIScreen.main.bounds.size.width-50, y:45, width:10, height:20)
             cell?.addSubview(arrowIV)
             
-            let aIV = UIImageView(image:UIImage(named:"0001"))
-            aIV.frame = CGRect(x:50, y:25, width:60, height:60)
-            cell?.addSubview(aIV)
-            let bIV = UIImageView(image:UIImage(named:"0001"))
-            bIV.frame = CGRect(x:130, y:25, width:60, height:60)
-            cell?.addSubview(bIV)
-            let cIV = UIImageView(image:UIImage(named:"0001"))
-            cIV.frame = CGRect(x:210, y:25, width:60, height:60)
-            cell?.addSubview(cIV)
+            
+            if (self.community_cover != nil){
+                for index in 0..<self.community_cover.count{
+                    switch index {
+                    case 0:
+                        let aIV = UIImageView()
+                        let aUrl = URL(string: community_cover[index] ?? "")
+                        aIV.kf.setImage(with: aUrl)
+                        aIV.frame = CGRect(x:50, y:25, width:60, height:60)
+                        cell?.addSubview(aIV)
+                        
+                        break
+                    case 1:
+                        let bIV = UIImageView()
+                        let bUrl = URL(string: community_cover[index] ?? "")
+                        bIV.kf.setImage(with: bUrl)
+                        bIV.frame = CGRect(x:130, y:25, width:60, height:60)
+                        cell?.addSubview(bIV)
+                      break
+                    case 2 :
+                        let cIV = UIImageView()
+                        let cUrl = URL(string: community_cover[index] ?? "")
+                        cIV.kf.setImage(with: cUrl)
+                        cIV.frame = CGRect(x:210, y:25, width:60, height:60)
+                        cell?.addSubview(cIV)
+                        break
+                        
+                    default :
+                        print("无数据")
+                  
+                    }
+                   
+                }
+                
+            }
+            
+           
             
         case 3:
             let titleIV = UIImageView(image:UIImage(named:"0002"))
             titleIV.frame = CGRect(x:(UIScreen.main.bounds.size.width-550/3)/2, y:20, width:550/3, height:50/3)
             cell?.addSubview(titleIV)
-            
-            let aIV = UIImageView(image:UIImage(named:"0001"))
-            aIV.frame = CGRect(x:15, y:50, width:60, height:60)
-            cell?.addSubview(aIV)
-            let bIV = UIImageView(image:UIImage(named:"0001"))
-            bIV.frame = CGRect(x:95, y:50, width:60, height:60)
-            cell?.addSubview(bIV)
-            
+            if self.gambit_cover != nil{
+                for index in 0..<self.gambit_cover.count{
+                    switch index{
+                    case 0:
+                        let aIV = UIImageView()
+                        let aURl = URL(string: self.gambit_cover[index] ?? "")
+                        aIV.kf.setImage(with: aURl)
+                        aIV.frame = CGRect(x:15, y:50, width:60, height:60)
+                        cell?.addSubview(aIV)
+                        break
+                        
+                    case 1:
+                        break
+                        let bIV = UIImageView()
+                        let bURl = URL(string: self.gambit_cover[index] ?? "")
+                        bIV.kf.setImage(with: bURl)
+                        bIV.frame = CGRect(x:95, y:50, width:60, height:60)
+                        cell?.addSubview(bIV)
+                    case 2:
+                        break
+                        let cIV = UIImageView()
+                        let cURl = URL(string: self.gambit_cover[index] ?? "")
+                        cIV.kf.setImage(with: cURl)
+                        cIV.frame = CGRect(x:175, y:50, width:60, height:60)
+                        cell?.addSubview(cIV)
+                    default:
+                         print("无数据")
+                    }
+                
+                }
+                
+            }
+     
         case 4:
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
             cell?.textLabel?.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
@@ -208,18 +290,15 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                 uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
                 cell?.addSubview(uiSwitch)
             }
-            
-            
-            
+       
             
         default:
-            print("fdfd")
+            print("")
         }
         
-        
-        
-        
         return cell!
+        
+        
         
     }
     
@@ -241,7 +320,19 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell点击事件")
+        
+        if indexPath.section == 2 {
+            let commun = MyCommunityViewController()
+            commun.userId = self.targetId
+            self.navigationController?.pushViewController(commun, animated: true)
+//             print("社区点击事件")
+        }
+        if indexPath.section == 3 {
+            let topicsView = TopicsViewController()
+            self.navigationController?.pushViewController(topicsView, animated: true)
+//             print("话题点击事件")
+        }
+       
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -270,7 +361,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     // MARK: - scrollView代理方法
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         self.navOffset = scrollView.contentOffset.y / 200
         self.navBarBgAlpha = self.navOffset
         setNeedsStatusBarAppearanceUpdate()
@@ -304,7 +395,33 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         LSXPopMenu.show(at: p, titles: ["删除好友", "修改备注", "推荐名片"], icons: ["", "", ""], menuWidth: 150, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
     }
     
-   
+    func netRequestAction(){
+        
+        
+        
+        NetRequest.requestMyhome(tarUId: self.targetId!) { (success, info, result) in
+            if success {
+                let array = result
+                let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                print(jsonString)
+                self.personalModel = PersonalModel.deserialize(from: jsonString) as? PersonalModel
+                self.community_cover = (self.personalModel?.community_cover)!
+                self.gambit_cover = (self.personalModel?.gambit_cover)!
+                self.tableView.reloadData()
+                
+                
+            }else {
+                SVProgressHUD.showError(withStatus: info)
+            }
+            
+        }
+        
+      
+        
+    }
+    
+    
     
     
     
@@ -324,3 +441,4 @@ extension PersonalInformationViewController:LSXPopMenuDelegate{
         }
     }
 }
+

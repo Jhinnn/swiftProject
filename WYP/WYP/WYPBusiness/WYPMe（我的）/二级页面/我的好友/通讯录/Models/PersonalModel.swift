@@ -32,6 +32,8 @@ class PersonalModel: HandyJSON {
     var aldid: String?
     //电话
     public var mobile: String?
+
+    
     //备注名
     var alias: String?
     
@@ -55,6 +57,7 @@ class PersonalModel: HandyJSON {
     
     
     
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.name <-- "nickname"
         mapper <<< self.avatar <-- "avatar"
@@ -68,7 +71,8 @@ class PersonalModel: HandyJSON {
         mapper <<< self.gambit_cover <-- "gambit_cover"
         mapper <<< self.community_cover <-- "community_cover"
         mapper <<< self.sex <-- "sex"
-        mapper <<< self.varis_follow <-- "varis_follow"
+        mapper <<< self.varis_follow <-- "is_follow"
+        mapper <<< self.mobile <-- "mobile"
         mapper <<< self.mobile <-- "mobile"
         
         

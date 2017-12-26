@@ -503,6 +503,7 @@ class MyCommunityViewController: BaseViewController {
                     self.view.addSubview(self.noDataLabel)
                     // 当进入自己的社区时
                     if self.userId == AppInfo.shared.user?.userId {
+                        self.sendMessageButton.isHidden = true
                         self.view.addSubview(self.noDataButton)
                         self.noDataButton.snp.makeConstraints({ (make) in
                             make.centerX.equalTo(self.view)
