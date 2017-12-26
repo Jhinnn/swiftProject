@@ -52,10 +52,7 @@ class PersonalModel: HandyJSON {
     public var gambit_cover: [String] = []
     //是否免打扰
     var is_push: String?
-    //好友关系
-    public var varis_follow: String?
-    
-    
+  
     
     
     func mapping(mapper: HelpingMapper) {
@@ -71,9 +68,9 @@ class PersonalModel: HandyJSON {
         mapper <<< self.gambit_cover <-- "gambit_cover"
         mapper <<< self.community_cover <-- "community_cover"
         mapper <<< self.sex <-- "sex"
-        mapper <<< self.varis_follow <-- "is_follow"
+        
         mapper <<< self.mobile <-- "mobile"
-        mapper <<< self.mobile <-- "mobile"
+       
         
         
         

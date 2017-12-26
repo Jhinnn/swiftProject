@@ -1471,9 +1471,10 @@ class NetRequest {
     //个人资料
     
     
-    class func requestMyhome(tarUId: String ,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func requestMyhome(tarUId: String, muid: String ,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
+                                      "is_login_uid": muid,
                                       "uid": tarUId]
         Alamofire.request(kApi_my_home, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
@@ -1495,6 +1496,7 @@ class NetRequest {
             }
         }
     }
+    
     
     // 我的 - 取消关注的人
     class func peopleCancelAttentionNetRequest(openId: String, peopleId: String, complete: @escaping ((Bool, String?) -> Void)) {
