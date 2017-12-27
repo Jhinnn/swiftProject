@@ -56,7 +56,13 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     
     lazy var tableView :UITableView = {
-        let tabView = UITableView(frame: CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height), style: .plain)
+        var tabView = UITableView()
+        if kScreen_height == 812 {
+            tabView.frame = CGRect(x: 0, y: -88, width: kScreen_width, height: kScreen_height)
+        }else{
+          tabView.frame = CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height)
+        }
+        
         tabView.delegate = self
         tabView.dataSource = self
         tabView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -64,7 +70,13 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }()
     
     lazy var bgView: UIView = {
-        let bgView = UIView(frame: CGRect(x: 0, y: kScreen_height - 124, width: kScreen_width, height: 60))
+        var bgView = UIView()
+        if kScreen_height == 812 {
+            bgView.frame = CGRect(x: 0, y: kScreen_height - 158, width: kScreen_width, height: 60)
+        }else{
+            bgView.frame = CGRect(x: 0, y: kScreen_height - 124, width: kScreen_width, height: 60)
+        }
+        
         bgView.backgroundColor = UIColor.groupTableViewBackground
         return bgView
     }()
