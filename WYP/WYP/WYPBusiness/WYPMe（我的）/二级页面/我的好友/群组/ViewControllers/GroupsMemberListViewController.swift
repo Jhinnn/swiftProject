@@ -27,6 +27,8 @@ class GroupsMemberListViewController: BaseViewController {
         
         
     }
+    // 记录偏移量
+    var navOffset: CGFloat = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,10 +40,19 @@ class GroupsMemberListViewController: BaseViewController {
         super.viewDidAppear(animated)
         // 设置导航条透明度
         DispatchQueue.main.async {
-            self.navBarBgAlpha = 0
+            self.navBarBgAlpha = self.navOffset
+            if self.navOffset == 0 {
+                self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            }
         }
     }
-    
+    // MARK: - scrollView代理方法
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        self.navOffset = scrollView.contentOffset.y / 200
+        self.navBarBgAlpha = self.navOffset
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     
     // MARK: - private method
@@ -57,8 +68,12 @@ class GroupsMemberListViewController: BaseViewController {
     
     func layoutPageSubviews() {
         memberCollectionView.snp.makeConstraints { (make) in
-            
-            make.top.equalTo(view.snp.top).offset(-64)
+            if kScreen_height == 812 {
+                make.top.equalTo(view.snp.top).offset(-88)
+            }else{
+                make.top.equalTo(view.snp.top).offset(-64)
+            }
+           
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.bottom.equalTo(view.snp.bottom)
@@ -94,7 +109,7 @@ class GroupsMemberListViewController: BaseViewController {
         
         let messageObject = UMSocialMessageObject()
         // 分享链接
-        let urlString = "http://ald.1001alading.com/mob/Fenxiang/index.html?id=" + self.groupId!
+        let urlString = kApi_baseUrl(path: "mob/Fenxiang/index.html?id=") + self.groupId!
         let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
         let shareLink = kApi_baseUrl(path: url)
         // 设置文本
@@ -256,7 +271,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
             headView.delegate = self
             let imgURL = URL.init(string: (self.groupDetail?.group_avatar ?? "")!)
             headView.headerImgView.sd_setImage(with: imgURL)
-            headView.groupNumb.text = "群编号:" + self.groupId!
+            headView.groupNumb.text = "群编号:" + (self.groupDetail?.aldrid ?? "")
             headView.memberNumLabel.text = "群成员 " + "(\(self.groupDetail?.groupMember?.count ?? 0)人)"
             return headView
         }
@@ -271,7 +286,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: kScreen_width, height: 267)
+        return CGSize(width: kScreen_width, height: 287)
     }
     
     
@@ -307,6 +322,13 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
                 deleteGroupMemberVC.members = self.groupDetail?.groupMember
                 deleteGroupMemberVC.groupId = self.groupId; self.navigationController?.pushViewController(deleteGroupMemberVC, animated: true)
             }
+            let personalInformationVC = PersonalInformationViewController()
+            personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
+            personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+            personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
+            
+            navigationController?.pushViewController(personalInformationVC, animated: true)
+            
         }else {
             let personalInformationVC = PersonalInformationViewController()
             personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name

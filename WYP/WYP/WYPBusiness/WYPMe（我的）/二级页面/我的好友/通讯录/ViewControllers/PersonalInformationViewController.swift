@@ -44,18 +44,19 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         view.addSubview(bgView)
         
         if self.targetId == AppInfo.shared.user?.userId {  //如果是自己的社区
-            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            
             bgView.isHidden = true
         }else {
-            self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 64, 0)
             
             bgView.isHidden = false
         }
     
     }
     
+    
+    
     lazy var tableView :UITableView = {
-        let tabView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), style: .plain)
+        let tabView = UITableView(frame: CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height), style: .plain)
         tabView.delegate = self
         tabView.dataSource = self
         tabView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -63,7 +64,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }()
     
     lazy var bgView: UIView = {
-        let bgView = UIView(frame: CGRect(x: 0, y: kScreen_height - 60, width: kScreen_width, height: 60))
+        let bgView = UIView(frame: CGRect(x: 0, y: kScreen_height - 124, width: kScreen_width, height: 60))
         bgView.backgroundColor = UIColor.groupTableViewBackground
         return bgView
     }()
@@ -81,24 +82,20 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navBarBgAlpha = 0
-        navigationController?.navigationBar.isTranslucent = true
-        
+       
          netRequestAction()
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
         // 设置导航条透明度
         DispatchQueue.main.async {
-            
-           
-            
-            self.navBarBgAlpha = 0
-            self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            self.navBarBgAlpha = self.navOffset
+            if self.navOffset == 0 {
+                self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            }
         }
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -374,11 +371,10 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         self.navOffset = scrollView.contentOffset.y / 200
-        self.navigationController?.navigationBar.subviews.first?.alpha = self.navOffset
+        self.navBarBgAlpha = self.navOffset
         setNeedsStatusBarAppearanceUpdate()
-        
-        
     }
+    
     
     // MARK: - 自定义方法
     func switchClick(uiSwitch:UISwitch) {
