@@ -21,6 +21,7 @@ class TopicsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         title = "我的话题"
         let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
         navigationItem.rightBarButtonItem = releaseBtn
@@ -40,11 +41,12 @@ class TopicsViewController: BaseViewController {
         view.addSubview(tableView)
         
         setupUIFrame()
-        
+        print(self.targId!)
         let views = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
+        views?.targetId = self.targId!
         self.headView.addSubview(views!)
         tableView.tableHeaderView = headView
-        
+
     }
     
     // 设置控件frame
@@ -290,6 +292,13 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension TopicsViewController: TopicsCellDelegate {
+    func clickImageAction(sender: UIButton, topics: TopicsModel) {
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = topics.peopleId ?? ""
+        personalInformationVC.name = topics.nickName ?? ""
+        navigationController?.pushViewController(personalInformationVC, animated: true)
+    }
+    
     func starDidSelected(sender: UIButton, topics: TopicsModel) {
         NetRequest.topicStarNetRequest(openId: AppInfo.shared.user?.token ?? "", newsId: topics.topicId ?? "", typeId: "1", cid: "") { (success, info) in
             if success {

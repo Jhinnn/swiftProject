@@ -325,6 +325,13 @@ extension NewsTopicViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension NewsTopicViewController: TopicsCellDelegate {
+    func clickImageAction(sender: UIButton, topics: TopicsModel) {
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = topics.peopleId ?? ""
+        personalInformationVC.name = topics.nickName ?? ""
+        navigationController?.pushViewController(personalInformationVC, animated: true)
+    }
+    
     func starDidSelected(sender: UIButton, topics: TopicsModel) {
         let token = AppInfo.shared.user?.token ?? ""
         if token == "" {

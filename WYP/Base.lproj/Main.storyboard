@@ -1146,9 +1146,6 @@
                                                 <constraint firstItem="pNg-DI-nz5" firstAttribute="leading" secondItem="shw-oa-13W" secondAttribute="leading" constant="13" id="eQA-2x-YSA"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="S8h-Hl-k7R" kind="push" id="lGe-J0-3cm"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="14g-om-cpJ">
                                         <rect key="frame" x="0.0" y="451" width="375" height="44.5"/>
@@ -1439,7 +1436,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fTQ-Rx-hY6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2mD-aU-xC5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

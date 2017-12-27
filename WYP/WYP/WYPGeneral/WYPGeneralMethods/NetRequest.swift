@@ -1469,8 +1469,6 @@ class NetRequest {
     }
     
     //个人资料
-    
-    
     class func requestMyhome(tarUId: String, muid: String ,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",

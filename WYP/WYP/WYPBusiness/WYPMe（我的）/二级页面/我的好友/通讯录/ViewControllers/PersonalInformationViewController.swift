@@ -9,8 +9,7 @@
 import UIKit
 
 class PersonalInformationViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
-     let uid = AppInfo.shared.user?.userId ?? ""
-    
+
     var targetId: String?
     var conversationType: Int?
     var name: String?
@@ -35,13 +34,16 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
   
-        
-        
+
         self.title = "个人资料"
         self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
         
-        self.tableView = UITableView.init(frame: CGRect(x:0, y:-64, width:UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height-70), style: UITableViewStyle.plain)
+        self.tableView = UITableView()
       
+        
+        if self.targetId == AppInfo.shared.user?.userId {
+//            tableView.frame = CGRect(x: 0, y: <#T##Int#>, width: <#T##Int#>, height: <#T##Int#>)
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -51,6 +53,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(moreAction))
         self.navigationItem.rightBarButtonItem = rightItem
         
+    
         let messageB = UIButton(frame:CGRect(x:50, y:UIScreen.main.bounds.size.height-60-70, width:UIScreen.main.bounds.size.width-100, height:50))
         if kScreen_height == 812 {
             self.tableView.frame = CGRect(x:0, y:-88, width:UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height-70)
@@ -60,21 +63,13 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         messageB.backgroundColor = UIColor.themeColor
         messageB.layer.cornerRadius = 15
         messageB.clipsToBounds = true
-//        print("isfollow\(self.personalModel?.isFollow)")
-        if self.personalModel?.isFollow == "1" {
-            messageB.setTitle("发消息", for: UIControlState.normal)
-        }else{
-            messageB.setTitle("添加好友", for: UIControlState.normal)
-            
-        }
+
+       
         messageB.addTarget(self, action: #selector(messageBAction(button:)), for: .touchUpInside)
         self.view.addSubview(messageB)
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -119,11 +114,8 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
-        //        let cellid = "cellID" + String.init(format: "%.2f", indexPath.section) + String.init(format: "%.2f", indexPath.row)
         let cellid = "cellID"
         var cell = tableView.cellForRow(at: indexPath)
-        //        var cell = tableView.dequeueReusableCell(withIdentifier: cellid)
         if cell == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellid)
         }
@@ -409,25 +401,16 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     func netRequestAction(){
         
-//        if uid == "" {
-//            // 跳转登录页面
-//            let navi = BaseNavigationController(rootViewController: LogInViewController())
-//            present(navi, animated: true) {
-//
-//            }
-//
-            NetRequest.requestMyhome(tarUId: self.targetId! ,muid: self.uid) { (success, info, result) in
+            NetRequest.requestMyhome(tarUId: self.targetId! ,muid: AppInfo.shared.user?.userId ?? "" ) { (success, info, result) in
                 if success {
                     let array = result
                     let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-                    print(jsonString)
-                    self.personalModel = PersonalModel.deserialize(from: jsonString) as? PersonalModel
+                    self.personalModel = PersonalModel.deserialize(from: jsonString)
                     self.community_cover = (self.personalModel?.community_cover)!
                     self.gambit_cover = (self.personalModel?.gambit_cover)!
                     self.tableView.reloadData()
-                    
-                    
+        
                 }else {
                     SVProgressHUD.showError(withStatus: info)
                 }

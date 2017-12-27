@@ -235,6 +235,12 @@ class MeViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 && indexPath.row == 0{
              self.navigationController?.pushViewController(QRCodeViewController(), animated: true)
+        }else if indexPath.section == 2 && indexPath.row == 0 {
+        
+                let topicVC = TopicsViewController()
+                topicVC.targId = AppInfo.shared.user?.userId
+                print(AppInfo.shared.user?.userId ?? "")
+                self.navigationController?.pushViewController(topicVC, animated: true)
         }
         else if indexPath.section == 3 && indexPath.row == 0 {
             

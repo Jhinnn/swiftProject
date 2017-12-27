@@ -10,6 +10,7 @@ import UIKit
 
 protocol TopicsCellDelegate: NSObjectProtocol {
     func starDidSelected(sender: UIButton, topics: TopicsModel)
+    func clickImageAction(sender: UIButton, topics: TopicsModel)
 }
 
 class TopicsCell: UITableViewCell {
@@ -95,10 +96,9 @@ class TopicsCell: UITableViewCell {
     }
     
     func clickHeadImageView(sender: UIButton) {
-        let personalInformationVC = PersonalInformationViewController()
-        personalInformationVC.targetId = topicsFrame?.topics.peopleId ?? ""
-        personalInformationVC.name = topicsFrame?.topics.nickName ?? ""
-        self.viewController()?.navigationController?.pushViewController(personalInformationVC, animated: true)
+        
+        delegate?.clickImageAction(sender: sender, topics: (topicsFrame?.topics)!)
+        
     }
     
     // 头像

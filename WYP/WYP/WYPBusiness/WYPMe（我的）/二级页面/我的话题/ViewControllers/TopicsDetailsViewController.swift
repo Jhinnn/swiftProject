@@ -306,6 +306,13 @@ extension TopicsDetailsViewController: UITextFieldDelegate {
 }
 
 extension TopicsDetailsViewController: TopicsCellDelegate {
+    func clickImageAction(sender: UIButton, topics: TopicsModel) {
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = topics.peopleId ?? ""
+        personalInformationVC.name = topics.nickName ?? ""
+        navigationController?.pushViewController(personalInformationVC, animated: true)
+    }
+    
 
     func starDidSelected(sender: UIButton, topics: TopicsModel) {
         NetRequest.topicStarNetRequest(openId: AppInfo.shared.user?.token ?? "", newsId: topics.topicId ?? "", typeId: "1", cid: "") { (success, info) in

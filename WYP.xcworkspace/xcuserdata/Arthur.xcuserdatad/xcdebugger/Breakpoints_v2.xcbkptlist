@@ -11,5 +11,68 @@
             continueAfterRunningActions = "No">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WYP/WYP/WYPBusiness/WYPMe&#xff08;&#x6211;&#x7684;&#xff09;/&#x4e8c;&#x7ea7;&#x9875;&#x9762;/&#x6211;&#x7684;&#x8bdd;&#x9898;/ViewControllers/TopicsViewController.swift"
+            timestampString = "536032135.078042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "loadNetData(requestType:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WYP.TopicsViewController.loadNetData(requestType: WYP.BaseViewController.RequestType) -&gt; ()"
+                  moduleName = "WYP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPBusiness/WYPMe%EF%BC%88%E6%88%91%E7%9A%84%EF%BC%89/%E4%BA%8C%E7%BA%A7%E9%A1%B5%E9%9D%A2/%E6%88%91%E7%9A%84%E8%AF%9D%E9%A2%98/ViewControllers/TopicsViewController.swift"
+                  timestampString = "536032135.942872"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "365">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #1 : @autoclosure () throws -&gt; Swift.String in WYP.TopicsViewController.loadNetData(requestType: WYP.BaseViewController.RequestType) -&gt; ()"
+                  moduleName = "WYP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPBusiness/WYPMe%EF%BC%88%E6%88%91%E7%9A%84%EF%BC%89/%E4%BA%8C%E7%BA%A7%E9%A1%B5%E9%9D%A2/%E6%88%91%E7%9A%84%E8%AF%9D%E9%A2%98/ViewControllers/TopicsViewController.swift"
+                  timestampString = "536032135.945711"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.Array&lt;Swift.Optional&lt;__ObjC.NSDictionary&gt;&gt;&gt;) -&gt; () in WYP.TopicsViewController.loadNetData(requestType: WYP.BaseViewController.RequestType) -&gt; ()"
+                  moduleName = "WYP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPBusiness/WYPMe%EF%BC%88%E6%88%91%E7%9A%84%EF%BC%89/%E4%BA%8C%E7%BA%A7%E9%A1%B5%E9%9D%A2/%E6%88%91%E7%9A%84%E8%AF%9D%E9%A2%98/ViewControllers/TopicsViewController.swift"
+                  timestampString = "536032135.948899"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -9,6 +9,8 @@
 import UIKit
 
 class TopicHeaderView: UIView {
+    
+    var targetId: String?
 
     
     @IBOutlet weak var imageVie: UIImageView!
@@ -23,25 +25,22 @@ class TopicHeaderView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-
-        load_init()
-        
-        
     }
     
     override func awakeFromNib() {
-        
+    
         addressImage.isHidden = true
-        
         self.imageVie?.layer.masksToBounds = true
         self.imageVie?.layer.cornerRadius = self.imageVie.width / 2
+        
+        load_init()
     }
     
     
     func load_init(){
         
-        
-        NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: AppInfo.shared.user?.userId ?? "") { (success, info, dic) in
+        print(self.targetId)
+        NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: self.targetId!) { (success, info, dic) in
             if success {
                 
                 self.addressImage.isHidden = false
