@@ -2386,7 +2386,7 @@ class NetRequest {
                                        "open_id": open_id!,
                                        "uid": uid!,
                                        "gid": gid]
-        Alamofire.request(kApi_addGroupMember, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(kApi_invitationJoinGroup, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
@@ -2404,9 +2404,6 @@ class NetRequest {
             }
         }
     }
-    
-    
-    
     
     // 群组公告列表
     class  func getGroupNoteListNetRequest(page: String, groupId: String, complete: @escaping ((Bool, String?, String?) -> Void)) {
@@ -2469,6 +2466,8 @@ class NetRequest {
                 }
         }
     }
+    
+    
     
     // 群组 - 申请入群
     class func enterGroupNetRequest(type: String, openId: String, groupId: String, comment: String, complete: @escaping ((Bool, String?) -> Void)) {

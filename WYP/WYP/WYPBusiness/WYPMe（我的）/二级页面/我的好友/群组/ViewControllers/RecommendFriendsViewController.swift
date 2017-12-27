@@ -84,14 +84,21 @@ class RecommendFriendsViewController: UIViewController {
 //                SVProgressHUD.showError(withStatus: info!)
 //            }
 //        }
-        NetRequest.invitationJoinGroupNetRequest(open_id: AppInfo.shared.user?.token, uid: AppInfo.shared.user?.userId, gid: self.groupId!) { (success, info) in
-            if success {
-                SVProgressHUD.showSuccess(withStatus: info!)
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                SVProgressHUD.showError(withStatus: info!)
+        
+        for str in self.recommendArr {
+            NetRequest.invitationJoinGroupNetRequest(open_id: AppInfo.shared.user?.token, uid: str, gid: groupId!) { (success, info) in
+                if success {
+                    
+
+                    SVProgressHUD.showSuccess(withStatus: info!)
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    SVProgressHUD.showError(withStatus: info!)
+                }
             }
         }
+        
+        
     }
     
     // MARK: - setter
@@ -144,11 +151,21 @@ extension RecommendFriendsViewController: UITableViewDelegate,UITableViewDataSou
         cell.delegate = self
         return cell
     }
+    
+ 
 }
 
 extension RecommendFriendsViewController: RecommendTableViewCellDelegate {
     func chooseFriends(sender: UIButton) {
         
-        self.recommendArr.append(personSource?[sender.tag - 110].peopleId ?? "")
+        
+        if sender.isSelected {
+            self.recommendArr.append(personSource?[sender.tag - 110].peopleId ?? "")
+        }else {
+            let index = self.recommendArr.index(of: personSource?[sender.tag - 110].peopleId ?? "")
+            self.recommendArr.remove(at: index!)
+           
+        }
+        
     }
 }

@@ -61,8 +61,8 @@ class UserSettingsViewController: BaseViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_editorGary_button_normal_iPhone"), style: .done, target: self, action: #selector(goToUserQR))
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+//        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_editorGary_button_normal_iPhone"), style: .done, target: self, action: #selector(goToUserQR))
+//        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     // 设置tableView
