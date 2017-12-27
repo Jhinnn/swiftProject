@@ -32,6 +32,7 @@ class NotificationDetailsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "消息详情"
         viewConfig()
     }
     

@@ -18,13 +18,9 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     var gambit_cover: [String] = []
     var community_cover: [String] = []
     
-    
-    
-    
+
     // 记录偏移量
     var navOffset: CGFloat = 0
-    
-    var tableView: UITableView!
     
     
     var personalModel: PersonalModel?
@@ -38,41 +34,56 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         self.title = "个人资料"
         self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
         
-        self.tableView = UITableView()
-      
-        
-        if self.targetId == AppInfo.shared.user?.userId {
-//            tableView.frame = CGRect(x: 0, y: <#T##Int#>, width: <#T##Int#>, height: <#T##Int#>)
-        }
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        self.view.addSubview(tableView)
-        
         let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(moreAction))
         self.navigationItem.rightBarButtonItem = rightItem
         
-    
-        let messageB = UIButton(frame:CGRect(x:50, y:UIScreen.main.bounds.size.height-60-70, width:UIScreen.main.bounds.size.width-100, height:50))
-        if kScreen_height == 812 {
-            self.tableView.frame = CGRect(x:0, y:-88, width:UIScreen.main.bounds.size.width, height:UIScreen.main.bounds.size.height-70)
-            messageB.frame = CGRect(x:50, y:UIScreen.main.bounds.size.height-60-100, width:UIScreen.main.bounds.size.width-100, height:50)
-            
-        }
-        messageB.backgroundColor = UIColor.themeColor
-        messageB.layer.cornerRadius = 15
-        messageB.clipsToBounds = true
-
-       
-        messageB.addTarget(self, action: #selector(messageBAction(button:)), for: .touchUpInside)
-        self.view.addSubview(messageB)
         
+    
+        view.addSubview(self.tableView)
+        bgView.addSubview(button)
+        view.addSubview(bgView)
+        
+        if self.targetId == AppInfo.shared.user?.userId {  //如果是自己的社区
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            bgView.isHidden = true
+        }else {
+            self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 64, 0)
+            
+            bgView.isHidden = false
+        }
+    
     }
+    
+    lazy var tableView :UITableView = {
+        let tabView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), style: .plain)
+        tabView.delegate = self
+        tabView.dataSource = self
+        tabView.separatorStyle = UITableViewCellSeparatorStyle.none
+        return tabView
+    }()
+    
+    lazy var bgView: UIView = {
+        let bgView = UIView(frame: CGRect(x: 0, y: kScreen_height - 60, width: kScreen_width, height: 60))
+        bgView.backgroundColor = UIColor.groupTableViewBackground
+        return bgView
+    }()
+    
+    lazy var button : UIButton = {
+        let btn = UIButton(frame: CGRect(x: 20, y: 5, width: kScreen_width - 40, height: 50))
+        btn.backgroundColor = UIColor.themeColor
+        btn.layer.cornerRadius = 15
+        btn.clipsToBounds = true
+        btn.addTarget(self, action: #selector(messageBAction(button:)), for: .touchUpInside)
+        return btn
+    }()
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navBarBgAlpha = 0
+        navigationController?.navigationBar.isTranslucent = true
+        
          netRequestAction()
     }
     
@@ -81,16 +92,20 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
        
         // 设置导航条透明度
         DispatchQueue.main.async {
-            self.navBarBgAlpha = self.navOffset
-            if self.navOffset == 0 {
-                self.navigationController?.navigationBar.subviews.first?.alpha = 0
-            }
+            
+           
+            
+            self.navBarBgAlpha = 0
+            self.navigationController?.navigationBar.subviews.first?.alpha = 0
         }
-        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navBarBgAlpha = 1
         self.navigationController?.navigationBar.subviews.first?.alpha = 1
     }
     
@@ -359,8 +374,10 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         self.navOffset = scrollView.contentOffset.y / 200
-        self.navBarBgAlpha = self.navOffset
+        self.navigationController?.navigationBar.subviews.first?.alpha = self.navOffset
         setNeedsStatusBarAppearanceUpdate()
+        
+        
     }
     
     // MARK: - 自定义方法
@@ -410,6 +427,12 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     self.community_cover = (self.personalModel?.community_cover)!
                     self.gambit_cover = (self.personalModel?.gambit_cover)!
                     self.tableView.reloadData()
+                    
+                    if self.personalModel?.isFollow == "1" {
+                        self.button.setTitle("发消息", for: .normal)
+                    }else {
+                        self.button.setTitle("添加好友", for: .normal)
+                    }
         
                 }else {
                     SVProgressHUD.showError(withStatus: info)

@@ -25,6 +25,7 @@ class BaseViewController: UIViewController {
         
         // 取消滑动视图自动偏移
         automaticallyAdjustsScrollViewInsets = false
+        navigationController?.navigationBar.isTranslucent = false
         
         // item颜色
         navigationController?.navigationBar.tintColor = UIColor.white

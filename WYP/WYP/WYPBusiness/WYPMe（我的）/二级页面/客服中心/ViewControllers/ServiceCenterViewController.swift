@@ -71,7 +71,7 @@ extension ServiceCenterViewController: WKScriptMessageHandler {
         if message.name == "call" {
             
             //自动打开拨号页面并自动拨打电话
-            let urlString = "tel://364815562"
+            let urlString = "tel://010-64457191"
             if let url = URL(string: urlString) {
                 //根据iOS系统版本，分别处理
                 if #available(iOS 10, *) {

@@ -15,7 +15,7 @@ class VerifyApplicationViewController: BaseViewController {
     // 群组Id
     var groupId: String?
     // 群组跳过来的为2
-    var flag = 1
+    var flag: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class VerifyApplicationViewController: BaseViewController {
     }
     func layoutPageSubviews() {
         backView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(64)
+            make.top.equalTo(view).offset(0)
             make.left.equalTo(view)
             make.size.equalTo(CGSize(width: kScreen_width, height: 101))
         }
@@ -88,9 +88,7 @@ class VerifyApplicationViewController: BaseViewController {
                     groupList.isAdd = true
                     let viewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 4]
                     self.navigationController?.popToViewController(viewController!, animated: true)
-                    
-                    
-                    
+                
                 } else {
                     SVProgressHUD.showError(withStatus: info!)
                 }

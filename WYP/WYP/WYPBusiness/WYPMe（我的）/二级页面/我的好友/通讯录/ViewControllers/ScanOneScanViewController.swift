@@ -33,20 +33,13 @@ class ScanOneScanViewController: BaseViewController {
         navigationItem.titleView?.backgroundColor = UIColor.black
         navigationItem.titleView?.tintColor = UIColor.white
         
-        view.addSubview(messageLabel)
+        
         
     }
     func layoutPageSubViews(){
-        messageLabel.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(view)
-            make.height.equalTo(50)
-        }
+        
     }
-    lazy var messageLabel:UILabel = {
-        let messageLable:UILabel = UILabel()
-        messageLable.backgroundColor = UIColor.white
-        return messageLable
-    }()
+   
     func scan(){
         // 获得 AVCaptureDevice 对象，用于初始化捕获视频的硬件设备，并配置硬件属性
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -105,7 +98,7 @@ class ScanOneScanViewController: BaseViewController {
             // 开始视频捕获
             captureSession?.startRunning()
             // 将显示信息的 label 与 top bar 提到最前面
-            view.bringSubview(toFront: messageLabel)
+
         } catch {
             // 如果出现任何错误，仅做输出处理，并返回
             print(error)
@@ -125,7 +118,7 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
         // 检查：metadataObjects 对象不为空，并且至少包含一个元素
         if metadataObjects == nil || metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
-            messageLabel.text = "No QR code is detected"
+            
             return
         }
         
@@ -138,13 +131,30 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                messageLabel.text = metadataObj.stringValue
-                if zhiXingCount == 0{
-                    let vc = VerifyApplicationViewController()
-                    vc.applyMobile = metadataObj.stringValue
+                
+                let vc = VerifyApplicationViewController()
+               
+                let str = metadataObj.stringValue
+                if metadataObj.stringValue.hasPrefix("group") {
+                    vc.flag = 2
+                    
+//                    let str2 = str.substringFromIndex(metadataObj.stringValue.startIndex.advancedBy(6)) //Swift
+                    let startIndex = str?.index((str?.startIndex)!, offsetBy:6)//获取d的索引
+                    let result = str?.substring(from: startIndex!)
+                    vc.groupId = result
+                }else {
+                    vc.flag = 1
+                    vc.applyMobile = str
+                }
+            
+                if zhiXingCount == 0 {
                     navigationController?.pushViewController(vc, animated: true)
                     zhiXingCount = zhiXingCount + 1
                 }
+                
+                
+                
+               
 
             }
         }

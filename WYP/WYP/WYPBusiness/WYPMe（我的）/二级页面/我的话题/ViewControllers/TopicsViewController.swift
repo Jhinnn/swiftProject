@@ -16,6 +16,8 @@ class TopicsViewController: BaseViewController {
     
     var newsData = [MineTopicsModel]()
     
+    var headerView: TopicHeaderView?
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -26,13 +28,38 @@ class TopicsViewController: BaseViewController {
         let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
         navigationItem.rightBarButtonItem = releaseBtn
         setupUI()
+        
+        //加载头部视图
+        loadHeadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    
         // 加载网络数据
         loadNetData(requestType: .update)
+    }
+    
+    
+    func loadHeadData() {
+        NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dic) in
+            if success {
+                
+                self.headerView?.addressImage.isHidden = false
+                
+                let imageStr = dic?["avatar"] as! String
+                let imageUrl = URL(string: imageStr)
+                self.headerView?.imageVie.kf.setImage(with: imageUrl)
+                
+                self.headerView?.titleLabel.text = dic?["nickname"] as? String
+                self.headerView?.addressLabel.text = dic?["address"] as? String
+                self.headerView?.textLabel.text = dic?["signature"] as? String
+                
+                self.headerView?.attentionLabel.text = String.init(format: "%@关注", (dic?["follow_num"] as? String)!)
+                self.headerView?.fansLabel.text = String.init(format: "%@粉丝", (dic?["fans_num"] as? String)!)
+            }
+        }
     }
 
     
@@ -41,12 +68,10 @@ class TopicsViewController: BaseViewController {
         view.addSubview(tableView)
         
         setupUIFrame()
-        print(self.targId!)
-        let views = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
-        views?.targetId = self.targId!
-        self.headView.addSubview(views!)
+    
+        self.headerView = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
+        self.headView.addSubview(self.headerView!)
         tableView.tableHeaderView = headView
-
     }
     
     // 设置控件frame

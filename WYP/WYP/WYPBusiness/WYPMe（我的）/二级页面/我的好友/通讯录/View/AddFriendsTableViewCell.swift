@@ -39,7 +39,7 @@ class AddFriendsTableViewCell: UITableViewCell {
         friendsImageView.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(13.5)
             make.centerY.equalTo(contentView)
-            make.size.equalTo(CGSize(width: 40, height: 40))
+            make.size.equalTo(CGSize(width: 45, height: 45))
         }
         addAttentionButton.snp.makeConstraints { (make) in
             make.right.equalTo(contentView).offset(-13.5)
@@ -47,7 +47,7 @@ class AddFriendsTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView)
         }
         friendsTitleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(friendsImageView.snp.right).offset(25)
+            make.left.equalTo(friendsImageView.snp.right).offset(15)
             make.right.equalTo(addAttentionButton.snp.left).offset(-10)
             make.centerY.equalTo(contentView)
             make.height.equalTo(20)
@@ -65,14 +65,14 @@ class AddFriendsTableViewCell: UITableViewCell {
     lazy var friendsImageView: UIImageView = {
         let friendsImageView = UIImageView()
         friendsImageView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
-        friendsImageView.layer.cornerRadius = 20
+        friendsImageView.layer.cornerRadius = 22.5
         friendsImageView.layer.masksToBounds = true
         
         return friendsImageView
     }()
     lazy var friendsTitleLabel: UILabel = {
         let friendsTitleLabel = UILabel()
-        friendsTitleLabel.font = UIFont.systemFont(ofSize: 15)
+        friendsTitleLabel.font = UIFont.systemFont(ofSize: 16)
         return friendsTitleLabel
     }()
     lazy var addAttentionButton: UIButton = {
@@ -80,7 +80,8 @@ class AddFriendsTableViewCell: UITableViewCell {
         addAttentionButton.layer.cornerRadius = 5
         addAttentionButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         addAttentionButton.setTitle("添加", for: .normal)
-        addAttentionButton.backgroundColor = UIColor.naviColor
+        addAttentionButton.backgroundColor = UIColor.themeColor
+        addAttentionButton.setTitleColor(UIColor.white, for: .normal)
 //        addAttentionButton.setImage(UIImage(named: "mine_add_button_normal_iPhone"), for: .normal)
 //        addAttentionButton.setImage(UIImage(named: "mine_add_button_selected_iPhone"), for: .selected)
         addAttentionButton.addTarget(self, action: #selector(applyAddFriends(sender:)), for: .touchUpInside)

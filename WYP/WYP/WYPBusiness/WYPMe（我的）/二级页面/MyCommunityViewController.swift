@@ -61,7 +61,7 @@ class MyCommunityViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navBarBgAlpha = 0
-        
+
         navigationController?.navigationBar.isTranslucent = false
         
         if userId == AppInfo.shared.user?.userId ?? "" {
@@ -88,7 +88,7 @@ class MyCommunityViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        IQKeyboardManager.shared().isEnabled = false
+//        IQKeyboardManager.shared().isEnabled = false
         
         // 是否发布
         let userDefault = UserDefaults.standard
@@ -142,7 +142,7 @@ class MyCommunityViewController: BaseViewController {
 //        //添加 消息免打扰View
         view.addSubview(essageDoNotDisturb)
 //        //添加 发送消息按钮
-        view.addSubview(sendMessageButton)
+//        view.addSubview(sendMessageButton)
         setupUIFrame()
     }
     
@@ -150,17 +150,17 @@ class MyCommunityViewController: BaseViewController {
 //        tableView.snp.makeConstraints { (make) in
 //            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
 //        }
-        sendMessageButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(view).offset(-33)
-            make.left.equalTo(view.snp.left).offset(42)
-            make.right.equalTo(view.snp.right).offset(-42)
-            make.height.equalTo(44)
-        }
+//        sendMessageButton.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(view).offset(-33)
+//            make.left.equalTo(view.snp.left).offset(42)
+//            make.right.equalTo(view.snp.right).offset(-42)
+//            make.height.equalTo(44)
+//        }
 
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(-64)
             make.left.right.equalTo(view)
-            make.height.equalTo(kScreen_height)
+            make.bottom.equalTo(self.view)
         }
         
         headerImgView.snp.makeConstraints { (make) in
@@ -172,7 +172,7 @@ class MyCommunityViewController: BaseViewController {
         nickNameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(headerImgView.snp.right).offset(20)
             make.top.equalTo(headerImgView).offset(10)
-            make.size.equalTo(CGSize(width: 100, height: 30))
+            make.size.equalTo(CGSize(width: 200, height: 30))
         }
         
         friendsCountLabel.snp.makeConstraints { (make) in
@@ -238,7 +238,8 @@ class MyCommunityViewController: BaseViewController {
     
     // 表视图
     lazy var tableView: WYPTableView = {
-        let tableView = WYPTableView(frame: CGRect.zero, style: .plain)
+        
+        let tableView = WYPTableView(frame:CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), style: .plain)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
@@ -405,6 +406,10 @@ class MyCommunityViewController: BaseViewController {
             self.fansCountLabel.text = String.init(format: "粉丝:%@人", (dic?["fans_num"] as? String)!)
             self.friendsCountLabel.text = String.init(format: "好友:%@人", (dic?["friend_num"] as? String)!)
             
+            let url = URL(string: (dic?["avatar"] as? String)!)
+            self.headerImgView.kf.setImage(with: url, placeholder: UIImage(named: "mine_header_icon_normal_iPhone"), options: nil, progressBlock: nil, completionHandler: nil)
+            
+            self.nickNameLabel.text = String.init(format: "%@", (dic?["nickname"] as? String)!)
             
             self.addFriendsPhoneNumber = (dic?["mobile"] as? String)!
             

@@ -15,6 +15,9 @@ class GroupsMemberListViewController: BaseViewController {
     // 群资料
     var groupDetail: ApplyGroupModel?
     
+    //阿拉丁ID
+    var aldrid: String?
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +70,8 @@ class GroupsMemberListViewController: BaseViewController {
             if success {
                 self.groupDetail = ApplyGroupModel.deserialize(from: result)
                 self.memberCollectionView.reloadData()
+                
+                
             } else {
                 print(info!)
             }
@@ -172,7 +177,7 @@ class GroupsMemberListViewController: BaseViewController {
         })
         let codeImageView = UIImageView()
         codeImageView.backgroundColor = UIColor.clear
-        codeImageView.image = SGQRCodeGenerateManager.generate(withDefaultQRCodeData: self.groupId! + " ####", imageViewWidth: CGFloat(196))
+        codeImageView.image = SGQRCodeGenerateManager.generate(withDefaultQRCodeData: "group," + (self.groupDetail?.aldrid)!, imageViewWidth: CGFloat(196))
         whiteView.addSubview(codeImageView)
         codeImageView.snp.makeConstraints({ (make) in
             make.size.equalTo(196)

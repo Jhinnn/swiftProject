@@ -63,7 +63,8 @@ class HomeViewController: BaseViewController {
         setupBarButtonItem()
         setupUI()
         
-        automaticallyAdjustsScrollViewInsets = false
+        
+
         tableView.register(ClassifyTableViewCell.self, forCellReuseIdentifier: "classfiy")
         
     }
@@ -114,16 +115,16 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        // 设置导航条透明度
-//        DispatchQueue.main.async {
-//            self.navBarBgAlpha = self.navOffset
-//            if self.navOffset == 0 {
-//                self.searchTitleView.alpha = 0.5
-//                self.navigationController?.navigationBar.subviews.first?.alpha = 0
-//            } else {
-//                self.searchTitleView.alpha = 1
-//            }
-//        }
+        // 设置导航条透明度
+        DispatchQueue.main.async {
+            self.navBarBgAlpha = self.navOffset
+            if self.navOffset == 0 {
+                self.searchTitleView.alpha = 0.5
+                self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            } else {
+                self.searchTitleView.alpha = 1
+            }
+        }
         
         
         
@@ -1007,19 +1008,28 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     adv.newsTitle = self.homeNewsData?[indexPath.row].infoTitle
                     navigationController?.pushViewController(adv, animated: true)
                 } else {
-                    let newsDetail = NewsDetailsViewController()
-                    newsDetail.newsTitle = homeNewsData?[indexPath.row].infoTitle
-                    newsDetail.newsId = homeNewsData?[indexPath.row].newsId
-                    newsDetail.commentNumber = homeNewsData?[indexPath.row].infoComment
-                    navigationController?.pushViewController(newsDetail, animated: true)
+                    
+                    if homeNewsData?[indexPath.row].infoSource == "话题" {
+                        let talkNewsDetail = TalkNewsDetailsViewController()
+                        talkNewsDetail.newsId = homeNewsData?[indexPath.row].newsId
+                        navigationController?.pushViewController(talkNewsDetail, animated: true)
+                    }else {
+                        let newsDetail = NewsDetailsViewController()
+                        newsDetail.newsTitle = homeNewsData?[indexPath.row].infoTitle
+                        newsDetail.newsId = homeNewsData?[indexPath.row].newsId
+                        newsDetail.commentNumber = homeNewsData?[indexPath.row].infoComment
+                        navigationController?.pushViewController(newsDetail, animated: true)
+                    }
+                    
+                    
                 }
             }
         } else if indexPath.section == 6 {
-            let topicDetails = TopicsDetailsViewController()
-            topicDetails.delegate = self
-            topicDetails.topicId = homeData?.hotTopics?[indexPath.row].topicId ?? ""
-            topicDetails.contentData = homeData?.hotTopics?[indexPath.row]
-            navigationController?.pushViewController(topicDetails, animated: true)
+            
+            let talkNewsDetail = TalkNewsDetailsViewController()
+            talkNewsDetail.newsId = homeNewsData?[indexPath.row].newsId
+            navigationController?.pushViewController(talkNewsDetail, animated: true)
+        
         }
     }
     

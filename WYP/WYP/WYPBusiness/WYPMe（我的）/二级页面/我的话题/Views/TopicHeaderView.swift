@@ -33,31 +33,9 @@ class TopicHeaderView: UIView {
         self.imageVie?.layer.masksToBounds = true
         self.imageVie?.layer.cornerRadius = self.imageVie.width / 2
         
-        load_init()
     }
     
     
-    func load_init(){
-        
-        print(self.targetId)
-        NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: self.targetId!) { (success, info, dic) in
-            if success {
-                
-                self.addressImage.isHidden = false
-                
-                let imageStr = dic?["avatar"] as! String
-                let imageUrl = URL(string: imageStr)
-                self.imageVie.kf.setImage(with: imageUrl)
-                
-                self.titleLabel.text = dic?["nickname"] as? String
-                self.addressLabel.text = dic?["address"] as? String
-                self.textLabel.text = dic?["signature"] as? String
-                
-                self.attentionLabel.text = String.init(format: "%@关注", (dic?["follow_num"] as? String)!)
-                self.fansLabel.text = String.init(format: "%@粉丝", (dic?["fans_num"] as? String)!)
-            }
-        }
-        
-    }
+ 
     
 }

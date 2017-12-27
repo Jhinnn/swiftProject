@@ -55,55 +55,19 @@ class TalkNewsDetailsViewController: BaseViewController {
         
         viewConfig()
         layoutPageSubviews()
-//        commentDetailBtn.badgeLabel.frame = CGRect(x: 9, y: -2, width: 15, height: 8)
-//        commentDetailBtn.badgeLabel.text = commentNumber ?? "0"
-//        commentDetailBtn.addSubview(commentDetailBtn.badgeLabel)
+
         request()
 
-        // 监听键盘
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 推送资讯入口
-        let push = UserDefaults.standard.object(forKey: "NewsPush") as? String
-        if push == "NewsPush" {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "common_navback_button_normal_iPhone"), style: .done, target: self, action: #selector(rebackToRootViewAction(sender:)))
-        }
-        
-        IQKeyboardManager.shared().isEnabled = false
-        navigationController?.navigationBar.isHidden = false
-        
+   
+
         loadCommentList(requestType: .update)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        SVProgressHUD.dismiss()
-        IQKeyboardManager.shared().isEnabled = true
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    deinit {
-        if isAddObserver {
-            self.wbScrollView?.removeObserver(self, forKeyPath: "contentSize")
-        }
-        
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
-        
-    }
-    
-    // MARK: - event reaponse
-    //返回
-    func rebackToRootViewAction(sender: UIBarButtonItem) {
-        let pushJudge = UserDefaults.standard
-        pushJudge.set("", forKey: "NewsPush")
-        self.dismiss(animated: false, completion: nil)
-    }
     // 分享
     func shareBarButtonItemAction() {
         
@@ -180,11 +144,7 @@ class TalkNewsDetailsViewController: BaseViewController {
         view.addSubview(newsTableView)
         newsTableView.isHidden = true
         view.addSubview(interactionView)
-//        interactionView.addSubview(moreButton)
-//        interactionView.addSubview(shareButton)
-//        interactionView.addSubview(collectionButton)
-//        interactionView.addSubview(commentDetailBtn)
-//        interactionView.addSubview(commentTextField)
+
         
         let imageArray = ["theme_icon_more_normal","detail_icon_follow_normal","theme_icon_publish_normal"]
         let titleArray = ["更多","关注","提问"]
@@ -591,6 +551,7 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     func answerAction(sender: UIButton) {
         let vc = TalkNewsDetailsReplyViewController()
         vc.newsId = self.newsId
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 

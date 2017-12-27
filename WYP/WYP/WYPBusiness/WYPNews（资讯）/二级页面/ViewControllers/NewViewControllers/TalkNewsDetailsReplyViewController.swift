@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TalkNewsDetailsReplyViewController: BaseViewController {
+class TalkNewsDetailsReplyViewController: UIViewController {
     
     // 新闻id
     var newsId: String?
@@ -21,14 +21,43 @@ class TalkNewsDetailsReplyViewController: BaseViewController {
 
         
         title = "评论"
-    
+        view.backgroundColor = UIColor.white
+        
+
         view.addSubview(textView)
         view.addSubview(commitButton)
         view.addSubview(lineView)
         bgView.addSubview(photoView)
         view.addSubview(bgView)
         
+    
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_navback_button_normal_iPhone"), style: .done, target: self, action: #selector(saveButtonItemAction))
+        
     }
+    
+    func saveButtonItemAction(){
+        
+//        if !textView.text.isEmpty {
+//            let alertController = UIAlertController(title: "提示",
+//                                                    message: "是否保存评论内容", preferredStyle: .alert)
+//            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            let okAction = UIAlertAction(title: "好的", style: .default, handler: {
+//                action in
+//                self.navigationController?.popViewController(animated: true)
+//            })
+//            alertController.addAction(cancelAction)
+//            alertController.addAction(okAction)
+//            self.present(alertController, animated: true, completion: nil)
+//        }else {
+//            self.navigationController?.popViewController(animated: true)
+//        }
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    
     
     lazy var textView: UITextView = {
         let textView = UITextView(frame: CGRect(x: 15, y: 20, width: kScreen_width - 30, height: 150))

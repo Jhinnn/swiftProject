@@ -190,24 +190,24 @@ class NewsDetailsViewController: BaseViewController {
         }
         shareButton.snp.makeConstraints { (make) in
             make.right.equalTo(interactionView).offset(-15)
-            make.bottom.equalTo(interactionView).offset(-24.5)
-            make.size.equalTo(CGSize(width: 12.5, height: 16))
+            make.centerY.equalTo(interactionView.snp.centerY)
+            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         collectionButton.snp.makeConstraints { (make) in
-            make.right.equalTo(shareButton.snp.left).offset(-10)
-            make.bottom.equalTo(interactionView).offset(-24.5)
+            make.right.equalTo(shareButton.snp.left).offset(-15)
+            make.centerY.equalTo(interactionView.snp.centerY)
             make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         commentDetailBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(collectionButton.snp.left).offset(-10)
-            make.bottom.equalTo(interactionView).offset(-23)
+            make.right.equalTo(collectionButton.snp.left).offset(-15)
+            make.centerY.equalTo(interactionView.snp.centerY)
             make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         commentTextField.snp.makeConstraints { (make) in
-            make.bottom.equalTo(interactionView).offset(-20)
+            make.centerY.equalTo(interactionView.snp.centerY)
             make.left.equalTo(interactionView).offset(13)
-            make.right.equalTo(commentDetailBtn.snp.left).offset(-15)
-            make.height.equalTo(30)
+            make.right.equalTo(commentDetailBtn.snp.left).offset(-30)
+            make.height.equalTo(34)
         }
     }
     
@@ -306,10 +306,10 @@ class NewsDetailsViewController: BaseViewController {
         commentTextField.font = UIFont.systemFont(ofSize: 13)
         commentTextField.delegate = self
         commentTextField.borderStyle = .roundedRect
-        commentTextField.placeholder = "期待你的神评论"
+        commentTextField.placeholder = "写下你的想法..."
         commentTextField.returnKeyType = .send
         
-        let imageView = UIImageView(frame: CGRect(x: 5, y: 8.25, width: 13.5, height: 13.5))
+        let imageView = UIImageView(frame: CGRect(x: 5, y: 8, width: 16, height: 16))
         imageView.image = UIImage(named: "community_icon_edit_normal")
         commentTextField.addSubview(imageView)
         
