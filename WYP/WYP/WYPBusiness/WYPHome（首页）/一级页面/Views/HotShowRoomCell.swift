@@ -55,7 +55,7 @@ class HotShowRoomCell: UICollectionViewCell {
                 ShowTimeLabel.text = "已经上演"
             }
             
-            if newValue?.title == "特洛伊" {
+            if newValue?.isTop == "1" {
                 starIconImage.isHidden = false
             } else {
                 starIconImage.isHidden = true

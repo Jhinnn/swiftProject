@@ -527,6 +527,11 @@ public var kApi_deleteGroupMember: String {
     return kApi_baseUrl(path: "api/del_qun_member")
 }
 
+
+public var kApi_addGroupMember: String {
+    return kApi_baseUrl(path: "api/friend_join_group")
+}
+
 public var kApi_invitationJoinGroup: String {
     return kApi_baseUrl(path: "api/friend_join_group")
 }

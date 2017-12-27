@@ -38,7 +38,7 @@ class GroupMemberListHeadCollectionReusableView: UICollectionReusableView {
     }()
     
     lazy var HeaderView: UIImageView = {
-        let HeaderView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 140))
+        let HeaderView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 180))
         HeaderView.backgroundColor = UIColor.yellow
         HeaderView.image = UIImage(named: "grzy_porfile_bg")
 
