@@ -92,10 +92,10 @@ class MyFriendsViewController: BaseViewController {
         navigationController?.pushViewController(SearchFriendsViewController(), animated: true)
     }
     func addFriends(sender: UIBarButtonItem) {
-        let x = UIScreen.main.bounds.size.width - 10 - 100
+        let x = UIScreen.main.bounds.size.width - 20
         let y = CGFloat(78)
         let p = CGPoint(x: x, y: y)
-        LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["datum_icon_dimension_normal","mine_invite_icon_normal_iPhone"], menuWidth: 150, isShowTriangle: false, delegate: self as! LSXPopMenuDelegate)
+        LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["",""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
         //原来的代码，暂时注释掉
 //        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }

@@ -110,14 +110,14 @@ class GroupsMemberListViewController: BaseViewController {
         let messageObject = UMSocialMessageObject()
         // 分享链接
         let urlString = kApi_baseUrl(path: "mob/Fenxiang/index.html?id=") + self.groupId!
-        let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
-        let shareLink = kApi_baseUrl(path: url)
+//        let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
+        let shareLink = URL.init(string: urlString)
         // 设置文本
         //        messageObject.text = newsTitle! + shareLink
         // 分享对象
         let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: self.title ?? "", descr: "快加入我们的讨论吧！", thumImage: nil)
         // 网址
-        shareObject.webpageUrl = shareLink
+        shareObject.webpageUrl = urlString
         messageObject.shareObject = shareObject
         
         // 传相关参数
@@ -320,14 +320,17 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
             }else if indexPath.row == (groupDetail?.groupMember?.count)! + 1 {
                 let deleteGroupMemberVC = DeleteGroupMemberViewController()
                 deleteGroupMemberVC.members = self.groupDetail?.groupMember
-                deleteGroupMemberVC.groupId = self.groupId; self.navigationController?.pushViewController(deleteGroupMemberVC, animated: true)
+                deleteGroupMemberVC.groupId = self.groupId;
+                self.navigationController?.pushViewController(deleteGroupMemberVC, animated: true)
+            }else {
+                let personalInformationVC = PersonalInformationViewController()
+                personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
+                personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+                personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
+                
+                navigationController?.pushViewController(personalInformationVC, animated: true)
             }
-            let personalInformationVC = PersonalInformationViewController()
-            personalInformationVC.name = groupDetail?.groupMember?[indexPath.item].name
-            personalInformationVC.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
-            personalInformationVC.targetId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
             
-            navigationController?.pushViewController(personalInformationVC, animated: true)
             
         }else {
             let personalInformationVC = PersonalInformationViewController()

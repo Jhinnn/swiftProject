@@ -32,9 +32,6 @@ class ScanOneScanViewController: BaseViewController {
         navigationItem.title = "二维码/条码"
         navigationItem.titleView?.backgroundColor = UIColor.black
         navigationItem.titleView?.tintColor = UIColor.white
-        
-        
-        
     }
     func layoutPageSubViews(){
         
@@ -132,25 +129,33 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
             
             if metadataObj.stringValue != nil {
                 
-                let vc = VerifyApplicationViewController()
-               
+                
+    
                 let str = metadataObj.stringValue
                 if metadataObj.stringValue.hasPrefix("group") {
-                    vc.flag = 2
+                    let vc = GroupsMemberListViewController()
+                
+                    let startIndex = str?.index((str?.startIndex)!, offsetBy:8)//获取d的索引
+                    let result = str?.substring(from: startIndex!)
                     
-//                    let str2 = str.substringFromIndex(metadataObj.stringValue.startIndex.advancedBy(6)) //Swift
+                    vc.groupId = result
+                    if zhiXingCount == 0 {
+                        navigationController?.pushViewController(vc, animated: true)
+                        zhiXingCount = zhiXingCount + 1
+                    }
+                }else {
+                    let vc = PersonalInformationViewController()
                     let startIndex = str?.index((str?.startIndex)!, offsetBy:6)//获取d的索引
                     let result = str?.substring(from: startIndex!)
-                    vc.groupId = result
-                }else {
-                    vc.flag = 1
-                    vc.applyMobile = str
+                    vc.targetId = result
+                    vc.conversationType = Int(RCConversationType.ConversationType_PRIVATE.rawValue)
+                    if zhiXingCount == 0 {
+                        navigationController?.pushViewController(vc, animated: true)
+                        zhiXingCount = zhiXingCount + 1
+                    }
                 }
             
-                if zhiXingCount == 0 {
-                    navigationController?.pushViewController(vc, animated: true)
-                    zhiXingCount = zhiXingCount + 1
-                }
+               
                 
                 
                 

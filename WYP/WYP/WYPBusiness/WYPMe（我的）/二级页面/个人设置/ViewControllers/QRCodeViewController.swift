@@ -35,8 +35,10 @@ class QRCodeViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
-         let myPhoneNumber = AppInfo.shared.user?.mobilePhoneNumber
-        let image:UIImage = self.creatCIQRCodeImage(formdata: myPhoneNumber!, imageWidth: 300)
+        let userId = AppInfo.shared.user?.userId ?? ""
+        let intUserId = Int(userId)! + 100000
+        let str = String.init(format: "chat,%d", intUserId)
+        let image:UIImage = self.creatCIQRCodeImage(formdata: str, imageWidth: 300)
         QRcodeImageViewLocal?.image = image
     }
     

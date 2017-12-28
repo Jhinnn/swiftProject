@@ -31,7 +31,9 @@ class MyQRViewController: BaseViewController {
         // 显示二维码
         // 获取用户Id
         let userId = AppInfo.shared.user?.userId ?? ""
-        QRImageView.image = SGQRCodeGenerateManager.generate(withDefaultQRCodeData: userId + " ####", imageViewWidth: CGFloat(imageW))
+        let intUserId = Int(userId)! + 100000
+        let str = String.init(format: "chat,%d", intUserId)
+        QRImageView.image = SGQRCodeGenerateManager.generate(withDefaultQRCodeData: str, imageViewWidth: CGFloat(imageW))
         
     }
     

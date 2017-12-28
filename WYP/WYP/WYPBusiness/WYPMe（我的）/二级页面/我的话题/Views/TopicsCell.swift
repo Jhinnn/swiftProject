@@ -35,7 +35,7 @@ class TopicsCell: UITableViewCell {
             
             seeCountLabel.text = String.init(format: "%@ 浏览", newValue?.topics.seeCount ?? "-")
             
-            commentCountLabel.text = String.init(format: "%@ 评论", newValue?.topics.commentCount ?? "-")
+            commentCountLabel.text = String.init(format: "%@ 个回答", newValue?.topics.commentCount ?? "-")
             
             starCountButton.setTitle(" \(newValue?.topics.starCount ?? "0")", for: .normal)
             if newValue?.topics.isStar == "1" {

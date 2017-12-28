@@ -1012,6 +1012,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     if homeNewsData?[indexPath.row].infoSource == "话题" {
                         let talkNewsDetail = TalkNewsDetailsViewController()
                         talkNewsDetail.newsId = homeNewsData?[indexPath.row].newsId
+                        talkNewsDetail.newsTitle = homeNewsData?[indexPath.row].infoTitle
                         navigationController?.pushViewController(talkNewsDetail, animated: true)
                     }else {
                         let newsDetail = NewsDetailsViewController()
@@ -1027,7 +1028,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 6 {
             
             let talkNewsDetail = TalkNewsDetailsViewController()
-            talkNewsDetail.newsId = homeNewsData?[indexPath.row].newsId
+            talkNewsDetail.newsId = homeData?.hotTopics?[indexPath.row].topicId
+            talkNewsDetail.newsTitle = homeData?.hotTopics?[indexPath.row].content
             navigationController?.pushViewController(talkNewsDetail, animated: true)
         
         }

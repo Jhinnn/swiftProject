@@ -107,7 +107,7 @@ class ChatDeatilViewController: RCConversationViewController {
     // 返回按钮
     lazy var backButton: UIButton = {
         let backButton = UIButton(type: .custom)
-        backButton.frame = CGRect(x: 0, y: 0, width: 8, height: 13.5)
+        backButton.frame = CGRect(x: 10, y: 0, width: 40, height: 18)
         backButton.setImage(UIImage(named: "common_navback_button_normal_iPhone"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         
@@ -151,7 +151,8 @@ class ChatDeatilViewController: RCConversationViewController {
     
     // 查看好友社区
     func checkFriendCoumity(sender: UIBarButtonItem) {
-        goToUserCommunity(userId: self.targetId)
+//        goToUserCommunity(userId: self.targetId)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func goToUserCommunity(userId: String) {

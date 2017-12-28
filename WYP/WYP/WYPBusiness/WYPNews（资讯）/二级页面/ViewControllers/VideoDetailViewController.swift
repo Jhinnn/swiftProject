@@ -753,6 +753,13 @@ extension VideoDetailViewController: UITextFieldDelegate {
 }
 
 extension VideoDetailViewController: ShowRoomCommentCellDelegate {
+    func commentPushButtonDidSelected(sender: UIButton, comments: CommentModel) {
+        let personInfo = PersonalInformationViewController()
+        personInfo.targetId = comments.uid ?? ""
+        personInfo.name = comments.nickName ?? ""
+        self.navigationController?.pushViewController(personInfo, animated: true)
+    }
+    
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel) {
         
         let token = AppInfo.shared.user?.token ?? ""

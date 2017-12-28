@@ -135,7 +135,9 @@ class MyCommunityViewController: BaseViewController {
         tableViewHeaderView.addSubview(fansCountLabel)
 //        tableView.addSubview(followBtn)
         tableViewHeaderView.addSubview(followBtn)
-//        view.addSubview(commentInputView)
+        
+        view.addSubview(interactionView)
+        interactionView.addSubview(commentTextField)
         
 //        //添加 查找聊天记录View
         view.addSubview(findChatHistory)
@@ -157,11 +159,20 @@ class MyCommunityViewController: BaseViewController {
 //            make.height.equalTo(44)
 //        }
 
+        
+        
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(view).offset(-64)
             make.left.right.equalTo(view)
             make.bottom.equalTo(self.view)
         }
+        
+        interactionView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalTo(view)
+            make.height.equalTo(44)
+        }
+        
+        
         
         headerImgView.snp.makeConstraints { (make) in
             make.bottom.equalTo(tableViewHeaderView).offset(-20)
@@ -192,11 +203,15 @@ class MyCommunityViewController: BaseViewController {
             make.left.equalTo(fansCountLabel.snp.right).offset(15)
             make.size.equalTo(CGSize(width: 60, height: 30))
         }
-        /* 原来代码
-        commentInputView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(view)
-            make.bottom.equalTo(view).offset(0)
+        
+        commentTextField.snp.makeConstraints { (make) in
+            
+            make.top.equalTo(interactionView.snp.top).offset(3)
+            make.right.equalTo(interactionView).offset(-20)
+            make.left.equalTo(interactionView).offset(20)
+            make.height.equalTo(34)
         }
+        /* 原来代码
         */
         /* 原来代码
         findChatHistory.snp.makeConstraints { (make) in
@@ -320,19 +335,43 @@ class MyCommunityViewController: BaseViewController {
         return followBtn
     }()
     
-    // 评论文本输入框
-    lazy var commentInputView: CMInputView = {
-        let commentInputView = CMInputView()
-        commentInputView.delegate = self
-        commentInputView.placeholderColor = UIColor.gray
-        commentInputView.placeholderFont = UIFont.systemFont(ofSize: 14)
-        commentInputView.isHidden = true
-        commentInputView.returnKeyType = .send
-        commentInputView.font = UIFont.systemFont(ofSize: 14)
-        commentInputView.backgroundColor = UIColor.white
-        
-        return commentInputView
+    // 背景
+    lazy var interactionView: UIView = {
+        let interactionView = UIView()
+        interactionView.backgroundColor = UIColor.white
+        interactionView.isHidden = true
+        return interactionView
     }()
+    
+    // 评论框
+    lazy var commentTextField: SYTextField = {
+        let commentTextField = SYTextField()
+        commentTextField.font = UIFont.systemFont(ofSize: 13)
+        commentTextField.delegate = self
+        commentTextField.borderStyle = .roundedRect
+        commentTextField.placeholder = "写下你的评论..."
+        commentTextField.returnKeyType = .send
+    
+        return commentTextField
+    }()
+    
+//    // 评论文本输入框
+//    lazy var commentInputView: CMInputView = {
+//        let commentInputView = CMInputView()
+//        commentInputView.delegate = self
+//        commentInputView.placeholderColor = UIColor.gray
+//        commentInputView.placeholderFont = UIFont.systemFont(ofSize: 14)
+//        commentInputView.isHidden = true
+//        commentInputView.returnKeyType = .send
+//        commentInputView.font = UIFont.systemFont(ofSize: 14)
+//        commentInputView.backgroundColor = UIColor.white
+//
+//        return commentInputView
+//
+//    }()
+    
+    
+    
     
     lazy var bgView: UIView = {
         let bgView = UIView()
@@ -375,12 +414,13 @@ class MyCommunityViewController: BaseViewController {
         let userInfo = note.userInfo!
         let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
-        
+        self.interactionView.isHidden = false
         let deltaY = keyBoardBounds.size.height
         let animations:(() -> Void) = {
             //键盘的偏移量
-            self.commentInputView.isHidden = false
-            self.commentInputView.transform = CGAffineTransform(translationX: 0 , y: -deltaY)
+            self.interactionView.transform = CGAffineTransform(translationX: 0 , y: -deltaY)
+            
+            
         }
         
         if duration > 0 {
@@ -396,7 +436,7 @@ class MyCommunityViewController: BaseViewController {
     
     func keyboardWillHidden(note: NSNotification) {
         
-        commentInputView.isHidden = true
+        interactionView.isHidden = true
     }
     
     //加载个人信息
@@ -689,8 +729,8 @@ extension MyCommunityViewController: StatementCellDelegate {
         currentStatement = statement
         dataId = statement._id
         
-        commentInputView.becomeFirstResponder()
-        commentInputView.isHidden = false
+        commentTextField.becomeFirstResponder()
+        commentTextField.isHidden = false
     }
     
     func buttonActionRequestNetData(URLString: String, parameters: [String: Any]) {
@@ -703,7 +743,7 @@ extension MyCommunityViewController: StatementCellDelegate {
                 let info = json["info"].stringValue
                 if code == 200 {
                     SVProgressHUD.showSuccess(withStatus: info)
-                    self.commentInputView.resignFirstResponder()
+                    self.commentTextField.resignFirstResponder()
                     
                     let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
                     
@@ -716,7 +756,7 @@ extension MyCommunityViewController: StatementCellDelegate {
                             statementFrame.statement = statement
                         }
                     }
-                    self.commentInputView.resignFirstResponder()
+                    self.commentTextField.resignFirstResponder()
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)
@@ -728,19 +768,60 @@ extension MyCommunityViewController: StatementCellDelegate {
     }
 }
 
-extension MyCommunityViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//extension MyCommunityViewController: UITextViewDelegate {
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//
+//        if WYPContain.stringContainsEmoji(text) {
+//            if WYPContain.isNineKeyBoard(text) {
+//                return true
+//            }
+//            SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
+//            return false
+//        }
+//
+//        //在这里做你响应return键的代码
+//        if text == "\n" {
+//            //判断输入的字是否是回车，即按下return
+//            // 获取用户token
+//            let userId = AppInfo.shared.user?.userId ?? "1"
+//            let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+//                                          "method": "POST",
+//                                          "uid": userId,
+//                                          "dynamic_id": dataId,
+//                                          "content": commentInputView.text]
+//            let url = kApi_baseUrl(path: "api/community_comment")
+//            buttonActionRequestNetData(URLString: url, parameters: parameters)
+//            commentInputView.resignFirstResponder
+//            commentInputView.text = ""
+//            return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+//        }
+//
+//        return true
+//    }
+//
+//    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+//        if textView.text.characters.count >= 150 {
+//            return false
+//        }
+//        return true
+//    }
+//}
+
+extension MyCommunityViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if WYPContain.stringContainsEmoji(text) {
-            if WYPContain.isNineKeyBoard(text) {
+        
+        if WYPContain.stringContainsEmoji(textField.text) {
+            
+            if WYPContain.isNineKeyBoard(textField.text) {
                 return true
             }
             SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
             return false
         }
-        
+    
         //在这里做你响应return键的代码
-        if text == "\n" {
+        if !(textField.text?.isEmpty)! {
             //判断输入的字是否是回车，即按下return
             // 获取用户token
             let userId = AppInfo.shared.user?.userId ?? "1"
@@ -748,19 +829,24 @@ extension MyCommunityViewController: UITextViewDelegate {
                                           "method": "POST",
                                           "uid": userId,
                                           "dynamic_id": dataId,
-                                          "content": commentInputView.text]
+                                          "content": textField.text!]
             let url = kApi_baseUrl(path: "api/community_comment")
             buttonActionRequestNetData(URLString: url, parameters: parameters)
-            commentInputView.resignFirstResponder
-            commentInputView.text = ""
+            interactionView.isHidden = true
+            
             return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
         }
-        
+
         return true
+        
     }
     
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        if textView.text.characters.count >= 150 {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if WYPContain.stringContainsEmoji(string) {
+            if WYPContain.isNineKeyBoard(string) {
+                return true
+            }
+            SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
             return false
         }
         return true

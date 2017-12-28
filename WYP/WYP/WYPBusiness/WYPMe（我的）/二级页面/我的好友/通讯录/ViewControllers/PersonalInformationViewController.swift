@@ -34,8 +34,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         self.title = "个人资料"
         self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
         
-        let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(moreAction))
-        self.navigationItem.rightBarButtonItem = rightItem
+        
         
         
     
@@ -46,8 +45,17 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         if self.targetId == AppInfo.shared.user?.userId {  //如果是自己的社区
             
             bgView.isHidden = true
+            if kScreen_height == 812 {
+                tableView.frame = CGRect(x: 0, y: -88, width: kScreen_width, height: kScreen_height)
+            }else{
+                tableView.frame = CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height)
+            }
         }else {
-            
+            if kScreen_height == 812 {
+                tableView.frame = CGRect(x: 0, y: -88, width: kScreen_width, height: kScreen_height - 70)
+            }else{
+                tableView.frame = CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height - 64)
+            }
             bgView.isHidden = false
         }
     
@@ -57,11 +65,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     lazy var tableView :UITableView = {
         var tabView = UITableView()
-        if kScreen_height == 812 {
-            tabView.frame = CGRect(x: 0, y: -88, width: kScreen_width, height: kScreen_height)
-        }else{
-          tabView.frame = CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height)
-        }
+        
         
         tabView.delegate = self
         tabView.dataSource = self
@@ -348,6 +352,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         }
         if indexPath.section == 3 {
             let topicsView = TopicsViewController()
+            topicsView.titleName = self.personalModel?.name
             topicsView.targId = self.targetId
             self.navigationController?.pushViewController(topicsView, animated: true)
 //             print("话题点击事件")
@@ -408,7 +413,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             conversationVC.title = self.name
             conversationVC.flag = 11
             navigationController?.pushViewController(conversationVC, animated: true)
-        }else{
+        }else {
             let vc = VerifyApplicationViewController()
             vc.applyMobile = self.personalModel?.mobile
             navigationController?.pushViewController(vc, animated: true)
@@ -417,11 +422,10 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func moreAction() {
-        print("更多")
-        let x = UIScreen.main.bounds.size.width - 10 - 100
+        let x = UIScreen.main.bounds.size.width - 20
         let y = CGFloat(78)
         let p = CGPoint(x: x, y: y)
-        LSXPopMenu.show(at: p, titles: ["删除好友", "修改备注", "推荐名片"], icons: ["", "", ""], menuWidth: 150, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
+        LSXPopMenu.show(at: p, titles: ["修改备注", "推荐名片"], icons: ["", ""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
     }
     
     func netRequestAction(){
@@ -434,10 +438,13 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     self.personalModel = PersonalModel.deserialize(from: jsonString)
                     self.community_cover = (self.personalModel?.community_cover)!
                     self.gambit_cover = (self.personalModel?.gambit_cover)!
+//                    self.name = self.personalModel?.name
                     self.tableView.reloadData()
                     
                     if self.personalModel?.isFollow == "1" {
                         self.button.setTitle("发消息", for: .normal)
+                        let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
+                        self.navigationItem.rightBarButtonItem = rightItem
                     }else {
                         self.button.setTitle("添加好友", for: .normal)
                     }
@@ -470,8 +477,6 @@ extension PersonalInformationViewController:LSXPopMenuDelegate{
         if index == 0 {
             
         }else if index == 1 {
-            
-        }else {
             
         }
     }

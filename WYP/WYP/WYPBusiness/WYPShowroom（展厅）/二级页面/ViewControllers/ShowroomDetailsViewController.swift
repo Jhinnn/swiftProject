@@ -1326,6 +1326,13 @@ extension ShowroomDetailsViewController: UICollectionViewDataSource, UICollectio
 }
 
 extension ShowroomDetailsViewController: ShowRoomCommentCellDelegate {
+    func commentPushButtonDidSelected(sender: UIButton, comments: CommentModel) {
+        let personInfo = PersonalInformationViewController()
+        personInfo.targetId = comments.uid ?? ""
+        personInfo.name = comments.nickName ?? ""
+        self.navigationController?.pushViewController(personInfo, animated: true)
+    }
+    
     // 点赞按钮
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel) {
         let uid = AppInfo.shared.user?.userId ?? ""

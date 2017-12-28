@@ -10,7 +10,7 @@ import UIKit
 
 class SetSystemViewController: BaseViewController {
 
-    fileprivate let titleArray = ["账号安全", "关于阿拉丁", "隐私", "通用"]
+    fileprivate let titleArray = ["账号安全", "关于1001阿拉丁", "隐私", "通用"]
     
     // MARK: - Lifecycle
     

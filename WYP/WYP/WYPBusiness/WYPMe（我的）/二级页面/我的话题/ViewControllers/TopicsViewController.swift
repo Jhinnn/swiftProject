@@ -10,6 +10,8 @@ import UIKit
 
 class TopicsViewController: BaseViewController {
     
+    var titleName: String?
+    
     var targId: String?
     
     var dataList = [TopicsFrameModel]()
@@ -23,10 +25,16 @@ class TopicsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if self.targId == AppInfo.shared.user?.userId {
+            title = "我的话题"
+            let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
+            navigationItem.rightBarButtonItem = releaseBtn
+        }else {
+            title = self.titleName! + "的话题"
+        }
         
-        title = "我的话题"
-        let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
-        navigationItem.rightBarButtonItem = releaseBtn
+        
+        
         setupUI()
         
         //加载头部视图
@@ -279,7 +287,6 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
         let newsDetail = TalkNewsDetailsViewController()
         
         newsDetail.newsId = newsData[indexPath.row].topicId
-        
         navigationController?.pushViewController(newsDetail, animated: true)
     }
     // 修改删除按钮的文字

@@ -205,8 +205,7 @@ class UserSettingsViewController: BaseViewController {
     }
     
     func goToUserQR() {
-        let QRVC = MyQRViewController()
-        navigationController?.pushViewController(QRVC, animated: false)
+        
     }
 }
 
@@ -255,7 +254,6 @@ extension UserSettingsViewController: UITableViewDataSource, UITableViewDelegate
             }
         }
         if indexPath.row == 4 {
-            //我的二维码
             
         }
         

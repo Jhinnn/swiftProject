@@ -67,7 +67,9 @@ class AddFriendsViewController: BaseViewController {
     lazy var searchLabel:UILabel = {
         let searchLabel:UILabel = UILabel()
         searchLabel.text = "阿拉丁号/手机号"
-//        searchLabel.textColor = UIColor(red: 247, green: 247, blue: 248, alpha: 1)
+        searchLabel.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(pushNextPage))
+        searchLabel.addGestureRecognizer(tap)
         searchLabel.textColor = UIColor(red: 192/250, green: 192/250, blue: 192/250, alpha: 1)
         return searchLabel
     }()
@@ -79,8 +81,15 @@ class AddFriendsViewController: BaseViewController {
         categoryTableView.register(CategoryAddFriendsTableViewCell.self, forCellReuseIdentifier: "CategoryAddFriendsTableViewCell")
         return categoryTableView
     }()
+    
+    
+    func pushNextPage() {
+        navigationController?.pushViewController(SearchFriendsViewController(), animated: true)
+    }
 
 }
+
+
 extension AddFriendsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2

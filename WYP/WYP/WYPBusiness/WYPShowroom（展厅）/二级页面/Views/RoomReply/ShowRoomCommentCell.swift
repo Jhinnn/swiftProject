@@ -11,6 +11,7 @@ import UIKit
 protocol ShowRoomCommentCellDelegate: NSObjectProtocol {
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel)
     func commentReplyButtonDidSelected(sender: UIButton)
+    func commentPushButtonDidSelected(sender: UIButton, comments: CommentModel)
 }
 
 class ShowRoomCommentCell: UITableViewCell {
@@ -58,6 +59,10 @@ class ShowRoomCommentCell: UITableViewCell {
         delegate?.commentReplyButtonDidSelected(sender: sender)
     }
     
+    func clickClickButton(sender: UIButton) {
+        delegate?.commentPushButtonDidSelected(sender: sender, comments: (commentFrame?.comment)!)
+    }
+    
     // MARK: - setter and getter
     // 头像
     lazy var headImgView: UIButton = {
@@ -65,7 +70,7 @@ class ShowRoomCommentCell: UITableViewCell {
         headImgView.backgroundColor = UIColor.init(hexColor: "f1f2f4")
         headImgView.layer.masksToBounds = true
         headImgView.layer.cornerRadius = 19.5
-        
+        headImgView.addTarget(self, action: #selector(clickClickButton(sender:)), for: .touchUpInside)
         return headImgView
     }()
     

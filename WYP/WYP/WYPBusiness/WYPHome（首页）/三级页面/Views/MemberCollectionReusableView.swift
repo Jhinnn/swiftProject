@@ -39,19 +39,19 @@ class MemberCollectionReusableView: UICollectionReusableView {
     }
     func layoutPageSubviews() {
         groupMarkLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(13)
-            make.top.equalTo(self).offset(25)
+            make.left.equalTo(self).offset(30)
+            make.top.equalTo(self).offset(20)
             make.height.equalTo(15)
         }
         groupIntroduceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(13)
-            make.right.equalTo(self).offset(-13)
+            make.left.equalTo(self).offset(30)
+            make.right.equalTo(self).offset(-30)
             make.top.equalTo(groupMarkLabel.snp.bottom).offset(23)
         }
         applyToGroupButton.snp.makeConstraints { (make) in
             make.top.equalTo(groupIntroduceLabel.snp.bottom).offset(66)
             make.centerX.equalTo(self)
-            make.size.equalTo(CGSize(width: 276.5, height: 47))
+            make.size.equalTo(CGSize(width: kScreen_width - 60, height: 47))
         }
         
         // 推荐的情况下
@@ -88,6 +88,7 @@ class MemberCollectionReusableView: UICollectionReusableView {
         groupIntroduceLabel.font = UIFont.systemFont(ofSize: 15)
         groupIntroduceLabel.textColor = UIColor.init(hexColor: "b3b4b8")
         groupIntroduceLabel.numberOfLines = 0
+        
         return groupIntroduceLabel
     }()
     
@@ -98,7 +99,7 @@ class MemberCollectionReusableView: UICollectionReusableView {
         var image = UIImage(named: "common_backgroundColor_button_normal_iPhone")
         image = image?.resizableImage(withCapInsets: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1), resizingMode: .tile)
         applyToGroupButton.setBackgroundImage(image, for: .normal)
-        applyToGroupButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        applyToGroupButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         applyToGroupButton.addTarget(self, action: #selector(applyAddGroup(sender:)), for: .touchUpInside)
         applyToGroupButton.layer.cornerRadius = 8.0
         applyToGroupButton.layer.masksToBounds = true

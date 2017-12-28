@@ -322,6 +322,13 @@ extension CommentReplyViewController: TopicReplyTableViewCellDelegate {
 }
 
 extension CommentReplyViewController: ShowRoomCommentCellDelegate {
+    func commentPushButtonDidSelected(sender: UIButton, comments: CommentModel) {
+        let personInfo = PersonalInformationViewController()
+        personInfo.targetId = comments.uid ?? ""
+        personInfo.name = comments.nickName ?? ""
+        self.navigationController?.pushViewController(personInfo, animated: true)
+    }
+    
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel) {
         
         if flag == 3 { // 展厅详情 - 资讯详情

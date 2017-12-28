@@ -22,6 +22,9 @@ class ApplyGroupModel: HandyJSON {
     // 成员等级
     var rank : String?
     
+    // 群组介绍
+//    var Introduction: String?
+    
     // 成员等级
     var aldrid : String?
     
@@ -29,6 +32,7 @@ class ApplyGroupModel: HandyJSON {
         mapper <<< self.groupMember <-- "user"
         mapper <<< self.groupDetail <-- "Introduction"
         mapper <<< self.aldrid <-- "aldrid"
+        
     }
 
     required init() {}

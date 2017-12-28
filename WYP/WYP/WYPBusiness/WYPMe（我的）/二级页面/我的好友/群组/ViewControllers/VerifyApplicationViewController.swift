@@ -44,19 +44,19 @@ class VerifyApplicationViewController: BaseViewController {
             make.size.equalTo(CGSize(width: kScreen_width, height: 101))
         }
         verifyinfoLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(backView).offset(22.5)
+            make.top.equalTo(backView).offset(18)
             make.left.equalTo(backView).offset(13)
             make.right.equalTo(backView).offset(-13)
             make.height.equalTo(15)
         }
         verifyTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(verifyinfoLabel.snp.bottom).offset(8)
+            make.top.equalTo(verifyinfoLabel.snp.bottom).offset(15)
             make.left.equalTo(backView).offset(13)
             make.right.equalTo(backView).offset(-13)
             make.height.equalTo(30)
         }
         redLine.snp.makeConstraints { (make) in
-            make.top.equalTo(verifyinfoLabel.snp.bottom).offset(40)
+            make.top.equalTo(verifyTextField.snp.bottom).offset(2)
             make.left.equalTo(backView).offset(13)
             make.right.equalTo(backView).offset(-13)
             make.height.equalTo(1)
@@ -105,7 +105,7 @@ class VerifyApplicationViewController: BaseViewController {
     }()
     lazy var verifyinfoLabel: UILabel = {
         let verifyinfoLabel = UILabel()
-        verifyinfoLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        verifyinfoLabel.font = UIFont.boldSystemFont(ofSize: 16)
         verifyinfoLabel.textColor = UIColor.init(hexColor: "999999")
         verifyinfoLabel.text = "你需要发送验证申请，等待对方通过"
         return verifyinfoLabel
@@ -115,7 +115,7 @@ class VerifyApplicationViewController: BaseViewController {
         let verifyTextField = UITextField()
         verifyTextField.borderStyle = .none
         verifyTextField.placeholder = "请输入验证内容"
-        
+        verifyTextField.font = UIFont.boldSystemFont(ofSize: 16)
         return verifyTextField
     }()
     
