@@ -96,7 +96,7 @@ class AttentionViewController: BaseViewController {
     private func layoutPageSubviews() {
         navTabBar.snp.makeConstraints { (make) in
             make.top.equalTo(view)
-//            make.centerX.equalTo(view)
+            make.centerX.equalTo(view)
             if deviceTypeIphone5() || deviceTypeIPhone4() {
                make.width.equalTo(kScreen_width)
             } else {

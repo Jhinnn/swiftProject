@@ -88,7 +88,7 @@ class MyCommunityViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        IQKeyboardManager.shared().isEnabled = false
+        IQKeyboardManager.shared().isEnabled = false
         
         // 是否发布
         let userDefault = UserDefaults.standard
@@ -169,7 +169,7 @@ class MyCommunityViewController: BaseViewController {
         
         interactionView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(view)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
         
         
@@ -207,8 +207,8 @@ class MyCommunityViewController: BaseViewController {
         commentTextField.snp.makeConstraints { (make) in
             
             make.top.equalTo(interactionView.snp.top).offset(3)
-            make.right.equalTo(interactionView).offset(-20)
-            make.left.equalTo(interactionView).offset(20)
+            make.right.equalTo(interactionView).offset(0)
+            make.left.equalTo(interactionView).offset(0)
             make.height.equalTo(34)
         }
         /* 原来代码
@@ -351,6 +351,10 @@ class MyCommunityViewController: BaseViewController {
         commentTextField.borderStyle = .roundedRect
         commentTextField.placeholder = "写下你的评论..."
         commentTextField.returnKeyType = .send
+        
+        let imageView = UIImageView(frame: CGRect(x: 5, y: 9, width: 16, height: 16))
+        imageView.image = UIImage(named: "community_icon_edit_normal")
+        commentTextField.addSubview(imageView)
     
         return commentTextField
     }()
@@ -768,44 +772,7 @@ extension MyCommunityViewController: StatementCellDelegate {
     }
 }
 
-//extension MyCommunityViewController: UITextViewDelegate {
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//
-//        if WYPContain.stringContainsEmoji(text) {
-//            if WYPContain.isNineKeyBoard(text) {
-//                return true
-//            }
-//            SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
-//            return false
-//        }
-//
-//        //在这里做你响应return键的代码
-//        if text == "\n" {
-//            //判断输入的字是否是回车，即按下return
-//            // 获取用户token
-//            let userId = AppInfo.shared.user?.userId ?? "1"
-//            let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
-//                                          "method": "POST",
-//                                          "uid": userId,
-//                                          "dynamic_id": dataId,
-//                                          "content": commentInputView.text]
-//            let url = kApi_baseUrl(path: "api/community_comment")
-//            buttonActionRequestNetData(URLString: url, parameters: parameters)
-//            commentInputView.resignFirstResponder
-//            commentInputView.text = ""
-//            return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
-//        }
-//
-//        return true
-//    }
-//
-//    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-//        if textView.text.characters.count >= 150 {
-//            return false
-//        }
-//        return true
-//    }
-//}
+
 
 extension MyCommunityViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -833,7 +800,7 @@ extension MyCommunityViewController: UITextFieldDelegate {
             let url = kApi_baseUrl(path: "api/community_comment")
             buttonActionRequestNetData(URLString: url, parameters: parameters)
             interactionView.isHidden = true
-            
+            textField.text  = ""
             return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
         }
 

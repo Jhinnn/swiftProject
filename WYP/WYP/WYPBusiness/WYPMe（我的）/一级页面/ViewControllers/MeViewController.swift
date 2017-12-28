@@ -202,7 +202,7 @@ class MeViewController: UITableViewController {
                 community.fansCount = String.init(format: "粉丝:%@人", AppInfo.shared.user?.fans ?? "0")
                 community.friendsCountLabel.text = String.init(format: "好友:%d人", friendsArr.count)
                 community.type = "2"
-                community.userType = "200"
+//                community.userType = "200"
                 community.isFollowed = false
                 self.navigationController?.pushViewController(community, animated: true)
                 
