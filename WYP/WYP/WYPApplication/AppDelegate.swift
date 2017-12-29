@@ -86,10 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         
         // MARK: - 开始获取定位信息
-//        LocationManager.shared.starUpdatingLocation()
+        LocationManager.shared.starUpdatingLocation()
         
         // MARK: - 添加开屏广告
-//        self.setupXHLaunchAd()
+        self.setupXHLaunchAd()
         
         // 注册推送
         registerNotification(application: application)

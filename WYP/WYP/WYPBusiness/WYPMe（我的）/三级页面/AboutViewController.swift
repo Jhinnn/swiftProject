@@ -13,7 +13,7 @@ class AboutViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "关于阿拉丁"
+        title = "关于1001阿拉丁"
         
         setupUI()
     }

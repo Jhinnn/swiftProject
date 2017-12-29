@@ -297,6 +297,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             }
      
         case 4:
+            if self.personalModel?.isFollow == "1"  {
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
             cell?.textLabel?.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
             if indexPath.row == 0 {
@@ -307,11 +308,15 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                 
             }
             if indexPath.row == 1 {
-                cell?.textLabel?.text = "消息免打扰"
-                let uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
-                uiSwitch.setOn(false, animated: true)
-                uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
-                cell?.addSubview(uiSwitch)
+                
+                
+                    cell?.textLabel?.text = "消息免打扰"
+                    let uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
+                    uiSwitch.setOn(false, animated: true)
+                    uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
+                    cell?.addSubview(uiSwitch)
+                }
+             
             }
        
             

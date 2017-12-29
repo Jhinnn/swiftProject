@@ -598,6 +598,7 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
         let personInfo = PersonalInformationViewController()
         personInfo.targetId = comments.uid ?? ""
         personInfo.name = comments.nickName ?? ""
+        
         self.navigationController?.pushViewController(personInfo, animated: true)
     }
     
