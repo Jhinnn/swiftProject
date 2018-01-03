@@ -164,20 +164,12 @@ class ChatDeatilViewController: RCConversationViewController {
                 self.userData = PersonModel.deserialize(from: result)
                 
                 if self.userData?.userImage != nil && userId != mineId {
-                    let community = MyCommunityViewController()
-                    community.title = "个人主页"
-                    community.userId = userId
-                    community.headImageUrl = self.userData?.userImage ?? ""
-                    community.nickName = self.userData?.name ?? ""
-                    community.fansCount = String.init(format: "粉丝:%@人", self.userData?.peopleFans ?? "0")
-                    community.friendsCountLabel.text = String.init(format: "好友:%@人", self.userData?.peopleFriends ?? "0")
-                    community.type = "2"
-                    // 判断是否关注
-                    if self.userData?.isFollow == "0" {
-                        community.isFollowed = false
-                    } else {
-                        community.isFollowed = true
-                    }
+
+                    let community = PersonalInformationViewController()
+                    community.targetId = userId
+                    community.name = self.userData?.name ?? ""
+                   
+                 
                     self.navigationController?.pushViewController(community, animated: true)
                 }
             } else {
