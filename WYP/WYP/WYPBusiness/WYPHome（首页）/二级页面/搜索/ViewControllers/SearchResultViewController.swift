@@ -432,10 +432,43 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             }
         case 1:
             if homeSearch?.news != nil {
-                let news = NewsDetailsViewController()
-                news.newsId = homeSearch?.news?[indexPath.row].newsId
-                news.commentNumber = homeSearch?.news?[indexPath.row].infoComment
-                navigationController?.pushViewController(news, animated: true)
+                
+                if homeSearch?.news![indexPath.row].infoType! == 4 {
+                    let newsDetail = NewsPhotosDetailViewController()
+                    newsDetail.currentIndex = 0
+                    newsDetail.imageArray = homeSearch?.news![indexPath.row].infoImageArr
+                    newsDetail.contentArray = homeSearch?.news![indexPath.row].contentArray
+                    newsDetail.newsId = homeSearch?.news![indexPath.row].newsId ?? ""
+                    newsDetail.commentNumber = homeSearch?.news![indexPath.row].infoComment
+                    navigationController?.pushViewController(newsDetail, animated: true)
+                }
+//
+//                if newsData![indexPath.row].infoType! == 4 { // 图集
+//                    let newsDetail = NewsPhotosDetailViewController()
+//                    newsDetail.currentIndex = 0
+//                    newsDetail.imageArray = newsData?[indexPath.row].infoImageArr
+//                    newsDetail.contentArray = newsData?[indexPath.row].contentArray
+//                    newsDetail.newsId = newsData?[indexPath.row].newsId ?? ""
+//                    newsDetail.commentNumber = newsData?[indexPath.row].infoComment
+//                    navigationController?.pushViewController(newsDetail, animated: true)
+//
+                else if homeSearch?.news![indexPath.row].infoType! == 2 { // 视频
+                    let newsDetail = VideoDetailViewController()
+                    newsDetail.newsId = homeSearch?.news![indexPath.row].newsId ?? ""
+                    navigationController?.pushViewController(newsDetail, animated: true)
+
+                } else { // web
+                    let newsDetail = NewsDetailsViewController()
+                    newsDetail.newsId = homeSearch?.news![indexPath.row].newsId
+                    newsDetail.commentNumber = homeSearch?.news![indexPath.row].infoComment
+                    navigationController?.pushViewController(newsDetail, animated: true)
+                
+            
+                }
+//                let news = NewsDetailsViewController()
+//                news.newsId = homeSearch?.news?[indexPath.row].newsId
+//                news.commentNumber = homeSearch?.news?[indexPath.row].infoComment
+//                navigationController?.pushViewController(news, animated: true)
             }
         case 2:
             if homeSearch?.rooms != nil {

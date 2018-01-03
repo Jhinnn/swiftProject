@@ -30,8 +30,6 @@ class HomeViewController: BaseViewController {
     // 跳转至AppStore
     var trackViewUrl: String?
     
-    
-    
     // banner图片
     var bannerImages: [String]? {
         willSet {
@@ -47,9 +45,7 @@ class HomeViewController: BaseViewController {
     
     // 分组标题
     lazy var sectionTitleArray: [String] = {
-//        let sectionTitleArray = ["抢票专区", "热门发现", "推荐群组", "热点资讯", "", "精选话题"]
         let sectionTitleArray = ["", "", "热门发现", "推荐群组", "", "精选话题", "劲爆热抢"]
-        
         return sectionTitleArray
     }()
         
@@ -57,14 +53,14 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadHomeData()
         
         NetworkStatusListener()
         setupBarButtonItem()
         setupUI()
-        
-        
 
+        
         tableView.register(ClassifyTableViewCell.self, forCellReuseIdentifier: "classfiy")
         
     }
@@ -138,18 +134,20 @@ class HomeViewController: BaseViewController {
         
         // 根据城市名称的长度来设置偏移量
         let cityName = UserDefaults.standard.object(forKey: "cityName") as? String ?? "北京"
-        if cityName.characters.count < 3 {
+        
+        
+        if cityName.count == 2 {  //2
             leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
             leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 35, bottom: 0, right: 0)
             leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -25, bottom: 0, right: 0)
-        } else if cityName.characters.count > 2 && cityName.characters.count < 5 {
+        } else if cityName.count == 4 {
             leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
             leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 60, bottom: 0, right: 0)
             leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -25, bottom: 0, right: 0)
         } else {
-            leftBarButton.frame = CGRect(x: 0, y: 0, width: 90, height: 30)
-            leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 55, bottom: 0, right: 0)
-            leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -50, bottom: 0, right: 0)
+            leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
+            leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 45, bottom: 0, right: 0)
+            leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -25, bottom: 0, right: 0)
         }
         leftBarButton.setTitle(cityName, for: .normal)
         // 设置城市选择按钮
@@ -370,8 +368,7 @@ class HomeViewController: BaseViewController {
     
     }
     
-    
-
+  
     
     
     // 消息铃铛
@@ -391,8 +388,6 @@ class HomeViewController: BaseViewController {
         // 设置表视图的头视图
         tableView.tableHeaderView = syBanner
         
-       
-        
         // 添加刷新的头
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { 
             self.loadHomeData()
@@ -411,6 +406,7 @@ class HomeViewController: BaseViewController {
         popularizeBtn.addTarget(self, action: #selector(popularizeBtnAction), for: .touchUpInside)
         tableView.addSubview(popularizeBtn)
         
+        //状态栏背景
         view.addSubview(statusBarBackground)
         statusBarBackground.snp.makeConstraints { (make) in
             make.left.right.equalTo(view)
@@ -493,7 +489,7 @@ class HomeViewController: BaseViewController {
     
     // 导航栏上的view
     lazy var searchTitleView: commonSearchView = {
-        let searchTitleView = commonSearchView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 34))
+        let searchTitleView = commonSearchView(frame: .zero)
 
         // 添加手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(searchNews(sender:)))
@@ -504,17 +500,6 @@ class HomeViewController: BaseViewController {
         return searchTitleView
     }()
     
-    func setupButton(_ imageName: String, _ title: String, _ frame: CGRect) -> UIButton {
-        let button = UIButton(type: .custom)
-        button.backgroundColor = UIColor.blue
-        let btnImg = UIImage(named: imageName)
-        btnImg?.cornerImage(size: CGSize(width: 40, height: 40), radius: 20, fillColor: UIColor.clear, completion: { (image) in
-            button.setImage(btnImg, for: .normal)
-        })
-        button.setTitle(title, for: .normal)
-        
-        return button
-    }
     
     lazy var searchViewController: PYSearchViewController = {
         let hotSearchArray = ["赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017","赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017"]

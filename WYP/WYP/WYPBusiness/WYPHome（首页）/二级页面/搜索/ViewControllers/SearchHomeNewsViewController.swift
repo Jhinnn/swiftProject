@@ -102,7 +102,7 @@ class SearchHomeNewsViewController: BaseViewController {
             changeText.append(string)
         }
         
-        print(changeText)
+        
         
         for i in 0..<nsText.length {
             let textRange = NSMakeRange(i, 1)
@@ -110,9 +110,9 @@ class SearchHomeNewsViewController: BaseViewController {
                 
                 nsText.enumerateSubstrings(in: textRange, options: .byLines, using: {
                     (substring, substringRange, _, _) in
-                    print("\(char)\(i)\(String(describing: substring))")
+                    
                     if (substring == char) {
-                        print("执行了")
+                        
                         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: substringRange)
                     }
                 })
@@ -124,6 +124,7 @@ class SearchHomeNewsViewController: BaseViewController {
     // MARK: - setter and getter
     lazy var newsTableView: WYPTableView = {
         let newsTableView = WYPTableView(frame: .zero, style: .plain)
+        
         newsTableView.delegate = self
         newsTableView.dataSource = self
         newsTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
@@ -136,6 +137,7 @@ class SearchHomeNewsViewController: BaseViewController {
         newsTableView.register(TravelTableViewCell.self, forCellReuseIdentifier: "textCell")
         newsTableView.register(ThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
         newsTableView.register(VideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
+
         return newsTableView
     }()
     
@@ -188,7 +190,7 @@ extension SearchHomeNewsViewController: UITableViewDelegate,UITableViewDataSourc
             case 2: //上图下文
                 let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoInfoTableViewCell
                 cell.infoModel = newsData?[indexPath.row]
-                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
                 cell.infoTitleLabel.attributedText = attributeString
                 return cell
             case 3: //左文右图
@@ -222,6 +224,8 @@ extension SearchHomeNewsViewController: UITableViewDelegate,UITableViewDataSourc
         
         if newsData != nil {
             switch newsData![indexPath.row].showType! {
+            case 0:
+                return 280 * width_height_ratio
             case 1:
                 return 87.5 * width_height_ratio
             case 2:
@@ -238,9 +242,9 @@ extension SearchHomeNewsViewController: UITableViewDelegate,UITableViewDataSourc
         }
         return 0
     }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 0.1
+//    }
     // 选中单元格
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

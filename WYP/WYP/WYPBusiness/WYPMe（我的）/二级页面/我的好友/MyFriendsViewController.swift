@@ -73,9 +73,11 @@ class MyFriendsViewController: BaseViewController {
     // 初始化导航条
     func initWithNavgationBar() {
         
-        let searchBarButton = UIBarButtonItem(image: UIImage(named: "common_whiteSearch_button_normal_iPhone"), style: .done, target: self, action: #selector(searchFriends(sender:)))
-        let addBarButton = UIBarButtonItem(image: UIImage(named: "mine_addFriends_button_normal_iPhone"), style: .done, target: self, action: #selector(addFriends(sender:)))
-        navigationItem.rightBarButtonItems = [addBarButton,searchBarButton]
+        let searchBarButton = UIBarButtonItem(image: UIImage(named: "address_icon_scan_normal"), style: .done, target: self, action: #selector(addFriends(sender:)))
+        
+        let addBarButton = UIBarButtonItem(image: UIImage(named: "friend_icon_search_normal"), style: .done, target: self, action: #selector(searchFriends(sender:)))
+        navigationItem.rightBarButtonItems = [searchBarButton,addBarButton]
+
 
     }
     func layoutPageSubviews() {
@@ -89,13 +91,20 @@ class MyFriendsViewController: BaseViewController {
     
     // MARK: - event response
     func searchFriends(sender: UIBarButtonItem) {
+        
+        
+        
         navigationController?.pushViewController(SearchFriendsViewController(), animated: true)
     }
     func addFriends(sender: UIBarButtonItem) {
-        let x = UIScreen.main.bounds.size.width - 20
-        let y = CGFloat(78)
-        let p = CGPoint(x: x, y: y)
-        LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["",""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
+        
+        navigationController?.pushViewController(ScanOneScanViewController(), animated: true)
+        
+//        let x = UIScreen.main.bounds.size.width - 20
+        
+//        let y = CGFloat(78)
+//        let p = CGPoint(x: x, y: y)
+//        LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["",""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
         //原来的代码，暂时注释掉
 //        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }

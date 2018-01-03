@@ -209,7 +209,7 @@ class SearchResultNaviViewController: BaseViewController {
     }()
     
     lazy var searchView: SearchTitleView = {
-        let searchView = SearchTitleView(frame: CGRect(x: 0, y: 0, width: kScreen_width - 110, height: 30))
+        let searchView = SearchTitleView(frame: CGRect(x: 10, y: 0, width: kScreen_width - 138, height: 30))
         searchView.searchTextField.delegate = self
         return searchView
     }()

@@ -79,7 +79,7 @@ class TalkNewsDetailsViewController: BaseViewController {
         
         let messageObject = UMSocialMessageObject()
         // 分享链接
-        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1", newsId ?? "")
+        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1&phone_type=1", newsId ?? "")
         let shareLink = kApi_baseUrl(path: url)
         // 设置文本
 //        messageObject.text = newsTitle! + shareLink

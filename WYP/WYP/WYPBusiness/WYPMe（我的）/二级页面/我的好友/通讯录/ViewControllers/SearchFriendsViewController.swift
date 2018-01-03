@@ -101,7 +101,7 @@ class SearchFriendsViewController: BaseViewController {
         let textField = UITextField()
         textField.delegate = self
         textField.backgroundColor = UIColor.white
-        textField.placeholder = "请输入对方手机号"
+        textField.placeholder = "请输入对方手机号/阿拉丁号"
         return textField
     }()
     lazy var submitButton: UIButton = {

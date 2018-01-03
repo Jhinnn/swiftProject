@@ -86,7 +86,7 @@ public var kScreen_size: CGSize {
 
 // 
 public var width_height_ratio: CGFloat {
-    
+
    return kScreen_width / 375
 }
 

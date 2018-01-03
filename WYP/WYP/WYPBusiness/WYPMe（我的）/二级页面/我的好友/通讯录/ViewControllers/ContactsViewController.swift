@@ -12,8 +12,8 @@ class ContactsViewController: BaseViewController {
 
     var indexArray : NSMutableArray? = NSMutableArray()
     var letterResultArray : NSMutableArray? = NSMutableArray()
-    var titleArray = ["通过手机号添加好友","通过通讯录添加好友"]
-    var firstSectionArray = ["mine_searchiphone_icon_normal_iPhone","mine_addContacts_icon_normal_iPhone"]
+    var titleArray = ["通过手机号/阿拉丁号添加好友","通过通讯录添加好友"]
+    var firstSectionArray = ["address_icon_cellphone_normal","address_icon_telephone_normal"]
     var personSource = [PersonModel]()
     
     var timer: Timer?

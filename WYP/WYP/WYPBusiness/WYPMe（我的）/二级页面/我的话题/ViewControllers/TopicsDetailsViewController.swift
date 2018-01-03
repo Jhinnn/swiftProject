@@ -123,7 +123,7 @@ class TopicsDetailsViewController: BaseViewController {
         let messageObject = UMSocialMessageObject()
         
         // 分享链接
-        let str = String.init(format: "Mob/News/gambit_detail.html?id=%@", topicId ?? "")
+        let str = String.init(format: "Mob/News/gambit_detail.html?id=%@&phone_type=1", topicId ?? "")
         let shareLink = kApi_baseUrl(path: str)
         // 设置文本
 //        messageObject.text = contentData!.content! + shareLink
