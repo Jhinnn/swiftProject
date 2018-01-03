@@ -43,7 +43,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         self.addSubview(grayLine2)
         self.addSubview(grayLine3)
         self.addSubview(noDisturbingLabel)
-        self.addSubview(switchBtn)
+//        self.addSubview(switchBtn)
         self.addSubview(grayLine1)
         self.addSubview(quitGroupButton)
         self.addSubview(groupNote)
@@ -101,9 +101,9 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.top.equalTo(grayLine4.snp.bottom).offset(13)
             make.right.equalTo(self)
             make.left.equalTo(self).offset(13)
-            make.height.equalTo(15)
+            make.height.equalTo(0)
         }
-        
+
         chatRecordBtn.snp.makeConstraints { (make) in
             make.size.equalTo(Chatrecord)
             make.centerY.equalTo(Chatrecord)
@@ -112,23 +112,23 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         grayLine3.snp.makeConstraints { (make) in
             make.left.right.equalTo(self)
             make.top.equalTo(Chatrecord.snp.bottom).offset(13)
-            make.height.equalTo(10)
+            make.height.equalTo(0)
         }
 
         noDisturbingLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self).offset(13)
             make.top.equalTo(grayLine3.snp.bottom).offset(13)
-            make.size.equalTo(CGSize(width: 100, height: 15))
+            make.size.equalTo(CGSize(width: 100, height: 0))
         }
-        switchBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(self).offset(-13)
-            make.top.equalTo(grayLine3.snp.bottom).offset(6)
-            make.size.equalTo(CGSize(width: 50, height: 20))
-        }
+//        switchBtn.snp.makeConstraints { (make) in
+//            make.right.equalTo(self).offset(-13)
+//            make.top.equalTo(grayLine3.snp.bottom).offset(6)
+//            make.size.equalTo(CGSize(width: 50, height: 0))
+//        }
         grayLine1.snp.makeConstraints { (make) in
             make.left.right.equalTo(self)
             make.top.equalTo(noDisturbingLabel.snp.bottom).offset(13)
-            make.height.equalTo(10)
+            make.height.equalTo(0)
         }
         groupDetal.snp.makeConstraints { (make) in
             make.right.equalTo(self)
@@ -279,7 +279,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         groupNoteButton.addTarget(self, action: #selector(putGroupNote(sender:)), for: UIControlEvents.touchUpInside)
         return groupNoteButton
     }()
-    
+
     //聊天记录
     lazy var Chatrecord: UILabel = {
         let Chatrecord = UILabel()
@@ -287,9 +287,9 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         Chatrecord.font  = UIFont.systemFont(ofSize: 15)
         Chatrecord.text = "聊天记录"
         return Chatrecord
-        
+
     }()
-    
+
     lazy var chatRecordBtn: UIButton = {
         let chatRecordBtn = UIButton()
         chatRecordBtn.setImage(UIImage(named: "chat_icon_advance_normalmore"), for: .normal)
@@ -297,11 +297,11 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         chatRecordBtn.addTarget(self, action: #selector(chatRecordBtnClicked(sender:)), for: .touchUpInside)
         return chatRecordBtn
     }()
-    
+
     func chatRecordBtnClicked(sender: UIButton) {
         delegate?.chatRecordBtnClicked()
     }
-    
+
     lazy var noDisturbingLabel: UILabel = {
         let noDisturbingLabel = UILabel()
         noDisturbingLabel.font = UIFont.systemFont(ofSize: 15)
@@ -309,13 +309,13 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         noDisturbingLabel.text = "开启免打扰"
         return noDisturbingLabel
     }()
-    
-    lazy var switchBtn: UISwitch = {
-        let switchBtn = UISwitch()
-        switchBtn.onTintColor = UIColor.themeColor
-        switchBtn.addTarget(self, action: #selector(noDisturbing(sender:)), for: .valueChanged)
-        return switchBtn
-    }()
+
+//    lazy var switchBtn: UISwitch = {
+//        let switchBtn = UISwitch()
+//        switchBtn.onTintColor = UIColor.themeColor
+//        switchBtn.addTarget(self, action: #selector(noDisturbing(sender:)), for: .valueChanged)
+//        return switchBtn
+//    }()
     
     //群介绍
     lazy var groupDetal: UILabel = {

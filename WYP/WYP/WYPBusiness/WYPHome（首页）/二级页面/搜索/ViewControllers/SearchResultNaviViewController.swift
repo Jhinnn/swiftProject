@@ -181,7 +181,7 @@ class SearchResultNaviViewController: BaseViewController {
         }
     }
     func whenTextFieldValueChange() {
-        if (searchView.searchTextField.text?.characters.count)! < 1 {
+        if (searchView.searchTextField.text?.count)! < 1 {
             navigationController?.popViewController(animated: true)
         }
     }

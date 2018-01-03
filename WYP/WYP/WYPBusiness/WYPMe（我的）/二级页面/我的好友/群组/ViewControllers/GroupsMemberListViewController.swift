@@ -257,11 +257,11 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
         if kind == UICollectionElementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberFooter", for: indexPath) as! GroupsMemberListCollectionReusableView
             let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
-            if notification == "0" {
-                footerView.switchBtn.isOn = false
-            } else if notification == "1" {
-                footerView.switchBtn.isOn = true
-            }
+//            if notification == "0" {
+//                footerView.switchBtn.isOn = false
+//            } else if notification == "1" {
+//                footerView.switchBtn.isOn = true
+//            }
             footerView.groupNoteConten.text = self.groupDetail?.board
             footerView.groupDetalConten.text = self.groupDetail?.groupDetail
             footerView.delegate = self
@@ -282,7 +282,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: kScreen_width, height: 847)
+        return CGSize(width: kScreen_width, height: 480)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

@@ -49,7 +49,7 @@ class GroupMemberListViewController: BaseViewController {
         if flag == 10 { // 从展厅详情页面进入
             self.title = String.init(format: "%@(%d)", groupName ?? "", groupNumber ?? 0)
         } else {
-            if (roomName?.characters.count)! > 5 {
+            if (roomName?.count)! > 5 {
                 let subName = (roomName! as NSString).substring(to: 5)
                 self.title = String.init(format: "%@... - %@(%d)", subName, groupName ?? "", groupNumber ?? 0)
             } else {
@@ -93,7 +93,7 @@ class GroupMemberListViewController: BaseViewController {
     // MARK: - setter and getter
     lazy var memberCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: kScreen_width / 5 - 10, height: 75)
+        layout.itemSize = CGSize(width: kScreen_width / 5 - 10, height: 80)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let memberCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

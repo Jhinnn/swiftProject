@@ -59,7 +59,8 @@ class NotificationViewController: BaseViewController {
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.loadNetData(requestType: .update)
         })
-        tableView.rowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "NotificationCellIdentifier")
         
         return tableView

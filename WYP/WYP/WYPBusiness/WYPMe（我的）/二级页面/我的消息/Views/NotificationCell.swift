@@ -79,6 +79,7 @@ class NotificationCell: UITableViewCell {
             make.bottom.equalTo(contentView).offset(-18)
             make.left.equalTo(typeLabel)
             make.right.equalTo(contentView).offset(-10)
+            make.top.equalTo(typeLabel.snp.bottom).offset(8)
         }
         
         timeLabel.snp.makeConstraints { (make) in

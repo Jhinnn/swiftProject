@@ -164,7 +164,14 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             circleIV.clipsToBounds = true
             cell?.addSubview(circleIV)
             
-            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:90, height:30))
+//            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:90, height:30))
+            let label1 = UILabel()
+            cell?.addSubview(label1)
+            label1.snp.makeConstraints({ (make) in
+                make.left.equalTo(circleIV.snp.right).offset(20)
+                make.top.equalTo(circleIV.snp.top).offset(5)
+                make.height.equalTo(30)
+            })
             label1.layer.cornerRadius = 10
             label1.clipsToBounds = true
             label1.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
@@ -172,7 +179,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             label1.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.30)
             label1.text = self.name
             label1.textAlignment = .center
-            cell?.addSubview(label1)
+            
             
             let label2 = UILabel(frame:CGRect(x:248/3+15+30, y:220+5, width:180, height:30))
             label2.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)

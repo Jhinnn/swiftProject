@@ -35,7 +35,7 @@ class SearchTitleView: UIView {
     func layoutPageSubviews() {
         backView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
-            make.size.equalTo(CGSize(width: kScreen_width - 110, height: 30))
+            make.size.equalTo(CGSize(width: kScreen_width - 130, height: 30))
         }
         searchImageView.snp.makeConstraints { (make) in
             make.right.equalTo(backView).offset(-10)

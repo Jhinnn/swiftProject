@@ -48,66 +48,13 @@ class HomeViewController: BaseViewController {
         let sectionTitleArray = ["", "", "热门发现", "推荐群组", "", "精选话题", "劲爆热抢"]
         return sectionTitleArray
     }()
-        
-    // MARK: - Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadHomeData()
-        
-        NetworkStatusListener()
-        setupBarButtonItem()
-        setupUI()
-
-        
-        tableView.register(ClassifyTableViewCell.self, forCellReuseIdentifier: "classfiy")
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
         
     }
-   
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // 设置导航条透明度
-        DispatchQueue.main.async {
-            self.navBarBgAlpha = self.navOffset
-            if self.navOffset == 0 {
-                self.searchTitleView.alpha = 0.5
-                self.navigationController?.navigationBar.isTranslucent = true
-                self.navigationController?.navigationBar.subviews.first?.alpha = 0
-            
-                if deviceTypeIPhoneX() {
-                    if #available(iOS 11.0, *) {
-                        self.tableView.contentInsetAdjustmentBehavior = .never
-                        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 32, 0)
-                        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-                    }else {
-                        self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
-                    }
-                }else{
-                    if #available(iOS 11.0, *) {
-                        self.tableView.contentInsetAdjustmentBehavior = .never
-                        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-                        self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-                    }else {
-                        self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-                    }
-                    
-                }
-                self.tableView.snp.makeConstraints({ (make) in
-                    make.top.equalTo(self.view.snp.top)
-                })
-                
-            } else {
-                self.searchTitleView.alpha = 0
-                
-                
-            }
-        }
-    }
-
-   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -116,14 +63,14 @@ class HomeViewController: BaseViewController {
             self.navBarBgAlpha = self.navOffset
             if self.navOffset == 0 {
                 self.searchTitleView.alpha = 0.5
-                self.navigationController?.navigationBar.subviews.first?.alpha = 0
             } else {
                 self.searchTitleView.alpha = 1
             }
         }
         
         
-        
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.automaticallyAdjustsScrollViewInsets = true
         
         
         // 初始化定时器
@@ -173,13 +120,23 @@ class HomeViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(pushToStartAdv), name: NSNotification.Name(rawValue: "startAdv"), object: nil)
     }
     
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadHomeData()
+        
+        NetworkStatusListener()
+        setupBarButtonItem()
+        setupUI()
+
+
+        tableView.register(ClassifyTableViewCell.self, forCellReuseIdentifier: "classfiy")
         
     }
    
-    
 
     // 判断当前是不是最新版本
     func currentVersion() {
@@ -385,6 +342,28 @@ class HomeViewController: BaseViewController {
     private func setupUI() {
         
         view.addSubview(tableView)
+        
+        if deviceTypeIPhoneX() {
+            if #available(iOS 11.0, *) {
+                self.tableView.contentInsetAdjustmentBehavior = .never
+                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 83, 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }else {
+                self.tableView.contentInset = UIEdgeInsetsMake(-88, 0, 0, 0)
+            }
+        }else{
+            if #available(iOS 11.0, *) {
+                self.tableView.contentInsetAdjustmentBehavior = .never
+                self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0)
+                self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+            }else {
+                self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+            }
+            
+        }
+        self.tableView.snp.makeConstraints({ (make) in
+            make.top.equalTo(self.view)
+        })
         // 设置表视图的头视图
         tableView.tableHeaderView = syBanner
         
@@ -448,14 +427,11 @@ class HomeViewController: BaseViewController {
                 self.headlineArray.append(self.homeData?.headLine?[1].text ?? "")
                 self.upnumb = self.upnumb + 1
                 
-                
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()
-                
-                
-                
+
             } else {
-                print(info!)
+                
             }
         }
     }
@@ -513,7 +489,6 @@ class HomeViewController: BaseViewController {
         searchViewController?.delegate = self
         searchViewController?.hotSearchStyle = .rankTag
         searchViewController?.searchHistoryStyle = .normalTag
-//        searchViewController?.naviItemHidesBackButton = true
         
         let searchBtn = UIButton(type: .custom)
         searchBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 24)
@@ -526,9 +501,8 @@ class HomeViewController: BaseViewController {
         return searchViewController!
     }()
     
-    // MARK: - NSCopying
     
-    
+
     
     // MARK: - IBActions
     
@@ -1037,6 +1011,24 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         setNeedsStatusBarAppearanceUpdate()
     }
+//
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.isKind(of: UICollectionView.self) {
+//            return
+//        }
+//        self.navOffset = scrollView.contentOffset.y / (tableView.tableHeaderView?.frame.size.height)!
+//        self.navBarBgAlpha = self.navOffset
+//        if self.navOffset > 0.3 {
+//            notificationBarButtonItem.changeBadgeViewColor(color: .white)
+//            searchTitleView.searchView.searchLabel.textColor = UIColor.init(hexColor: "cbcbcb")
+//            searchTitleView.alpha = 1
+//        } else {
+//            notificationBarButtonItem.changeBadgeViewColor(color: .themeColor)
+//            searchTitleView.searchView.searchLabel.textColor = UIColor.init(hexColor: "333333")
+//            searchTitleView.alpha = 0.5
+//        }
+//        setNeedsStatusBarAppearanceUpdate()
+//    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {

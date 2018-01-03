@@ -127,6 +127,7 @@ class SearchHomeNewsViewController: BaseViewController {
         
         newsTableView.delegate = self
         newsTableView.dataSource = self
+        newsTableView.tableFooterView = UIView()
         newsTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadSearchResult(requestType: .loadMore)
         })
