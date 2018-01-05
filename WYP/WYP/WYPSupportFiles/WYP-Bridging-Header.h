@@ -49,6 +49,7 @@
 #import "UIImageView+WebCache.h"
 #import "HXPhotoViewController.h"
 #import "HXPhotoView.h"
+#import "StartButton.h"
 
 // 支付相关
 #import "WXApi.h"

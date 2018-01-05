@@ -34,9 +34,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         self.title = "个人资料"
         self.view.backgroundColor = UIColor.init(red: 239/255.0, green: 239/255.0, blue: 244/255.0, alpha: 1)
         
-        
-        
-        
+    
     
         view.addSubview(self.tableView)
         bgView.addSubview(button)

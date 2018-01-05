@@ -9,7 +9,7 @@
 // 控件之间的间距
 #define space 15
 // 姓名字体大小
-#define nameFont [UIFont systemFontOfSize:13]
+#define nameFont [UIFont systemFontOfSize:14]
 
 #import "ShowCommentView.h"
 #import "StarAndCommentModel.h"
@@ -38,18 +38,17 @@
             for (NSInteger i = 0; i < addNumber; i ++) {
                 // 创建评论文本标签
                 UILabel * commentLabel = [[UILabel alloc] init];
-//                commentLabel.backgroundColor = [UIColor whiteColor];
                 commentLabel.numberOfLines = 0;
                 commentLabel.font = nameFont;
-                commentLabel.textColor = [UIColor blackColor];
+                commentLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
                 
                 [self addSubview:commentLabel];
                 [commentLabelArray addObject:commentLabel];
                 // 创建昵称按钮
                 UIButton * nickNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                nickNameBtn.backgroundColor = [UIColor whiteColor];
+                nickNameBtn.backgroundColor = [UIColor clearColor];
                 nickNameBtn.titleLabel.font = nameFont;
-                [nickNameBtn setTitleColor:[[UIColor alloc] initWithRed:92/255.0 green:117/255.0 blue:157/255.0 alpha:1] forState:UIControlStateNormal];
+                [nickNameBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [self addSubview:nickNameBtn];
                 [nickNameBtnArray addObject:nickNameBtn];
             }

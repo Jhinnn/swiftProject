@@ -52,6 +52,8 @@
  */
 @property (assign, nonatomic) CGRect starArrayF;
 
+@property (assign, nonatomic) CGRect zanArrayF;
+
 /**
  评论整体视图frame
  */
@@ -61,6 +63,8 @@
  所有图片frame的集合
  */
 @property (strong, nonatomic) NSMutableArray * allImageF;
+
+
 
 /**
  所有点赞昵称frame的集合

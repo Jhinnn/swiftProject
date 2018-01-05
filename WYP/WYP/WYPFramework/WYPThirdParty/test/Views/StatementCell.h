@@ -12,7 +12,7 @@
 #import "ShowImagesView.h"
 #import "ShowStarView.h"
 #import "ShowCommentView.h"
-
+#import "StartButton.h"
 @class StatementCell;
 
 @protocol StatementCellDelegate <NSObject>
@@ -46,13 +46,16 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
     // 图片数组
     ShowImagesView * _imageArrayView;
     // 更多按钮
-    UIButton * _shareButton;
+    StartButton * _shareButton;
     // 评论按钮
-    UIButton * _leaveMessageButton;
+    StartButton * _leaveMessageButton;
     // 点赞按钮
-    UIButton * _starButton;
+    StartButton *_starButton;
     // 删除按钮
 //    UIButton * _deleteButton;
+    
+    UIImageView *_zanImageView;
+    
     // 点赞数组
     ShowStarView * _starArrayView;
     // 评论数组

@@ -28,14 +28,24 @@ class PublicCommunViewController: BaseViewController{
         // 创建注册Item
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(publicButtonItemAction))
         
-        self.view.addSubview(textView)
-        bgView.addSubview(photoView)
+        self.view.addSubview(backgroundView)
+        backgroundView.addSubview(textView)
         self.view.addSubview(bgView)
+        bgView.addSubview(photoView)
+        
         
     }
+    
+    lazy var backgroundView: UIView = {
+        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 220))
+        bgView.backgroundColor = UIColor.white
+        return bgView
+    }()
+    
+    
     lazy var textView: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 200))
-        textView.placeholder = "分享身边对我的新鲜事..."
+        let textView = UITextView(frame: CGRect(x: 10, y: 20, width: kScreen_width - 20, height: 200))
+        textView.placeholder = "添加描述和配图（选填）"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
         textView.font = UIFont.systemFont(ofSize: 16)
         return textView
@@ -53,12 +63,12 @@ class PublicCommunViewController: BaseViewController{
     
     
     lazy var bgView: UIView = {
-        let view = UIView(frame: CGRect(x: 15, y: 210, width: kScreen_width - 30, height: 300))
+        let view = UIView(frame: CGRect(x: 0, y: 220, width: kScreen_width, height: 100))
         return view
     }()
     
     lazy var photoView: HXPhotoView = {
-        let photoView = HXPhotoView(frame: CGRect(x: 0, y: 13, width: kScreen_width - 30, height: 320), with: self.manager)
+        let photoView = HXPhotoView(frame: CGRect(x: 10, y: 13, width: kScreen_width - 20, height: 120), with: self.manager)
         photoView?.delegate = self
         return photoView!
     }()

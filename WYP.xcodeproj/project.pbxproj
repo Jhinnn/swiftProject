@@ -38,6 +38,7 @@
 		8E650AE11FE7B5B400A453BB /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AC31FE7B5B300A453BB /* HXPhotoPreviewViewCell.m */; };
 		8E650AE51FE8F52C00A453BB /* WYPContain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650AE41FE8F52C00A453BB /* WYPContain.m */; };
 		8E82B8631FF247AE00617220 /* PublicCommunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */; };
+		8EB58CE61FFE219400A20BC3 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB58CE51FFE219400A20BC3 /* StartButton.m */; };
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
 		8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */; };
 		8EC74C211FF228B200839A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC74C1F1FF228B200839A6F /* Main.storyboard */; };
@@ -449,6 +450,8 @@
 		8E650AE31FE8F52C00A453BB /* WYPContain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYPContain.h; sourceTree = "<group>"; };
 		8E650AE41FE8F52C00A453BB /* WYPContain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYPContain.m; sourceTree = "<group>"; };
 		8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicCommunViewController.swift; sourceTree = "<group>"; };
+		8EB58CE41FFE219400A20BC3 /* StartButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartButton.h; sourceTree = "<group>"; };
+		8EB58CE51FFE219400A20BC3 /* StartButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartButton.m; sourceTree = "<group>"; };
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
 		8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTopicViewController.swift; sourceTree = "<group>"; };
 		8EC74C201FF228B200839A6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
@@ -1268,6 +1271,8 @@
 			children = (
 				A4A134F31EA4AF7500FC4D67 /* CCPScrollView.h */,
 				A4A134F41EA4AF7500FC4D67 /* CCPScrollView.m */,
+				8EB58CE41FFE219400A20BC3 /* StartButton.h */,
+				8EB58CE51FFE219400A20BC3 /* StartButton.m */,
 			);
 			path = CCPScrollView;
 			sourceTree = "<group>";
@@ -2898,7 +2903,6 @@
 					};
 					A4301C3B1E5FDEB000E8E222 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = RM36J6C6H4;
 						ProvisioningStyle = Automatic;
 						TestTargetID = A4301C1C1E5FDEB000E8E222;
 					};
@@ -3096,6 +3100,7 @@
 				F9986A051EA61C2B002C502B /* UserModel.swift in Sources */,
 				F93D07011EC415B9002EFE30 /* AnnouncementModel.swift in Sources */,
 				A4B204FA1EC01291007DA418 /* JFAssetHelper.m in Sources */,
+				8EB58CE61FFE219400A20BC3 /* StartButton.m in Sources */,
 				F9CE6F911EC56D3A00B9B06D /* RecordsDetailFrameModel.swift in Sources */,
 				A43C2A3D1E8101D90037BB5A /* String+Extension.swift in Sources */,
 				8E650AD11FE7B5B300A453BB /* HXPhotoPreviewViewController.m in Sources */,
@@ -3604,11 +3609,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = RM36J6C6H4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WYPUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NGeLB.WYPUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = WYP;
 			};
@@ -3618,11 +3626,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = RM36J6C6H4;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WYPUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NGeLB.WYPUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = WYP;
 			};

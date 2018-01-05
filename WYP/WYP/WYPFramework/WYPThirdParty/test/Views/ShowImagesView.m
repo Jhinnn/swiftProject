@@ -36,6 +36,8 @@
             for (NSInteger i = 0; i < thumbImageUrlArray.count - imageBtns.count; i ++) {
                 UIButton * imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 imageBtn.backgroundColor = [UIColor whiteColor];
+                imageBtn.layer.masksToBounds = YES;
+                imageBtn.layer.cornerRadius = 8;
                 imageBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
                 [imageBtn addTarget:self action:@selector(imageBtnAction:) forControlEvents:UIControlEventTouchUpInside];
                 [self addSubview:imageBtn];

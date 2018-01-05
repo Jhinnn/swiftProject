@@ -9,9 +9,9 @@
 // 控件之间的间距
 #define space 15
 // 姓名字体大小
-#define nameFont [UIFont systemFontOfSize:13]
+#define nameFont [UIFont systemFontOfSize:15]
 // 消息字体大小
-#define messageFont [UIFont systemFontOfSize:14]
+#define messageFont [UIFont systemFontOfSize:15]
 // 图片之间的间距
 #define imageSpace 5
 // 图片的宽度
@@ -58,18 +58,21 @@
         // 姓名
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = [UIColor whiteColor];
+        _nameLabel.textColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:1];
         _nameLabel.font = nameFont;
+        
         [self.contentView addSubview:_nameLabel];
         // 时间
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.backgroundColor = [UIColor whiteColor];
-        _timeLabel.textColor = [[UIColor alloc] initWithRed:135/255.0 green:137/255.0 blue:143/255.0 alpha:1];
+        _timeLabel.textColor = [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
         _timeLabel.font = [UIFont systemFontOfSize:10];
         [self.contentView addSubview:_timeLabel];
         // 消息
         _messageLabel = [[UILabel alloc] init];
-        _messageLabel.backgroundColor = [UIColor whiteColor];
+        _messageLabel.backgroundColor = [UIColor clearColor];
         _messageLabel.numberOfLines = 0;
+        _messageLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1];
         _messageLabel.font = messageFont;
         [self.contentView addSubview:_messageLabel];
         // 所有图片视图
@@ -86,34 +89,55 @@
         [self.contentView addSubview:_deleteButton];
         
         // 分享按钮
-        _shareButton = [[UIButton alloc] init];
-        [_shareButton setImage:[UIImage imageNamed:@"community_grayShare_button_normal_iPhone"] forState: UIControlStateNormal];
+        _shareButton = [[StartButton alloc] init];
+        [_shareButton setImage:[UIImage imageNamed:@"information_icon_share_normal"] forState: UIControlStateNormal];
+        [_shareButton setTitle:@"分享" forState:UIControlStateNormal];
+        _shareButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_shareButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _shareButton.tag = 300 + 52;
         [_shareButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_shareButton];
     
         // 评论按钮
-        _leaveMessageButton = [[UIButton alloc] init];
-        [_leaveMessageButton setImage:[UIImage imageNamed:@"community_comment_button_normal_iPhone"] forState:UIControlStateNormal];
+        _leaveMessageButton = [[StartButton alloc] init];
+        [_leaveMessageButton setImage:[UIImage imageNamed:@"information_icon_write_normal"] forState:UIControlStateNormal];
+        [_leaveMessageButton setTitle:@"评论" forState:UIControlStateNormal];
+        _leaveMessageButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_leaveMessageButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _leaveMessageButton.tag = 300 + 51;
         [_leaveMessageButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_leaveMessageButton];
         
         // 点赞按钮
-        _starButton = [[UIButton alloc] init];
-        [_starButton setImage:[UIImage imageNamed:@"community_grayStar_button_normal_iPhone"] forState:UIControlStateNormal];
+        _starButton = [[StartButton alloc] init];
+        [_starButton setImage:[UIImage imageNamed:@"information_icon_help_normal"] forState:UIControlStateNormal];
+        [_starButton setTitle:@"点赞" forState:UIControlStateNormal];
+        _starButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_starButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _starButton.tag = 300 + 50;
         [_starButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_starButton];
         
-        // kaishigenduo_btn_s
+      
+        
         // 所有点赞视图
         _starArrayView = [[ShowStarView alloc] init];
-        _starArrayView.backgroundColor = [UIColor whiteColor];
+        _starArrayView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
+        _starArrayView.layer.masksToBounds = YES;
+        _starArrayView.layer.cornerRadius = 6;
         [self.contentView addSubview:_starArrayView];
+        
+        //点赞视图图标
+        _zanImageView = [[UIImageView alloc] init];
+        _zanImageView.image = [UIImage imageNamed:@"information_icon_help_click"];
+        [self.contentView addSubview:_zanImageView];
+        
+        
         // 所有评论视图
         _commentArrayView = [[ShowCommentView alloc] init];
-        _commentArrayView.backgroundColor = [UIColor whiteColor];
+        _commentArrayView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
+        _commentArrayView.layer.masksToBounds = YES;
+        _commentArrayView.layer.cornerRadius = 6;
         [self.contentView addSubview:_commentArrayView];
     }
     return self;
@@ -159,15 +183,18 @@
         
     } else {
         // 已点赞
-        [_starButton setImage:[UIImage imageNamed:@"community_zan_button_selected_iPhone"] forState:UIControlStateNormal];
+        [_starButton setImage:[UIImage imageNamed:@"information_icon_help_click"] forState:UIControlStateNormal];
     }
     
     // 所有图片设置数据
     _imageArrayView.imageUrlArray = statement.imageUrlArray;
     
     _imageArrayView.thumbImageUrlArray = statement.thumbImageUrlArray;
+    
     // 所有点赞设置数据
     _starArrayView.starArray = statement.starArray;
+    
+    
     
     // 所有评论设置数据
     _commentArrayView.commentArray = statement.commentArray;
@@ -188,7 +215,7 @@
     
     if (self.statementFrame.messageHeight > 100 && (_messageLabel.frame.size.height != self.statementFrame.messageHeight)) {
         
-        CGFloat moreBtnX = CGRectGetMaxX(_messageLabel.frame) - 40;
+        CGFloat moreBtnX = CGRectGetMinX(_messageLabel.frame);
         CGFloat moreBtnY = CGRectGetMaxY(_messageLabel.frame);
         CGFloat moreBtnW = 40;
         CGFloat moreBtnH = 20;
@@ -197,22 +224,34 @@
         button.frame = CGRectMake(moreBtnX, moreBtnY, moreBtnW, moreBtnH);
         [button setTitle:@"更多" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [button addTarget:self action:@selector(moreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
         [self addSubview:button];
     }
     
-    _deleteButton.frame = CGRectMake(self.statementFrame.shareF.origin.x, self.statementFrame.nameF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    _deleteButton.frame = CGRectMake(kScreen_width - self.statementFrame.shareF.origin.x, self.statementFrame.nameF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    
+    
     
     _imageArrayView.frame = self.statementFrame.imageArrayF;
     
-    _shareButton.frame = self.statementFrame.shareF;
     
-    _leaveMessageButton.frame = CGRectMake(_shareButton.frame.origin.x - 40, self.statementFrame.shareF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    CGFloat Dis = (kScreen_width - 180 - 70 - space ) / 2 + 60;
     
-    _starButton.frame = CGRectMake(_leaveMessageButton.frame.origin.x - 40, self.statementFrame.shareF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    //点赞
+    _starButton.frame = self.statementFrame.shareF;
+    
+    //评论
+    _leaveMessageButton.frame = CGRectMake(self.statementFrame.shareF.origin.x + Dis, self.statementFrame.shareF.origin.y, self.statementFrame.shareF.size.width,  self.statementFrame.shareF.size.height);
+    
+    //分享
+    _shareButton.frame = CGRectMake(_leaveMessageButton.frame.origin.x + Dis, self.statementFrame.shareF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    
     
     _starArrayView.frame = self.statementFrame.starArrayF;
+    
+    _zanImageView.frame = self.statementFrame.zanArrayF;
     
     _commentArrayView.frame = self.statementFrame.commentArrayF;
     

@@ -65,7 +65,6 @@ class MyCommunityViewController: BaseViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         if userId == AppInfo.shared.user?.userId ?? "" {
-            
             // 是自己的朋友圈
             let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
             navigationItem.rightBarButtonItem = releaseBtn
@@ -162,7 +161,12 @@ class MyCommunityViewController: BaseViewController {
         
         
         tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(-64)
+            if deviceTypeIPhoneX() {
+                make.top.equalTo(view).offset(-88)
+            }else {
+                make.top.equalTo(view).offset(-64)
+            }
+            
             make.left.right.equalTo(view)
             make.bottom.equalTo(self.view)
         }
