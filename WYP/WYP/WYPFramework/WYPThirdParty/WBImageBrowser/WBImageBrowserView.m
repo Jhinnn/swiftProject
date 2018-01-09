@@ -17,14 +17,17 @@ static  NSString *cellID = @"cellID";
 
 @property (nonatomic, strong) UICollectionView  *collectionView;
 
-@property (nonatomic, strong) NSArray           *browserArray;      // 数据源
+@property (nonatomic, strong) NSArray  *browserArray;      // 数据源
 
 @property (nonatomic, strong) UIScrollView      *currentScrollView; // 当前scrollview
 @property (nonatomic, strong) UIImage           *currentImage;      // 当前图片
 @property (nonatomic, assign) NSInteger         currentIndex;       // 当前选中的index
 
-@property (nonatomic, strong) UIView    *topBgView;          // 顶部背景视图
-@property (nonatomic, strong) UIButton  *backButton;         // 返回
+@property (nonatomic, strong) UIButton *backButton;         // 返回
+
+@property (nonatomic, strong) UIButton *saveButton; //保存按钮
+
+
 
 
 @end
@@ -52,6 +55,10 @@ static  NSString *cellID = @"cellID";
         [self addSubview:self.topBgView];
         [self.topBgView addSubview:self.backButton];
         [self.topBgView addSubview:self.shareButton];
+        
+        [self addSubview:self.bottomBgView];
+        [self.bottomBgView addSubview:self.indexLabel];
+        [self.bottomBgView addSubview:self.saveButton];
     }
     return self;
 }
@@ -102,11 +109,21 @@ static  NSString *cellID = @"cellID";
     cell.bgScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     cell.bgImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [cell.bgImageView sd_setImageWithURL:self.browserArray[indexPath.item] placeholderImage: [UIImage imageNamed:@"loading..."]];
-
+    
+    
+    [cell.bgImageView sd_setImageWithURL:self.browserArray[indexPath.item] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        self.currentImage = cell.bgImageView.image;
+    }];
+    
+    
+    
+    
     // 添加手势
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapAction:)];
     [cell.bgScrollView addGestureRecognizer:singleTap];
+
+    UILongPressGestureRecognizer *lop = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(saveImage:)];
+    [cell.bgScrollView addGestureRecognizer:lop];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapAction:)];
     doubleTap.numberOfTapsRequired = 2;
@@ -138,15 +155,20 @@ static  NSString *cellID = @"cellID";
 #pragma mark - 图片缩放相关方法
 // 单击手势
 - (void)singleTapAction:(UITapGestureRecognizer *)tap {
-    [_viewController dismissViewControllerAnimated:NO completion:^{
-        [self removeFromSuperview];
-        [_viewController.view removeFromSuperview];
-    }];
+    if (self.type == 1) {  //web界面
+        [UIView animateWithDuration:.3 animations:^{
+            [self removeFromSuperview];
+            [_viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
+    }
+
+}
+- (void)saveImage:(UITapGestureRecognizer *)tap {
+       [self.delegate longPressButtonToClick];
 }
 
 // 双击手势
 - (void)doubleTapAction:(UITapGestureRecognizer *)tap {
-    
     self.currentScrollView = (UIScrollView *)tap.view;
     CGFloat scale = self.currentScrollView.zoomScale == 1 ? 3 : 1;
     CGRect zoomRect = [self zoomRectForScale:scale withCenter:[tap locationInView:tap.view]];
@@ -174,12 +196,43 @@ static  NSString *cellID = @"cellID";
     [self.collectionView setContentOffset:CGPointMake((startIndex - 1) * SCREEN_WIDTH, 0)];
 }
 
+
 - (UIView *)topBgView {
     if (!_topBgView) {
-        _topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, HeightForTopView)];
+        _topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, HeightForTopView)];
         _topBgView.backgroundColor = [UIColor clearColor];
     }
     return _topBgView;
+}
+
+- (UIView *)bottomBgView {
+    if (!_bottomBgView) {
+        _bottomBgView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - HOME_INDICATOR_HEIGHT -HeightForTopView , SCREEN_WIDTH, HeightForTopView)];
+        _topBgView.backgroundColor = [UIColor clearColor];
+    }
+    return _bottomBgView;
+}
+
+- (UILabel *)indexLabel {
+    if(!_indexLabel) {
+        _indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 38, 30)];
+        _indexLabel.textAlignment = NSTextAlignmentRight;
+        _indexLabel.font = [UIFont systemFontOfSize:15];
+        _indexLabel.textColor = [UIColor whiteColor];
+    }
+    return _indexLabel;
+}
+
+- (UIButton *)saveButton {
+    if (!_saveButton) {
+        _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _saveButton.titleLabel.textColor = [UIColor whiteColor];
+        _saveButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
+        [_saveButton addTarget:self action:@selector(saveImageClick) forControlEvents:UIControlEventTouchUpInside];
+        _saveButton.frame = CGRectMake(SCREEN_WIDTH - 60, 10, 60, 30);
+    }
+    return _saveButton;
 }
 
 - (UIButton *)backButton {
@@ -217,18 +270,23 @@ static  NSString *cellID = @"cellID";
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.pagingEnabled = YES;
         [_collectionView registerClass:[WBImageBrowserCell class] forCellWithReuseIdentifier:cellID];
-
     }
     return _collectionView;
 }
 
-#pragma mark - 按钮事件
+#pragma mark -- 关闭按钮
 - (void)backButtonClick {
-
     [self.delegate backButtonToClick];
 }
+
+#pragma mark -- 分享
 - (void)shareButtonButtonClick {
     [self.delegate shareButtonToClick];
+}
+
+#pragma mark -- 保存相册
+- (void)saveImageClick {
+    [self.delegate saveImageButtonToClick:self.currentImage];
 }
 
 @end

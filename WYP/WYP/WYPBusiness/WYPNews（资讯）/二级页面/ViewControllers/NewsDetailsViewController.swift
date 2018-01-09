@@ -11,11 +11,19 @@ import WebKit
 
 class NewsDetailsViewController: BaseViewController {
 
+    
+    var webImageListArray : Array<Any>!
     // 新闻id
     var newsId: String?
     // 新闻标题
     var newsTitle: String?
     // 评论数
+    
+    // 图集视图
+    var pictureBrowserView: WBImageBrowserView?
+    
+    var imageIndex: Int?
+    
     var commentNumber: String? {
         willSet {
             commentDetailBtn.badgeLabel.text = newValue ?? "0"
@@ -217,6 +225,7 @@ class NewsDetailsViewController: BaseViewController {
         let url = kApi_baseUrl(path: str)
         let urlString = URL(string: url)
         let request = URLRequest(url: urlString!)
+        
         newsWebView.load(request)
     }
     
@@ -268,15 +277,25 @@ class NewsDetailsViewController: BaseViewController {
     // MARK: - setter and getter
 
     lazy var newsWebView: WKWebView = {
-        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height))
-        newsWebView.backgroundColor = UIColor.clear
-        newsWebView.isOpaque = false
-        newsWebView.uiDelegate = self
-        newsWebView.navigationDelegate = self
-        newsWebView.scrollView.isScrollEnabled = false
-        newsWebView.scrollView.showsVerticalScrollIndicator = false
         
-        return newsWebView
+        // 自定义配置
+        let conf = WKWebViewConfiguration()
+        conf.userContentController = WKUserContentController()
+        conf.preferences.javaScriptEnabled = true
+        conf.selectionGranularity = WKSelectionGranularity.character
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "clickIndex")
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
+        
+        
+        let newWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), configuration: conf)
+        newWebView.backgroundColor = UIColor.clear
+        newWebView.isOpaque = false
+        newWebView.uiDelegate = self
+        newWebView.navigationDelegate = self
+        newWebView.scrollView.isScrollEnabled = false
+        newWebView.scrollView.showsVerticalScrollIndicator = false
+        
+        return newWebView
     }()
     
     lazy var newsTableView: WYPTableView = {
@@ -579,4 +598,63 @@ extension NewsDetailsViewController: ShowRoomCommentCellDelegate {
         commentReply.commentData = commentData[sender.tag - 190]
         navigationController?.pushViewController(commentReply, animated: true)
     }
+    
+    func image(image:UIImage,didFinishSavingWithError error:NSError?,contextInfo:AnyObject) {
+        if error != nil {
+            SVProgressHUD.showError(withStatus: "保存失败！")
+            return
+            
+        }else {
+            SVProgressHUD.showSuccess(withStatus: "保存成功!")
+        }
+        
+    }
 }
+
+extension NewsDetailsViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
+        if message.name == "clickIndex" {  //图片点击事件
+            
+            let window = UIApplication.shared.keyWindow!
+            window.backgroundColor = UIColor.black
+            
+            pictureBrowserView = WBImageBrowserView.pictureBrowsweView(withFrame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), delegate: self, browserInfoArray: webImageListArray)
+            pictureBrowserView?.type = 1
+            pictureBrowserView?.viewController = self
+            pictureBrowserView?.topBgView.isHidden = true
+            pictureBrowserView?.startIndex = message.body as! Int + 1
+            pictureBrowserView?.show(in: window)
+            pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", message.body as! Int + 1,webImageListArray.count)
+            
+            return
+        }
+        
+        if message.name == "showImgs" {
+            let str = message.body
+            let strArray = (str as! String).components(separatedBy: ",")
+            webImageListArray = strArray
+            return
+        }
+    }
+}
+
+extension NewsDetailsViewController: WBImageBrowserViewDelegate {
+    func saveImageButton(toClick image: UIImage!) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func getContentWithItem(_ item: Int) {
+        pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", item + 1,webImageListArray.count)
+        
+    }
+    
+    
+    
+}
+
+
+
+
+

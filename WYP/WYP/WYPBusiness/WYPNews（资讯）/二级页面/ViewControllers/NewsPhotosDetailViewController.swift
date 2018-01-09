@@ -435,6 +435,10 @@ extension NewsPhotosDetailViewController: UITextFieldDelegate {
 }
 
 extension NewsPhotosDetailViewController: WBImageBrowserViewDelegate {
+    func longPressButtonToClick() {
+        
+    }
+    
     func getContentWithItem(_ item: Int) {
         contentLabel.text = String.init(format: "%d/%d %@", item + 1, contentArray?.count ?? 0, contentArray?[item] ?? "")
         self.contentLabel.attributedText = self.changeTextFont(text: self.contentLabel.text ?? "")

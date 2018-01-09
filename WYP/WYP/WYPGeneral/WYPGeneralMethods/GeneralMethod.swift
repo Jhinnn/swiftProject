@@ -23,4 +23,17 @@ class GeneralMethod: NSObject {
         alert.addAction(toAction)
         viewController.present(alert, animated: false, completion: nil)
     }
+    
+    // 未登录时的提示框
+    class func saveImage(viewController: UIViewController) {
+        let alert = UIAlertController(title: "", message: "保存到相册", preferredStyle: .actionSheet)
+        let closeAction = UIAlertAction(title: "关闭", style: .default, handler: nil)
+        let toAction = UIAlertAction(title: "保存", style: .default, handler: { (_) in
+            
+        })
+        alert.addAction(closeAction)
+        alert.addAction(toAction)
+        viewController.present(alert, animated: false, completion: nil)
+    }
+    
 }

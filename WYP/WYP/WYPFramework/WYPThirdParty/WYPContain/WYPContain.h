@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@import WebKit;
 @interface WYPContain : NSObject
 
 + (BOOL)isNineKeyBoard:(NSString *)string;
 
 + (BOOL)stringContainsEmoji:(NSString *)string;
+
++ (NSString*)encodeString:(NSString*)unencodedString;
+
++ (WKUserScript *)userScript;
 
 @end

@@ -83,7 +83,7 @@ class TalkOnePictureTableViewCell: UITableViewCell {
             make.height.equalTo(10)
         }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(infoLabel.snp.right).offset(-10)
+            make.left.equalTo(infoTimeLabel.snp.right).offset(4)
             make.centerY.equalTo(infoTimeLabel.snp.centerY)
             make.height.equalTo(10)
         }

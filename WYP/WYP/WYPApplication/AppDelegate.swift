@@ -89,10 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocationManager.shared.starUpdatingLocation()
         
         // MARK: - 添加开屏广告
-        self.setupXHLaunchAd()
+//        self.setupXHLaunchAd()
         
         // 注册推送
-        registerNotification(application: application)
+//        registerNotification(application: application)
         
         // MARK: - 极光推送
         if application.applicationIconBadgeNumber == 0 {

@@ -20,13 +20,17 @@
         self.bgScrollView.showsHorizontalScrollIndicator = NO;
         self.bgScrollView.showsVerticalScrollIndicator = NO;
         [self.contentView addSubview:self.bgScrollView];
-        
         self.bgImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         self.bgImageView.contentMode = UIViewContentModeScaleAspectFit;
+      
         [self.bgScrollView addSubview:self.bgImageView];        
         
     }
     return self;
 }
+
+
+
+
 
 @end

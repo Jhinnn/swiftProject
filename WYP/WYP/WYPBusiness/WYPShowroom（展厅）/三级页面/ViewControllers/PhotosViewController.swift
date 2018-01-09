@@ -130,6 +130,10 @@ class PhotosViewController: UIViewController {
 }
 
 extension PhotosViewController: WBImageBrowserViewDelegate {
+    func longPressButtonToClick() {
+        
+    }
+    
     func getContentWithItem(_ item: Int) {
         indexLabel.text = "\(item+1)/\(imageArray?.count ?? 0)"
         print(item)

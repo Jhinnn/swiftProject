@@ -11,6 +11,7 @@ import WebKit
 
 class TalkNewsDetailsViewController: BaseViewController {
 
+    var webImageListArray : Array<Any>!
     
     var collectionButton: UIButton!
     // 新闻id
@@ -19,6 +20,10 @@ class TalkNewsDetailsViewController: BaseViewController {
     var newsTitle: String?
     // 评论数
     
+    // 图集视图
+    var pictureBrowserView: WBImageBrowserView?
+    
+    var imageIndex: Int?
 
     
     var commentNumber: String? {
@@ -282,7 +287,16 @@ class TalkNewsDetailsViewController: BaseViewController {
     // MARK: - setter and getter
 
     lazy var newsWebView: WKWebView = {
-        let newsWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0))
+        
+        // 自定义配置
+        let conf = WKWebViewConfiguration()
+        conf.userContentController = WKUserContentController()
+        conf.preferences.javaScriptEnabled = true
+        conf.selectionGranularity = WKSelectionGranularity.character
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "clickIndex")
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
+        
+        let newsWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0), configuration: conf)
         newsWebView.backgroundColor = UIColor.red
 
         newsWebView.uiDelegate = self
@@ -330,39 +344,6 @@ class TalkNewsDetailsViewController: BaseViewController {
         return commentTextField
     }()
     
-    
-  
-    
-    
-    
- 
-    
-    
-    /*
-    // 分享
-    lazy var shareButton: UIButton = {
-        let shareButton = UIButton()
-        shareButton.setBackgroundImage(UIImage(named: "news_share_button_normal_iPhone"), for: .normal)
-        shareButton.addTarget(self, action: #selector(shareBarButtonItemAction), for: .touchUpInside)
-        return shareButton
-    }()
-    // 收藏
-    lazy var collectionButton: UIButton = {
-        let collectionButton = UIButton()
-        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_normal_iPhone"), for: .normal)
-        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
-        collectionButton.addTarget(self, action: #selector(collectionNews(sender:)), for: .touchUpInside)
-        return collectionButton
-    }()
-    // 评论详情按钮
-    lazy var commentDetailBtn: SYButton = {
-        let commentDetailBtn = SYButton()
-        commentDetailBtn.setBackgroundImage(UIImage(named: "newsDetail_button_normal_iPhone"), for: .normal)
-        commentDetailBtn.addTarget(self, action: #selector(chickCommentDetail(sender:)), for: .touchUpInside)
-        return commentDetailBtn
-    }()
- 
- */
     
     // 监听
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -488,34 +469,14 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 10))
         headerView.backgroundColor = UIColor.groupTableViewBackground
-//        // 图标视图
-//        let iconView = UIImageView(frame: CGRect(x: 0, y: 13, width: 2, height: 18))
-//        iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
-//        headerView.addSubview(iconView)
-//        let hotCommentLabel = UILabel(frame: CGRect(x: 13, y: 10, width: 100, height: 30))
-//        hotCommentLabel.text = "最新评论"
-//        hotCommentLabel.font = UIFont.systemFont(ofSize: 15)
-//        headerView.addSubview(hotCommentLabel)
-//
-//        let commentNumLabel = UILabel()
-//        commentNumLabel.frame = CGRect(x: kScreen_width - 50, y: 0, width: 60, height: 40)
-//        commentNumLabel.font = UIFont.systemFont(ofSize: 10)
-//        commentNumLabel.textColor = UIColor.init(hexColor: "a1a1a1")
-//        commentNumLabel.text = String.init(format: "评论数%@", commentNumber ?? "0")
-//        headerView.addSubview(commentNumLabel)
+
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if commentData.count > 0 {
-//            let commentReply = CommentReplyViewController()
-//            commentReply.flag = 2
-//            commentReply.newsId = newsId ?? ""
-//            commentReply.commentData = commentData[indexPath.row]
-//            navigationController?.pushViewController(commentReply, animated: true)
-//        }
+
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -662,11 +623,60 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
                 }
             }
         }
-        
-        
-     
-        
-        
-       
     }
+    
+    func image(image:UIImage,didFinishSavingWithError error:NSError?,contextInfo:AnyObject) {
+        if error != nil {
+            SVProgressHUD.showError(withStatus: "保存失败！")
+            return
+            
+        }else {
+            SVProgressHUD.showSuccess(withStatus: "保存成功!")
+        }
+        
+    }
+}
+
+
+extension TalkNewsDetailsViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
+        if message.name == "clickIndex" {  //图片点击事件
+            
+            let window = UIApplication.shared.keyWindow!
+            window.backgroundColor = UIColor.black
+            
+            pictureBrowserView = WBImageBrowserView.pictureBrowsweView(withFrame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), delegate: self, browserInfoArray: webImageListArray)
+            pictureBrowserView?.type = 1
+            pictureBrowserView?.viewController = self
+            pictureBrowserView?.topBgView.isHidden = true
+            pictureBrowserView?.startIndex = message.body as! Int + 1
+            pictureBrowserView?.show(in: window)
+            pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", message.body as! Int + 1,webImageListArray.count)
+            imageIndex = (message.body as! Int) //获得下标
+            return
+        }
+        
+        if message.name == "showImgs" {
+            let str = message.body
+            let strArray = (str as! String).components(separatedBy: ",")
+            webImageListArray = strArray
+            return
+        }
+    }
+}
+
+extension TalkNewsDetailsViewController: WBImageBrowserViewDelegate {
+    func saveImageButton(toClick image: UIImage!) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func getContentWithItem(_ item: Int) {
+        pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", item + 1,webImageListArray.count)
+        imageIndex = item //获得图片下标
+    }
+    
+    
+    
 }

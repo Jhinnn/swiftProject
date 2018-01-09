@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */; };
 		8E28E6E21FE7AC3800B43A6E /* View(Extension).swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E6E11FE7AC3800B43A6E /* View(Extension).swift */; };
+		8E56103C20035EF20034D8E9 /* DVActionSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56103B20035EF10034D8E9 /* DVActionSheetVC.swift */; };
 		8E650AC71FE7B5B300A453BB /* HXCameraPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650A921FE7B5B300A453BB /* HXCameraPreviewViewController.m */; };
 		8E650AC81FE7B5B300A453BB /* HXPhotoConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650A931FE7B5B300A453BB /* HXPhotoConst.m */; };
 		8E650AC91FE7B5B300A453BB /* HXPresentTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E650A941FE7B5B300A453BB /* HXPresentTransition.m */; };
@@ -394,6 +395,7 @@
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E28E6E11FE7AC3800B43A6E /* View(Extension).swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View(Extension).swift"; sourceTree = "<group>"; };
+		8E56103B20035EF10034D8E9 /* DVActionSheetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVActionSheetVC.swift; sourceTree = "<group>"; };
 		8E650A921FE7B5B300A453BB /* HXCameraPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCameraPreviewViewController.m; sourceTree = "<group>"; };
 		8E650A931FE7B5B300A453BB /* HXPhotoConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoConst.m; sourceTree = "<group>"; };
 		8E650A941FE7B5B300A453BB /* HXPresentTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPresentTransition.m; sourceTree = "<group>"; };
@@ -1170,6 +1172,7 @@
 				A4FE0E491EA8591500F13C8F /* PooCodeView */,
 				A4A134F21EA4AF7500FC4D67 /* CCPScrollView */,
 				A4ECDEFE1E83A47300A05B40 /* LBCodeButton.swift */,
+				8E56103B20035EF10034D8E9 /* DVActionSheetVC.swift */,
 			);
 			path = WYPThirdParty;
 			sourceTree = "<group>";
@@ -3322,6 +3325,7 @@
 				F9FA08F41EB9C9A200E71E4D /* SearchFriendsResultViewController.swift in Sources */,
 				F9986A3D1EA61C2B002C502B /* OnePictureTableViewCell.swift in Sources */,
 				F99869FA1EA61C2B002C502B /* SearchResultNaviViewController.swift in Sources */,
+				8E56103C20035EF20034D8E9 /* DVActionSheetVC.swift in Sources */,
 				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
 				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
 				FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */,
