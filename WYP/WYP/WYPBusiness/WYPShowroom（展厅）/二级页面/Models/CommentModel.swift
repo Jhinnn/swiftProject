@@ -37,6 +37,8 @@ class CommentModel: HandyJSON {
     var replyCount: Int?
     // 评论图片
     var cover_url: [String]?
+    
+    
 
     
     func mapping(mapper: HelpingMapper) {
@@ -51,6 +53,7 @@ class CommentModel: HandyJSON {
         mapper <<< self.createTime <-- "create_time"
         mapper <<< self.replyCount <-- "reply_count"
         mapper <<< self.is_follow <-- "is_follow"
+        
     }
     
     required init() {}

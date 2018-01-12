@@ -191,6 +191,9 @@ extension SearchHomeComViewController: UITableViewDelegate,UITableViewDataSource
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
         let attributeString = changeTextColor(text: cell.messageLabel.text ?? "")
         cell.messageLabel.attributedText = attributeString
+        cell.shareButton.isHidden = true
+        cell.leaveMessageButton.isHidden =  true
+        cell.starButton.isHidden = true
         cell.statementFrame = newsData[indexPath.row]
         cell.selectionStyle = .none;
         cell.selectImgBlock = {(index, imageUrlArray) in

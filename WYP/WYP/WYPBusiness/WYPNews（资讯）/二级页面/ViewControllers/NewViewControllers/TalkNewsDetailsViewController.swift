@@ -61,7 +61,7 @@ class TalkNewsDetailsViewController: BaseViewController {
         viewConfig()
         layoutPageSubviews()
 
-        request()
+        
 
     
     }
@@ -69,7 +69,7 @@ class TalkNewsDetailsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
    
-
+        request()
         loadCommentList(requestType: .update)
     }
     
@@ -640,7 +640,12 @@ extension TalkNewsDetailsViewController: WKScriptMessageHandler {
 
 extension TalkNewsDetailsViewController: WBImageBrowserViewDelegate {
     func saveImageButton(toClick image: UIImage!) {
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+        if image != nil {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+        }else {
+            SVProgressHUD.showInfo(withStatus: "等待加载...")
+            SVProgressHUD.dismiss(withDelay: 0.5)
+        }
     }
     
     func getContentWithItem(_ item: Int) {

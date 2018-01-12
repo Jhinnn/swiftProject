@@ -66,6 +66,15 @@
  */
 @property (strong, nonatomic) NSString * isStar;
 
+
+@property (strong, nonatomic) NSString * fabulous_count;
+
+
+@property (strong, nonatomic) NSString * comment_count;
+
+
+@property (strong, nonatomic) NSString * share;
+
 /**
  是否展开消息
  */

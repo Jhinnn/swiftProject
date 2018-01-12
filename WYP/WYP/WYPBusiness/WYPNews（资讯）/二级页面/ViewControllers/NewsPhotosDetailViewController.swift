@@ -425,7 +425,13 @@ class NewsPhotosDetailViewController: BaseViewController {
     }
     
     func saveImageAction() {  //保存图片
-        UIImageWriteToSavedPhotosAlbum(saveImage!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+        if saveImage != nil {
+            UIImageWriteToSavedPhotosAlbum(saveImage!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+        }else {
+            SVProgressHUD.showInfo(withStatus: "等待加载...")
+            SVProgressHUD.dismiss(withDelay: 0.5)
+        }
+        
     }
     
     func cancelAction() {

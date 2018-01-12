@@ -2281,7 +2281,8 @@ class NetRequest {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "keyword": keyword,
-                                      "page": page]
+                                      "page": page,
+            "uid" :AppInfo.shared.user?.userId ?? ""]
         Alamofire.request(kApi_homeSearchCommunity, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:

@@ -171,7 +171,14 @@ static NSString *identifierAlbumCellId = @"identifierAlbumCellId";
 }
 
 - (void)saveImageClick {
-    UIImageWriteToSavedPhotosAlbum(saveImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    if (saveImage != nil) {
+        UIImageWriteToSavedPhotosAlbum(saveImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    }else {
+        [SVProgressHUD showWithStatus:@"等待加载..."];
+        
+        [SVProgressHUD dismissWithDelay:0.5];
+    }
+    
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

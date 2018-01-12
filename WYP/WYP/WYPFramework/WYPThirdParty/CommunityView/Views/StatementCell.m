@@ -171,6 +171,12 @@
         [_starButton setImage:[UIImage imageNamed:@"sq_icon_dz_select"] forState:UIControlStateNormal];
     }
     
+    
+    [_starButton setTitle:[NSString stringWithFormat:@"%@",statement.fabulous_count] forState:UIControlStateNormal];
+    [_leaveMessageButton setTitle:[NSString stringWithFormat:@"%@",statement.comment_count] forState:UIControlStateNormal];
+    [_shareButton setTitle:[NSString stringWithFormat:@"%@",statement.share] forState:UIControlStateNormal];
+    
+    
     // 所有图片设置数据
     _imageArrayView.imageUrlArray = statement.imageUrlArray;
     

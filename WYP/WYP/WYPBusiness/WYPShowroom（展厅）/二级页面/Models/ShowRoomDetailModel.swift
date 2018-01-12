@@ -32,6 +32,9 @@ class ShowRoomDetailModel: HandyJSON {
     // 公告
     var announ: [AnnouncementModel]?
     
+    //评论数量
+    var plcount: String?
+    
 
     
     func mapping(mapper: HelpingMapper) {
@@ -44,6 +47,7 @@ class ShowRoomDetailModel: HandyJSON {
         mapper <<< self.recentNews <-- "new"
         mapper <<< self.comment <-- "pinglun"
         mapper <<< self.announ <-- "announcement"
+        mapper <<< self.plcount <-- "plcount"
     }
     
     required init() {}

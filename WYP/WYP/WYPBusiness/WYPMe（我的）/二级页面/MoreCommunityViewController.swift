@@ -171,9 +171,9 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
         cell.deleteButton.isHidden = true
         cell.statementFrame = self.statementFrame
         
-        cell.shareButton.isHidden = true
-        cell.leaveMessageButton.isHidden =  true
-        cell.starButton.isHidden = true
+//        cell.shareButton.isHidden = true
+//        cell.leaveMessageButton.isHidden =  true
+//        cell.starButton.isHidden = true
         cell.selectionStyle = .none;
         cell.delegate = self
         cell.selectImgBlock = {(index, imageUrlArray) in
@@ -237,6 +237,8 @@ extension MoreCommunityViewController: StatementCellDelegate {
         ShareManager.shared.messageObject = messageObject
         ShareManager.shared.viewController = self
         ShareManager.shared.show()
+        
+        
     }
     // 删除按钮点击事件
     func statementCell(_ statementCell: StatementCell!, deleteButtonAction button: UIButton!, statement: StatementModel!) {
@@ -263,21 +265,21 @@ extension MoreCommunityViewController: StatementCellDelegate {
                 if code == 200 {
                     SVProgressHUD.showSuccess(withStatus: info)
                     self.commentInputView.resignFirstResponder()
-                    
+
                     let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
-                    
+
                     let statement = StatementModel(contentDic: dic as! [AnyHashable : Any])
                     self.currentStatement = statement
                     let frameModel = StatementFrameModel()
                     frameModel.isShowAllMessage = true
                     frameModel.statement = statement
-                    
+
                     self.statementFrame = frameModel
-                    
+
                     if self.statementFrame.statement == self.currentStatement {
                         self.statementFrame.statement = statement
                     }
-
+                    
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)

@@ -23,6 +23,10 @@
         self.thumbImageUrlArray = [dic objectForKey:@"dynamic_path"];
         self.imageUrlArray = [dic objectForKey:@"dynamic_path"];
         
+        self.comment_count = [dic objectForKey:@"comment_count"];
+        self.fabulous_count = [dic objectForKey:@"fabulous_count"];
+        self.share = [dic objectForKey:@"share"];
+        
         NSArray * starArray = [dic objectForKey:@"fabulous"];
         NSMutableArray * starModels = [NSMutableArray array];
         for (NSDictionary * starDic in starArray) {

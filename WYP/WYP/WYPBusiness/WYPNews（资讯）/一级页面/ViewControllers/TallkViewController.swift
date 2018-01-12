@@ -330,18 +330,15 @@ class TallkViewController: BaseViewController {
             GeneralMethod.alertToLogin(viewController: self)
             return
         } else {
-//            let board = UIStoryboard.init(name: "Main", bundle: nil)
-//            let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
-//
-//            issue.delegate = self
-//            navigationController?.pushViewController(issue, animated: true)
             navigationController?.pushViewController(PublicGroupViewController(), animated: true)
         }
     }
     
     // MARK: - setter and getter
     lazy var newAllTableView: WYPTableView = {
-        let newAllTableView = WYPTableView(frame: .zero, style: .plain)
+        let newAllTableView = WYPTableView(frame: .zero, style: .grouped)
+        newAllTableView.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
+        newAllTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         newAllTableView.delegate = self
         newAllTableView.dataSource = self
         // 刷新
@@ -387,7 +384,7 @@ class TallkViewController: BaseViewController {
 
 extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return newsData.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if newsData.count == 0 {
@@ -397,14 +394,14 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             noDataLabel.isHidden = true
             noDataImageView.isHidden = true
         }
-        return newsData.count
+        return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch newsData[indexPath.row].showType ?? 6 {
+        switch newsData[indexPath.section].showType ?? 6 {
         case 0: // 视频
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
@@ -413,7 +410,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
         case 1: //只有文字
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
@@ -422,7 +419,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
         case 2: //上图下文
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
@@ -431,7 +428,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
         case 3: //左文右图
             let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
@@ -440,7 +437,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
         case 4: //三张图
             let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
@@ -451,7 +448,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             cell.infoLabel.isHidden = true
             cell.playImageView.isHidden = true
-            cell.infoModel = newsData[indexPath.row]
+            cell.infoModel = newsData[indexPath.section]
             // 判断是不是搜索页面
             if flag == 2 {
                 let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
@@ -466,7 +463,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch newsData[indexPath.row].showType ?? 6 {
+        switch newsData[indexPath.section].showType ?? 6 {
         case 0:
             return 275 * width_height_ratio
         case 1:
@@ -484,11 +481,16 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 9
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if newsData[indexPath.row].infoType == 4 { // 图集
+        if newsData[indexPath.section].infoType == 4 { // 图集
             let newsDetail = NewsPhotosDetailViewController()
             newsDetail.currentIndex = 0
             newsDetail.isFollow = newsData[indexPath.row].isFollow
@@ -499,7 +501,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             newsDetail.commentNumber = newsData[indexPath.row].infoComment
             navigationController?.pushViewController(newsDetail, animated: true)
             
-        } else if newsData[indexPath.row].infoType == 2 { // 视频
+        } else if newsData[indexPath.section].infoType == 2 { // 视频
             let newsDetail = VideoDetailViewController()
             newsDetail.newsId = newsData[indexPath.row].newsId ?? ""
             newsDetail.newsTitle = newsData[indexPath.row].infoTitle
@@ -531,9 +533,9 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
                 }
             } else {
                 let newsDetail = TalkNewsDetailsViewController()
-                newsDetail.newsTitle = newsData[indexPath.row].infoTitle
-                newsDetail.newsId = newsData[indexPath.row].newsId
-                newsDetail.commentNumber = newsData[indexPath.row].infoComment
+                newsDetail.newsTitle = newsData[indexPath.section].infoTitle
+                newsDetail.newsId = newsData[indexPath.section].newsId
+                newsDetail.commentNumber = newsData[indexPath.section].infoComment
                 navigationController?.pushViewController(newsDetail, animated: true)
             }
         }

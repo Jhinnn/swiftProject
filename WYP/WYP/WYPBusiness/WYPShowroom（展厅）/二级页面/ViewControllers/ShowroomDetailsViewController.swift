@@ -1135,7 +1135,8 @@ class ShowroomDetailsViewController: UITableViewController {
             // 评论
             if section == 7 {
                 let commentLabel = UILabel()
-                commentLabel.text = String.init(format: "(%d)", showRoomDetailData?.comment?.count ?? 0)
+                
+                commentLabel.text = "(\(showRoomDetailData!.plcount!))"
                 commentLabel.font = UIFont.systemFont(ofSize: 13)
                 sectionHeaderView.addSubview(commentLabel)
                 

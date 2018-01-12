@@ -702,6 +702,20 @@ extension MyCommunityViewController: StatementCellDelegate {
         ShareManager.shared.messageObject = messageObject
         ShareManager.shared.viewController = self
         ShareManager.shared.show()
+        
+        
+        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                      "method": "POST",
+                        
+            "id": statement._id]
+        let url = kApi_baseUrl(path: "api/share_dynamic")
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).response { (response) in
+            self.loadNetData(requestType: .update)
+            self.tableView.reloadData()
+        }
+        
+        
     }
     // 更多按钮点击事件
     func statementCell(_ statementCell: StatementCell!, moreButtonAction button: UIButton!, statement: StatementModel!) {
@@ -737,21 +751,26 @@ extension MyCommunityViewController: StatementCellDelegate {
                 let code = json["code"].intValue
                 let info = json["info"].stringValue
                 if code == 200 {
-                    SVProgressHUD.showSuccess(withStatus: info)
+                    
+                    
+//                    SVProgressHUD.showSuccess(withStatus: info)
+//                    self.commentTextField.resignFirstResponder()
+//
+//                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+//
+//                    let statement = StatementModel(contentDic: dic as! [AnyHashable : Any])
+//
+////                    print(<#T##items: Any...##Any#>)
+//                    let frameModel = StatementFrameModel()
+//                    frameModel.statement = statement
+//
+//                    for statementFrame in self.dataList {
+//                        if statementFrame.statement == self.currentStatement {
+//                            statementFrame.statement = statement
+//                        }
+//                    }
                     self.commentTextField.resignFirstResponder()
-                    
-                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
-                    
-                    let statement = StatementModel(contentDic: dic as! [AnyHashable : Any])
-                    let frameModel = StatementFrameModel()
-                    frameModel.statement = statement
-                    
-                    for statementFrame in self.dataList {
-                        if statementFrame.statement == self.currentStatement {
-                            statementFrame.statement = statement
-                        }
-                    }
-                    self.commentTextField.resignFirstResponder()
+                    self.loadNetData(requestType: .update)
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)

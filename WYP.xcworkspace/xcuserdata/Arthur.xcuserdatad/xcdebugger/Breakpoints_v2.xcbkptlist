@@ -34,11 +34,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
-            timestampString = "537421622.332656"
+            timestampString = "537445073.170715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2958"
-            endingLineNumber = "2958"
+            startingLineNumber = "2959"
+            endingLineNumber = "2959"
             landmarkName = "roomNewsThumbUpNetRequest(commentId:uid:complete:)"
             landmarkType = "7">
             <Locations>
@@ -50,12 +50,12 @@
                   moduleName = "WYP"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
-                  timestampString = "537421623.650023"
+                  timestampString = "537445074.138198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2958"
-                  endingLineNumber = "2958"
-                  offsetFromSymbolStart = "672">
+                  startingLineNumber = "2959"
+                  endingLineNumber = "2959"
+                  offsetFromSymbolStart = "536">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -65,30 +65,14 @@
                   moduleName = "WYP"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
-                  timestampString = "537421623.657441"
+                  timestampString = "537445074.142095"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2959"
-                  endingLineNumber = "2959"
-                  offsetFromSymbolStart = "32">
+                  startingLineNumber = "2960"
+                  endingLineNumber = "2960"
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WYP/WYP/WYPBusiness/WYPNews&#xff08;&#x8d44;&#x8baf;&#xff09;/&#x4e00;&#x7ea7;&#x9875;&#x9762;/ViewControllers/TallkViewController.swift"
-            timestampString = "537421622.332904"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

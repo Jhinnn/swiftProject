@@ -64,6 +64,8 @@ class SearchResultViewController: BaseViewController {
                 
 //                var models = [StatementFrameModel]()
                 
+                self.newsData.removeAll()
+                
                 for optDic in response! {
                     let statement = StatementModel(contentDic: optDic as! [AnyHashable : Any])
                     let statementFrame = StatementFrameModel()
@@ -188,26 +190,25 @@ class SearchResultViewController: BaseViewController {
 
 extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        var tag = 0
-        if homeSearch?.news != nil {
-            tag = tag + 1
-        }
-        if self.newsData.count != 0 {
-            tag = tag + 1
-        }
-        
-        if homeSearch?.gambit != nil {
-            tag = tag + 1
-        }
-        if homeSearch?.rooms != nil {
-            tag = tag + 1
-        }
-       
-        if homeSearch?.tickets != nil {
-            tag = tag + 1
-        }
-        print(tag)
-        return tag
+//        var tag = 0
+//        if homeSearch?.tickets?.count != 0 {
+//            tag = tag + 1
+//        }
+//        if homeSearch?.news?.count != 0 {
+//            tag = tag + 1
+//        }
+//        if homeSearch?.gambit?.count != 0 {
+//            tag = tag + 1
+//        }
+//        if self.newsData.count != 0 {
+//            tag = tag + 1
+//        }
+//
+//        if homeSearch?.rooms?.count != 0 {
+//            tag = tag + 1
+//        }
+
+        return 5
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 没有搜索结果
@@ -221,19 +222,19 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
         // 有搜索结果
         switch section {
         case 0:
-            if homeSearch?.tickets != nil {
+            if homeSearch?.tickets?.count != 0 {
                 return homeSearch?.tickets?.count ?? 0
             } else {
                 return 0
             }
         case 1:
-            if homeSearch?.news != nil {
+            if homeSearch?.news?.count != 0 {
                 return homeSearch?.news?.count ?? 0
             } else {
                 return 0
             }
         case 2:
-            if homeSearch?.gambit != nil {
+            if homeSearch?.gambit?.count != 0 {
                 return homeSearch?.gambit?.count ?? 0
             } else {
                 return 0
@@ -245,7 +246,7 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                 return 0
             }
         case 4:
-            if homeSearch?.rooms != nil {
+            if homeSearch?.rooms?.count != 0 {
                 return homeSearch?.rooms?.count ?? 0
             } else {
                 return 0
@@ -402,11 +403,11 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             cell.selectImgBlock = {(index, imageUrlArray) in
                 return
             }
+            
             return cell
-            
-            
-           
         case 4:
+            
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "searchShowRoomCell", for: indexPath) as! ShowroomCell
             cell.showRoomModel = homeSearch?.rooms?[indexPath.row]
             // 关键字标红
