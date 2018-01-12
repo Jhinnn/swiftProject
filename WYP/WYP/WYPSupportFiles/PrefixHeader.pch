@@ -1,0 +1,34 @@
+//
+//  PrefixHeader.pch
+//  WYP
+//
+//  Created by Arthur on 2018/1/10.
+//  Copyright © 2018年 NGeLB. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// 控件之间的间距
+#define space 11
+// 姓名字体大小
+#define nameFont [UIFont systemFontOfSize:15]
+// 消息字体大小
+#define messageFont [UIFont systemFontOfSize:14]
+
+#define kScreen_width UIScreen.mainScreen.bounds.size.width
+#define kScreen_height UIScreen.mainScreen.bounds.size.height
+
+
+// 判断是否是iPhone X
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+// 状态栏高度
+#define STATUS_BAR_HEIGHT (iPhoneX ? 44.f : 20.f)
+// 导航栏高度
+#define NAVIGATION_BAR_HEIGHT (iPhoneX ? 88.f : 64.f)
+// tabBar高度
+#define TAB_BAR_HEIGHT (iPhoneX ? (49.f+34.f) : 49.f)
+// home indicator
+#define HOME_INDICATOR_HEIGHT (iPhoneX ? 34.f : 0.f)
+
+#endif /* PrefixHeader_pch */

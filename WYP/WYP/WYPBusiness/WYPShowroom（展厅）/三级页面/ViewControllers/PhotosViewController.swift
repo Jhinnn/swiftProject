@@ -62,17 +62,23 @@ class PhotosViewController: UIViewController {
         pictureBrowserView?.orientation = UIDevice.current.orientation
         pictureBrowserView?.viewController = self
         pictureBrowserView?.shareButton.isHidden = true
+//        pictureBrowserView?.topBgView.isHidden = true
+//        pictureBrowserView?.type = 1
         pictureBrowserView?.startIndex = currentIndex ?? 0 + 1
         pictureBrowserView?.show(in: window)
     
         window.addSubview(indexLabel)
         indexLabel.snp.makeConstraints { (make) in
-            make.centerX.equalTo(window)
-            make.top.equalTo(window).offset(80)
-            make.size.equalTo(CGSize(width: 100, height: 40))
+//            make.centerX.equalTo(window)
+            if deviceTypeIPhoneX() {
+                make.bottom.equalTo(window).offset(-37)
+            }else {
+                make.bottom.equalTo(window).offset(-10)
+            }
+            make.left.equalTo(window)
+            make.size.equalTo(CGSize(width: 70, height: 40))
         }
-        
-        
+    
     }
     
     private func addNotificationCenter() {
@@ -122,11 +128,22 @@ class PhotosViewController: UIViewController {
     lazy var indexLabel: UILabel = {
         let indexLabel = UILabel()
         indexLabel.textColor = UIColor.white
-        indexLabel.font = UIFont.systemFont(ofSize: 17)
+        indexLabel.font = UIFont.systemFont(ofSize: 16)
         indexLabel.textAlignment = .center
         indexLabel.text = "1/\(self.imageArray?.count ?? 0)"
         return indexLabel
     }()
+    
+    func image(image:UIImage,didFinishSavingWithError error:NSError?,contextInfo:AnyObject) {
+        if error != nil {
+            SVProgressHUD.showError(withStatus: "保存失败！")
+            return
+            
+        }else {
+            SVProgressHUD.showSuccess(withStatus: "保存成功!")
+        }
+        
+    }
 }
 
 extension PhotosViewController: WBImageBrowserViewDelegate {
@@ -147,4 +164,9 @@ extension PhotosViewController: WBImageBrowserViewDelegate {
     func shareButtonToClick() {
         
     }
+    
+    func saveImageButton(toClick image: UIImage!) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
 }
+

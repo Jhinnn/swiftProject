@@ -18,10 +18,19 @@ class HomeSearcModel: HandyJSON {
     // 发现
     var rooms: [ShowroomModel]?
     
+    //话题
+    var gambit: [InfoModel]?
+    
+    //社区
+    var community: [StatementModel]?
+    
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.tickets <-- "ticket"
         mapper <<< self.news <-- "News"
         mapper <<< self.rooms <-- "group"
+        mapper <<< self.gambit <-- "Gambit"
+        mapper <<< self.community <-- "Dynamic"
     }
     
     required init() {}

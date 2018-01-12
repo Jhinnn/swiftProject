@@ -204,7 +204,7 @@ class LotteryDetailsViewController: BaseViewController {
                 // string 是需要设置中划线的字符串
                 let attributedStr = NSMutableAttributedString(string: self.ticketPriceLabel.text ?? "")
                 // range 是设置中划线的范围   其他参数不必管
-                attributedStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, self.ticketPriceLabel.text!.characters.count))
+                attributedStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, self.ticketPriceLabel.text!.count))
                 
                 // 赋值
                 self.ticketPriceLabel.attributedText = attributedStr

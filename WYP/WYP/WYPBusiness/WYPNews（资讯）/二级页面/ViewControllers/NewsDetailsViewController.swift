@@ -212,7 +212,12 @@ class NewsDetailsViewController: BaseViewController {
             make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         commentTextField.snp.makeConstraints { (make) in
-            make.centerY.equalTo(interactionView.snp.centerY)
+            if deviceTypeIPhoneX() {
+                make.centerY.equalTo(interactionView.snp.centerY).offset(-4)
+            }else {
+                make.centerY.equalTo(interactionView.snp.centerY)
+            }
+            
             make.left.equalTo(interactionView).offset(13)
             make.right.equalTo(commentDetailBtn.snp.left).offset(-30)
             make.height.equalTo(34)

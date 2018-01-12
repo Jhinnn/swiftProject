@@ -215,7 +215,7 @@ class VideoInfoTableViewCell: UITableViewCell {
                 if newValue?.duration != nil {
                     if (newValue?.duration)! < 60 {
                         infoLabel.text = String.init(format: "00:%02d", newValue?.duration ?? 00)
-                    } else if (newValue?.duration)! > 60 {
+                    } else if (newValue?.duration)! >= 60 {
                         infoLabel.text = String.init(format: "%02d:%02d", (newValue?.duration)!/60, (newValue?.duration)!%60)
                     }
                 }

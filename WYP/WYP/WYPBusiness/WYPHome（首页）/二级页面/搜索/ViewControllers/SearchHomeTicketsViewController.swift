@@ -180,12 +180,22 @@ extension SearchHomeTicketsViewController: UITableViewDelegate, UITableViewDataS
     
     // 选中单元格
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let board = UIStoryboard.init(name: "LotteryDetails", bundle: nil)
-        let lotteryDetailsViewController = board.instantiateInitialViewController() as! LotteryDetailsViewController
-        lotteryDetailsViewController.ticketId = ticketData?[indexPath.row].ticketId ?? ""
-        navigationController?.pushViewController(lotteryDetailsViewController, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! ScrambleForTicketCell
+        if cell.ticketButton.isUserInteractionEnabled == false {
+            // 抢票截止，不能跳到详情页
+        } else if AppInfo.shared.user?.userId == nil {
+            // 未登录也不能跳转到详情页
+            SVProgressHUD.showError(withStatus: "请登录")
+        } else {
+            let board = UIStoryboard.init(name: "LotteryDetails", bundle: nil)
+            let lotteryDetailsViewController = board.instantiateInitialViewController() as! LotteryDetailsViewController
+            lotteryDetailsViewController.ticketId = ticketData?[indexPath.row].ticketId ?? ""
+            navigationController?.pushViewController(lotteryDetailsViewController, animated: true)
+            
+            ticketTableView.deselectRow(at: indexPath, animated: true)
+        }
         
-        ticketTableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
 }

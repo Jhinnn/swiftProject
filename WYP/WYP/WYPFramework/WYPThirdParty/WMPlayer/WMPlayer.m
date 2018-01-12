@@ -175,7 +175,13 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         make.left.equalTo(self.contentView).with.offset(0);
         make.right.equalTo(self.contentView).with.offset(0);
         make.height.mas_equalTo(70);
-        make.top.equalTo(self.contentView).with.offset(0);
+        if ([UIScreen mainScreen].bounds.size.height == 812) {
+            make.top.equalTo(self.contentView).with.offset(10);
+        }else {
+            make.top.equalTo(self.contentView).with.offset(0);
+        }
+        
+        
     }];
     
     
@@ -335,7 +341,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
        [self.topView addSubview:_closeBtn];
     //autoLayout _closeBtn
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        
         make.left.equalTo(self.topView).with.offset(5);
+        
+        
         make.height.mas_equalTo(30);
         make.width.mas_equalTo(30);
         make.top.equalTo(self.topView).with.offset(20);

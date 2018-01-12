@@ -162,14 +162,14 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             circleIV.clipsToBounds = true
             cell?.addSubview(circleIV)
             
-//            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:90, height:30))
-            let label1 = UILabel()
+            let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:95, height:30))
+//            let label1 = UILabel()
             cell?.addSubview(label1)
-            label1.snp.makeConstraints({ (make) in
-                make.left.equalTo(circleIV.snp.right).offset(20)
-                make.top.equalTo(circleIV.snp.top).offset(5)
-                make.height.equalTo(30)
-            })
+//            label1.snp.makeConstraints({ (make) in
+//                make.left.equalTo(circleIV.snp.right).offset(20)
+//                make.top.equalTo(circleIV.snp.top).offset(5)
+//                make.height.equalTo(30)
+//            })
             label1.layer.cornerRadius = 10
             label1.clipsToBounds = true
             label1.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
@@ -232,7 +232,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     switch index {
                     case 0:
                         let aIV = UIImageView()
-                        let aUrl = URL(string: community_cover[index] ?? "")
+                        let aUrl = URL(string: community_cover[index] )
                         aIV.kf.setImage(with: aUrl)
                         aIV.frame = CGRect(x:50, y:25, width:60, height:60)
                         cell?.addSubview(aIV)

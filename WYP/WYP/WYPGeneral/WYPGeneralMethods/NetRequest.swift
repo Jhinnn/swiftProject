@@ -1,4 +1,4 @@
-//
+    //
 //  NetRequest.swift
 //  WYP
 //
@@ -2143,7 +2143,7 @@ class NetRequest {
     }
     
     // 首页搜索
-    class func homeSearchNetRequest(keyword: String, longitude: String, latitude: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func homeSearchNetRequest(keyword: String, longitude: String, latitude: String, complete: @escaping ((Bool, String?, NSDictionary?,[NSDictionary]?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "keyword": keyword,
@@ -2158,10 +2158,11 @@ class NetRequest {
                 // 获取info信息
                 let info = json["info"].stringValue
                 if code == 400 {
-                    complete(false, info, nil)
+                    complete(false, info, nil,nil)
                 } else {
                     let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
-                    complete(true, info, dic)
+                    let arr = dic!["Dynamic"] as! [NSDictionary]
+                    complete(true, info, dic,arr)
                 }
             case .failure(let error):
                 print(error)
@@ -2242,6 +2243,59 @@ class NetRequest {
                 } else {
                     let dic = json.rawValue as? NSDictionary
                     complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 首页 - 搜索资讯更多
+    class func homeSearchMoreGambitNetRquest(page: String, keyword: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "keyword": keyword,
+                                      "page": page]
+        Alamofire.request(kApi_homeSearchGambit, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // 首页 - 搜索社区更多
+    class func homeSearchMoreCommNetRquest(page: String, keyword: String, complete: @escaping ((Bool, String?, [NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "keyword": keyword,
+                                      "page": page]
+        Alamofire.request(kApi_homeSearchCommunity, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+//                    let dic = json.rawValue as? NSDictionary
+                    let arr = json.dictionary?["data"]?.rawValue as! [NSDictionary]
+                    complete(true, info, arr)
                 }
             case .failure(let error):
                 print(error)
@@ -3462,7 +3516,7 @@ class NetRequest {
         var infoArr:[String] = [String]()
         for image in images {
             // 压缩图片
-            let fileData = UIImageJPEGRepresentation(image, 0.8)
+            let fileData = UIImageJPEGRepresentation(image, 1)
             let base64String = fileData?.base64EncodedString(options: .endLineWithCarriageReturn)
             infoArr.append(base64String!)
         }

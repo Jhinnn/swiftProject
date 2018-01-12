@@ -25,7 +25,8 @@
 - (void)getContentWithItem:(NSInteger)item ;
 - (void)backButtonToClick;
 - (void)shareButtonToClick;
-- (void)longPressButtonToClick;
+- (void)longPressButtonToClick:(UIImage *)image;
+- (void)onceButtonToClick;
 - (void)saveImageButtonToClick:(UIImage *)image;
 
 @end

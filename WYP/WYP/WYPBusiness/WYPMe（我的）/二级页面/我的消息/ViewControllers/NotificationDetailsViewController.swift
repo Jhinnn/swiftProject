@@ -71,8 +71,8 @@ extension NotificationDetailsViewController: UITableViewDelegate, UITableViewDat
             cell.friendsTitleLabel.text = String.init(format: "%@ - %@", roomName ?? "", nickname ?? "")
         }
         
-        cell.addAttentionButton.setImage(UIImage(named: "mine_allow_button_normal_iPhone"), for: .normal)
-        cell.addAttentionButton.setImage(UIImage(named: "mine_allow_button_selected_iPhone"), for: .selected)
+//        cell.addAttentionButton.setImage(UIImage(named: "mine_allow_button_normal_iPhone"), for: .normal)
+//        cell.addAttentionButton.setImage(UIImage(named: "mine_allow_button_selected_iPhone"), for: .selected)
         if isFriend == "1" || isGroup == "1" {
             cell.addAttentionButton.isHidden = true
         } else {

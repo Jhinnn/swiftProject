@@ -160,11 +160,18 @@ static  NSString *cellID = @"cellID";
             [self removeFromSuperview];
             [_viewController dismissViewControllerAnimated:YES completion:nil];
         }];
+    }else if (self.type == 2) {  //图集界面
+        [self.delegate onceButtonToClick];
     }
 
 }
 - (void)saveImage:(UITapGestureRecognizer *)tap {
-       [self.delegate longPressButtonToClick];
+    if (self.type == 1) {
+        
+    }else if (self.type == 2) {
+        [self.delegate longPressButtonToClick:self.currentImage];
+    }
+    
 }
 
 // 双击手势
@@ -199,7 +206,7 @@ static  NSString *cellID = @"cellID";
 
 - (UIView *)topBgView {
     if (!_topBgView) {
-        _topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, HeightForTopView)];
+        _topBgView = [[UIView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + 4, SCREEN_WIDTH, HeightForTopView)];
         _topBgView.backgroundColor = [UIColor clearColor];
     }
     return _topBgView;
@@ -215,8 +222,8 @@ static  NSString *cellID = @"cellID";
 
 - (UILabel *)indexLabel {
     if(!_indexLabel) {
-        _indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 38, 30)];
-        _indexLabel.textAlignment = NSTextAlignmentRight;
+        _indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 70, 30)];
+        _indexLabel.textAlignment = NSTextAlignmentLeft;
         _indexLabel.font = [UIFont systemFontOfSize:15];
         _indexLabel.textColor = [UIColor whiteColor];
     }
@@ -229,17 +236,21 @@ static  NSString *cellID = @"cellID";
         _saveButton.titleLabel.textColor = [UIColor whiteColor];
         _saveButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
+        _saveButton.layer.masksToBounds = YES;
+        _saveButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        _saveButton.layer.borderWidth = 0.8;
+        _saveButton.layer.cornerRadius = 10;
         [_saveButton addTarget:self action:@selector(saveImageClick) forControlEvents:UIControlEventTouchUpInside];
-        _saveButton.frame = CGRectMake(SCREEN_WIDTH - 60, 10, 60, 30);
+        _saveButton.frame = CGRectMake(SCREEN_WIDTH - 78, 10, 58, 26);
     }
     return _saveButton;
 }
 
 - (UIButton *)backButton {
     if (!_backButton) {
-        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, HeightForTopView, HeightForTopView)];
-        [_backButton setImage:[UIImage imageNamed:@"news_photo_button_normal_iPhone"] forState:UIControlStateNormal];
-        [_backButton setImage:[UIImage imageNamed:@"news_photo_button_normal_iPhone"] forState:UIControlStateHighlighted];
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 2, HeightForTopView, HeightForTopView)];
+        [_backButton setImage:[UIImage imageNamed:@"common_navback_button_normal_iPhone"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"common_navback_button_normal_iPhone"] forState:UIControlStateHighlighted];
         [_backButton addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
@@ -249,7 +260,7 @@ static  NSString *cellID = @"cellID";
     if (!_shareButton) {
         _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _shareButton.frame = CGRectMake(SCREEN_WIDTH - 50, 0, HeightForTopView, HeightForTopView);
-        [_shareButton setImage:[UIImage imageNamed:@"common_share_button_highlight_iPhone"] forState:UIControlStateNormal];
+        [_shareButton setImage:[UIImage imageNamed:@"tj_icon_fx_normal"] forState:UIControlStateNormal];
         [_shareButton addTarget:self action:@selector(shareButtonButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shareButton;

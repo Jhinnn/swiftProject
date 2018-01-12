@@ -11,6 +11,13 @@ import WebKit
 
 class RoomNewsDetailViewController: BaseViewController {
     
+    var webImageListArray : Array<Any>!
+    
+    // 图集视图
+    var pictureBrowserView: WBImageBrowserView?
+    
+    var imageIndex: Int?
+    
     // 新闻id
     var newsId: String?
     // 新闻标题
@@ -207,7 +214,17 @@ class RoomNewsDetailViewController: BaseViewController {
     // MARK: - setter and getter
     
     lazy var newsWebView: WKWebView = {
-        let newsWebView = WKWebView(frame: .zero)
+        
+        
+        // 自定义配置
+        let conf = WKWebViewConfiguration()
+        conf.userContentController = WKUserContentController()
+        conf.preferences.javaScriptEnabled = true
+        conf.selectionGranularity = WKSelectionGranularity.character
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "clickIndex")
+        conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
+        
+        let newsWebView = WKWebView.init(frame: .zero, configuration: conf)
         newsWebView.backgroundColor = UIColor.clear
         newsWebView.isOpaque = false
         newsWebView.uiDelegate = self
@@ -503,5 +520,59 @@ extension RoomNewsDetailViewController: ShowRoomCommentCellDelegate {
         commentReply.commentData = commentData[sender.tag - 190]
         navigationController?.pushViewController(commentReply, animated: true)
     }
+    
+    func image(image:UIImage,didFinishSavingWithError error:NSError?,contextInfo:AnyObject) {
+        if error != nil {
+            SVProgressHUD.showError(withStatus: "保存失败！")
+            return
+            
+        }else {
+            SVProgressHUD.showSuccess(withStatus: "保存成功!")
+        }
+        
+    }
+}
+
+extension RoomNewsDetailViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
+        if message.name == "clickIndex" {  //图片点击事件
+            
+            let window = UIApplication.shared.keyWindow!
+            window.backgroundColor = UIColor.black
+            
+            pictureBrowserView = WBImageBrowserView.pictureBrowsweView(withFrame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), delegate: self, browserInfoArray: webImageListArray)
+            pictureBrowserView?.type = 1
+            pictureBrowserView?.viewController = self
+            pictureBrowserView?.topBgView.isHidden = true
+            pictureBrowserView?.startIndex = message.body as! Int + 1
+            pictureBrowserView?.show(in: window)
+            pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", message.body as! Int + 1,webImageListArray.count)
+            imageIndex = (message.body as! Int) //获得下标
+            return
+        }
+        
+        if message.name == "showImgs" {
+            let str = message.body
+            let strArray = (str as! String).components(separatedBy: ",")
+            webImageListArray = strArray
+            return
+        }
+    }
+}
+
+extension RoomNewsDetailViewController: WBImageBrowserViewDelegate {
+    func saveImageButton(toClick image: UIImage!) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func getContentWithItem(_ item: Int) {
+        pictureBrowserView?.indexLabel.text = String.init(format: "%d/%d", item + 1,webImageListArray.count)
+        imageIndex = item //获得图片下标
+    }
+    
+    
+    
 }
 

@@ -162,6 +162,16 @@ public var kApi_homeSearchNews: String {
     return kApi_baseUrl(path: "api/newsSearchMore")
 }
 
+// 首页 - 搜索话题更多
+public var kApi_homeSearchGambit: String {
+    return kApi_baseUrl(path: "api/gambitSearchMore")
+}
+
+// 首页 - 搜索社区更多
+public var kApi_homeSearchCommunity: String {
+    return kApi_baseUrl(path: "api/dynamic_search_more")
+}
+
 // 城市搜索
 public var kApi_citySearch: String {
     return kApi_baseUrl(path: "api/cheng")

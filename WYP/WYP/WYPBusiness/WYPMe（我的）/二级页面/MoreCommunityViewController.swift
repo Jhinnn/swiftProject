@@ -31,6 +31,8 @@ class MoreCommunityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "社区详情"
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
@@ -49,6 +51,7 @@ class MoreCommunityViewController: BaseViewController {
         IQKeyboardManager.shared().isEnabled = true
         
         statementFrame.isShowAllMessage = false
+        
         statementFrame.statement = statementFrame.statement
         
         delegate?.changeStatementFrameModel(statementFrame: statementFrame)
@@ -162,16 +165,22 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
         
+    
+        let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
+        cell.deleteButton.isHidden = true
         cell.statementFrame = self.statementFrame
+        
         cell.selectionStyle = .none;
         cell.delegate = self
         cell.selectImgBlock = {(index, imageUrlArray) in
             let albumVC = AlbumViewController()
             albumVC.dataList = imageUrlArray
             albumVC.selectedIndex = index
-            self.navigationController?.pushViewController(albumVC, animated: true)
+            albumVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(albumVC, animated: true, completion: {
+                
+            })
         }
         return cell
     }

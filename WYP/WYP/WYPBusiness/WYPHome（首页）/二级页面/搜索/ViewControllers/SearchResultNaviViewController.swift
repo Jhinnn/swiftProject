@@ -102,7 +102,7 @@ class SearchResultNaviViewController: BaseViewController {
         currentIndex = 0
         navTabBar.currentIndex = currentIndex!
         // 初始化标题数组
-        titles = ["全部","资讯","发现","抢票"]
+        titles = ["全部","资讯","发现","抢票","话题","社区"]
         // 将标题数组赋给分页导航的数组
         navTabBar.itemTitles = titles
         // 刷新数据
@@ -125,7 +125,18 @@ class SearchResultNaviViewController: BaseViewController {
         // 票务
         let ticket = SearchHomeTicketsViewController()
         ticket.keyword = searchView.searchTextField.text
-        subViewControllers = [searchResult,news,showRoom,ticket]
+        
+        // 话题
+        let topicResult = SearchHomeTopicsViewController()
+        
+        topicResult.keyword = searchView.searchTextField.text
+        
+        let comResult = SearchHomeComViewController()
+        
+        comResult.keyword = searchView.searchTextField.text
+        
+        
+        subViewControllers = [searchResult,news,showRoom,ticket,topicResult,comResult]
         
         // 设置控制器的尺寸
         mainView.contentSize = CGSize(width: kScreen_width*CGFloat(subViewControllers!.count), height: 0)
@@ -178,6 +189,14 @@ class SearchResultNaviViewController: BaseViewController {
             let viewController = subViewControllers?[index] as! SearchHomeTicketsViewController
             viewController.keyword = searchView.searchTextField.text
             viewController.loadDataSource(requestType: .update)
+        } else if index == 4 {
+            let viewController = subViewControllers?[index] as! SearchHomeTopicsViewController
+            viewController.keyword = searchView.searchTextField.text
+            viewController.loadSearchResult(requestType: .update)
+        } else if index == 5 {
+            let viewController = subViewControllers?[index] as! SearchHomeComViewController
+            viewController.keyword = searchView.searchTextField.text
+            viewController.loadSearchResult(requestType: .update)
         }
     }
     func whenTextFieldValueChange() {
@@ -234,7 +253,7 @@ extension SearchResultNaviViewController: UIScrollViewDelegate {
 }
 extension SearchResultNaviViewController: SYNavTabBarDelegate {
     func itemDidSelected(index: NSInteger, currentIndex: NSInteger) {
-        if currentIndex-index > 3 || currentIndex-index < -3 {
+        if currentIndex-index > 5 || currentIndex-index < -5 {
             mainView.contentOffset = CGPoint(x: CGFloat(index) * kScreen_width, y: 0)
         }else{
             mainView.setContentOffset(CGPoint(x: CGFloat(index) * kScreen_width, y: 0), animated: false)
@@ -247,11 +266,13 @@ extension SearchResultNaviViewController: SearchResultViewControllerDelegate {
         switch sender.tag {
         case 0:
             currentIndex = 3
-            
         case 1:
             currentIndex = 1
-            
         case 2:
+            currentIndex = 4
+        case 3:
+            currentIndex = 5
+        case 4:
             currentIndex = 2
         default:
             break

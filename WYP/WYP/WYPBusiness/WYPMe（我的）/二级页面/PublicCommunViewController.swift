@@ -68,7 +68,7 @@ class PublicCommunViewController: BaseViewController{
     }()
     
     lazy var photoView: HXPhotoView = {
-        let photoView = HXPhotoView(frame: CGRect(x: 10, y: 13, width: kScreen_width - 20, height: 120), with: self.manager)
+        let photoView = HXPhotoView(frame: CGRect(x: 10, y: 13, width: kScreen_width - 40, height: 220), with: self.manager)
         photoView?.delegate = self
         return photoView!
     }()

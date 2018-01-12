@@ -21,6 +21,13 @@ class NewsPhotosDetailViewController: BaseViewController {
     // 图集视图
     var pictureBrowserView: WBImageBrowserView?
     
+    
+    //弹出视图
+    var sheetView: UIView?
+    
+    //保存图片
+    var saveImage: UIImage?
+    
     // 资讯Id
     var newsId: String?
     // 新闻标题
@@ -40,6 +47,8 @@ class NewsPhotosDetailViewController: BaseViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +74,9 @@ class NewsPhotosDetailViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        sheetView?.removeFromSuperview()
+        sheetView = nil
         
         let window = UIApplication.shared.keyWindow!
         window.backgroundColor = UIColor.themeColor
@@ -174,7 +186,9 @@ class NewsPhotosDetailViewController: BaseViewController {
         pictureBrowserView = WBImageBrowserView.pictureBrowsweView(withFrame: CGRect(x: 0, y: -64, width: kScreen_width, height: kScreen_height), delegate: self, browserInfoArray: imageArray)
         pictureBrowserView?.orientation = UIDevice.current.orientation
         pictureBrowserView?.viewController = self
+        pictureBrowserView?.type = 2
         pictureBrowserView?.startIndex = currentIndex
+        pictureBrowserView?.bottomBgView.isHidden = true
         pictureBrowserView?.show(in: window)
         
         window.addSubview(interactionView)
@@ -188,19 +202,24 @@ class NewsPhotosDetailViewController: BaseViewController {
             make.height.equalTo(160)
         }
         collectionButton.snp.makeConstraints { (make) in
-            make.right.equalTo(interactionView).offset(-15)
-            make.bottom.equalTo(interactionView).offset(-14.5)
+            make.right.equalTo(interactionView).offset(-18)
+            make.centerY.equalTo(commentTextField)
             make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         commentDetailBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(interactionView).offset(-13)
-            make.right.equalTo(collectionButton.snp.left).offset(-10)
+            make.centerY.equalTo(commentTextField)
+            make.right.equalTo(collectionButton.snp.left).offset(-18)
             make.size.equalTo(CGSize(width: 19.5, height: 19.5))
         }
         commentTextField.snp.makeConstraints { (make) in
-            make.bottom.equalTo(interactionView).offset(-10)
+            if deviceTypeIPhoneX() {
+                make.bottom.equalTo(interactionView).offset(-18)
+            }else {
+                make.bottom.equalTo(interactionView).offset(-10)
+            }
+            
             make.left.equalTo(interactionView).offset(13)
-            make.right.equalTo(commentDetailBtn.snp.left).offset(-15)
+            make.right.equalTo(commentDetailBtn.snp.left).offset(-20)
             make.height.equalTo(30)
         }
         contentLabel.snp.makeConstraints { (make) in
@@ -294,7 +313,7 @@ class NewsPhotosDetailViewController: BaseViewController {
                 if success {
                     SVProgressHUD.showSuccess(withStatus: info!)
                     sender.isSelected = true
-                    sender.setImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+                    sender.setImage(UIImage(named: "tj_icon_follow_select"), for: .selected)
                 } else {
                     SVProgressHUD.showError(withStatus: info!)
                 }
@@ -330,16 +349,18 @@ class NewsPhotosDetailViewController: BaseViewController {
     }()
     
     // 评论框
-    lazy var commentTextField: SYTextField = {
-        let commentTextField = SYTextField()
+    lazy var commentTextField: SYYTextField = {
+        let commentTextField = SYYTextField()
+        commentTextField.backgroundColor = UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1)
         commentTextField.font = UIFont.systemFont(ofSize: 13)
         commentTextField.delegate = self
         commentTextField.borderStyle = .roundedRect
-        commentTextField.placeholder = "期待你的神评论"
+        commentTextField.placeholder = "写下你的想法..."
         commentTextField.returnKeyType = .send
-        
+        commentTextField.textColor = UIColor.white
+    
         let imageView = UIImageView(frame: CGRect(x: 5, y: 8.25, width: 13.5, height: 13.5))
-        imageView.image = UIImage(named: "common_editorGary_button_normal_iPhone")
+        imageView.image = UIImage(named: "tj_icon_write_normal")
         commentTextField.addSubview(imageView)
         
         return commentTextField
@@ -348,18 +369,20 @@ class NewsPhotosDetailViewController: BaseViewController {
     // 评论详情按钮
     lazy var commentDetailBtn: SYButton = {
         let commentDetailBtn = SYButton()
-        commentDetailBtn.setBackgroundImage(UIImage(named: "newsDetail_button_normal_iPhone"), for: .normal)
+        commentDetailBtn.setBackgroundImage(UIImage(named: "tj_icon_edit_normal"), for: .normal)
         commentDetailBtn.addTarget(self, action: #selector(chickCommentDetail(sender:)), for: .touchUpInside)
         return commentDetailBtn
     }()
     // 收藏
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()
-        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_normal_iPhone"), for: .normal)
-        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+        collectionButton.setBackgroundImage(UIImage(named: "tj_icon_follow_normal"), for: .normal)
+        collectionButton.setBackgroundImage(UIImage(named: "tj_icon_follow_select"), for: .selected)
         collectionButton.addTarget(self, action: #selector(collectionNews(sender:)), for: .touchUpInside)
         return collectionButton
     }()
+    
+  
     
     func keyboardWillShow(note: NSNotification) {
         let userInfo = note.userInfo!
@@ -399,6 +422,31 @@ class NewsPhotosDetailViewController: BaseViewController {
         }
         return attributedString
     }
+    
+    func saveImageAction() {  //保存图片
+        UIImageWriteToSavedPhotosAlbum(saveImage!, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func cancelAction() {
+        sheetView?.removeFromSuperview()
+        sheetView = nil
+    }
+    
+    func image(image:UIImage,didFinishSavingWithError error:NSError?,contextInfo:AnyObject) {
+        
+        sheetView?.removeFromSuperview()
+        sheetView = nil
+        
+        if error != nil {
+            SVProgressHUD.showError(withStatus: "保存失败！")
+            return
+            
+        }else {
+            SVProgressHUD.showSuccess(withStatus: "保存成功!")
+        }
+        
+    }
+    
 }
 
 extension NewsPhotosDetailViewController: UITextFieldDelegate {
@@ -432,12 +480,60 @@ extension NewsPhotosDetailViewController: UITextFieldDelegate {
         }
         return true
     }
+    
 }
 
 extension NewsPhotosDetailViewController: WBImageBrowserViewDelegate {
-    func longPressButtonToClick() {
-        
+    
+    func longPressButton(toClick image: UIImage!) {  //长按弹出sheet 保存图片
+        if sheetView == nil {
+            sheetView = UIView.init()
+            if deviceTypeIPhoneX() {
+                sheetView?.frame = CGRect(x: 0, y: kScreen_height, width: kScreen_width, height: 100 + 34)
+            }else {
+                sheetView?.frame = CGRect(x: 0, y: kScreen_height, width: kScreen_width, height: 100)
+            }
+            sheetView?.backgroundColor = UIColor.white
+            
+            let saveBtn = UIButton.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 47))
+            saveBtn.setTitle("保存图片", for: .normal)
+            saveBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            
+            saveBtn.addTarget(self, action: #selector(saveImageAction), for: .touchUpInside)
+            saveBtn.setTitleColor(UIColor.black, for: .normal)
+            saveBtn.backgroundColor = UIColor.white
+            sheetView?.addSubview(saveBtn)
+            
+            
+            let lineView = UIView.init(frame: CGRect(x: 0, y: 47, width: kScreen_width, height: 6))
+            lineView.backgroundColor = UIColor.groupTableViewBackground
+            sheetView?.addSubview(lineView)
+            
+            let quitBtn = UIButton.init(frame: CGRect(x: 0, y: 53, width: kScreen_width, height: 47))
+            quitBtn.setTitle("取消", for: .normal)
+            quitBtn.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+            quitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+            quitBtn.setTitleColor(UIColor.red, for: .normal)
+            quitBtn.backgroundColor = UIColor.white
+            sheetView?.addSubview(quitBtn)
+            
+            UIApplication.shared.keyWindow!.addSubview(sheetView!)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                if deviceTypeIPhoneX() {
+                    
+                    self.sheetView?.transform = (self.sheetView?.transform.translatedBy(x: 0, y: -100 - 34))!
+                }else {
+                    self.sheetView?.transform = (self.sheetView?.transform.translatedBy(x: 0, y: -100))!
+                }
+            })
+            
+            saveImage = image  //获得保存图片
+            
+        }
     }
+
+
     
     func getContentWithItem(_ item: Int) {
         contentLabel.text = String.init(format: "%d/%d %@", item + 1, contentArray?.count ?? 0, contentArray?[item] ?? "")
@@ -454,5 +550,36 @@ extension NewsPhotosDetailViewController: WBImageBrowserViewDelegate {
     }
     func shareButtonToClick() {
         shareBarButtonItemAction()
+    }
+    
+    func onceButtonToClick() {
+        sheetView?.removeFromSuperview()
+        sheetView = nil
+    }
+}
+
+class SYYTextField: UITextField {
+    
+    // 控制默认文本的位置(placeholder)
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
+    }
+    
+    // 控制编辑文本的位置
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
+        
+    }
+    
+    // 控制显示文本的位置
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
+    }
+    
+    override func drawPlaceholder(in rect: CGRect) {
+        
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName: UIColor.white])
+        
+        super.drawPlaceholder(in: rect)
     }
 }

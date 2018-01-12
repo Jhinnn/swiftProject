@@ -189,8 +189,8 @@ class TalkNewsDetailsViewController: BaseViewController {
         if deviceTypeIPhoneX() {
             interactionView.snp.makeConstraints { (make) in
                 make.left.right.equalTo(view)
-                make.bottom.equalTo(-34)
-                make.height.equalTo(59)
+                make.bottom.equalTo(0)
+                make.height.equalTo(59 + 34)
             }
         }else {
             interactionView.snp.makeConstraints { (make) in
@@ -199,35 +199,6 @@ class TalkNewsDetailsViewController: BaseViewController {
             }
         }
         
-        
-        
-//        moreButton.snp.makeConstraints { (make) in
-//            make.left.equalTo(interactionView)
-//            make.top.equalTo(interactionView)
-//            make.width.equalTo(interactionView.width/6)
-//            make.height.equalTo(interactionView)
-//        }
-//        shareButton.snp.makeConstraints { (make) in
-//            make.right.equalTo(interactionView).offset(-15)
-//            make.bottom.equalTo(interactionView).offset(-24.5)
-//            make.size.equalTo(CGSize(width: 9.5, height: 19.5))
-//        }
-//        collectionButton.snp.makeConstraints { (make) in
-//            make.right.equalTo(shareButton.snp.left).offset(-10)
-//            make.bottom.equalTo(interactionView).offset(-24.5)
-//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-//        }
-//        commentDetailBtn.snp.makeConstraints { (make) in
-//            make.right.equalTo(collectionButton.snp.left).offset(-10)
-//            make.bottom.equalTo(interactionView).offset(-23)
-//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-//        }
-//        commentTextField.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(interactionView).offset(-20)
-//            make.left.equalTo(interactionView).offset(13)
-//            make.right.equalTo(commentDetailBtn.snp.left).offset(-15)
-//            make.height.equalTo(30)
-//        }
     }
     
     func request() {
@@ -324,7 +295,7 @@ class TalkNewsDetailsViewController: BaseViewController {
     // 背景
     lazy var interactionView: UIView = {
         let interactionView = UIView()
-//        interactionView.backgroundColor = UIColor.gray
+        interactionView.backgroundColor = UIColor.white
         return interactionView
     }()
     

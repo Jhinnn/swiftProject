@@ -194,7 +194,7 @@ class ScrambleForTicketCell: UITableViewCell {
             ticketPriceLabel.text = newValue?.ticketPirce ?? ""
             // 中划线
             let attributedStr = NSMutableAttributedString(string: ticketPriceLabel.text!)
-            attributedStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, ticketPriceLabel.text!.characters.count))
+            attributedStr.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(value: 1), range: NSMakeRange(0, ticketPriceLabel.text!.count))
             ticketPriceLabel.attributedText = attributedStr
             
             ticketNumberlabel.text = String.init(format: "%@ 人参与抢票", newValue?.ticketPeople ?? "0")

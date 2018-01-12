@@ -77,14 +77,14 @@ class TalkRoomCommentFrameModel: NSObject {
                     image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 80)
                 }
                 starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (image1F?.maxY)! + 14, width: 70, height: 14)
-                timeF = CGRect(x: kScreen_width - 95, y: (image1F?.maxY)! + 16, width: 80, height: 14)
+                timeF = CGRect(x: kScreen_width - 160, y: (image1F?.maxY)! + 16, width: 150, height: 14)
             }else {
                 
                 image1F = CGRect(x: (headImgUrlF?.maxX)! + 15, y: (contentF?.maxY)! + 10, width: 80, height: 0)
                 image2F = CGRect(x: (headImgUrlF?.maxX)! + 100, y: (contentF?.maxY)! + 10, width: 80, height: 0)
                 image3F = CGRect(x: (headImgUrlF?.maxX)! + 185, y: (contentF?.maxY)! + 10, width: 80, height: 0)
                 starCountF = CGRect(x: (headImgUrlF?.maxX)! - 4, y: (image1F?.maxY)!, width: 70, height: 14)
-                timeF = CGRect(x: kScreen_width - 95, y: (image1F?.maxY)! + 2, width: 80, height: 14)
+                timeF = CGRect(x: kScreen_width - 160, y: (image1F?.maxY)! + 2, width: 150, height: 14)
             }
            
     

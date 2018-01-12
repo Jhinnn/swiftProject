@@ -21,6 +21,10 @@ class SearchResultViewController: BaseViewController {
     // 搜索结果
     var homeSearch: HomeSearcModel?
     
+    var newsData = [StatementFrameModel]()
+    
+    var newsDataAll = [StatementFrameModel]()
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +46,38 @@ class SearchResultViewController: BaseViewController {
     }
     private func layoutPageSubviews() {
         resultTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
+            if deviceTypeIPhoneX() {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 142, 0))
+            }else {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
+            }
+            
         }
     }
     
     func loadData() {
         let longitude = String.init(format: "%lf", LocationManager.shared.longitude ?? 0)
         let latitude = String.init(format: "%lf", LocationManager.shared.latitude ?? 0)
-        NetRequest.homeSearchNetRequest(keyword: keyword ?? "", longitude: longitude, latitude: latitude) { (success, info, result) in
+        NetRequest.homeSearchNetRequest(keyword: keyword ?? "", longitude: longitude, latitude: latitude) { (success, info, result,response) in
             if success {
                 self.homeSearch = HomeSearcModel.deserialize(from: result)
+                
+//                var models = [StatementFrameModel]()
+                
+                for optDic in response! {
+                    let statement = StatementModel(contentDic: optDic as! [AnyHashable : Any])
+                    let statementFrame = StatementFrameModel()
+                    let statementFrameAll = StatementFrameModel()
+                    statementFrame.isSeachResult = true
+                    
+                    statementFrame.statement = statement
+                    statementFrameAll.statement = statement
+                    self.newsData.append(statementFrame)
+                    self.newsDataAll.append(statementFrameAll)
+                }
+                
+                
+                
                 
                 // 先移除再添加
                 self.noDataImageView.removeFromSuperview()
@@ -115,6 +141,7 @@ class SearchResultViewController: BaseViewController {
     // MARK: - setter and getter
     lazy var resultTableView: WYPTableView = {
         let resultTableView = WYPTableView(frame: .zero, style: .grouped)
+        
         resultTableView.delegate = self
         resultTableView.dataSource = self
         resultTableView.register(ScrambleForTicketCell.self, forCellReuseIdentifier: "searchTicketCell")
@@ -123,6 +150,15 @@ class SearchResultViewController: BaseViewController {
         resultTableView.register(VideoInfoTableViewCell.self, forCellReuseIdentifier: "searchVideoCell")
         resultTableView.register(TravelTableViewCell.self, forCellReuseIdentifier: "searchTextCell")
         resultTableView.register(ShowroomCell.self, forCellReuseIdentifier: "searchShowRoomCell")
+        
+        resultTableView.register(TalkOnePictureTableViewCell.self, forCellReuseIdentifier: "onePicCell")
+        resultTableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "textCell")
+        resultTableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
+        resultTableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
+        
+        resultTableView.register(StatementCell.self, forCellReuseIdentifier: "StatementCellIdentifier")
+        
+        
         if #available(iOS 11.0, *) {
 //            resultTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
             self.automaticallyAdjustsScrollViewInsets = true
@@ -156,9 +192,17 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
         if homeSearch?.news != nil {
             tag = tag + 1
         }
+        if self.newsData.count != 0 {
+            tag = tag + 1
+        }
+        
+        if homeSearch?.gambit != nil {
+            tag = tag + 1
+        }
         if homeSearch?.rooms != nil {
             tag = tag + 1
         }
+       
         if homeSearch?.tickets != nil {
             tag = tag + 1
         }
@@ -167,7 +211,7 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 没有搜索结果
-        if homeSearch?.tickets?.count == 0 && homeSearch?.news?.count == 0 && homeSearch?.rooms?.count == 0 {
+        if homeSearch?.tickets?.count == 0 && homeSearch?.news?.count == 0 && homeSearch?.rooms?.count == 0  && self.newsData.count != 0 && homeSearch?.gambit?.count == 0{
             noDataImageView.isHidden = false
             noDataLabel.isHidden = false
         } else {
@@ -189,6 +233,18 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                 return 0
             }
         case 2:
+            if homeSearch?.gambit != nil {
+                return homeSearch?.gambit?.count ?? 0
+            } else {
+                return 0
+            }
+        case 3:
+            if self.newsData.count != 0 {
+                return self.newsData.count
+            } else {
+                return 0
+            }
+        case 4:
             if homeSearch?.rooms != nil {
                 return homeSearch?.rooms?.count ?? 0
             } else {
@@ -210,7 +266,6 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             
         case 1:
             if homeSearch?.news != nil {
-            
                 switch homeSearch!.news![indexPath.row].showType! {
                 case 0: // 视频
                     let cell = tableView.dequeueReusableCell(withIdentifier: "searchVideoCell", for: indexPath) as! VideoInfoTableViewCell
@@ -265,10 +320,87 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                 default:
                     return UITableViewCell()
                 }
+                
             }
             return UITableViewCell()
-            
         case 2:
+            if homeSearch?.gambit != nil {
+                switch homeSearch!.gambit![indexPath.row].showType! {
+                case 0: // 视频
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                    
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                    
+                    return cell
+                case 1: //只有文字
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
+                    cell.travelTitleLabel.attributedText = attributeString
+                    
+                    return cell
+                case 2: //上图下文
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                    
+                    return cell
+                case 3: //左文右图
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+                    cell.infoLabel.attributedText = attributeString
+                    
+                    return cell
+                case 4: //三张图
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+                    cell.infoLabel.attributedText = attributeString
+                    
+                    return cell
+                case 5: // 大图
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                    cell.infoLabel.isHidden = true
+                    cell.playImageView.isHidden = true
+                    cell.infoModel = homeSearch!.gambit![indexPath.row]
+                    // 判断是不是搜索页面
+                    
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                    
+                    return cell
+                default:
+                    return UITableViewCell()
+                }
+            }
+            return UITableViewCell()
+        case 3:
+            
+            let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
+            cell.statementFrame = newsData[indexPath.row]
+            cell.selectionStyle = .none;
+            cell.selectImgBlock = {(index, imageUrlArray) in
+                return
+            }
+            return cell
+            
+            
+           
+        case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "searchShowRoomCell", for: indexPath) as! ShowroomCell
             cell.showRoomModel = homeSearch?.rooms?[indexPath.row]
             // 关键字标红
@@ -280,6 +412,8 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             return UITableViewCell()
         }
     }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -308,6 +442,29 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             }
             return 0
         case 2:
+            if (homeSearch?.gambit?.count)! > 0 {
+                switch homeSearch!.gambit![indexPath.row].showType! {
+                    case 0:
+                        return 275 * width_height_ratio
+                    case 1:
+                        return 87.5 * width_height_ratio
+                    case 2:
+                        return 275 * width_height_ratio
+                    case 3:
+                        return 109
+                    case 4:
+                        return 160 * width_height_ratio
+                    case 5:
+                        return 275 * width_height_ratio
+                    default:
+                        return 0
+                }
+            }
+            return 0
+        case 3:
+            let statementFrame = newsData[indexPath.row]
+            return statementFrame.cellHeight
+        case 4:
             if (homeSearch?.rooms?.count)! > 0 {
                 return 340 * width_height_ratio
             }
@@ -330,6 +487,10 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
         case 1:
             moreLabel.text = "查看更多资讯结果"
         case 2:
+            moreLabel.text = "查看更多发现结果"
+        case 3:
+            moreLabel.text = "查看更多发现结果"
+        case 4:
             moreLabel.text = "查看更多发现结果"
         default:
             break
@@ -367,6 +528,16 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             }
             return nil
         case 2:
+            if homeSearch?.gambit != nil && homeSearch?.gambit?.count != 0 {
+                return footerView
+            }
+            return nil
+        case 3:
+            if self.newsData.count != 0 {
+                return footerView
+            }
+            return nil
+        case 4:
             if homeSearch?.rooms != nil && homeSearch?.rooms?.count != 0 {
                 return footerView
             }
@@ -388,6 +559,16 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             }
             return 0.01
         case 2:
+            if homeSearch?.gambit != nil && homeSearch?.gambit?.count != 0 {
+                return 25
+            }
+            return 0.01
+        case 3:
+            if self.newsData.count != 0 {
+                return 25
+            }
+            return 0.01
+        case 4:
             if homeSearch?.rooms != nil && homeSearch?.rooms?.count != 0 {
                 return 25
             }
@@ -430,7 +611,7 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                     }
                 }
             }
-        case 1:
+        case 1:  //资讯
             if homeSearch?.news != nil {
                 
                 if homeSearch?.news![indexPath.row].infoType! == 4 {
@@ -470,7 +651,25 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
 //                news.commentNumber = homeSearch?.news?[indexPath.row].infoComment
 //                navigationController?.pushViewController(news, animated: true)
             }
-        case 2:
+        case 2:  //话题
+            let newsDetail = TalkNewsDetailsViewController()
+            newsDetail.newsTitle = homeSearch?.gambit?[indexPath.row].infoTitle
+            newsDetail.newsId = homeSearch?.gambit?[indexPath.row].newsId
+            newsDetail.commentNumber = homeSearch?.gambit?[indexPath.row].infoComment
+            navigationController?.pushViewController(newsDetail, animated: true)
+            
+            
+            
+        case 3: //社区
+        
+            let moreCommenityVC = MoreCommunityViewController()
+            
+            let statement = self.newsDataAll[indexPath.row]
+            
+            moreCommenityVC.statementFrame = statement
+            
+            navigationController?.pushViewController(moreCommenityVC, animated: true)
+        case 4:
             if homeSearch?.rooms != nil {
                 // 跳转
                 let showRoom = homeSearch?.rooms?[indexPath.row]

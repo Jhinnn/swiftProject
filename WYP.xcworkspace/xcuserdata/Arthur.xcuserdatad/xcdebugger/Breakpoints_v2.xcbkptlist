@@ -17,13 +17,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WYP/WYP/WYPBusiness/WYPHome&#xff08;&#x9996;&#x9875;&#xff09;/&#x4e8c;&#x7ea7;&#x9875;&#x9762;/&#x641c;&#x7d22;/ViewControllers/SearchHomeNewsViewController.swift"
-            timestampString = "536825495.874339"
+            filePath = "WYP/WYP/WYPBusiness/WYPMe&#xff08;&#x6211;&#x7684;&#xff09;/&#x4e8c;&#x7ea7;&#x9875;&#x9762;/&#x6211;&#x7684;&#x5173;&#x6ce8;/&#x7968;&#x52a1;/ViewControllers/AttentionTicketViewController.swift"
+            timestampString = "536836420.88964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -33,12 +33,60 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WYP/WYP/WYPBusiness/WYPMe&#xff08;&#x6211;&#x7684;&#xff09;/&#x4e8c;&#x7ea7;&#x9875;&#x9762;/&#x6211;&#x7684;&#x5173;&#x6ce8;/&#x7968;&#x52a1;/ViewControllers/AttentionTicketViewController.swift"
-            timestampString = "536836420.88964"
+            filePath = "WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
+            timestampString = "537411624.9541481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "2958"
+            endingLineNumber = "2958"
+            landmarkName = "roomNewsThumbUpNetRequest(commentId:uid:complete:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static WYP.NetRequest.roomNewsThumbUpNetRequest(commentId: Swift.String, uid: Swift.String, complete: (Swift.Bool, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "WYP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
+                  timestampString = "537411626.788353"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2958"
+                  endingLineNumber = "2958"
+                  offsetFromSymbolStart = "672">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in static WYP.NetRequest.roomNewsThumbUpNetRequest(commentId: Swift.String, uid: Swift.String, complete: (Swift.Bool, Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "WYP"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pengpeng/workspace/1001ALaDing_ios/WYP/WYP/WYPGeneral/WYPGeneralMethods/NetRequest.swift"
+                  timestampString = "537411626.792204"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2959"
+                  endingLineNumber = "2959"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WYP/WYP/WYPBusiness/WYPNews&#xff08;&#x8d44;&#x8baf;&#xff09;/&#x4e00;&#x7ea7;&#x9875;&#x9762;/ViewControllers/TallkViewController.swift"
+            timestampString = "537411624.954453"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>

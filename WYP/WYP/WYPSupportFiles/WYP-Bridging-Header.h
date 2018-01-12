@@ -28,7 +28,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 //#import "LHPerformanceStatusBar.h"
-#import "XHLaunchAd.h"
+//#import "XHLaunchAd.h"
 //#import <Bugtags/Bugtags.h>
 #import "UITextView+PlaceHolder.h"
 #import "PYSearch.h"
@@ -41,7 +41,6 @@
 #import "StarAndCommentModel.h"
 #import "StatementCell.h"
 #import "AlbumViewController.h"
-//#import "PublicGroupViewController.h"
 #import "WYPContain.h"
 #import "CMInputView.h"
 #import "FYLCityPickView.h"
@@ -50,6 +49,7 @@
 #import "HXPhotoViewController.h"
 #import "HXPhotoView.h"
 #import "StartButton.h"
+
 
 
 // 支付相关

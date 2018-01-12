@@ -363,24 +363,8 @@ class MyCommunityViewController: BaseViewController {
         return commentTextField
     }()
     
-//    // 评论文本输入框
-//    lazy var commentInputView: CMInputView = {
-//        let commentInputView = CMInputView()
-//        commentInputView.delegate = self
-//        commentInputView.placeholderColor = UIColor.gray
-//        commentInputView.placeholderFont = UIFont.systemFont(ofSize: 14)
-//        commentInputView.isHidden = true
-//        commentInputView.returnKeyType = .send
-//        commentInputView.font = UIFont.systemFont(ofSize: 14)
-//        commentInputView.backgroundColor = UIColor.white
-//
-//        return commentInputView
-//
-//    }()
     
-    
-    
-    
+
     lazy var bgView: UIView = {
         let bgView = UIView()
         
@@ -523,7 +507,7 @@ class MyCommunityViewController: BaseViewController {
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
-                print(json)
+                
                 // 获取code码
                 let code = json["code"].intValue
                 if code == 400 {
@@ -633,7 +617,10 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
             let albumVC = AlbumViewController()
             albumVC.dataList = imageUrlArray
             albumVC.selectedIndex = index
-            self.navigationController?.pushViewController(albumVC, animated: false)
+            albumVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(albumVC, animated: true, completion: {
+                
+            })
         }
         
         return cell
