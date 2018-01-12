@@ -306,7 +306,7 @@ class ShowroomDetailsViewController: UITableViewController {
             
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "showroom_grayshare_button_normal_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         }
         loadShowRoomDetailData(requestType: .update)
         headAImageView.startAnimation()

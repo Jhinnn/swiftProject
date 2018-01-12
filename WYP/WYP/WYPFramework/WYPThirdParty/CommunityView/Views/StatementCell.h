@@ -45,12 +45,7 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
     UILabel * _messageLabel;
     // 图片数组
     ShowImagesView * _imageArrayView;
-    // 更多按钮
-    StartButton * _shareButton;
-    // 评论按钮
-    StartButton * _leaveMessageButton;
-    // 点赞按钮
-    StartButton *_starButton;
+    
     // 删除按钮
     UIImageView *_zanImageView;
     
@@ -64,6 +59,15 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @property (strong, nonatomic) UIButton *deleteButton;
+
+@property (strong, nonatomic) UILabel *messageLabel;
+
+@property (strong, nonatomic) StartButton *shareButton;;
+
+@property (strong, nonatomic) StartButton *leaveMessageButton;
+
+@property (strong, nonatomic) StartButton *starButton;
+
 
 @property (strong, nonatomic) StatementFrameModel * statementFrame;
 

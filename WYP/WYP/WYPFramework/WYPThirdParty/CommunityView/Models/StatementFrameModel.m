@@ -174,12 +174,16 @@
         
         
         
+        
+        
         _cellHeight = CGRectGetMaxY(_imageArrayF) + 10;
     }else {
         //分享按钮
+        
         if (imageCount == 0) {
             // 没有图片
             _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_messageF) + space, 60, 35);
+            
         } else {
             // 有图片
             _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_imageArrayF) + space, 60, 35);

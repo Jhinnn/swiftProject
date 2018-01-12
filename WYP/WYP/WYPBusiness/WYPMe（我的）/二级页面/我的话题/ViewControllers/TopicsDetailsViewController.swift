@@ -58,7 +58,7 @@ class TopicsDetailsViewController: BaseViewController {
     // MARK: - private method
     func viewConfig() {
         title = "话题详情"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         
         view.addSubview(replyTableView)
         view.addSubview(commentView)
@@ -341,23 +341,22 @@ class SYTextField: UITextField {
     
     // 控制默认文本的位置(placeholder)
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
+        return CGRect(x: 30, y: bounds.origin.y, width: bounds.size.width - 30, height: bounds.size.height)
     }
     
     // 控制编辑文本的位置
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
-        
+        return CGRect(x: 30, y: bounds.origin.y, width: bounds.size.width - 30, height: bounds.size.height)
     }
     
     // 控制显示文本的位置
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: 23.5, y: bounds.origin.y, width: bounds.size.width - 23.5, height: bounds.size.height)
+        return CGRect(x: 30, y: bounds.origin.y, width: bounds.size.width - 30, height: bounds.size.height)
     }
     
     override func drawPlaceholder(in rect: CGRect) {
         
-        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)])
+        attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName: UIColor.black])
         
         super.drawPlaceholder(in: rect)
     }

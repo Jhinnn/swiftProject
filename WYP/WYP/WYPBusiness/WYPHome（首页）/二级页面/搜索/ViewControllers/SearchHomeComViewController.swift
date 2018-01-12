@@ -189,6 +189,8 @@ extension SearchHomeComViewController: UITableViewDelegate,UITableViewDataSource
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
+        let attributeString = changeTextColor(text: cell.messageLabel.text ?? "")
+        cell.messageLabel.attributedText = attributeString
         cell.statementFrame = newsData[indexPath.row]
         cell.selectionStyle = .none;
         cell.selectImgBlock = {(index, imageUrlArray) in

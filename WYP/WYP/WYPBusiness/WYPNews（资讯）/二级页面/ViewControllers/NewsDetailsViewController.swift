@@ -176,12 +176,12 @@ class NewsDetailsViewController: BaseViewController {
     
     // MARK: - private method
     func viewConfig() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         
         view.addSubview(newsTableView)
         newsTableView.isHidden = true
         view.addSubview(interactionView)
-        interactionView.addSubview(shareButton)
+//        interactionView.addSubview(shareButton)
         interactionView.addSubview(collectionButton)
         interactionView.addSubview(commentDetailBtn)
         interactionView.addSubview(commentTextField)
@@ -196,20 +196,20 @@ class NewsDetailsViewController: BaseViewController {
             make.left.right.bottom.equalTo(view)
             make.height.equalTo(59)
         }
-        shareButton.snp.makeConstraints { (make) in
-            make.right.equalTo(interactionView).offset(-15)
-            make.centerY.equalTo(interactionView.snp.centerY)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-        }
+//        shareButton.snp.makeConstraints { (make) in
+//            make.right.equalTo(interactionView).offset(-15)
+//            make.centerY.equalTo(interactionView.snp.centerY)
+//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+//        }
         collectionButton.snp.makeConstraints { (make) in
-            make.right.equalTo(shareButton.snp.left).offset(-15)
-            make.centerY.equalTo(interactionView.snp.centerY)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+            make.right.equalTo(interactionView).offset(-24)
+            make.centerY.equalTo(commentTextField.snp.centerY)
+            make.size.equalTo(CGSize(width: 21, height: 21))
         }
         commentDetailBtn.snp.makeConstraints { (make) in
-            make.right.equalTo(collectionButton.snp.left).offset(-15)
-            make.centerY.equalTo(interactionView.snp.centerY)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+            make.right.equalTo(collectionButton.snp.left).offset(-24)
+            make.centerY.equalTo(commentTextField.snp.centerY)
+            make.size.equalTo(CGSize(width: 21, height: 21))
         }
         commentTextField.snp.makeConstraints { (make) in
             if deviceTypeIPhoneX() {
@@ -292,7 +292,7 @@ class NewsDetailsViewController: BaseViewController {
         conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
         
         
-        let newWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), configuration: conf)
+        let newWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0), configuration: conf)
         newWebView.backgroundColor = UIColor.clear
         newWebView.isOpaque = false
         newWebView.uiDelegate = self
@@ -327,26 +327,29 @@ class NewsDetailsViewController: BaseViewController {
     // 评论框
     lazy var commentTextField: SYTextField = {
         let commentTextField = SYTextField()
-        commentTextField.font = UIFont.systemFont(ofSize: 13)
+        commentTextField.font = UIFont.systemFont(ofSize: 14)
         commentTextField.delegate = self
-        commentTextField.borderStyle = .roundedRect
+//        commentTextField.borderStyle = .roundedRect
         commentTextField.placeholder = "写下你的想法..."
+//        commentTextField.returnKeyType = .send
         commentTextField.returnKeyType = .send
-        
-        let imageView = UIImageView(frame: CGRect(x: 5, y: 8, width: 16, height: 16))
-        imageView.image = UIImage(named: "community_icon_edit_normal")
+        commentTextField.layer.masksToBounds = true
+        commentTextField.layer.cornerRadius = 15
+        commentTextField.backgroundColor = UIColor.init(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 8, width: 16, height: 16))
+        imageView.image = UIImage(named: "zx_icon_write_normal")
         commentTextField.addSubview(imageView)
         
         return commentTextField
     }()
     
-    // 分享
-    lazy var shareButton: UIButton = {
-        let shareButton = UIButton()
-        shareButton.setBackgroundImage(UIImage(named: "community_icon_share_normal"), for: .normal)
-        shareButton.addTarget(self, action: #selector(shareBarButtonItemAction), for: .touchUpInside)
-        return shareButton
-    }()
+//    // 分享
+//    lazy var shareButton: UIButton = {
+//        let shareButton = UIButton()
+//        shareButton.setBackgroundImage(UIImage(named: "community_icon_share_normal"), for: .normal)
+//        shareButton.addTarget(self, action: #selector(shareBarButtonItemAction), for: .touchUpInside)
+//        return shareButton
+//    }()
     // 收藏
     lazy var collectionButton: UIButton = {
         let collectionButton = UIButton()

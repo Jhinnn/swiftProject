@@ -392,6 +392,12 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             
             let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
             cell.statementFrame = newsData[indexPath.row]
+            
+            let attributeString = changeTextColor(text: cell.messageLabel.text ?? "")
+            cell.messageLabel.attributedText = attributeString
+            cell.shareButton.isHidden = true
+            cell.leaveMessageButton.isHidden =  true
+            cell.starButton.isHidden = true
             cell.selectionStyle = .none;
             cell.selectImgBlock = {(index, imageUrlArray) in
                 return

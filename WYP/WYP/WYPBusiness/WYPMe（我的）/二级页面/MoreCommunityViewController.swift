@@ -171,6 +171,9 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
         cell.deleteButton.isHidden = true
         cell.statementFrame = self.statementFrame
         
+        cell.shareButton.isHidden = true
+        cell.leaveMessageButton.isHidden =  true
+        cell.starButton.isHidden = true
         cell.selectionStyle = .none;
         cell.delegate = self
         cell.selectImgBlock = {(index, imageUrlArray) in
@@ -192,6 +195,7 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
+    
 }
 
 extension MoreCommunityViewController: StatementCellDelegate {

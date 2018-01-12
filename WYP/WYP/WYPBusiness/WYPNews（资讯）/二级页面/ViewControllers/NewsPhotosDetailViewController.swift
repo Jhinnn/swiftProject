@@ -202,14 +202,14 @@ class NewsPhotosDetailViewController: BaseViewController {
             make.height.equalTo(160)
         }
         collectionButton.snp.makeConstraints { (make) in
-            make.right.equalTo(interactionView).offset(-18)
+            make.right.equalTo(interactionView).offset(-24)
             make.centerY.equalTo(commentTextField)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+            make.size.equalTo(CGSize(width: 21, height: 21))
         }
         commentDetailBtn.snp.makeConstraints { (make) in
             make.centerY.equalTo(commentTextField)
-            make.right.equalTo(collectionButton.snp.left).offset(-18)
-            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
+            make.right.equalTo(collectionButton.snp.left).offset(-24)
+            make.size.equalTo(CGSize(width: 21, height: 21))
         }
         commentTextField.snp.makeConstraints { (make) in
             if deviceTypeIPhoneX() {
@@ -354,11 +354,12 @@ class NewsPhotosDetailViewController: BaseViewController {
         commentTextField.backgroundColor = UIColor.init(red: 38/255.0, green: 38/255.0, blue: 38/255.0, alpha: 1)
         commentTextField.font = UIFont.systemFont(ofSize: 13)
         commentTextField.delegate = self
-        commentTextField.borderStyle = .roundedRect
+//        commentTextField.borderStyle = .roundedRect
         commentTextField.placeholder = "写下你的想法..."
         commentTextField.returnKeyType = .send
         commentTextField.textColor = UIColor.white
-    
+        commentTextField.layer.masksToBounds = true
+        commentTextField.layer.cornerRadius = 15
         let imageView = UIImageView(frame: CGRect(x: 5, y: 8.25, width: 13.5, height: 13.5))
         imageView.image = UIImage(named: "tj_icon_write_normal")
         commentTextField.addSubview(imageView)
