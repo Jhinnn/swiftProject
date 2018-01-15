@@ -42,19 +42,21 @@
     
     // 消息
     CGSize messageSize = [self sizeWithText:statement.message font:messageFont maxSize:CGSizeMake(kScreen_width - IntervalW - space, 1000)];
-
+    
     if (self.isSeachResult) {  //如果是搜索界面，如果视图高于60则为60  小于60显示计算高度
         
         if (messageSize.height >= 60) {
-            _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + space, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), 60);
+            _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + 10, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), 60);
         }else {
-            _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + space, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), messageSize.height);
+            _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + 10, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), messageSize.height);
         }
     }else {
+        _messageHeight = messageSize.height;
         if (messageSize.height > 100) {
             // 判断是否展开
             if (_isShowAllMessage) {  //文字高度大于100展开情况下
                 _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + space, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), messageSize.height);
+                
             } else {   // 文字高度大于100未展开情况下
                 _messageF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_headImageF) + 5, kScreen_width- (CGRectGetMaxX(_headImageF) + 2 *space), 100);
             }
@@ -87,7 +89,7 @@
             imageW = imageW;
             imageH = imageH;
             if (messageSize.height > 100) {
-                _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space + 30, imageW, imageH);
+                _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + 10, imageW, imageH);
             } else {
                 _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, imageW, imageH);
             }
@@ -116,7 +118,7 @@
                     imageY = imageRow * (imageH + imageSpace);
                     
                     if (messageSize.height > 100) {
-                        _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space + 30, kScreen_width - 2 * space, imageY + imageH);
+                        _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, kScreen_width - 2 * space, imageY + imageH);
                     } else {
                         _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, kScreen_width - 2 * space, imageY + imageH);
                     }
@@ -143,8 +145,8 @@
                 }
                 imageY = imageRow * (imageH + imageSpace);
                 
-                if (messageSize.height > 100) {
-                    _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space + 30, kScreen_width - 2 * space, imageY + imageH);
+                if (messageSize.height > 100) { 
+                    _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space + 10, kScreen_width - 2 * space, imageY + imageH);
                 } else {
                     _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, kScreen_width - 2 * space, imageY + imageH);
                 }
@@ -167,26 +169,23 @@
     if (self.isSeachResult) {  //如果图片视图高度大于一个图片高度
         
         if (_imageArrayF.size.height >= imageH)  { //大于一排图片高度
-            _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, kScreen_width - 2 * space, imageH);
+            _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + 6, kScreen_width - 2 * space, imageH);
         }else {
             _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, kScreen_width - 2 * space, 0);
         }
         
+        _cellHeight = CGRectGetMaxY(_imageArrayF) + 4;
         
-        
-        
-        
-        _cellHeight = CGRectGetMaxY(_imageArrayF) + 10;
     }else {
         //分享按钮
         
         if (imageCount == 0) {
             // 没有图片
-            _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_messageF) + space, 60, 35);
+            _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_messageF) + 10, 60, 35);
             
         } else {
             // 有图片
-            _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_imageArrayF) + space, 60, 35);
+            _shareF = CGRectMake(IntervalW, CGRectGetMaxY(_imageArrayF) + 5, 60, 35);
         }
         
         // 点赞
@@ -207,7 +206,7 @@
             for (StarAndCommentModel * star in statement.starArray) {
                 // 计算昵称尺寸
                 
-                CGSize starSize = [self sizeWithText:[NSString stringWithFormat:@"%@、", star.nickName] font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(kScreen_width - 3 * space - 100, 30)];
+                CGSize starSize = [self sizeWithText:[NSString stringWithFormat:@"%@,", star.nickName] font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(kScreen_width - 3 * space - 70, 30)];
                 starW = starSize.width;
                 starH = starSize.height;
                 // 获取上一个点赞昵称的位置
@@ -219,7 +218,7 @@
                 i++;
                 
                 // 如果当前行放不下当前的昵称，换到下一行
-                if ((starW + starX) > (kScreen_width - 2 * space)) {
+                if ((starW + starX) > (kScreen_width - 3 * space - 70)) {
                     starX = 30;
                     starRow = starRow + 1;
                     
@@ -234,9 +233,9 @@
                 lastStarRect = starRect;
             }
             
-            _starArrayF = CGRectMake(space * 2 + 40, CGRectGetMaxY(_shareF) + space, kScreen_width - 33 - 40, starY + starH + 4);
+            _starArrayF = CGRectMake(space * 2 + 40, CGRectGetMaxY(_shareF) + 10, kScreen_width - space * 3 - 40, starY + starH + 4);
             
-            _zanArrayF = CGRectMake(space * 2 + 40 + 8, CGRectGetMaxY(_shareF) + space + 5, 15, 15);
+            _zanArrayF = CGRectMake(space * 2 + 40 + 8, CGRectGetMaxY(_shareF) + 16, 15, 15);
         }
         
         
@@ -258,7 +257,7 @@
         
         for (StarAndCommentModel * comment in statement.commentArray) {
             
-            CGSize nickNameSize = [self sizeWithText:comment.nickName font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(kScreen_width - 2 * space, MAXFLOAT)];
+            CGSize nickNameSize = [self sizeWithText:comment.nickName font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(kScreen_width - 2 * space, MAXFLOAT)];
             
             nickNameW = nickNameSize.width;
             nickNameH = nickNameSize.height;
@@ -274,7 +273,7 @@
             NSValue * commentNickNameRectValue = [NSValue valueWithCGRect:commentNickNameRect];
             [_allCommentNickNameF addObject:commentNickNameRectValue];
             
-            CGSize commentSize = [self sizeWithText:[NSString stringWithFormat:@"%@:%@",comment.nickName, comment.comment] font:[UIFont systemFontOfSize:13] maxSize:CGSizeMake(kScreen_width - 2 * space, MAXFLOAT)];
+            CGSize commentSize = [self sizeWithText:[NSString stringWithFormat:@"%@:%@",comment.nickName, comment.comment] font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(kScreen_width - 2 * space, MAXFLOAT)];
             commentW = kScreen_width - 2 * space - 40 - 20;
             commentH = commentSize.height;
             commentX = nickNameX;

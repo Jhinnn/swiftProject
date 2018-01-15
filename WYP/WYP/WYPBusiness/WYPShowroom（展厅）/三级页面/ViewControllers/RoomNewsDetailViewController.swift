@@ -122,7 +122,7 @@ class RoomNewsDetailViewController: BaseViewController {
     
     // MARK: - private method
     func viewConfig() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         
         view.addSubview(newsTableView)
         view.addSubview(interactionView)

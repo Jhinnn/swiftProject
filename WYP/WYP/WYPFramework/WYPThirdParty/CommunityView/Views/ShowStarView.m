@@ -21,7 +21,7 @@
         if (starBtns.count < starArray.count) {
             for (NSInteger i = 0; i < starArray.count - starBtns.count; i ++) {
                 UIButton * starBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                starBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+                starBtn.titleLabel.font = [UIFont systemFontOfSize:15];
                 [starBtn setTitleColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1] forState:UIControlStateNormal];
                 [self addSubview:starBtn];
             }
@@ -38,7 +38,7 @@
             StarAndCommentModel * star = starArray[i];
         
             UIButton * starBtn = self.subviews[i];
-            NSString * btnTitle = [NSString stringWithFormat:@"%@、", star.nickName];
+            NSString * btnTitle = [NSString stringWithFormat:@"%@,", star.nickName];
             if (i == starArray.count -1) {
                 btnTitle = [NSString stringWithFormat:@"%@", star.nickName];
             }

@@ -632,6 +632,10 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+        
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -719,17 +723,8 @@ extension MyCommunityViewController: StatementCellDelegate {
     }
     // 更多按钮点击事件
     func statementCell(_ statementCell: StatementCell!, moreButtonAction button: UIButton!, statement: StatementModel!) {
-        currentStatement = statement
-        dataId = statement._id
-        
-        let statementFrame = StatementFrameModel()
-        statementFrame.isShowAllMessage = true
-        statementFrame.statement = statement
-        
         let moreCommenityVC = MoreCommunityViewController()
-        moreCommenityVC.statementFrame = statementFrame
-        //        moreCommenityVC.delegate
-        moreCommenityVC.delegate = self
+        moreCommenityVC.dataId = statement._id
         navigationController?.pushViewController(moreCommenityVC, animated: true)
     }
     // 评论按钮点击事件
@@ -830,15 +825,15 @@ extension MyCommunityViewController: UITextFieldDelegate {
     }
 }
 
-extension MyCommunityViewController: MoreCommunityViewControllerDelegate {
-    func changeStatementFrameModel(statementFrame: StatementFrameModel) {
-        for i in 0..<dataList.count {
-            let model = dataList[i];
-            if model.statement._id == dataId {
-                dataList[i] = statementFrame
-                tableView.reloadData()
-            }
-        }
-    }
-}
+//extension MyCommunityViewController: MoreCommunityViewControllerDelegate {
+//    func changeStatementFrameModel(statementFrame: StatementFrameModel) {
+//        for i in 0..<dataList.count {
+//            let model = dataList[i];
+//            if model.statement._id == dataId {
+//                dataList[i] = statementFrame
+//                tableView.reloadData()
+//            }
+//        }
+//    }
+//}
 

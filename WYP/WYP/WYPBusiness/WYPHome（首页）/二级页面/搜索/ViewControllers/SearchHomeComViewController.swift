@@ -214,7 +214,9 @@ extension SearchHomeComViewController: UITableViewDelegate,UITableViewDataSource
         
         let statement = self.newsDataAll[indexPath.row]
         
-        moreCommenityVC.statementFrame = statement
+        moreCommenityVC.dataId = statement.statement._id
+    
+//        moreCommenityVC.statementFrame = statement
         
         navigationController?.pushViewController(moreCommenityVC, animated: true)
        

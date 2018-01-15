@@ -36,7 +36,7 @@
                 // 创建评论文本标签
                 UILabel * commentLabel = [[UILabel alloc] init];
                 commentLabel.numberOfLines = 0;
-                commentLabel.font = [UIFont systemFontOfSize:13];
+                commentLabel.font = [UIFont systemFontOfSize:15];
                 commentLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
                 
                 [self addSubview:commentLabel];
@@ -44,7 +44,7 @@
                 // 创建昵称按钮
                 UIButton * nickNameBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 nickNameBtn.backgroundColor = [UIColor clearColor];
-                nickNameBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+                nickNameBtn.titleLabel.font = [UIFont systemFontOfSize:15];
                 
                 [nickNameBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 [self addSubview:nickNameBtn];

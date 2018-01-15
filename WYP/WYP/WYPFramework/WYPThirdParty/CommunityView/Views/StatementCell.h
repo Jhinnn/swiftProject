@@ -69,6 +69,7 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
 @property (strong, nonatomic) StartButton *starButton;
 
 
+
 @property (strong, nonatomic) StatementFrameModel * statementFrame;
 
 @property (copy, nonatomic) selectImg selectImgBlock;

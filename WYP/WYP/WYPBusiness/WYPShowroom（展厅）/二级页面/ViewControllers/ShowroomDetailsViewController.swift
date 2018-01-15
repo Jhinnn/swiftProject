@@ -302,11 +302,11 @@ class ShowroomDetailsViewController: UITableViewController {
         
         if isFree {
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-            navigationController?.navigationBar.barTintColor = UIColor.white
+//            navigationController?.navigationBar.barTintColor = UIColor.white
             
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "showroom_grayshare_button_normal_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         }
         loadShowRoomDetailData(requestType: .update)
         headAImageView.startAnimation()
@@ -361,8 +361,8 @@ class ShowroomDetailsViewController: UITableViewController {
     // 返回按钮
     lazy var backButton: UIButton = {
         let backButton = UIButton(type: .custom)
-        backButton.frame = CGRect(x: 0, y: 0, width: 8, height: 13.5)
-        backButton.setImage(UIImage(named: "common_blackback_button_normal_iPhone"), for: .normal)
+        backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 13.5)
+        backButton.setImage(UIImage(named: "chat_icon_return_normalmore"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         
         return backButton

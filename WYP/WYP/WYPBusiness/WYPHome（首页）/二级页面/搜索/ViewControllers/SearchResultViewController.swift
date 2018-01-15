@@ -74,6 +74,7 @@ class SearchResultViewController: BaseViewController {
                     
                     statementFrame.statement = statement
                     statementFrameAll.statement = statement
+                    statementFrame.isShowAllMessage = true
                     self.newsData.append(statementFrame)
                     self.newsDataAll.append(statementFrameAll)
                 }
@@ -668,12 +669,15 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
             
             
         case 3: //社区
+            
+            
         
             let moreCommenityVC = MoreCommunityViewController()
             
             let statement = self.newsDataAll[indexPath.row]
             
-            moreCommenityVC.statementFrame = statement
+            moreCommenityVC.dataId = statement.statement._id
+            
             
             navigationController?.pushViewController(moreCommenityVC, animated: true)
         case 4:

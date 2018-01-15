@@ -37,6 +37,8 @@ class TalkShowRoomCommentCell: UITableViewCell {
         contentView.addSubview(contentLabel)
         contentView.addSubview(timeLabel)
         contentView.addSubview(isFollowButton)
+        contentView.addSubview(zanLabel)
+        contentView.addSubview(readLabel)
         contentView.addSubview(starCountButton)
         contentView.addSubview(replyCountLabel)
         contentView.addSubview(replyButton)
@@ -49,13 +51,14 @@ class TalkShowRoomCommentCell: UITableViewCell {
         headImgView.frame = (replyFrame.headImgUrlF)!
         nickNameLablel.frame = (replyFrame.nickNameF)!
         contentLabel.frame = (replyFrame.contentF)!
-        timeLabel.frame = (replyFrame.timeF)!
-        isFollowButton.frame = (replyFrame.followF)!
-        starCountButton.frame = (replyFrame.starCountF)!
+//        timeLabel.frame = (replyFrame.timeF)!
+//        isFollowButton.frame = (replyFrame.followF)!
+//        starCountButton.frame = (replyFrame.starCountF)!
         infoImageView1.frame = (replyFrame.image1F)!
         infoImageView2.frame = (replyFrame.image2F)!
         infoImageView3.frame = (replyFrame.image3F)!
-        
+        zanLabel.frame = (replyFrame.zanLabelF)!
+        readLabel.frame = (replyFrame.readLabelF)!
 //        replyCountLabel.frame = (replyFrame.replyCountF)!
 //        replyButton.frame = (replyFrame.replyButtonF)!
     }
@@ -93,8 +96,8 @@ class TalkShowRoomCommentCell: UITableViewCell {
     // 昵称
     lazy var nickNameLablel: UILabel = {
         let nickNameLablel = UILabel()
-        nickNameLablel.textColor = UIColor.init(hexColor: "898989")
-        nickNameLablel.font = UIFont.systemFont(ofSize: 14)
+//        nickNameLablel.textColor = UIColor.init(hexColor: "898989")
+        nickNameLablel.font = UIFont.boldSystemFont(ofSize: 15)
         
         return nickNameLablel
     }()
@@ -102,7 +105,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
     // 内容
     lazy var contentLabel: UILabel = {
         let contentLabel = UILabel()
-        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.font = UIFont.systemFont(ofSize: 15)
         contentLabel.numberOfLines = 0
         contentLabel.textColor = UIColor.init(hexColor: "333333")
         return contentLabel
@@ -163,6 +166,24 @@ class TalkShowRoomCommentCell: UITableViewCell {
         starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
         starCountButton.addTarget(self, action: #selector(clickStarButton(sender:)), for: .touchUpInside)
         return starCountButton
+    }()
+    
+    // 赞的数量
+    lazy var zanLabel: UILabel = {
+        let timeLabel = UILabel()
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textAlignment = NSTextAlignment.left
+        timeLabel.textColor = UIColor.init(hexColor: "BDBDBD")
+        return timeLabel
+    }()
+    
+    // 浏览的数量
+    lazy var readLabel: UILabel = {
+        let timeLabel = UILabel()
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+        timeLabel.textAlignment = NSTextAlignment.left
+        timeLabel.textColor = UIColor.init(hexColor: "BDBDBD")
+        return timeLabel
     }()
     
     // 回复
@@ -229,15 +250,21 @@ class TalkShowRoomCommentCell: UITableViewCell {
                 isFollowButton.setTitleColor(UIColor.init(hexColor: "898989"), for: .normal)
             }
             contentLabel.text = newValue?.comment.content ?? ""
-            timeLabel.text = Int(newValue!.comment!.createTime!)?.getTimeString()
-            replyCountLabel.text = "回复数：\(newValue?.comment.replyCount ?? 0)"
-            starCountButton.setTitle(" \(newValue?.comment.zanNumber ?? "0")", for: .normal)
-            if newValue?.comment.isStar == "1" {
-                starCountButton.isSelected = true
-                starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
-            } else {
-                starCountButton.isSelected = false
-            }
+//            timeLabel.text = Int(newValue!.comment!.createTime!)?.getTimeString()
+//            replyCountLabel.text = "回复数：\(newValue?.comment.replyCount ?? 0)"
+//            starCountButton.setTitle(" \(newValue?.comment.zanNumber ?? "0")", for: .normal)
+//            if newValue?.comment.isStar == "1" {
+//                starCountButton.isSelected = true
+//                starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
+//            } else {
+//                starCountButton.isSelected = false
+//            }
+            
+            zanLabel.text = "\(newValue?.comment.replyCount ?? 0)赞"
+            
+            readLabel.text = "\(newValue?.comment.view ?? "")个阅读"
+            
+            
             
             setupUIFrame(replyFrame: newValue!)
         }

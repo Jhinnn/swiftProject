@@ -10,11 +10,11 @@
 #define PrefixHeader_pch
 
 // 控件之间的间距
-#define space 11
+#define space 15
 // 姓名字体大小
-#define nameFont [UIFont systemFontOfSize:15]
+#define nameFont [UIFont systemFontOfSize:16]
 // 消息字体大小
-#define messageFont [UIFont systemFontOfSize:14]
+#define messageFont [UIFont systemFontOfSize:16]
 
 #define kScreen_width UIScreen.mainScreen.bounds.size.width
 #define kScreen_height UIScreen.mainScreen.bounds.size.height

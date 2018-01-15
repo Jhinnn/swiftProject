@@ -56,21 +56,43 @@ class TalkNewsDetailsViewController: BaseViewController {
 
         title = "话题详情"
         
-     
-        
         viewConfig()
-        layoutPageSubviews()
-
         
-
-    
+        layoutPageSubviews()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
    
         request()
+        
         loadCommentList(requestType: .update)
+    }
+    
+    func layoutPageSubviews() {
+        newsTableView.snp.makeConstraints { (make) in
+            if deviceTypeIPhoneX() {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 59 + 24, 0))
+            }else {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 59, 0))
+            }
+        }
+        
+        if deviceTypeIPhoneX() {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.equalTo(view)
+                make.bottom.equalTo(0)
+                make.height.equalTo(59 + 34)
+            }
+        }else {
+            interactionView.snp.makeConstraints { (make) in
+                make.left.right.bottom.equalTo(view)
+                make.height.equalTo(59)
+            }
+        }
+        
     }
     
     // 分享
@@ -104,47 +126,13 @@ class TalkNewsDetailsViewController: BaseViewController {
         ShareManager.shared.show()
     }
     
-    func collectionNews(sender: UIButton) {
-        
-        let token = AppInfo.shared.user?.token ?? ""
-        if token == "" {
-            GeneralMethod.alertToLogin(viewController: self)
-            return
-        }
-        if sender.isSelected {
-            NetRequest.cancelAttentionNetRequest(openId: token, newsId: newsId ?? "", complete: { (success, info) in
-                if success {
-                    SVProgressHUD.showSuccess(withStatus: info!)
-                    sender.isSelected = false
-                } else {
-                    SVProgressHUD.showError(withStatus: info!)
-                }
-            })
-        } else if !sender.isSelected {
-            NetRequest.collectionNewsNetRequest(openId: token, newsId: newsId ?? "") { (success, info) in
-                if success {
-                    SVProgressHUD.showSuccess(withStatus: info!)
-                    sender.isSelected = true
-                    sender.setImage(UIImage(named: "detail_icon_follow_select"), for: .selected)
-                } else {
-                    SVProgressHUD.showError(withStatus: info!)
-                }
-            }
-        }
-        
-    }
+   
     
-    func chickCommentDetail(sender: UIButton) {
-        
-        newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: webContentHeight ?? 0)
-        newsTableView.reloadData()
-        let oneIndex = IndexPath(row: 0, section: 0)
-        self.newsTableView.scrollToRow(at: oneIndex, at: .top, animated: true)
-    }
+
     
     // MARK: - private method
     func viewConfig() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_share_button_highlight_iPhone"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
         
         view.addSubview(newsTableView)
         newsTableView.isHidden = true
@@ -181,29 +169,10 @@ class TalkNewsDetailsViewController: BaseViewController {
         
     }
     
-    func layoutPageSubviews() {
-        newsTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 59, 0))
-        }
-        
-        if deviceTypeIPhoneX() {
-            interactionView.snp.makeConstraints { (make) in
-                make.left.right.equalTo(view)
-                make.bottom.equalTo(0)
-                make.height.equalTo(59 + 34)
-            }
-        }else {
-            interactionView.snp.makeConstraints { (make) in
-                make.left.right.bottom.equalTo(view)
-                make.height.equalTo(59)
-            }
-        }
-        
-    }
+   
     
     func request() {
         let str = String.init(format: "Mob/news/index.html?news_id=%@", newsId ?? "")
-        print(str)
         let url = kApi_baseUrl(path: str)
         let urlString = URL(string: url)
         let request = URLRequest(url: urlString!)
@@ -269,7 +238,7 @@ class TalkNewsDetailsViewController: BaseViewController {
         
         let newsWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0), configuration: conf)
         newsWebView.backgroundColor = UIColor.red
-
+        
         newsWebView.uiDelegate = self
         newsWebView.navigationDelegate = self
         newsWebView.scrollView.isScrollEnabled = false
@@ -279,17 +248,18 @@ class TalkNewsDetailsViewController: BaseViewController {
     }()
     
     lazy var newsTableView: WYPTableView = {
-        let tableView = WYPTableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-        tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+//        let newAllTableView = WYPTableView(frame: .zero, style: .grouped)
+        let newAllTableView = WYPTableView()
+        newAllTableView.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
+//        newAllTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        newAllTableView.delegate = self
+        newAllTableView.dataSource = self
+
+        newAllTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadCommentList(requestType: .loadMore)
         })
-        tableView.register(ShowRoomCommentCell.self, forCellReuseIdentifier: "replyCell")
-        
-        
-        return tableView
+        newAllTableView.register(ShowRoomCommentCell.self, forCellReuseIdentifier: "replyCell")
+        return newAllTableView
     }()
     
     // 背景
@@ -299,23 +269,8 @@ class TalkNewsDetailsViewController: BaseViewController {
         return interactionView
     }()
     
-    // 评论框
-    lazy var commentTextField: SYTextField = {
-        let commentTextField = SYTextField()
-        commentTextField.font = UIFont.systemFont(ofSize: 13)
-        commentTextField.delegate = self
-        commentTextField.borderStyle = .roundedRect
-        commentTextField.placeholder = "期待你的神评论"
-        commentTextField.returnKeyType = .send
-        
-        let imageView = UIImageView(frame: CGRect(x: 5, y: 8.25, width: 13.5, height: 13.5))
-        imageView.image = UIImage(named: "common_editorGary_button_normal_iPhone")
-        commentTextField.addSubview(imageView)
-        
-        return commentTextField
-    }()
-    
-    
+
+
     // 监听
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         // 根据内容的高度重置webview视图的高度
@@ -323,31 +278,36 @@ class TalkNewsDetailsViewController: BaseViewController {
         resetWebViewFrameWidthHeight(height: newHeight!)
     }
     
-    func keyboardWillShow(note: NSNotification) {
-        let userInfo = note.userInfo!
-        let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+    func collectionNews(sender: UIButton) {
         
-        let deltaY = keyBoardBounds.size.height
-        let animations:(() -> Void) = {
-            //键盘的偏移量
-            self.interactionView.transform = CGAffineTransform(translationX: 0 , y: -deltaY)
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }
+        if sender.isSelected {
+            NetRequest.cancelAttentionNetRequest(openId: token, newsId: newsId ?? "", complete: { (success, info) in
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info!)
+                    sender.isSelected = false
+                } else {
+                    SVProgressHUD.showError(withStatus: info!)
+                }
+            })
+        } else if !sender.isSelected {
+            NetRequest.collectionNewsNetRequest(openId: token, newsId: newsId ?? "") { (success, info) in
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info!)
+                    sender.isSelected = true
+                    sender.setImage(UIImage(named: "detail_icon_follow_select"), for: .selected)
+                } else {
+                    SVProgressHUD.showError(withStatus: info!)
+                }
+            }
         }
         
-        if duration > 0 {
-            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
-            
-            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
-            
-        }else{
-            animations()
-        }
     }
     
-    
-    func keyboardWillHidden(note: NSNotification) {
-        self.interactionView.transform = CGAffineTransform(translationX: 0 , y: 0)
-    }
 }
 
 extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
@@ -381,7 +341,7 @@ extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
             })
         }
         newsTableView.tableHeaderView = newsWebView
-        wbScrollView = self.newsWebView.scrollView
+//        wbScrollView = self.newsWebView.scrollView
         wbScrollView?.bounces = false
         wbScrollView?.isScrollEnabled = true
         newsTableView.isHidden = false
@@ -389,6 +349,14 @@ extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
 }
 
 extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        if commentData.count == 0 {
+//            return 1
+//        } else {
+//            return commentData.count
+//        }
+//    }
+//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commentData.count == 0 {
             return 1
@@ -419,8 +387,8 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
             let cell = TalkShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
             let commentFrame = TalkRoomCommentFrameModel()
             commentFrame.comment = commentData[indexPath.row]
-            cell.starCountButton.tag = indexPath.row + 180
-            cell.replyButton.tag = indexPath.row + 190
+            cell.starCountButton.tag = indexPath.section + 180
+            cell.replyButton.tag = indexPath.section + 190
             cell.delegate = self
             cell.commentFrame = commentFrame
             
@@ -430,21 +398,20 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if commentData.count == 0 {
-            return 50
+            return 0
         } else {
             let commentFrame = TalkRoomCommentFrameModel()
             commentFrame.comment = commentData[indexPath.row]
             return commentFrame.cellHeight ?? 0
         }
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 10))
-        headerView.backgroundColor = UIColor.groupTableViewBackground
-
-        return headerView
+ 
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.001
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 9
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -500,7 +467,7 @@ extension TalkNewsDetailsViewController: UITextFieldDelegate {
         NetRequest.topicsCommentNetRequest(openId: token, topicId: newsId ?? "", content: textField.text ?? "", pid: "") { (success, info) in
             if success {
                 textField.resignFirstResponder()
-                self.commentTextField.text = ""
+                
                 SVProgressHUD.showSuccess(withStatus: info!)
                 self.loadCommentList(requestType: .update)
                 

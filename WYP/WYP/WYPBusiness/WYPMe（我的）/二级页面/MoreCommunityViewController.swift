@@ -12,12 +12,6 @@ import SwiftyJSON
 import SVProgressHUD
 
 
-//定义一个名字为学生协议
-protocol MoreCommunityViewControllerDelegate {
-    
-    func changeStatementFrameModel(statementFrame: StatementFrameModel)
-}
-
 class MoreCommunityViewController: BaseViewController {
 
     var dataId: String!
@@ -26,7 +20,6 @@ class MoreCommunityViewController: BaseViewController {
     
     var statementFrame: StatementFrameModel!
     
-    var delegate: MoreCommunityViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +30,54 @@ class MoreCommunityViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
         setupUI()
+        
+        
+        loadData() //加载数据
+        
+    }
+    
+    func loadData() {
+        
+        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                      "method": "GET",
+                                      "id": self.dataId,
+                                      "uid": AppInfo.shared.user?.userId ?? ""]
+        
+        let URLString = kApi_baseUrl(path: "api/get_dynamic")
+        Alamofire.request(URLString, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                let info = json["info"].stringValue
+                if code == 200 {
+            
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    
+                    let statement = StatementModel(contentDic: dic as! [AnyHashable : Any])
+                    self.currentStatement = statement
+                    let frameModel = StatementFrameModel()
+                    frameModel.isShowAllMessage = true
+                    frameModel.statement = statement
+                    
+                    self.statementFrame = frameModel
+                    
+                    if self.statementFrame.statement == self.currentStatement {
+                        self.statementFrame.statement = statement
+                    }
+                    
+                    self.tableView.reloadData()
+                } else {
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,22 +86,6 @@ class MoreCommunityViewController: BaseViewController {
         IQKeyboardManager.shared().isEnabled = false
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        IQKeyboardManager.shared().isEnabled = true
-        
-        statementFrame.isShowAllMessage = false
-        
-        statementFrame.statement = statementFrame.statement
-        
-        delegate?.changeStatementFrameModel(statementFrame: statementFrame)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -170,10 +195,7 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
         cell.deleteButton.isHidden = true
         cell.statementFrame = self.statementFrame
-        
-//        cell.shareButton.isHidden = true
-//        cell.leaveMessageButton.isHidden =  true
-//        cell.starButton.isHidden = true
+    
         cell.selectionStyle = .none;
         cell.delegate = self
         cell.selectImgBlock = {(index, imageUrlArray) in
@@ -189,7 +211,10 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.statementFrame.cellHeight
+        if self.statementFrame != nil {
+            return self.statementFrame.cellHeight
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -199,16 +224,26 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
 }
 
 extension MoreCommunityViewController: StatementCellDelegate {
+    
+    
     // 点赞按钮点击事件
     func statementCell(_ statementCell: StatementCell!, starButtonAction button: UIButton!, statement: StatementModel!) {
         
-        currentStatement = statement
-        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
-                                      "method": "POST",
-                                      "dynamic_id": statement._id,
-                                      "uid": AppInfo.shared.user?.userId ?? ""]
-        let url = kApi_baseUrl(path: "api/community_fabulous")
-        buttonActionRequestNetData(URLString: url, parameters: parameters)
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }else {
+            currentStatement = statement
+            let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                          "method": "POST",
+                                          "dynamic_id": statement._id,
+                                          "uid": AppInfo.shared.user?.userId ?? ""]
+            let url = kApi_baseUrl(path: "api/community_fabulous")
+            buttonActionRequestNetData(URLString: url, parameters: parameters)
+        }
+        
+       
     }
     
     func statementCell(_ statementCell: StatementCell!, moreButtonAction button: UIButton!, statement: StatementModel!) {
@@ -239,6 +274,15 @@ extension MoreCommunityViewController: StatementCellDelegate {
         ShareManager.shared.show()
         
         
+        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                      "method": "POST",
+                                      "id": statement._id]
+        let urls = kApi_baseUrl(path: "api/share_dynamic")
+        
+        Alamofire.request(urls, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).response { (response) in
+            self.loadData() //加载数据
+            
+        }
     }
     // 删除按钮点击事件
     func statementCell(_ statementCell: StatementCell!, deleteButtonAction button: UIButton!, statement: StatementModel!) {
@@ -246,6 +290,10 @@ extension MoreCommunityViewController: StatementCellDelegate {
     }
     // 评论按钮点击事件
     func statementCell(_ statementCell: StatementCell!, commentButtonAction button: UIButton!, statement: StatementModel!) {
+        
+        
+        
+        
         
         currentStatement = statement
         dataId = statement._id
@@ -293,22 +341,33 @@ extension MoreCommunityViewController: StatementCellDelegate {
 
 extension MoreCommunityViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        //在这里做你响应return键的代码
-        if text == "\n" {
-            //判断输入的字是否是回车，即按下return
-            // 获取用户token
-            let userId = AppInfo.shared.user?.userId ?? "1"
-            let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
-                                          "method": "POST",
-                                          "uid": userId,
-                                          "dynamic_id": dataId,
-                                          "content": commentInputView.text]
-            let url = kApi_baseUrl(path: "api/community_comment")
-            buttonActionRequestNetData(URLString: url, parameters: parameters)
-            commentInputView.resignFirstResponder
-            return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+        
+        
+        
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return false
+        }else {
+            //在这里做你响应return键的代码
+            if text == "\n" {
+                //判断输入的字是否是回车，即按下return
+                // 获取用户token
+                let userId = AppInfo.shared.user?.userId ?? "1"
+                let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                              "method": "POST",
+                                              "uid": userId,
+                                              "dynamic_id": dataId,
+                                              "content": commentInputView.text]
+                let url = kApi_baseUrl(path: "api/community_comment")
+                buttonActionRequestNetData(URLString: url, parameters: parameters)
+                commentInputView.resignFirstResponder
+                return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+            }
+            return true
         }
-        return true
+        
+     
     }
     
 }

@@ -50,7 +50,7 @@
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.backgroundColor = [UIColor whiteColor];
         _timeLabel.textColor = [UIColor colorWithRed:189/255.0 green:189/255.0 blue:189/255.0 alpha:1];
-        _timeLabel.font = [UIFont systemFontOfSize:10];
+        _timeLabel.font = [UIFont systemFontOfSize:11];
         [self.contentView addSubview:_timeLabel];
         // 消息
         _messageLabel = [[UILabel alloc] init];
@@ -69,6 +69,7 @@
         _deleteButton = [[UIButton alloc] init];
         [_deleteButton setImage:[UIImage imageNamed:@"info_delete_button_normal_iPhone"] forState:UIControlStateNormal];
         _deleteButton.tag = 300 + 53;
+        
         _deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_deleteButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_deleteButton];
@@ -77,7 +78,7 @@
         _shareButton = [[StartButton alloc] init];
         [_shareButton setImage:[UIImage imageNamed:@"sq_icon_fx_normal"] forState: UIControlStateNormal];
         [_shareButton setTitle:@"分享" forState:UIControlStateNormal];
-        _shareButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _shareButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_shareButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _shareButton.tag = 300 + 52;
         [_shareButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +88,7 @@
         _leaveMessageButton = [[StartButton alloc] init];
         [_leaveMessageButton setImage:[UIImage imageNamed:@"sq_icon_edit_normal"] forState:UIControlStateNormal];
         [_leaveMessageButton setTitle:@"评论" forState:UIControlStateNormal];
-        _leaveMessageButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _leaveMessageButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_leaveMessageButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _leaveMessageButton.tag = 300 + 51;
         [_leaveMessageButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -97,7 +98,7 @@
         _starButton = [[StartButton alloc] init];
         [_starButton setImage:[UIImage imageNamed:@"sq_icon_dz_normal"] forState:UIControlStateNormal];
         [_starButton setTitle:@"点赞" forState:UIControlStateNormal];
-        _starButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _starButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_starButton setTitleColor:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1] forState:UIControlStateNormal];
         _starButton.tag = 300 + 50;
         [_starButton addTarget:self action:@selector(moreSubBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -218,11 +219,11 @@
         [button setTitleColor:[UIColor colorWithHue:134/255.0 saturation:176/255.0 brightness:143/255.0 alpha:1] forState:UIControlStateNormal];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [button addTarget:self action:@selector(moreBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        button.titleLabel.font = [UIFont systemFontOfSize:13];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
         [self addSubview:button];
     }
     
-    _deleteButton.frame = CGRectMake(kScreen_width - self.statementFrame.shareF.size.width - space, self.statementFrame.nameF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
+    _deleteButton.frame = CGRectMake(kScreen_width - self.statementFrame.shareF.size.width - space - 5, self.statementFrame.nameF.origin.y, self.statementFrame.shareF.size.width, self.statementFrame.shareF.size.height);
     
     
     _imageArrayView.frame = self.statementFrame.imageArrayF;
