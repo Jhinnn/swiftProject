@@ -6,6 +6,7 @@
 //  Copyright © 2017年 NGeLB. All rights reserved.
 //
 
+import Foundation
 import HandyJSON
 
 class CouponModel: HandyJSON {

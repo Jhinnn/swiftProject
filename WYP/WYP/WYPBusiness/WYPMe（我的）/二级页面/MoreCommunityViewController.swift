@@ -256,9 +256,9 @@ extension MoreCommunityViewController: StatementCellDelegate {
         let messageObject = UMSocialMessageObject()
         
         // 缩略图
-        let thumbURL = ""
+        
         // 分享对象
-        let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: statement.message ?? "", descr: "在这里，总会找到你喜欢的话题，点进来看看吧", thumImage: thumbURL)
+        let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: statement.message ?? "", descr: "在这里，总会找到你喜欢的话题，点进来看看吧", thumImage: UIImage(named: "aladdiny_icon"))
         // 网址
         let url = String.init(format: "Mob/SheQu/index.html?dynamic_id=%@", statement._id)
         shareObject.webpageUrl = kApi_baseUrl(path: url)

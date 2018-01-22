@@ -31,6 +31,10 @@ class TalkNewsDetailsViewController: BaseViewController {
 //            commentDetailBtn.badgeLabel.text = newValue ?? "0"
         }
     }
+    
+ 
+    
+    
     // 评论数据
     var commentData = [CommentModel]()
     // 是否已收藏
@@ -232,12 +236,13 @@ class TalkNewsDetailsViewController: BaseViewController {
         let conf = WKWebViewConfiguration()
         conf.userContentController = WKUserContentController()
         conf.preferences.javaScriptEnabled = true
+        
         conf.selectionGranularity = WKSelectionGranularity.character
         conf.userContentController.add(self as WKScriptMessageHandler, name: "clickIndex")
         conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
         
         let newsWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0), configuration: conf)
-        newsWebView.backgroundColor = UIColor.red
+        
         
         newsWebView.uiDelegate = self
         newsWebView.navigationDelegate = self
@@ -248,13 +253,10 @@ class TalkNewsDetailsViewController: BaseViewController {
     }()
     
     lazy var newsTableView: WYPTableView = {
-//        let newAllTableView = WYPTableView(frame: .zero, style: .grouped)
         let newAllTableView = WYPTableView()
         newAllTableView.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
-//        newAllTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         newAllTableView.delegate = self
         newAllTableView.dataSource = self
-
         newAllTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadCommentList(requestType: .loadMore)
         })
@@ -349,14 +351,6 @@ extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
 }
 
 extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        if commentData.count == 0 {
-//            return 1
-//        } else {
-//            return commentData.count
-//        }
-//    }
-//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commentData.count == 0 {
             return 1
@@ -371,15 +365,15 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
             
             let label = UILabel()
             label.tag = 160
-            label.text = "暂无评论"
+            label.text = "暂无回答"
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 18)
+            label.font = UIFont.systemFont(ofSize: 17)
             label.textColor = UIColor.init(hexColor: "afafaf")
             cell.addSubview(label)
             
             label.snp.makeConstraints({ (make) in
                 make.centerX.equalTo(cell)
-                make.size.equalTo(CGSize(width: kScreen_width, height: 20))
+                make.size.equalTo(CGSize(width: kScreen_width, height: 40))
             })
             
             return cell
@@ -414,7 +408,16 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
         return 9
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+        let vc = TalkNewsDetailsCommentViewController()
+        let model = commentData[indexPath.row]
+        vc.pid = model.commentId
+        vc.newsId = self.newsId
+        vc.commentZanNumber = model.zanNumber
+        vc.isStar = model.isStar
+        vc.newsTitle = self.newsTitle
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -450,7 +453,7 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     func answerAction(sender: UIButton) {
         let vc = TalkNewsDetailsReplyViewController()
         vc.newsId = self.newsId
-        
+        vc.newsTitle = self.newsTitle
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -497,7 +500,6 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
         let personInfo = PersonalInformationViewController()
         personInfo.targetId = comments.uid ?? ""
         personInfo.name = comments.nickName ?? ""
-        
         self.navigationController?.pushViewController(personInfo, animated: true)
     }
     

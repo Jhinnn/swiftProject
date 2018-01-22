@@ -72,7 +72,7 @@ class MemberCollectionReusableView: UICollectionReusableView {
         delegate?.applyToEnterGroup(sender: sender)
     }
     func ignoreEnterGroup(sender: UIButton) {
-        self.viewController()?.navigationController?.popViewController(animated: false)
+        self.viewController?.navigationController?.popViewController(animated: false)
     }
     
     // MARK: - setter and getter

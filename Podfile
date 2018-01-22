@@ -12,7 +12,7 @@ target 'WYP' do
     pod 'IQKeyboardManager', '~> 4.0'
     #pod 'LHPerformanceStatusBar'
     pod 'XHLaunchAd'
-    pod 'PYSearch', '~> 0.8.4'
+#    pod 'PYSearch', '~> 0.8.4'
     pod 'YBPopupMenu'
     # SDK
     pod 'JPush', '~> 3.0'
@@ -31,10 +31,13 @@ target 'WYP' do
     pod 'SwiftyJSON'
     pod 'Kingfisher'
     #pod "PageControls"
-    pod 'HandyJSON'
+    pod 'HandyJSON','~> 1.7.2'
     pod 'CHIPageControl', '~> 0.1.3'
     pod 'ReachabilitySwift'
     
     pod 'AvoidCrash', '~> 1.6.7'
     
+    
+    pod 'YYKit', '~> 1.0.9'
+
 end

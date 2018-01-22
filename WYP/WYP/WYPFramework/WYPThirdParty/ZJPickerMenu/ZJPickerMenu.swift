@@ -40,7 +40,7 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     }()
     lazy var pickerView: UIView =
     {
-        var picker = UIView.init(frame: CGRect(x: padding_top, y: 0, width: UIScreen.main.bounds.width - padding_top, height: UIScreen.main.bounds.height))
+        var picker = UIView.init(frame: CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height))
         picker.backgroundColor = UIColor.white
         picker.addSubview(self.headerView)
         picker.addSubview(self.cv)
@@ -68,7 +68,7 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     
     lazy var commitButton: UIButton =
     {
-        var button = UIButton.init(frame: CGRect(x: 0, y:  UIScreen.main.bounds.height - 60 - padding_top, width: UIScreen.main.bounds.width, height: 60))
+        var button = UIButton.init(frame: CGRect(x: 0, y:  UIScreen.main.bounds.height - 60, width: UIScreen.main.bounds.width, height: 60))
         button.setTitle("确定", for: UIControlState.normal)
         button.setBackgroundImage(UIImage.init(named: "selected"), for: UIControlState.normal)
         button.addTarget(self, action: #selector(sureCommit), for: UIControlEvents.touchUpInside)
@@ -77,7 +77,7 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     lazy var cv: UICollectionView =
     {
         let layout = UICollectionViewFlowLayout()
-        var cv = UICollectionView.init(frame: CGRect(x: 0, y: 130, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - padding_top - 130 - 60), collectionViewLayout: layout)
+        var cv = UICollectionView.init(frame: CGRect(x: 0, y: 130, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 130 - 60), collectionViewLayout: layout)
         cv.register(ProCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         cv.register(ProHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
         cv.register(ProFoorterCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "sectionfoorter")
@@ -100,7 +100,7 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
         let result =  Array((arr?.values)!)
         let str = result[indexPath.section][indexPath.row]
         print(str)
-        let rect = (str as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 17)], context: nil)
+        let rect = (str as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:nil, context: nil)
         return CGSize(width: rect.width + 20, height: 30)
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
@@ -179,13 +179,13 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
         super.init(frame: frame)
         self.backView.addSubview(self.pickerView)
         self.pickerView.addSubview(self.cv)
-        self.addSubview(self.backView)
     }
     
-    func show(v:UIView)
+    func show()
     {
         self.frame = CGRect(x:UIScreen.main.bounds.width, y:0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        v.addSubview(self)
+        let guidePageWindow = UIApplication.shared.keyWindow
+        guidePageWindow?.addSubview(self.backView)
         UIView.animate(withDuration: 0.1)
         {
             self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -194,7 +194,7 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     
     @objc func miss()
     {
-        self.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.frame = CGRect(x: UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)

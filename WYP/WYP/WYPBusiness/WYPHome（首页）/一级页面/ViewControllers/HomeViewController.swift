@@ -1,3 +1,7 @@
+
+
+
+
 //
 //  HomeViewController.swift
 //  WYP
@@ -1110,7 +1114,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 let dic = json.dictionary
                 let str = dic!["is_join"]!
               
-                
+
                 if str == "0" {
                     let group = GroupMemberListViewController()
                     group.groupId = groupModel?.groupId ?? ""

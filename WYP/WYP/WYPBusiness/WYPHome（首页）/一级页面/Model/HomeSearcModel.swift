@@ -6,7 +6,7 @@
 //  Copyright © 2017年 NGeLB. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import HandyJSON
 
 class HomeSearcModel: HandyJSON {

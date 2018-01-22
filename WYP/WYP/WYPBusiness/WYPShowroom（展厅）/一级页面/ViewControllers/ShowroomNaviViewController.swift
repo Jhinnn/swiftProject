@@ -32,6 +32,10 @@ class ShowroomNaviViewController: BaseViewController {
     }
     // 分页导航上的title数组
     var titles: [String]?
+    
+    // 分页导航上的title数组
+    var arr: [[String]]?
+    
     // 热搜
     var hotSearchArray: [String]?
     
@@ -100,6 +104,8 @@ class ShowroomNaviViewController: BaseViewController {
         
         // 初始化标题数组
         titles = ["全部","演出","旅游","电影","会展","赛事","栏目"]
+        
+        
         // 将标题数组赋给分页导航的数组
         navTabBar.itemTitles = titles
         // 刷新数据
@@ -153,11 +159,24 @@ class ShowroomNaviViewController: BaseViewController {
     
     // MARK: - event response
     func screenInfo(sender: UIButton) {
-        let point = CGPoint(x: kScreen_width - 30, y: 55)
-        let popupMenu = YBPopupMenu.show(at: point, titles: ["最新", "最热"], icons: nil, menuWidth: 80, delegate: self)
-        popupMenu?.dismissOnSelected = true
-        popupMenu?.type = .default
+//        let point = CGPoint(x: kScreen_width - 30, y: 55)
+//        let popupMenu = YBPopupMenu.show(at: point, titles: ["最新", "最热"], icons: nil, menuWidth: 80, delegate: self)
+//        popupMenu?.dismissOnSelected = true
+//        popupMenu?.type = .default
+        
+        let arr = ["颜色":["红色","蓝色","白色","黄色","藏青色"],
+               "尺寸":["43","40","38","39","41","50","51","45"],
+               "风格":["拉风性","成熟稳重","杀马特","非主流形"]]
+        
+        self.picker.show()
+        self.picker.arr = arr
     }
+    
+    lazy var picker: ZJPickerMenu = {
+            var picker = ZJPickerMenu()
+            picker.delegate = self
+            return picker
+    }()
 
     // 搜索框取消按钮点击事件
     func searchButtonAction() {
@@ -169,6 +188,8 @@ class ShowroomNaviViewController: BaseViewController {
         result.searchView.searchTextField.text = searchViewController.searchBar.text
         self.navigationController?.pushViewController(result, animated: true)
     }
+    
+    
     
     // MARK: - Setter
     lazy var navTabBar: SYNavTabBar = {
@@ -203,7 +224,19 @@ class ShowroomNaviViewController: BaseViewController {
         let sortItemButton = UIBarButtonItem(image: UIImage(named: "common_sort_button_normal_iPhone"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(screenInfo(sender:)))
         return sortItemButton
     }()
+    
+    
+   
 }
+
+extension ShowroomNaviViewController: ZJPickerMenuDelegate{
+    // MARK: ZJPickerMenu delegate
+    func getMsg(num: Int, pro: [String : String]) {
+        print(num)
+        print(pro)
+    }
+}
+
 
 extension ShowroomNaviViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

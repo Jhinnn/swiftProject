@@ -23,8 +23,12 @@ class CommentModel: HandyJSON {
     var zanNumber: String?
     // 是否点赞
     var isStar: String?
-    // 评论内容
+    // 评论总内容
     var content: String?
+    // 评论文字内容
+    var content_text: String?
+    //评论图片内容
+    var content_img: [String]?
     // 创建时间
     var createTime: String?
     // 是否关注该用户
@@ -35,6 +39,8 @@ class CommentModel: HandyJSON {
     var fansNumber: String?
     // 话题回复数
     var replyCount: Int?
+    // 话题回复数
+    var comment_num: String?
     // 评论图片
     var cover_url: [String]?
     
@@ -55,6 +61,9 @@ class CommentModel: HandyJSON {
         mapper <<< self.replyCount <-- "reply_count"
         mapper <<< self.is_follow <-- "is_follow"
         mapper <<< self.view <-- "view"
+        mapper <<< self.content_img <-- "content_img"
+        mapper <<< self.content_text <-- "content_text"
+        mapper <<< self.comment_num <-- "comment_num"
         
     }
     

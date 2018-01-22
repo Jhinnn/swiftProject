@@ -45,6 +45,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
         contentView.addSubview(infoImageView1)
         contentView.addSubview(infoImageView2)
         contentView.addSubview(infoImageView3)
+        contentView.addSubview(lineLabel)
     }
     
     func setupUIFrame(replyFrame: TalkRoomCommentFrameModel) {
@@ -60,7 +61,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
         zanLabel.frame = (replyFrame.zanLabelF)!
         readLabel.frame = (replyFrame.readLabelF)!
 //        replyCountLabel.frame = (replyFrame.replyCountF)!
-//        replyButton.frame = (replyFrame.replyButtonF)!
+        lineLabel.frame = (replyFrame.lineLabelF)!
     }
     
     // MARK: - event response
@@ -97,7 +98,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
     lazy var nickNameLablel: UILabel = {
         let nickNameLablel = UILabel()
 //        nickNameLablel.textColor = UIColor.init(hexColor: "898989")
-        nickNameLablel.font = UIFont.boldSystemFont(ofSize: 15)
+        nickNameLablel.font = UIFont.boldSystemFont(ofSize: 16)
         
         return nickNameLablel
     }()
@@ -105,7 +106,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
     // 内容
     lazy var contentLabel: UILabel = {
         let contentLabel = UILabel()
-        contentLabel.font = UIFont.systemFont(ofSize: 15)
+        contentLabel.font = UIFont.systemFont(ofSize: 16)
         contentLabel.numberOfLines = 0
         contentLabel.textColor = UIColor.init(hexColor: "333333")
         return contentLabel
@@ -195,6 +196,15 @@ class TalkShowRoomCommentCell: UITableViewCell {
         return replyCountLabel
     }()
     
+    // 回复
+    lazy var lineLabel: UILabel = {
+        let lineLabel = UILabel()
+        lineLabel.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
+        return lineLabel
+    }()
+    
+    
+    
     // 回复按钮
     lazy var replyButton: UIButton = {
         let replyButton = UIButton()
@@ -212,25 +222,25 @@ class TalkShowRoomCommentCell: UITableViewCell {
             headImgView.kf.setImage(with: imageUrl, for: .normal)
             nickNameLablel.text = newValue?.comment.nickName ?? ""
             
-            if newValue?.comment.cover_url?.count != 0 {
+            if newValue?.comment.content_img?.count != 0 {
                 
-                if newValue?.comment.cover_url?.count == 1 {
-                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                if newValue?.comment.content_img?.count == 1 {
+                    let imageUrl = URL(string: newValue?.comment.content_img?[0] ?? "")
                     infoImageView1.kf.setImage(with: imageUrl)
-                }else if newValue?.comment.cover_url?.count == 2 {
-                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                }else if newValue?.comment.content_img?.count == 2 {
+                    let imageUrl = URL(string: newValue?.comment.content_img?[0] ?? "")
                     infoImageView1.kf.setImage(with: imageUrl)
 
-                    let imageUrl1 = URL(string: newValue?.comment.cover_url?[1] ?? "")
+                    let imageUrl1 = URL(string: newValue?.comment.content_img?[1] ?? "")
                     infoImageView2.kf.setImage(with: imageUrl1)
-                }else if newValue?.comment.cover_url?.count == 3 {
-                    let imageUrl = URL(string: newValue?.comment.cover_url?[0] ?? "")
+                }else if newValue?.comment.content_img?.count == 3 {
+                    let imageUrl = URL(string: newValue?.comment.content_img?[0] ?? "")
                     infoImageView1.kf.setImage(with: imageUrl)
                     
-                    let imageUrl1 = URL(string: newValue?.comment.cover_url?[1] ?? "")
+                    let imageUrl1 = URL(string: newValue?.comment.content_img?[1] ?? "")
                     infoImageView2.kf.setImage(with: imageUrl1)
                     
-                    let imageUrl2 = URL(string: newValue?.comment.cover_url?[2] ?? "")
+                    let imageUrl2 = URL(string: newValue?.comment.content_img?[2] ?? "")
                     infoImageView3.kf.setImage(with: imageUrl2)
                 }
             }
@@ -249,7 +259,9 @@ class TalkShowRoomCommentCell: UITableViewCell {
                 isFollowButton.setTitle("已关注", for: .normal)
                 isFollowButton.setTitleColor(UIColor.init(hexColor: "898989"), for: .normal)
             }
-            contentLabel.text = newValue?.comment.content ?? ""
+            
+            let contentStr = newValue?.comment.content_text?.replacingOccurrences(of: "\n", with: "")
+            contentLabel.text = contentStr!
 //            timeLabel.text = Int(newValue!.comment!.createTime!)?.getTimeString()
 //            replyCountLabel.text = "回复数：\(newValue?.comment.replyCount ?? 0)"
 //            starCountButton.setTitle(" \(newValue?.comment.zanNumber ?? "0")", for: .normal)

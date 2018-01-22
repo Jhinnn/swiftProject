@@ -7,7 +7,25 @@
 		<key>WYP.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>18</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>A4301C1C1E5FDEB000E8E222</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4301C301E5FDEB000E8E222</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4301C3B1E5FDEB000E8E222</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

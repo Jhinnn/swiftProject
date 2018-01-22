@@ -196,11 +196,7 @@ class NewsDetailsViewController: BaseViewController {
             make.left.right.bottom.equalTo(view)
             make.height.equalTo(59)
         }
-//        shareButton.snp.makeConstraints { (make) in
-//            make.right.equalTo(interactionView).offset(-15)
-//            make.centerY.equalTo(interactionView.snp.centerY)
-//            make.size.equalTo(CGSize(width: 19.5, height: 19.5))
-//        }
+
         collectionButton.snp.makeConstraints { (make) in
             make.right.equalTo(interactionView).offset(-24)
             make.centerY.equalTo(commentTextField.snp.centerY)

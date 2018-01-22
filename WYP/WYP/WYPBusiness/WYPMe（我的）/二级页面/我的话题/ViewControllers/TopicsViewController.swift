@@ -20,6 +20,15 @@ class TopicsViewController: BaseViewController {
     
     var headerView: TopicHeaderView?
     
+    //add
+    // 存放控制器的数组
+    var subViewControllers: [BaseViewController]?
+    // 当前所在控制器的索引
+    var currentIndex: NSInteger?
+    // 分页导航上的title数组
+    var titles: [String]?
+    
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -29,73 +38,146 @@ class TopicsViewController: BaseViewController {
             title = "我的话题"
             let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
             navigationItem.rightBarButtonItem = releaseBtn
+            
+            let roomView = AttentionTopicViewController()
+            let ticketView = TopicsMeViewController()
+            ticketView.targId = self.targId
+            let personView = TopicAnswerViewController()
+            personView.targId = self.targId
+            
+            roomView.title = "我关注的话题"
+            ticketView.title = "我提问的话题"
+            personView.title = "我回答的话题"
+            
+            // 添加到控制器数组
+            subViewControllers = [roomView,ticketView,personView]
+            
         }else {
             title = self.titleName! + "的话题"
+            
+            
+            let ticketView = TopicsMeViewController()
+            ticketView.targId = self.targId
+            let personView = TopicAnswerViewController()
+            personView.targId = self.targId
+            ticketView.title = "他提出的话题"
+            personView.title = "他回答的话题"
+            
+            // 添加到控制器数组
+            subViewControllers = [ticketView,personView]
+            
         }
-        
-        
-        
-        setupUI()
-        
-        //加载头部视图
+    
+        self.headerView = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
+        self.view.addSubview(self.headerView!)
+
+//        //加载头部视图
         loadHeadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-    
-        // 加载网络数据
-        loadNetData(requestType: .update)
+        self.headerView?.snp.makeConstraints({ (make) in
+            make.left.right.top.equalTo(self.view)
+            make.height.equalTo(128)
+        })
+        
+
+       
+        
+        // 视图控制器索引和标题的设置
+        currentIndex = 0
+        navTabBar.currentIndex = currentIndex!
+        // 初始化标题数组
+        titles = [String]()
+        for viewC in subViewControllers! {
+            titles?.append(viewC.title!)
+        }
+        // 将标题数组赋给分页导航的数组
+        navTabBar.itemTitles = titles
+        // 刷新数据
+        navTabBar.updateData()
+        view.addSubview(navTabBar)
+        // 设置控制器的尺寸
+        mainView.contentSize = CGSize(width: kScreen_width*CGFloat(subViewControllers!.count), height: 0)
+        view.addSubview(mainView)
+        
+        viewConfig()
     }
     
+    //add
+    
+    // 初始化视图
+    private func viewConfig() {
+        
+        
+        
+        //添加视图控制器
+        let viewController = subViewControllers?[currentIndex!]
+        viewController?.view.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height - 128 - 42)
+        
+        mainView.addSubview(viewController!.view)
+        self.addChildViewController(viewController!)
+        
+        
+    }
+  
+
+    
+    // MARK: - event response
+    
+    // MARK: - setter and getter
+    lazy var navTabBar: SYNavTabBar = {
+        let navTabBar = SYNavTabBar(frame:CGRect(x: 0, y: 128, width: kScreen_width, height: 42) )
+        navTabBar.delegate = self
+        navTabBar.backgroundColor = UIColor.white
+        navTabBar.navTabBarHeight = 42
+        navTabBar.buttonTextColor = UIColor.gray
+        navTabBar.line?.isHidden = false
+        navTabBar.lineColor = UIColor.red
+        return navTabBar
+    }()
+    // 下面的控制器
+    lazy var mainView: UIScrollView = {
+        let mainView = UIScrollView(frame: CGRect(x: 0, y: 42 + 128, width: kScreen_width, height: kScreen_height))
+        mainView.delegate = self
+        mainView.isPagingEnabled = true
+        mainView.bounces = false
+        mainView.isScrollEnabled = false
+        mainView.showsVerticalScrollIndicator = false
+        mainView.showsHorizontalScrollIndicator = false
+        return mainView
+    }()
     
     func loadHeadData() {
         NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dic) in
             if success {
-                
-                self.headerView?.addressImage.isHidden = false
-                
                 let imageStr = dic?["avatar"] as! String
                 let imageUrl = URL(string: imageStr)
                 self.headerView?.imageVie.kf.setImage(with: imageUrl)
                 
                 self.headerView?.titleLabel.text = dic?["nickname"] as? String
-                self.headerView?.addressLabel.text = dic?["address"] as? String
                 self.headerView?.textLabel.text = dic?["signature"] as? String
-                
-                self.headerView?.attentionLabel.text = String.init(format: "%@关注", (dic?["follow_num"] as? String)!)
-                self.headerView?.fansLabel.text = String.init(format: "%@粉丝", (dic?["fans_num"] as? String)!)
             }
         }
     }
 
     
-    // 设置所有控件
-    fileprivate func setupUI() {
-        view.addSubview(tableView)
-        
-        setupUIFrame()
-    
-        self.headerView = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
-        self.headView.addSubview(self.headerView!)
-        tableView.tableHeaderView = headView
+    func releaseDynamic() {
+       navigationController?.pushViewController(PublicGroupOneViewController(), animated: true)
     }
     
-    // 设置控件frame
-    fileprivate func setupUIFrame() {
-        // 设置tableView的布局
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
-        }
-    }
     
-    lazy var headView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 160))
-        return view
-    }()
+    
+//    // 设置控件frame
+//    fileprivate func setupUIFrame() {
+//        // 设置tableView的布局
+//        tableView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+//        }
+//    }
+    
+
   
 
+    /*
     // 设置tableView
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -155,16 +237,7 @@ class TopicsViewController: BaseViewController {
         return noDataButton
     }()
     
-    func releaseDynamic() {
-        UserDefaults.standard.set(AppInfo.shared.user?.token ?? "", forKey: "token")
-        var releaseVC = PublicGroupViewController()
-        releaseVC = PublicGroupViewController.init()
-        releaseVC.userToken = AppInfo.shared.user?.token ?? ""
-        releaseVC.uid = AppInfo.shared.user?.userId ?? ""
-        releaseVC.post_topic = "1"
-        print(releaseVC.post_topic)
-        navigationController?.pushViewController(releaseVC, animated: true)
-    }
+ 
     
     func loadNetData(requestType: RequestType) {
         if requestType == .update {
@@ -224,8 +297,33 @@ class TopicsViewController: BaseViewController {
             }
         }
     }
+ 
+ */
+    
 
 }
+
+
+
+extension TopicsViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        currentIndex = Int(scrollView.contentOffset.x) / Int(kScreen_width)
+        navTabBar.currentIndex = currentIndex!
+        
+        /** 当scrollview滚动的时候加载当前视图 */
+        let viewController = subViewControllers?[currentIndex!];
+        viewController?.view.frame = CGRect(x: CGFloat(currentIndex!) * kScreen_width, y: 0, width: kScreen_width, height: mainView.frame.size.height)
+        mainView.addSubview(viewController!.view)
+        self.addChildViewController(viewController!)
+    }
+}
+extension TopicsViewController: SYNavTabBarDelegate {
+    func itemDidSelected(index: NSInteger, currentIndex: NSInteger) {
+        mainView.contentOffset = CGPoint(x: CGFloat(index) * kScreen_width, y: 0)
+    }
+}
+
+/*
 
 extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -357,3 +455,5 @@ extension TopicsViewController: TopicsDetailsViewControllerDelegate {
         }
     }
 }
+
+ */

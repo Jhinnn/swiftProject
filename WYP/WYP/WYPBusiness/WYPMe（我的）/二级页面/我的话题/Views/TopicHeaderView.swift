@@ -15,10 +15,10 @@ class TopicHeaderView: UIView {
     
     @IBOutlet weak var imageVie: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
+//    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var attentionLabel: UILabel!
-    @IBOutlet weak var fansLabel: UILabel!
+//    @IBOutlet weak var attentionLabel: UILabel!
+//    @IBOutlet weak var fansLabel: UILabel!
     
     @IBOutlet weak var addressImage: UIImageView!
     
@@ -29,7 +29,6 @@ class TopicHeaderView: UIView {
     
     override func awakeFromNib() {
     
-        addressImage.isHidden = true
         self.imageVie?.layer.masksToBounds = true
         self.imageVie?.layer.cornerRadius = self.imageVie.width / 2
         

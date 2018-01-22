@@ -389,6 +389,11 @@ public var kApi_my_topicListnew: String {
     return kApi_baseUrl(path: "api/gambit_list_info")
 }
 
+//我的话题--新
+public var kApi_myAnswer_topicListnew: String {
+    return kApi_baseUrl(path: "api/re_gambit_list")
+}
+
 // 发布话题
 public var kApi_issue_Topic: String {
     return kApi_baseUrl(path: "api/sendGambit")
@@ -674,4 +679,14 @@ public var kApi_publicCommunity: String {
 //个人社区
 public var kApi_getPersonCommunity: String {
     return kApi_baseUrl(path: "api/follow_fans_num")
+}
+
+//个人社区
+public var kApi_getTopicCommtentDetail: String {
+    return kApi_baseUrl(path: "api/news_reply_content")
+}
+
+//删除话题评论
+public var kApi_delCommtentCommentDetail: String {
+    return kApi_baseUrl(path: "api/del_re_gambit")
 }

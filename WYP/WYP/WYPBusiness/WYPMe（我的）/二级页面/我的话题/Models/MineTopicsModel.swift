@@ -19,6 +19,8 @@ class MineTopicsModel: HandyJSON {
     var content: String?
     // 话题类型
     var type: String?
+    // 话题类型
+    var title: String?
     
     //显示分类
     var new_type: String?
@@ -69,6 +71,7 @@ class MineTopicsModel: HandyJSON {
         mapper <<< self.peopleFans <-- "fans"
         mapper <<< self.peopleFriends <-- "friend_num"
         mapper <<< self.cover_url <-- "cover_url"
+        mapper <<< self.title <-- "title"
     }
     
     required init() {}

@@ -10,6 +10,9 @@ import UIKit
 
 class PublicGroupViewController: BaseViewController{
     
+    
+    var typeid: String!
+    
     var uid: String!
     var userToken: String!
     var post_topic: String!
@@ -29,12 +32,19 @@ class PublicGroupViewController: BaseViewController{
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(publicButtonItemAction))
         
         view.addSubview(scrollView)
-        scrollView.addSubview(publicLabel)
+//        scrollView.addSubview(publicLabel)
         scrollView.addSubview(lineLabel)
         scrollView.addSubview(contentLabel)
         scrollView.addSubview(textView)
         scrollView.addSubview(bgView)
+        scrollView.addSubview(lineLabel1)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(contentLabel)
+        scrollView.addSubview(titleView)
+        
         bgView.addSubview(photoView)
+        
+        /*
         
         let buttonWidth = (kScreen_width - 34 - 10 * 5) / 6;
         let buttonHeight = buttonWidth
@@ -44,7 +54,7 @@ class PublicGroupViewController: BaseViewController{
         for i in 0..<6 {
             let button: UIButton = UIButton(type: .custom)
             button.backgroundColor = UIColor.white
-            button.frame = CGRect(x: 17 + CGFloat(i) * (buttonWidth + 10), y: publicLabel.bottom + 30 , width: buttonWidth, height: buttonHeight)
+            button.frame = CGRect(x: 17 + CGFloat(i) * (buttonWidth + 10), y: publicLabel.bottom + 24 , width: buttonWidth, height: buttonHeight)
             if i == 0{
                 button.isSelected = true
                 button.setBackgroundImage(UIImage.init(named: "theme_icon_option_pitch"), for: .selected)
@@ -66,8 +76,13 @@ class PublicGroupViewController: BaseViewController{
             button.tag = 100 + i
             scrollView.addSubview(button)
         }
-        
+ 
+ 
+ */
+
     }
+ 
+ 
     
     //滚动视图
     lazy var scrollView: UIScrollView = {
@@ -76,37 +91,60 @@ class PublicGroupViewController: BaseViewController{
         return scrollView
     }()
     
-    //发布标签
-    lazy var publicLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 13, y: 18.5, width: 54, height: 27))
+    lazy var titleLabel: UILabel = {
+        
+        let label = UILabel(frame: CGRect(x: 18, y: 30, width: 54, height: 27))
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "分类"
+        label.text = "标题"
         return label
     }()
     
+    lazy var textView: UITextView = {
+        let textView = UITextView(frame: CGRect(x: 15, y: 70, width: kScreen_width - 30, height: 40))
+        textView.placeholder = "添加标题"
+        textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
+        textView.font = UIFont.systemFont(ofSize: 16)
+        return textView
+    }()
+    
     lazy var lineLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 13, y: 170, width: kScreen_width - 15, height: 1))
+        let label = UILabel(frame: CGRect(x: 18, y: 111, width: kScreen_width - 18, height: 1))
         label.backgroundColor = UIColor.init(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: 1)
         return label
     }()
     
     lazy var contentLabel: UILabel = {
-    
-        let label = UILabel(frame: CGRect(x: 15, y: 190, width: 54, height: 27))
+        let label = UILabel(frame: CGRect(x: 18, y: 125, width: 54, height: 27))
         label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "话题"
+        label.text = "内容"
         return label
     }()
     
-    lazy var textView: UITextView = {
-        let textView = UITextView(frame: CGRect(x: 15, y: 230, width: kScreen_width - 30, height: 80))
-        textView.placeholder = "添加描述和配图（选填）"
+    
+    lazy var titleView: UITextView = {
+        let textView = UITextView(frame: CGRect(x: 15, y: 160, width: kScreen_width - 30, height: 100))
+        textView.placeholder = "添加描述"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
         textView.font = UIFont.systemFont(ofSize: 16)
         return textView
     }()
+    
+    lazy var lineLabel1: UILabel = {
+        let label = UILabel(frame: CGRect(x: 18, y: 270, width: kScreen_width - 18, height: 1))
+        label.backgroundColor = UIColor.init(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: 1)
+        return label
+    }()
+    
+//    //发布标签
+//    lazy var publicLabel: UILabel = {
+//        let label = UILabel(frame: CGRect(x: 13, y: 18.5, width: 54, height: 27))
+//        label.textColor = UIColor.gray
+//        label.font = UIFont.systemFont(ofSize: 16)
+//        label.text = "分类"
+//        return label
+//    }()
     
     lazy var manager: HXPhotoManager = {
         let manager = HXPhotoManager(type: HXPhotoManagerSelectedTypePhoto)
@@ -120,7 +158,7 @@ class PublicGroupViewController: BaseViewController{
     
     
     lazy var bgView: UIView = {
-        let view = UIView(frame: CGRect(x: 15, y: 310, width: kScreen_width - 30, height: 100))
+        let view = UIView(frame: CGRect(x: 15, y: 275, width: kScreen_width - 30, height: 100))
         return view
     }()
     
@@ -131,6 +169,7 @@ class PublicGroupViewController: BaseViewController{
     }()
     
 
+    /*
     //MARK: -Button 点击事件
     func clickAction(button : UIButton) {
         
@@ -154,39 +193,28 @@ class PublicGroupViewController: BaseViewController{
         self.selectedBtn = btn
         
     }
+ 
+ */
     
     // MARK: --发布按钮点击事件
     func publicButtonItemAction() {
         
-        if self.textView.text.count <= 15 {
-            SVProgressHUD.showInfo(withStatus: "发布内容少于15个字")
+        if self.textView.text.count <= 5 {
+            SVProgressHUD.showInfo(withStatus: "标题太短了")
+            return
+        }
+
+        if self.titleView.text.count <= 5 {
+            SVProgressHUD.showInfo(withStatus: "内容太少了")
             return
         }
     
-        var type = ""
-        switch self.selectedBtn.tag {
-        case 100:
-            type = "13"
-        case 101:
-            type = "14"
-        case 102:
-            type = "15"
-        case 103:
-            type = "16"
-        case 104:
-            type = "17"
-        case 105:
-            type = "18"
-        default:
-            type = "13"
-        }
-        
-        NetRequest.publishTopicNetRequest(open_id: AppInfo.shared.user?.token ?? "", type: type, title: self.textView.text, images: uploadImageArray) { (success, info, userDic) in
+        NetRequest.publishTopicNetRequest(open_id: AppInfo.shared.user?.token ?? "", type: self.typeid, title: self.textView.text, content: self.titleView.text,images: uploadImageArray) { (success, info, userDic) in
             if success {
                 SVProgressHUD.showSuccess(withStatus: info)
                 let time: TimeInterval = 0.8
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
-                    self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }else {
                 SVProgressHUD.showError(withStatus: info)

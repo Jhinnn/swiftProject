@@ -37,7 +37,7 @@ class ProFoorterCollectionReusableView: UICollectionReusableView
     lazy var numTf: UILabel =
     {
         var tf = UILabel()
-        tf.text = String(num)
+//        tf.text = String(num)
         tf.textAlignment = .center
         tf.backgroundColor = UIColor.init(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1.0)
         return tf

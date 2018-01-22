@@ -226,6 +226,40 @@ class NetRequest {
             }
         }
     }
+    
+    //我的回答的话题列表---新
+    class func myAnswerTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id": token,
+                                      "is_login_uid" : uid,
+                                      "uid" : uid,
+                                      "page": page]
+        Alamofire.request(kApi_myAnswer_topicListnew, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    
+                    let dic = json["data"].dictionaryValue
+                    
+                    let arr = dic["gambit"]?.rawValue as? [NSDictionary?]
+                    
+                    complete(true, info, arr)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     // 资讯 - 话题评论
     class func topicsCommentNetRequest(openId: String, topicId: String, content: String, pid: String, complete: @escaping ((Bool, String?) -> Void)) {
         
@@ -3454,7 +3488,7 @@ class NetRequest {
                 } else {
                     // 获取数据
                     let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
-                    print(dic)
+                    
                     complete(true, info, dic)
                 }
             case .failure(let error):
@@ -3465,13 +3499,13 @@ class NetRequest {
     
     
     //发布话题
-    class func publishTopicNetRequest(open_id: String, type: String, title: String, images: [UIImage],complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func publishTopicNetRequest(open_id: String, type: String, title: String,content: String, images: [UIImage],complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
     
         var i = 1
         var infoDic:[String: String] = [String: String]()
         for image in images {
             // 压缩图片
-            let fileData = UIImageJPEGRepresentation(image, 0.4)
+            let fileData = UIImageJPEGRepresentation(image, 1)
             let base64String = fileData?.base64EncodedString(options: .endLineWithCarriageReturn)
             let imageName = "baseImg\(i)"
             infoDic[imageName] = base64String ?? ""
@@ -3482,7 +3516,8 @@ class NetRequest {
                                       "method": "POST",
                                       "open_id": open_id,
                                       "type": type,
-                                      "title":title]
+                                      "title":title,
+                                      "content":content]
 
         for (key, value) in infoDic {
             print(key,value)
@@ -3554,6 +3589,57 @@ class NetRequest {
     class func getPersonCommunityNetRequest(uid: String,mid: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,"method": "POST","mid": mid,"uid": uid]
         Alamofire.request(kApi_getPersonCommunity, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //话题评论详情
+    class func getTopicCommentDetailNetRequest(pid: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,"method": "POST","pid": pid]
+        Alamofire.request(kApi_getTopicCommtentDetail, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //话题回答的评论删除
+    class func deleteCommentCommentNetRequest(openId: String, pid: String ,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id": openId,
+                                      "id": pid]
+        Alamofire.request(kApi_delCommtentCommentDetail, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)

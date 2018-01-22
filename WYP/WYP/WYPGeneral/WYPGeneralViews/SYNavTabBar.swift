@@ -31,7 +31,7 @@ class SYNavTabBar: UIView {
     // navTabBar的高度
     var navTabBarHeight: CGFloat = 42
     // button的字体颜色
-    var buttonTextColor: UIColor = UIColor.black
+    var buttonTextColor: UIColor?
 
     // 定义一个代理
     weak var delegate: SYNavTabBarDelegate?

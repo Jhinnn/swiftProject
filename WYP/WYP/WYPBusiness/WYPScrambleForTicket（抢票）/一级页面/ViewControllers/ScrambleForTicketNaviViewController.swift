@@ -54,11 +54,11 @@ class ScrambleForTicketNaviViewController: BaseViewController {
         
         // 当前城市
         let cityName = UserDefaults.standard.object(forKey: "cityName") as? String ?? "北京"
-        if cityName.characters.count < 3 {
+        if cityName.count < 3 {
             leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
             leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 40, bottom: 0, right: 0)
             leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -25, bottom: 0, right: 0)
-        } else if cityName.characters.count > 2 && cityName.characters.count < 5 {
+        } else if cityName.count > 2 && cityName.count < 5 {
             leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
             leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 60, bottom: 0, right: 0)
             leftBarButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -25, bottom: 0, right: 0)

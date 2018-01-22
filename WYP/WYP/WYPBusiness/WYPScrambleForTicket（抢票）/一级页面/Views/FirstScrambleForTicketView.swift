@@ -135,22 +135,23 @@ extension FirstScrambleForTicketView: WKScriptMessageHandler {
         //根据类型创建对应的对象
         let vc = childVcType.init()
         
-        self.viewController()?.navigationController?.pushViewController(vc, animated: true)
+        self.viewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension UIView {
-    func viewController() -> UIViewController? {
-        //通过响应者链，取得此视图所在的视图控制器
-        var next = self.next
-        
-        while(next != nil) {
-            //判断响应者对象是否是视图控制器类型
-            if next!.isKind(of: UIViewController.self) {
-                return next as? UIViewController;
-            }
-            next = next!.next
-        }
-        return nil;
-    }
-}
+//extension UIView {
+//    func viewController() -> UIViewController? {
+//        //通过响应者链，取得此视图所在的视图控制器
+//        var next = self.next
+//        
+//        while(next != nil) {
+//            //判断响应者对象是否是视图控制器类型
+//            if next!.isKind(of: UIViewController.self) {
+//                return next as? UIViewController;
+//            }
+//            next = next!.next
+//        }
+//        return nil;
+//    }
+//}
+

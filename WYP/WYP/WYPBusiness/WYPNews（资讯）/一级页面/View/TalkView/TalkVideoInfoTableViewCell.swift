@@ -43,7 +43,7 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
         adButton.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(13)
             make.bottom.equalTo(contentView).offset(-17)
-            make.size.equalTo(CGSize(width: 20, height: 12))
+            make.size.equalTo(CGSize(width: 0, height: 0))
         }
         topButton.snp.makeConstraints { (make) in
             make.left.equalTo(adButton.snp.right).offset(3)
@@ -272,7 +272,7 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
     //数据模型
     var mineTopicsModel: MineTopicsModel? {
         willSet {
-            infoTitleLabel.text = newValue?.content ?? ""
+            infoTitleLabel.text = newValue?.title
             
             infoSourceLabel.text = newValue?.category
             infoTimeLabel.text = newValue?.timestamp?.getTimeString()

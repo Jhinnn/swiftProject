@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopicsViewController: BaseViewController {
+class TopicsMeViewController: BaseViewController {
     
     var titleName: String?
     
@@ -25,62 +25,20 @@ class TopicsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.targId == AppInfo.shared.user?.userId {
-            title = "我的话题"
-            let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
-            navigationItem.rightBarButtonItem = releaseBtn
-        }else {
-            title = self.titleName! + "的话题"
-        }
-        
-        
-        
-        setupUI()
-        
-        //加载头部视图
-        loadHeadData()
+        self.view.addSubview(self.tableView)
+        self.setupUIFrame()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     
         // 加载网络数据
         loadNetData(requestType: .update)
     }
     
-    
-    func loadHeadData() {
-        NetRequest.myNewTopicMsgListNetRequest(page: "1", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dic) in
-            if success {
-                
-//                self.headerView?.addressImage.isHidden = false
-                
-                let imageStr = dic?["avatar"] as! String
-                let imageUrl = URL(string: imageStr)
-                self.headerView?.imageVie.kf.setImage(with: imageUrl)
-                
-                self.headerView?.titleLabel.text = dic?["nickname"] as? String
-//                self.headerView?.addressLabel.text = dic?["address"] as? String
-                self.headerView?.textLabel.text = dic?["signature"] as? String
-                
-//                self.headerView?.attentionLabel.text = String.init(format: "%@关注", (dic?["follow_num"] as? String)!)
-//                self.headerView?.fansLabel.text = String.init(format: "%@粉丝", (dic?["fans_num"] as? String)!)
-            }
-        }
-    }
 
     
-    // 设置所有控件
-    fileprivate func setupUI() {
-        view.addSubview(tableView)
-        
-        setupUIFrame()
-    
-        self.headerView = Bundle.main.loadNibNamed("TopicHeaderView", owner: nil, options: nil)?.first as? TopicHeaderView
-        self.headView.addSubview(self.headerView!)
-        tableView.tableHeaderView = headView
-    }
+   
     
     // 设置控件frame
     fileprivate func setupUIFrame() {
@@ -90,10 +48,7 @@ class TopicsViewController: BaseViewController {
         }
     }
     
-    lazy var headView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 128))
-        return view
-    }()
+
   
 
     // 设置tableView
@@ -227,7 +182,7 @@ class TopicsViewController: BaseViewController {
 
 }
 
-extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
+extension TopicsMeViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - UITableViewDataSource
     
@@ -247,19 +202,19 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        if newsData[indexPath.row].new_type == "1" {
+        if newsData[indexPath.row].new_type == "1" {  //文字
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
             cell.mineTopicsModel = newsData[indexPath.row]
             return cell
-        }else if newsData[indexPath.row].new_type == "2"{
+        }else if newsData[indexPath.row].new_type == "2"{  //大图
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
             cell.mineTopicsModel = newsData[indexPath.row]
             return cell
-        }else if newsData[indexPath.row].new_type == "3"{
+        }else if newsData[indexPath.row].new_type == "3"{ //左右
             let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
             cell.mineTopicsModel = newsData[indexPath.row]
             return cell
-        }else if newsData[indexPath.row].new_type == "4"{
+        }else if newsData[indexPath.row].new_type == "4"{ //三图
             let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
             cell.mineTopicsModel = newsData[indexPath.row]
             return cell
@@ -323,7 +278,7 @@ extension TopicsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension TopicsViewController: TopicsCellDelegate {
+extension TopicsMeViewController: TopicsCellDelegate {
     func clickImageAction(sender: UIButton, topics: TopicsModel) {
         let personalInformationVC = PersonalInformationViewController()
         personalInformationVC.targetId = topics.peopleId ?? ""
@@ -346,7 +301,7 @@ extension TopicsViewController: TopicsCellDelegate {
     }
 }
 
-extension TopicsViewController: TopicsDetailsViewControllerDelegate {
+extension TopicsMeViewController: TopicsDetailsViewControllerDelegate {
 
     func starBtnAction(topicId: String, topicsFrame: TopicsFrameModel) {
         for i in 0..<dataList.count {

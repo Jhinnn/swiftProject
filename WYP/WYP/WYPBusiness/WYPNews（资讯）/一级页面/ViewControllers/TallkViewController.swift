@@ -330,7 +330,7 @@ class TallkViewController: BaseViewController {
             GeneralMethod.alertToLogin(viewController: self)
             return
         } else {
-            navigationController?.pushViewController(PublicGroupViewController(), animated: true)
+            navigationController?.pushViewController(PublicGroupOneViewController(), animated: true)
         }
     }
     
