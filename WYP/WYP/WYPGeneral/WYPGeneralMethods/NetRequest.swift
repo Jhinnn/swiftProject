@@ -3660,6 +3660,59 @@ class NetRequest {
         }
     }
     
+    //展厅菜单数据
+    class func getExhibitionHallMeunNetRequest(type: String,complete: @escaping ((Bool, String?, [NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "category": type]
+        Alamofire.request(kApi_getExhibitionHallMeunData, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.dictionary?["data"]?.rawValue as? [NSDictionary]
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //展厅菜单数据
+    class func getMediaListNetRequest(type: String,id: String,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "type": type,
+                                      "id": id]
+        Alamofire.request(kApi_getMediaList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+//                     获取数据
+                        let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                        complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     
    
     

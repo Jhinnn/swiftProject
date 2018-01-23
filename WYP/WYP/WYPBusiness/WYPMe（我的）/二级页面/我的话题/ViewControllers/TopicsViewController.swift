@@ -40,6 +40,7 @@ class TopicsViewController: BaseViewController {
             navigationItem.rightBarButtonItem = releaseBtn
             
             let roomView = AttentionTopicViewController()
+            roomView.type = 1
             let ticketView = TopicsMeViewController()
             ticketView.targId = self.targId
             let personView = TopicAnswerViewController()
@@ -111,7 +112,7 @@ class TopicsViewController: BaseViewController {
         
         //添加视图控制器
         let viewController = subViewControllers?[currentIndex!]
-        viewController?.view.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height - 128 - 42)
+        viewController?.view.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height - 128 - 42 - 20)
         
         mainView.addSubview(viewController!.view)
         self.addChildViewController(viewController!)
@@ -136,7 +137,7 @@ class TopicsViewController: BaseViewController {
     }()
     // 下面的控制器
     lazy var mainView: UIScrollView = {
-        let mainView = UIScrollView(frame: CGRect(x: 0, y: 42 + 128, width: kScreen_width, height: kScreen_height))
+        let mainView = UIScrollView(frame: CGRect(x: 0, y: 42 + 128, width: kScreen_width, height: kScreen_height - 128 - 42 - 20))
         mainView.delegate = self
         mainView.isPagingEnabled = true
         mainView.bounces = false

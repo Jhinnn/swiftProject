@@ -112,7 +112,7 @@ static  NSString *cellID = @"cellID";
     
     
     [cell.bgImageView sd_setImageWithURL:self.browserArray[indexPath.item] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        self.currentImage = cell.bgImageView.image;
+        
     }];
     
     
@@ -297,7 +297,10 @@ static  NSString *cellID = @"cellID";
 
 #pragma mark -- 保存相册
 - (void)saveImageClick {
-    [self.delegate saveImageButtonToClick:self.currentImage];
+    NSString *urlStr = self.browserArray[self.currentIndex];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlStr]];
+    UIImage *image = [UIImage imageWithData:data];
+    [self.delegate saveImageButtonToClick:image];
 }
 
 @end

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MediaVideoCollectionCell" customModule="WYP" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="94" height="92"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="94" height="92"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HDk-Li-uSX">
+                        <rect key="frame" x="0.0" y="0.0" width="94" height="92"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mtk_icon_shiping_normalmore" translatesAutoresizingMaskIntoConstraints="NO" id="YHQ-OK-2Dl">
+                        <rect key="frame" x="33.5" y="32.5" width="28" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="BRQ-Hm-WQe"/>
+                            <constraint firstAttribute="height" constant="28" id="aSo-bo-mLl"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="HDk-Li-uSX" secondAttribute="bottom" id="34M-vB-1xQ"/>
+                <constraint firstItem="HDk-Li-uSX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="86P-tg-TjZ"/>
+                <constraint firstItem="HDk-Li-uSX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="D1P-f3-oP2"/>
+                <constraint firstItem="YHQ-OK-2Dl" firstAttribute="centerY" secondItem="HDk-Li-uSX" secondAttribute="centerY" id="PTK-Gi-3hz"/>
+                <constraint firstAttribute="trailing" secondItem="HDk-Li-uSX" secondAttribute="trailing" id="r0t-uh-goU"/>
+                <constraint firstItem="YHQ-OK-2Dl" firstAttribute="centerX" secondItem="HDk-Li-uSX" secondAttribute="centerX" id="tYP-dm-qpG"/>
+            </constraints>
+            <size key="customSize" width="3" height="92"/>
+            <point key="canvasLocation" x="-44" y="61"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="mtk_icon_shiping_normalmore" width="17" height="17"/>
+    </resources>
+</document>

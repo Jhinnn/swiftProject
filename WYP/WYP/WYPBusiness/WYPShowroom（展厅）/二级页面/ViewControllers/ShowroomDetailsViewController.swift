@@ -572,29 +572,22 @@ class ShowroomDetailsViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    // 查看更多视频
+    //MARK: // 查看更多视频
     func showMoreVideos(sender: UIButton) {
-        let videos = VideosViewController()
-        videos.roomId = roomId
-        videos.isTicket = isTicket ?? 0
-        videos.videoId = showRoomDetailData?.video?[0].mediaId
-        navigationController?.pushViewController(videos, animated: true)
+        let mediaVC = MediaLibraryViewController()
+        mediaVC.roomId = self.roomId
+        mediaVC.isTicket = self.isTicket
+        navigationController?.pushViewController(mediaVC, animated: true)
     }
-    //展示图片
+    //MARK:// 展示图片
     func showMorePhotos() {
-        let photos = PhotosViewController()
-        if showRoomDetailData?.image != nil {
-            var imageArr = [String]()
-            for i in 0..<showRoomDetailData!.image!.count {
-                let imageUrl = showRoomDetailData?.image?[i].address
-                imageArr.append(imageUrl!)
-            }
-            photos.imageArray = imageArr
-        }
-        photos.currentIndex = 1
-        photos.title = showRoomDetailData?.roomInfo?.title
-        self.present(photos, animated: false, completion: nil)
+        let mediaVC = MediaLibraryViewController()
+        mediaVC.roomId = self.roomId
+        mediaVC.isTicket = self.isTicket
+        navigationController?.pushViewController(mediaVC, animated: true)
     }
+    
+    //MARK: //显示图片
     func showCurrentIndex(index: Int) {
         let photos = PhotosViewController()
         if showRoomDetailData?.image != nil {
@@ -1032,6 +1025,8 @@ class ShowroomDetailsViewController: UITableViewController {
         sectionHeaderView.addSubview(moreTitleLabel)
         
         // 媒体库
+        
+        // FIXME:- 媒体库按钮大小
         if section == 2 && showRoomDetailData != nil {
             
             let photosButton = UIButton()
@@ -1039,6 +1034,7 @@ class ShowroomDetailsViewController: UITableViewController {
             let photosTitle = String.init(format: "图片 %d", showRoomDetailData?.image?.count ?? 0)
             photosButton.setTitle(photosTitle, for: .normal)
             photosButton.setTitleColor(UIColor.black, for: .normal)
+            
             photosButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
             photosButton.addTarget(self, action: #selector(showMorePhotos), for: .touchUpInside)
             sectionHeaderView.addSubview(photosButton)
@@ -1052,12 +1048,13 @@ class ShowroomDetailsViewController: UITableViewController {
             photosButton.snp.makeConstraints({ (make) in
                 make.right.equalTo(sectionHeaderView).offset(-13)
                 make.centerY.equalTo(sectionHeaderView)
-                make.height.equalTo(10)
+                make.height.equalTo(sectionHeaderView)
             })
             
             if !isFree { // 免费展厅没有视频
                 let videosButton = UIButton()
                 videosButton.titleLabel?.textAlignment = .right
+                
                 let videosTitle = String.init(format: "视频 %d", showRoomDetailData?.video?.count ?? 0)
                 videosButton.setTitle(videosTitle, for: .normal)
                 videosButton.setTitleColor(UIColor.black, for: .normal)
@@ -1074,7 +1071,7 @@ class ShowroomDetailsViewController: UITableViewController {
                 videosButton.snp.makeConstraints({ (make) in
                     make.right.equalTo(photosButton.snp.left).offset(-6)
                     make.centerY.equalTo(sectionHeaderView)
-                    make.height.equalTo(10)
+                    make.height.equalTo(sectionHeaderView)
                 })
             }
             
@@ -1128,6 +1125,7 @@ class ShowroomDetailsViewController: UITableViewController {
                 groupButton.snp.makeConstraints({ (make) in
                     make.right.equalTo(sectionHeaderView).offset(-13)
                     make.centerY.equalTo(sectionHeaderView)
+                    
                     make.height.equalTo(10)
                 })
             }

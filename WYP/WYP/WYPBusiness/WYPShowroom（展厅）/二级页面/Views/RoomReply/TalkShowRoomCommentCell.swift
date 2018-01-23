@@ -272,7 +272,7 @@ class TalkShowRoomCommentCell: UITableViewCell {
 //                starCountButton.isSelected = false
 //            }
             
-            zanLabel.text = "\(newValue?.comment.replyCount ?? 0)赞"
+            zanLabel.text = "\(newValue?.comment.like_num ?? "")赞"
             
             readLabel.text = "\(newValue?.comment.view ?? "")个阅读"
             

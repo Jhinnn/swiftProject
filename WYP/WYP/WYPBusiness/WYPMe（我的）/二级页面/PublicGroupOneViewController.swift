@@ -22,8 +22,7 @@ class PublicGroupOneViewController: BaseViewController {
         
         setupView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "下一步", style: .done, target: self, action: #selector(nextButtonItemAction))
-        
+  
         
         
     }
@@ -47,15 +46,15 @@ class PublicGroupOneViewController: BaseViewController {
                  button.frame = CGRect(x: 20 + CGFloat(i - 3) * (buttonWidth + 26), y: lineLabel.bottom + 30 + buttonHeight + 24 , width: buttonWidth, height: buttonHeight)
             }
            
-            if i == 0{
-
-                button.setTitleColor(UIColor.white, for: .normal)
-                button.backgroundColor = UIColor.themeColor
-                self.selectedBtn = button
-            }else{
+//            if i == 0{
+//
+//                button.setTitleColor(UIColor.white, for: .normal)
+//                button.backgroundColor = UIColor.themeColor
+//                self.selectedBtn = button
+//            }else{
                 button.setTitleColor(UIColor.gray, for: .normal)
                 button.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
-            }
+//            }
             button.addTarget(self, action: #selector(clickAction(button:)), for: .touchUpInside)
             button.setTitle(titleArray[i], for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -78,21 +77,17 @@ class PublicGroupOneViewController: BaseViewController {
             button.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
             button.isSelected = false
         }
-        
+
         let btn = view.viewWithTag(button.tag) as! UIButton
         btn.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = UIColor.themeColor
 
         
-        //获得选中的按钮
-        self.selectedBtn = btn
-        
-    }
-
-    func nextButtonItemAction() {
+//        //获得选中的按钮
+//        self.selectedBtn = btn
         
         var type = ""
-        switch self.selectedBtn.tag {
+        switch button.tag {
         case 100:
             type = "13"
         case 101:
@@ -108,12 +103,12 @@ class PublicGroupOneViewController: BaseViewController {
         default:
             type = "13"
         }
-    
+        
         let vc = PublicGroupViewController()
         vc.typeid = type
         navigationController?.pushViewController(vc, animated: true)
-        
     }
+
     
     
     lazy var titleLabel: UILabel = {

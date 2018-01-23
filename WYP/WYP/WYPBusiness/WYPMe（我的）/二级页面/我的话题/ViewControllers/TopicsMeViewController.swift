@@ -131,11 +131,16 @@ class TopicsMeViewController: BaseViewController {
         NetRequest.myNewTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dataArr) in
     
             if success {
+                
                 var news = [MineTopicsModel]()
-                if dataArr != nil {
+                if dataArr?.count != 0 {
                     let data = try! JSONSerialization.data(withJSONObject: dataArr!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
                     news = [MineTopicsModel].deserialize(from: jsonString)! as! [MineTopicsModel]
+                    
+                }else {
+                    self.tableView.mj_footer.endRefreshing()
+                    return
                 }
                 if requestType == .update {
                     self.newsData = news
@@ -230,7 +235,7 @@ extension TopicsMeViewController: UITableViewDataSource, UITableViewDelegate {
         }else if newsData[indexPath.row].new_type == "2" {
             return 275 * width_height_ratio
         }else if newsData[indexPath.row].new_type == "3" {
-            return 109
+            return 109 * width_height_ratio
         }else if newsData[indexPath.row].new_type == "4" {
             return 160 * width_height_ratio
         }

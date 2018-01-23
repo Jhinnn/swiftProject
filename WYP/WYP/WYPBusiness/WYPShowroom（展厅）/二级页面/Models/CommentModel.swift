@@ -46,6 +46,9 @@ class CommentModel: HandyJSON {
     
     //浏览数
     var view: String?
+    
+    //点赞
+    var like_num: String?
 
     
     func mapping(mapper: HelpingMapper) {
@@ -64,6 +67,7 @@ class CommentModel: HandyJSON {
         mapper <<< self.content_img <-- "content_img"
         mapper <<< self.content_text <-- "content_text"
         mapper <<< self.comment_num <-- "comment_num"
+        mapper <<< self.like_num <-- "like_num"
         
     }
     

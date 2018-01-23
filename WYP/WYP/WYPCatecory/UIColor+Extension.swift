@@ -50,6 +50,10 @@ extension UIColor {
         return UIColor(hexColor: "#dc3a20")
     }
     
+    open class var menuColor: UIColor {
+        return UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1.0)
+    }
+    
     // 导航栏颜色
     open class var naviColor: UIColor {
         return UIColor(hexColor: "#dc3a20")

@@ -337,6 +337,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     //_closeBtn
     _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _closeBtn.showsTouchWhenHighlighted = YES;
+    
     [_closeBtn addTarget:self action:@selector(colseTheVideo:) forControlEvents:UIControlEventTouchUpInside];
        [self.topView addSubview:_closeBtn];
     //autoLayout _closeBtn
@@ -344,10 +345,8 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         
         
         make.left.equalTo(self.topView).with.offset(5);
-        
-        
         make.height.mas_equalTo(30);
-        make.width.mas_equalTo(30);
+        make.width.mas_equalTo(40);
         make.top.equalTo(self.topView).with.offset(20);
         
     }];

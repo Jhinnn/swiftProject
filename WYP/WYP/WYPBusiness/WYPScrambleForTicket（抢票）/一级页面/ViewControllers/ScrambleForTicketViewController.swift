@@ -55,7 +55,12 @@ class ScrambleForTicketViewController: BaseViewController {
     }
     private func layoutPageSubviews() {
         ticketTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 157, right: 0))
+            if deviceTypeIPhoneX() {
+                make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 180, right: 0))
+            }else {
+                make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 157, right: 0))
+            }
+            
         }
     }
     

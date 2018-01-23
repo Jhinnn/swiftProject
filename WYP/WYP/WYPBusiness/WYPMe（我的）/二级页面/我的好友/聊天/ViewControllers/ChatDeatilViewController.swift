@@ -169,7 +169,6 @@ class ChatDeatilViewController: RCConversationViewController {
                     community.targetId = userId
                     community.name = self.userData?.name ?? ""
                    
-                 
                     self.navigationController?.pushViewController(community, animated: true)
                 }
             } else {

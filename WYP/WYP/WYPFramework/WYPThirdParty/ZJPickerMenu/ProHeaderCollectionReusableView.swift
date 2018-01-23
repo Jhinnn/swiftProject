@@ -15,7 +15,8 @@ class ProHeaderCollectionReusableView: UICollectionReusableView
             var label = UILabel()
             label.textAlignment = .left
             label.text = ""
-            label.font = UIFont.systemFont(ofSize: 17)
+            label.textColor = UIColor.gray
+            label.font = UIFont.systemFont(ofSize: 15)
             return label
     }()
     override init(frame: CGRect)
@@ -26,7 +27,7 @@ class ProHeaderCollectionReusableView: UICollectionReusableView
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        self.label.frame = CGRect(x: 10, y: 0, width: self.bounds.width -  10 , height: self.bounds.height)
+        self.label.frame = CGRect(x: 14, y: 0, width: self.bounds.width - 20 , height: self.bounds.height)
     }
     required init?(coder aDecoder: NSCoder)
     {

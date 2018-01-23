@@ -19,6 +19,9 @@ class ShowroomNaviViewController: BaseViewController {
     var currentIndex: NSInteger? {
         willSet {
             navTabBar.currentIndex = newValue!
+            
+            self.loadMenuData(index: newValue!)  //加载菜单
+            
             if subViewControllers != nil && flag == 0 {
                 let viewController = subViewControllers?[newValue!];
                 viewController?.view.frame = CGRect(x: CGFloat(newValue!) * kScreen_width, y: 0, width: kScreen_width, height: mainView.frame.size.height)
@@ -26,6 +29,8 @@ class ShowroomNaviViewController: BaseViewController {
                 self.addChildViewController(viewController!)
                 
                 mainView.setContentOffset(CGPoint(x: CGFloat(newValue!) * kScreen_width, y: 0), animated: false)
+                
+                
                 
             }
         }
@@ -35,6 +40,8 @@ class ShowroomNaviViewController: BaseViewController {
     
     // 分页导航上的title数组
     var arr: [[String]]?
+    
+    var showMenuData: [ExhibitionModel]?
     
     // 热搜
     var hotSearchArray: [String]?
@@ -64,6 +71,18 @@ class ShowroomNaviViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         roomsCurrentIndex = currentIndex!
+    }
+    
+    // MARK: - 加载菜单数据
+    func loadMenuData(index: NSInteger) {
+        
+//        NetRequest.getExhibitionHallMeunNetRequest(type: "\(index)") { (success, info, result) in
+//            if success {
+//                let data = try! JSONSerialization.data(withJSONObject: result!, options: JSONSerialization.WritingOptions.prettyPrinted)
+//                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+//                self.showMenuData = [ExhibitionModel].deserialize(from: jsonString) as? [ExhibitionModel]
+//            }
+//        }
     }
     
     // MARK: - Private Methods
@@ -164,10 +183,10 @@ class ShowroomNaviViewController: BaseViewController {
 //        popupMenu?.dismissOnSelected = true
 //        popupMenu?.type = .default
         
-        let arr = ["颜色":["红色","蓝色","白色","黄色","藏青色"],
-               "尺寸":["43","40","38","39","41","50","51","45"],
-               "风格":["拉风性","成熟稳重","杀马特","非主流形"]]
-        
+        let arr = ["颜色":["红色","蓝色","白色","黄色","藏青色","红色","蓝色","白色","黄色","藏青色"],
+               "尺寸":["43","40","38","39","41","50","51","45","43","40","38","39","41","50","51","45"],
+               "风格":["拉风性","成熟稳重","杀马特","非主流形","拉风性","成熟稳重","杀马特","非主流形"]]
+
         self.picker.show()
         self.picker.arr = arr
     }

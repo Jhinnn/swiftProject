@@ -690,3 +690,15 @@ public var kApi_getTopicCommtentDetail: String {
 public var kApi_delCommtentCommentDetail: String {
     return kApi_baseUrl(path: "api/del_re_gambit")
 }
+
+
+
+//展厅菜单数据
+public var kApi_getExhibitionHallMeunData: String {
+    return kApi_baseUrl(path: "api/get_category")
+}
+
+//媒体库
+public var kApi_getMediaList: String {
+    return kApi_baseUrl(path: "api/media_list")
+}

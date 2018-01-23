@@ -442,9 +442,9 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
             
             self.collectionNews(sender: sender)
             
-            
         }else if sender.tag == 102 {
-            self.navigationController?.pushViewController(PublicGroupViewController(), animated: true)
+            
+            self.navigationController?.pushViewController(PublicGroupOneViewController(), animated: true)
         }
     }
     

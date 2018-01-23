@@ -10,6 +10,8 @@ import UIKit
 
 class AttentionTopicViewController: BaseViewController {
     
+    var type: NSInteger = 0
+    
     // 数据源
     var newsData = [InfoModel]()
     
@@ -37,7 +39,14 @@ class AttentionTopicViewController: BaseViewController {
     }
     private func layoutPageSubviews() {
         newsTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
+            
+            if self.type == 1 { //我的话题复用
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            }else {  //我的关注话题
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 64, 0))
+            }
+            
+            
         }
     }
     
@@ -51,16 +60,29 @@ class AttentionTopicViewController: BaseViewController {
         NetRequest.attentionTopicNetRequest(page: "\(pageNumber)", openId: AppInfo.shared.user?.token ?? "") { (success, info, result) in
             if success {
                 
+                var newsArray = [InfoModel]()
+                
                 let array = result!.value(forKey: "data")
+            
                 let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
                 let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                
+            
                 if requestType == .update {
                     self.newsData = ([InfoModel].deserialize(from: jsonString) as? [InfoModel])!
                 } else {
                     // 把新数据添加进去
-                    let newsArray = [InfoModel].deserialize(from: jsonString) as? [InfoModel]
-                    self.newsData = self.newsData + newsArray!
+                    newsArray = ([InfoModel].deserialize(from: jsonString) as? [InfoModel])!
+                    if newsArray.count == 0 {
+                        self.newsTableView.mj_footer.endRefreshing()
+                        return
+                    }else {
+                        self.newsData = self.newsData + newsArray
+                    }
+                    
                 }
+                
+                
                 
                 // 先移除再添加
                 self.noDataImageView.removeFromSuperview()
@@ -95,7 +117,7 @@ class AttentionTopicViewController: BaseViewController {
     
     // MARK: - setter and getter
     lazy var newsTableView: UITableView = {
-        let newsTableView = UITableView(frame: .zero, style: .plain)
+        let newsTableView = UITableView()
         newsTableView.delegate = self
         newsTableView.dataSource = self
         newsTableView.tableFooterView = UIView()
@@ -142,76 +164,30 @@ extension AttentionTopicViewController: UITableViewDelegate,UITableViewDataSourc
         return newsData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch newsData[indexPath.section].showType ?? 6 {
-        case 0: // 视频
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                cell.infoTitleLabel.attributedText = attributeString
-//            }
-            return cell
-        case 1: //只有文字
+        
+        
+        if newsData[indexPath.row].showType == 1 {  //文字
             let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
-//                cell.travelTitleLabel.attributedText = attributeString
-//            }
-//            return cell
-        case 2: //上图下文
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                cell.infoTitleLabel.attributedText = attributeString
-//            }
+            cell.infoModel = newsData[indexPath.row]
             return cell
-        case 3: //左文右图
+        }else if newsData[indexPath.row].showType == 2{  //大图
+            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+            cell.infoModel = newsData[indexPath.row]
+            return cell
+        }else if newsData[indexPath.row].showType == 3{ //左右
             let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-//                cell.infoLabel.attributedText = attributeString
-//            }
+            cell.infoModel = newsData[indexPath.row]
             return cell
-        case 4: //三张图
+        }else if newsData[indexPath.row].showType == 4{ //三图
             let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-//                cell.infoLabel.attributedText = attributeString
-//            }
+            cell.infoModel = newsData[indexPath.row]
             return cell
-        case 5: // 大图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            cell.infoLabel.isHidden = true
-            cell.playImageView.isHidden = true
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-//            if flag == 2 {
-//                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                cell.infoTitleLabel.attributedText = attributeString
-//            }
-            return cell
-        default:
-            return UITableViewCell()
         }
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if newsData.count > 0 {
-            print(newsData[indexPath.row].showType ?? "")
-            switch newsData[indexPath.row].showType ?? 0 {
-            case 0:
-                return 280 * width_height_ratio
+    
+        switch newsData[indexPath.row].showType ?? 0 {
             case 1:
                 return 87.5 * width_height_ratio
             case 2:
@@ -220,13 +196,11 @@ extension AttentionTopicViewController: UITableViewDelegate,UITableViewDataSourc
                 return 109 * width_height_ratio
             case 4:
                 return 160 * width_height_ratio
-            case 5:
-                return 280 * width_height_ratio
             default:
                 return 0
-            }
         }
-        return 0
+        
+       
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
@@ -240,9 +214,9 @@ extension AttentionTopicViewController: UITableViewDelegate,UITableViewDataSourc
             
         } else if newsData[indexPath.row].status == "1" {
             let newsDetail = TalkNewsDetailsViewController()
-            newsDetail.newsTitle = newsData[indexPath.section].infoTitle
-            newsDetail.newsId = newsData[indexPath.section].newsId
-            newsDetail.commentNumber = newsData[indexPath.section].infoComment
+            newsDetail.newsTitle = newsData[indexPath.row].infoTitle
+            newsDetail.newsId = newsData[indexPath.row].newsId
+            newsDetail.commentNumber = newsData[indexPath.row].infoComment
             navigationController?.pushViewController(newsDetail, animated: true)
         }
         

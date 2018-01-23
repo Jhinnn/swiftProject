@@ -62,14 +62,11 @@ class PhotosViewController: UIViewController {
         pictureBrowserView?.orientation = UIDevice.current.orientation
         pictureBrowserView?.viewController = self
         pictureBrowserView?.shareButton.isHidden = true
-//        pictureBrowserView?.topBgView.isHidden = true
-//        pictureBrowserView?.type = 1
         pictureBrowserView?.startIndex = currentIndex ?? 0 + 1
         pictureBrowserView?.show(in: window)
     
         window.addSubview(indexLabel)
         indexLabel.snp.makeConstraints { (make) in
-//            make.centerX.equalTo(window)
             if deviceTypeIPhoneX() {
                 make.bottom.equalTo(window).offset(-37)
             }else {
@@ -152,13 +149,13 @@ extension PhotosViewController: WBImageBrowserViewDelegate {
     }
     
     func getContentWithItem(_ item: Int) {
+        
         indexLabel.text = "\(item+1)/\(imageArray?.count ?? 0)"
-        print(item)
+     
     }
     func backButtonToClick() {
         pictureBrowserView?.removeFromSuperview()
         indexLabel.removeFromSuperview()
-            
         self.dismiss(animated: false, completion: nil)
     }
     func shareButtonToClick() {

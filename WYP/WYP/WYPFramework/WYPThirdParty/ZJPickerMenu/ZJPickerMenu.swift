@@ -13,74 +13,76 @@ protocol ZJPickerMenuDelegate:NSObjectProtocol
 }
 
 
-class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
-{
+class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     var numLabel:UILabel?
     var pro = [String:String]()
     var delegate : ZJPickerMenuDelegate?
+
     
     private var padding_top:CGFloat = 100
     
     var arr : [String:[String]]?
     
-    lazy var backView: UIView =
-    {
+    lazy var backView: UIView = {
         var back = UIView.init(frame: UIScreen.main.bounds)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(miss(_ :)))
+//        back.addGestureRecognizer(tap)
         back.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
         return back
-        
     }()
-    lazy var headerView: UIView =
-    {
-        var header = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 120))
-        header.addSubview(self.exitButton)
-        header.addSubview(self.goodIm)
-        header.addSubview(self.lineView)
+    
+    lazy var hiddenView: UIView = {
+        var back = UIView.init(frame: CGRect(x: 0, y: 0, width: 100, height: UIScreen.main.bounds.height))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(miss(_ :)))
+        back.addGestureRecognizer(tap)
+        back.backgroundColor = UIColor.clear
+        return back
+    }()
+    
+    
+    
+    lazy var headerView: UIView = {
+        var header = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80))
+        header.backgroundColor = UIColor.menuColor
+        header.addSubview(self.titleLabel)
         return header
     }()
-    lazy var pickerView: UIView =
-    {
-        var picker = UIView.init(frame: CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height))
+    
+    lazy var titleLabel: UILabel = {
+        var titleLabel = UILabel.init(frame: CGRect(x: 14, y: 40, width: kScreen_width - 100, height: 30))
+        titleLabel.backgroundColor = UIColor.clear
+        titleLabel.textColor = UIColor.gray
+        titleLabel.text = "筛选"
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        return titleLabel
+    }()
+
+    lazy var commitButton: UIButton = {
+        var button = UIButton.init(frame: CGRect(x: 0, y:  UIScreen.main.bounds.height - 50 - 34, width: UIScreen.main.bounds.width - 100, height: 50))
+        button.setTitle("确定", for: UIControlState.normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.themeColor
+        button.addTarget(self, action: #selector(sureCommit), for: UIControlEvents.touchUpInside)
+        return button
+    }()
+    
+    lazy var pickerView: UIView = {
+        var picker = UIView.init(frame: CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         picker.backgroundColor = UIColor.white
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(misss(_ :)))
+//        picker.addGestureRecognizer(tap)
         picker.addSubview(self.headerView)
         picker.addSubview(self.cv)
         picker.addSubview(self.commitButton)
         return picker
     }()
-    lazy var exitButton: UIButton = {
-        var button = UIButton.init(frame: CGRect(x: UIScreen.main.bounds.width - 100, y: 0, width: 100, height: 100))
-        button.imageEdgeInsets = UIEdgeInsetsMake(5, 60, 60, 5)
-        button.setImage(UIImage.init(named: "退出"), for: UIControlState.normal)
-        button.addTarget(self, action: #selector(miss), for: UIControlEvents.touchUpInside)
-        return button
-    }()
-    lazy var goodIm: UIImageView = {
-        var im = UIImageView.init(frame: CGRect(x: 10, y: 10, width: 100, height: 100))
-//        im.backgroundColor = UIColor.red
-        im.image = UIImage.init(named: "1")
-        return im
-    }()
-    lazy var lineView: UIView = {
-        var line = UIView.init(frame: CGRect(x: 0, y: 120, width: UIScreen.main.bounds.width, height: 1))
-        line.backgroundColor = UIColor.init(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
-        return line
-    }()
     
-    lazy var commitButton: UIButton =
-    {
-        var button = UIButton.init(frame: CGRect(x: 0, y:  UIScreen.main.bounds.height - 60, width: UIScreen.main.bounds.width, height: 60))
-        button.setTitle("确定", for: UIControlState.normal)
-        button.setBackgroundImage(UIImage.init(named: "selected"), for: UIControlState.normal)
-        button.addTarget(self, action: #selector(sureCommit), for: UIControlEvents.touchUpInside)
-        return button
-    }()
     lazy var cv: UICollectionView =
     {
         let layout = UICollectionViewFlowLayout()
-        var cv = UICollectionView.init(frame: CGRect(x: 0, y: 130, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 130 - 60), collectionViewLayout: layout)
+        var cv = UICollectionView.init(frame: CGRect(x: 0, y:90, width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height - 90 - 50 - 34), collectionViewLayout: layout)
         cv.register(ProCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         cv.register(ProHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader")
-        cv.register(ProFoorterCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "sectionfoorter")
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = UIColor.white
@@ -97,49 +99,30 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let result =  Array((arr?.values)!)
-        let str = result[indexPath.section][indexPath.row]
-        print(str)
-        let rect = (str as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:nil, context: nil)
-        return CGSize(width: rect.width + 20, height: 30)
+//        let result =  Array((arr?.values)!)
+//        let str = result[indexPath.section][indexPath.row]
+//        let rect = (str as NSString).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 38), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes:nil, context: nil)
+//        return CGSize(width: rect.width + 58, height: 38)
+        return CGSize(width: 80, height: 38)
     }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
-    {
-        if(kind == UICollectionElementKindSectionHeader)
-        {
-            let v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as! ProHeaderCollectionReusableView
-            let res = Array((arr?.keys)!)
-            v.label.text = res[indexPath.section]
-            return v
-        }
-        else
-        {
-            let v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "sectionfoorter", for: indexPath) as! ProFoorterCollectionReusableView
-            numLabel = v.numTf
-            return v
-        }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "sectionHeader", for: indexPath) as! ProHeaderCollectionReusableView
+        let res = Array((arr?.keys)!)
+        v.label.text = res[indexPath.section]
+        return v
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 50)
+        return CGSize(width: UIScreen.main.bounds.width, height: 40)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize
-    {
-        if section == (arr?.count)! - 1
-        {
-            return CGSize(width: UIScreen.main.bounds.width, height: 50)
-        }
-        return CGSize(width: UIScreen.main.bounds.width, height: 0)
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat { //行间距
+        return 6
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {  //列间距
+        return 4
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(8, 8, 8, 8)
+        return UIEdgeInsetsMake(8, 15, 8, 8)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
@@ -158,17 +141,18 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
             let index = NSIndexPath.init(row: i, section: indexPath.section)
             if i != indexPath.row
             {
-                let cell1 = collectionView.cellForItem(at: index as IndexPath) as! ProCollectionViewCell
-                cell1.button.isSelected = false
+                let cell1 = collectionView.cellForItem(at: index as IndexPath) as? ProCollectionViewCell
+                cell1?.button.isSelected = false
             }
             else
             {
                 let result =  Array((arr?.values)!)
-                 let res =  Array((arr?.keys)!)
-                let cell1 = collectionView.cellForItem(at: index as IndexPath) as! ProCollectionViewCell
-                cell1.button.isSelected = true
+                let res =  Array((arr?.keys)!)
+                let cell1 = collectionView.cellForItem(at: index as IndexPath) as? ProCollectionViewCell
+                cell1?.button.isSelected = true
                 pro[res[indexPath.section]] = result[indexPath.section][indexPath.row]
             }
+       
         }
         
         
@@ -179,11 +163,13 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
         super.init(frame: frame)
         self.backView.addSubview(self.pickerView)
         self.pickerView.addSubview(self.cv)
+        self.backView.addSubview(self.hiddenView)
     }
     
     func show()
     {
-        self.frame = CGRect(x:UIScreen.main.bounds.width, y:0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.frame = CGRect(x:0, y:0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        self.backView.frame = CGRect(x:0, y:0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         let guidePageWindow = UIApplication.shared.keyWindow
         guidePageWindow?.addSubview(self.backView)
         UIView.animate(withDuration: 0.1)
@@ -192,19 +178,20 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
         }
     }
     
-    @objc func miss()
+    @objc func miss(_ tap: UITapGestureRecognizer)
     {
-        self.frame = CGRect(x: UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        let touc = ((touches.first?.view)!)
-        if (touc.frame.height == UIScreen.main.bounds.height)
-        {
-             miss()
+
+        UIView.animate(withDuration: 0.1) {
+            self.backView.transform = (self.backView.transform.translatedBy(x: kScreen_width, y: 0))
         }
     }
+    
+//    @objc func misss(_ tap: UITapGestureRecognizer)
+//    {
+//
+//    }
+    
+
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
@@ -213,9 +200,12 @@ class ZJPickerMenu: UIView,UICollectionViewDelegate,UICollectionViewDataSource,U
     //提交
     @objc func sureCommit()
     {
-        print("数量:\((numLabel?.text)!)")
-        print(pro)
-        self.delegate?.getMsg(num: Int((numLabel?.text)!)!, pro: pro)
+//        print("数量:\((numLabel?.text)!)")
+//        print(pro)
+        UIView.animate(withDuration: 0.1) {
+            self.backView.transform = (self.backView.transform.translatedBy(x: kScreen_width, y: 0))
+        }
+//        self.delegate?.getMsg(num: Int((numLabel?.text)!)!, pro: pro)
     }
     
 }

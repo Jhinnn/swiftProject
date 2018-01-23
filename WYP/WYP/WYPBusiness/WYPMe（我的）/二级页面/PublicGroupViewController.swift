@@ -102,7 +102,7 @@ class PublicGroupViewController: BaseViewController{
     
     lazy var textView: UITextView = {
         let textView = UITextView(frame: CGRect(x: 15, y: 70, width: kScreen_width - 30, height: 40))
-        textView.placeholder = "添加标题"
+        textView.placeholder = "请输入您的话题标题"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
         textView.font = UIFont.systemFont(ofSize: 16)
         return textView
@@ -125,7 +125,7 @@ class PublicGroupViewController: BaseViewController{
     
     lazy var titleView: UITextView = {
         let textView = UITextView(frame: CGRect(x: 15, y: 160, width: kScreen_width - 30, height: 100))
-        textView.placeholder = "添加描述"
+        textView.placeholder = "请输入您的话题描述"
         textView.placeholderLabel.font = UIFont.systemFont(ofSize: 16)
         textView.font = UIFont.systemFont(ofSize: 16)
         return textView

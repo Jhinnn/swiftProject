@@ -16,11 +16,12 @@ class ProCollectionViewCell: UICollectionViewCell
             button.isUserInteractionEnabled = false
         button.setBackgroundImage(UIImage.init(named: "normal"), for: UIControlState.normal)
         button.setBackgroundImage(UIImage.init(named: "selected"), for: UIControlState.selected)
+//        button.backgroundColor = UIColor.menuColor
         button.setTitleColor(UIColor.black, for: UIControlState.normal)
         button.setTitleColor(UIColor.white, for: UIControlState.selected)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         button.layer.masksToBounds = true
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 4
         return button
     }()
     override init(frame: CGRect)
