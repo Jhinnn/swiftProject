@@ -19,29 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WYP/WYP/WYPFramework/WYPThirdParty/CommunityView/Views/AlbumViewController.m"
-            timestampString = "538401995.11682"
+            filePath = "WYP/WYP/WYPBusiness/WYPShowroom&#xff08;&#x5c55;&#x5385;&#xff09;/&#x4e09;&#x7ea7;&#x9875;&#x9762;/ViewControllers/&#x7acb;&#x5373;&#x62a2;&#x7968;/ViewControllers/LotteryDetailsViewController.swift"
+            timestampString = "538646859.369676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WYP/WYP/WYPFramework/WYPThirdParty/CommunityView/Views/AlbumViewController.m"
-            timestampString = "538401995.1169209"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-scrollViewDidEndDecelerating:"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "projectCertificate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

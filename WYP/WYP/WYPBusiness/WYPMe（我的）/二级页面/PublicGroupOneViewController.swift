@@ -28,8 +28,8 @@ class PublicGroupOneViewController: BaseViewController {
     }
     
     func setupView() {
-        view.addSubview(titleLabel)
-        view.addSubview(lineLabel)
+//        view.addSubview(titleLabel)
+//        view.addSubview(lineLabel)
         
         let buttonWidth = (kScreen_width - 26 * 2 - 20 * 2) / 3;
         let buttonHeight = buttonWidth / 2 - 8
@@ -41,9 +41,9 @@ class PublicGroupOneViewController: BaseViewController {
             
         
             if i <= 2 {
-                 button.frame = CGRect(x: 20 + CGFloat(i) * (buttonWidth + 26), y: lineLabel.bottom + 30 , width: buttonWidth, height: buttonHeight)
+                 button.frame = CGRect(x: 20 + CGFloat(i) * (buttonWidth + 26), y: 30 , width: buttonWidth, height: buttonHeight)
             }else {
-                 button.frame = CGRect(x: 20 + CGFloat(i - 3) * (buttonWidth + 26), y: lineLabel.bottom + 30 + buttonHeight + 24 , width: buttonWidth, height: buttonHeight)
+                 button.frame = CGRect(x: 20 + CGFloat(i - 3) * (buttonWidth + 26), y: 30 + buttonHeight + 24 , width: buttonWidth, height: buttonHeight)
             }
            
 //            if i == 0{
@@ -111,18 +111,18 @@ class PublicGroupOneViewController: BaseViewController {
 
     
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel.init(frame: CGRect(x: 18, y: 40, width: 100, height: 28))
-        label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "选择发布类型"
-        return label
-    }()
-    
-    lazy var lineLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 18, y: 80, width: kScreen_width - 10, height: 1))
-        label.backgroundColor = UIColor.init(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: 1)
-        return label
-    }()
+//    lazy var titleLabel: UILabel = {
+//        let label = UILabel.init(frame: CGRect(x: 18, y: 40, width: 100, height: 28))
+//        label.textColor = UIColor.gray
+//        label.font = UIFont.systemFont(ofSize: 16)
+//        label.text = "选择发布类型"
+//        return label
+//    }()
+//
+//    lazy var lineLabel: UILabel = {
+//        let label = UILabel(frame: CGRect(x: 18, y: 80, width: kScreen_width - 10, height: 1))
+//        label.backgroundColor = UIColor.init(red: 234/255.0, green: 234/255.0, blue: 234/255.0, alpha: 1)
+//        return label
+//    }()
 
 }

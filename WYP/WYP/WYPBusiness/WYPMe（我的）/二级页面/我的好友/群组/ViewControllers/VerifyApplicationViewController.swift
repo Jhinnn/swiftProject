@@ -87,13 +87,13 @@ class VerifyApplicationViewController: BaseViewController {
                     let groupList = GroupMemberListViewController()
                     groupList.isAdd = true
                     SVProgressHUD.showSuccess(withStatus: "申请信息已提交，等待对方通过审核！")
-                    let viewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 1]
-                    self.navigationController?.popToViewController(viewController!, animated: true)
-                   
+//                    let viewController = self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 1]
+//                    self.navigationController?.popToViewController(viewController!, animated: true)
+                    self.navigationController?.popViewController(animated: true)
                 
                 } else {
                     SVProgressHUD.showError(withStatus: info!)
-                     print(self.applyMobile)
+                     
                 }
             }
         }

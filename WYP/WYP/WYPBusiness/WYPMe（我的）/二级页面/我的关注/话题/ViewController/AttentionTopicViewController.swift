@@ -73,17 +73,16 @@ class AttentionTopicViewController: BaseViewController {
                 } else {
                     // 把新数据添加进去
                     newsArray = ([InfoModel].deserialize(from: jsonString) as? [InfoModel])!
+                    
                     if newsArray.count == 0 {
+                        
                         self.newsTableView.mj_footer.endRefreshing()
+                        self.newsTableView.mj_header.endRefreshing()
                         return
                     }else {
                         self.newsData = self.newsData + newsArray
                     }
-                    
                 }
-                
-                
-                
                 // 先移除再添加
                 self.noDataImageView.removeFromSuperview()
                 self.noDataLabel.removeFromSuperview()
@@ -117,7 +116,7 @@ class AttentionTopicViewController: BaseViewController {
     
     // MARK: - setter and getter
     lazy var newsTableView: UITableView = {
-        let newsTableView = UITableView()
+        let newsTableView = WYPTableView()
         newsTableView.delegate = self
         newsTableView.dataSource = self
         newsTableView.tableFooterView = UIView()
@@ -143,7 +142,7 @@ class AttentionTopicViewController: BaseViewController {
     // 没有数据时的提示文字
     lazy var noDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "暂无关注的资讯"
+        label.text = "暂无关注的话题"
         label.font = UIFont.systemFont(ofSize: 11)
         label.textColor = UIColor.init(hexColor: "a1a1a1")
         label.textAlignment = .center

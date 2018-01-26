@@ -53,7 +53,7 @@ class TopicAnswerViewController: BaseViewController {
     
     // 设置tableView
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = WYPTableView()
         tableView.backgroundColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
@@ -254,38 +254,38 @@ extension TopicAnswerViewController: UITableViewDataSource, UITableViewDelegate 
         newsDetail.newsId = newsData[indexPath.row].topicId
         navigationController?.pushViewController(newsDetail, animated: true)
     }
-    // 修改删除按钮的文字
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "删除"
-    }
-    // 设置侧滑删除
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
-    }
-    // 删除cell
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete{
-            let topicId = self.newsData[indexPath.row].topicId ?? ""
-            
-            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
-                if success {
-                    // 删除成功
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    self.newsData.remove(at: indexPath.row)
-                    tableView.reloadData()
-                    // 删除成功
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    
-                } else {
-                    // 删除失败
-                    SVProgressHUD.showError(withStatus: info)
-                }
-            })
-            //2.刷新单元格
-            tableView.reloadData()
-        }
-    }
+//    // 修改删除按钮的文字
+//    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+//        return "删除"
+//    }
+//    // 设置侧滑删除
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return .delete
+//    }
+//    // 删除cell
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete{
+//            let topicId = self.newsData[indexPath.row].topicId ?? ""
+//
+//            NetRequest.deleteMyTopicNetRequest(token: AppInfo.shared.user?.token ?? "", topicId: topicId, complete: { (success, info) in
+//                if success {
+//                    // 删除成功
+//                    SVProgressHUD.showSuccess(withStatus: info)
+//                    self.newsData.remove(at: indexPath.row)
+//                    tableView.reloadData()
+//                    // 删除成功
+//                    SVProgressHUD.showSuccess(withStatus: info)
+//
+//                } else {
+//                    // 删除失败
+//                    SVProgressHUD.showError(withStatus: info)
+//                }
+//            })
+//            //2.刷新单元格
+//            tableView.reloadData()
+//        }
+//    }
 }
 
 extension TopicAnswerViewController: TopicsCellDelegate {

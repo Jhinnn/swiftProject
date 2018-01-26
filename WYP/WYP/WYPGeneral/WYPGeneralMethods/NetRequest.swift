@@ -812,13 +812,43 @@ class NetRequest {
     
     // MARK: - 展厅相关
     // 展厅列表接口
-    class func showRoomNetRequest(page: String, type_id: String, order: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func showRoomNetRequest(page: String,id: String, type_id: String, order: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "page": page,
                                       "type_id": type_id,
+                                      "id" : id,
                                       "order": order]
         Alamofire.request(kApi_showRoom, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: - 展厅相关
+    // 展厅筛选列表接口
+    class func showFilterRoomNetRequest(page: String, id: String, order: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "page": page,
+                                      "id": id,
+                                      "order": order]
+        Alamofire.request(kApi_showFilterRoom, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
@@ -1226,12 +1256,13 @@ class NetRequest {
                                       "method": "POST",
                                       "type": type,
                                       "class_pid": classPid,
-                                      "class_id": classId,
+//                                      "class_id": classId,
                                       "longitude": longitude,
                                       "latitude": latitude,
                                       "keywords": keywords,
                                       "page": page,
-                                      "city_id": cityId]
+//                                      "city_id": cityId
+        ]
         Alamofire.request(kApi_ticketList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -1535,7 +1566,8 @@ class NetRequest {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "GET",
                                       "open_id": openId,
-                                      "follow_who": peopleId]
+                                      "follow_who": peopleId,
+                                      "type" : "1"]
         Alamofire.request(kApi_peopleCancelAttention, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -2081,7 +2113,7 @@ class NetRequest {
                                       "method": "POST",
                                       "open_id": openId,
                                       "mobile": mobile,
-                                      "alias": info]
+                                      "message": info]
         Alamofire.request(kApi_verifyApplication, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:

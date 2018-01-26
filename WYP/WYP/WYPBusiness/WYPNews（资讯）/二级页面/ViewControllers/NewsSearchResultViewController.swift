@@ -124,8 +124,8 @@ class NewsSearchResultViewController: BaseViewController {
             viewArray.append(news)
         }
         
-        let topic = NewsTopicViewController()
-        topic.flag = 2
+        let topic = SearchHomeTopicsViewController()
+//        topic.flag = 2
         topic.keyword = searchView.searchTextField.text
         viewArray.append(topic)
         subViewControllers = viewArray
@@ -173,9 +173,10 @@ class NewsSearchResultViewController: BaseViewController {
             viewController.keyword = searchView.searchTextField.text
             viewController.loadNewsData(requestType: .update)
         } else if index == 12 {
-            let viewController = subViewControllers?[index] as! NewsTopicViewController
+            let viewController = subViewControllers?[index] as! SearchHomeTopicsViewController
             viewController.keyword = searchView.searchTextField.text
-            viewController.loadNewsData(requestType: .update)
+            viewController.loadSearchResult(requestType: .update)
+            
         } else {
             let viewController = subViewControllers?[index] as! NewsViewController
             viewController.keyword = searchView.searchTextField.text
@@ -257,9 +258,9 @@ extension NewsSearchResultViewController: UITextFieldDelegate {
             viewController.keyword = searchView.searchTextField.text
             viewController.loadNewsData(requestType: .update)
         } else if index == 12 {
-            let viewController = subViewControllers?[index] as! NewsTopicViewController
+            let viewController = subViewControllers?[index] as! SearchHomeTopicsViewController
             viewController.keyword = searchView.searchTextField.text
-            viewController.loadNewsData(requestType: .update)
+            viewController.loadSearchResult(requestType: .update)
         } else {
             let viewController = subViewControllers?[index] as! NewsViewController
             viewController.keyword = searchView.searchTextField.text

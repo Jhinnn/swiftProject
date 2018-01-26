@@ -329,7 +329,8 @@ extension ScrambleForTicketNaviViewController: UIAlertViewDelegate {
             return
         }
         let textField = alertView.textField(at: 0)
-        print(textField?.text ?? "哈哈哈")
+        
+        
         
         NetRequest.exchangeNetRequest(token: AppInfo.shared.user?.token ?? "", code: textField?.text ?? "") { (success, info, dic) in
             if success {

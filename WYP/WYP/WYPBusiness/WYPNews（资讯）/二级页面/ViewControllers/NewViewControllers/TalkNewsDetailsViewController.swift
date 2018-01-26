@@ -498,6 +498,7 @@ extension TalkNewsDetailsViewController: TalkShowRoomCommentCellDelegate {
     func commenPushCenterButtonDidSelected(comments: CommentModel) {
         
         let personInfo = PersonalInformationViewController()
+        personInfo.isFushFormTopic = true
         personInfo.targetId = comments.uid ?? ""
         personInfo.name = comments.nickName ?? ""
         self.navigationController?.pushViewController(personInfo, animated: true)

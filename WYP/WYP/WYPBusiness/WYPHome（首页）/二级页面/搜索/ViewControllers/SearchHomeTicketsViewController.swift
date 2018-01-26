@@ -121,7 +121,7 @@ class SearchHomeTicketsViewController: BaseViewController {
     
     // MARK: - stter and getter
     lazy var ticketTableView: UITableView = {
-        let ticketTableView = UITableView(frame: CGRect.zero, style: .plain)
+        let ticketTableView = WYPTableView(frame: CGRect.zero, style: .plain)
         ticketTableView.rowHeight = 165
         ticketTableView.delegate = self
         ticketTableView.dataSource = self

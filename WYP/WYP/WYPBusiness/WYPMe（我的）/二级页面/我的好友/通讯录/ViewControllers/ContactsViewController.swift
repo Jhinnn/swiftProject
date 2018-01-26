@@ -23,7 +23,14 @@ class ContactsViewController: BaseViewController {
         
         viewConfig()
         layoutPageSubViews()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadData()
+        
     }
     
     

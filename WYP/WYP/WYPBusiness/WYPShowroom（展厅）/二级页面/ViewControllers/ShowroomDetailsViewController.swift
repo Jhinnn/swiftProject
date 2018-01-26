@@ -610,9 +610,15 @@ class ShowroomDetailsViewController: UITableViewController {
             groupList.roomId = roomId ?? ""
             navigationController?.pushViewController(groupList, animated: true)
         case 4:
-            let member = MemberViewController()
-            member.roomId = roomId ?? ""
-            navigationController?.pushViewController(member, animated: true)
+            
+            if showRoomDetailData?.member?.count == 0 {
+                return
+            }else {
+                let member = MemberViewController()
+                member.roomId = roomId ?? ""
+                navigationController?.pushViewController(member, animated: true)
+            }
+           
             break
         case 5:
             let news = ShowNewsListViewController()
@@ -1029,6 +1035,13 @@ class ShowroomDetailsViewController: UITableViewController {
         // FIXME:- 媒体库按钮大小
         if section == 2 && showRoomDetailData != nil {
             
+            // 更多按钮
+            let moreButton = UIButton()
+            moreButton.tag = section
+            moreButton.setImage(UIImage(named: "home_more_button_normal_iPhone"), for: .normal)
+            moreButton.addTarget(self, action: #selector(showMorePhotos), for: .touchUpInside)
+            sectionHeaderView.addSubview(moreButton)
+            
             let photosButton = UIButton()
             photosButton.titleLabel?.textAlignment = .right
             let photosTitle = String.init(format: "图片 %d", showRoomDetailData?.image?.count ?? 0)
@@ -1045,11 +1058,19 @@ class ShowroomDetailsViewController: UITableViewController {
                 photosButton.isEnabled = true
             }
             
-            photosButton.snp.makeConstraints({ (make) in
+            moreButton.snp.makeConstraints { (make) in
                 make.right.equalTo(sectionHeaderView).offset(-13)
+                make.centerY.equalTo(sectionHeaderView)
+                make.size.equalTo(CGSize(width: 25, height: 25))
+            }
+            
+            photosButton.snp.makeConstraints({ (make) in
+                make.right.equalTo(moreButton.snp.left)
                 make.centerY.equalTo(sectionHeaderView)
                 make.height.equalTo(sectionHeaderView)
             })
+            
+            
             
             if !isFree { // 免费展厅没有视频
                 let videosButton = UIButton()

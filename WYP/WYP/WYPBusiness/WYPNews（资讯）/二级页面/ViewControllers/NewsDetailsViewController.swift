@@ -116,7 +116,7 @@ class NewsDetailsViewController: BaseViewController {
         
         let messageObject = UMSocialMessageObject()
         // 分享链接
-        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1", newsId ?? "")
+        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1&phone_type=1", newsId ?? "")
         let shareLink = kApi_baseUrl(path: url)
         // 设置文本
 //        messageObject.text = newsTitle! + shareLink
@@ -555,13 +555,7 @@ extension NewsDetailsViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if WYPContain.stringContainsEmoji(string) {
-            if WYPContain.isNineKeyBoard(string) {
-                return true
-            }
-            SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
-            return false
-        }
+    
         return true
     }
 }
@@ -607,7 +601,6 @@ extension NewsDetailsViewController: ShowRoomCommentCellDelegate {
         if error != nil {
             SVProgressHUD.showError(withStatus: "保存失败！")
             return
-            
         }else {
             SVProgressHUD.showSuccess(withStatus: "保存成功!")
         }

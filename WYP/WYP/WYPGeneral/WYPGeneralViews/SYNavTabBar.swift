@@ -151,7 +151,7 @@ class SYNavTabBar: UIView {
             _currentIndex = newValue
             if items != nil {
                 let button = items[_currentIndex]
-                if button.frame.origin.x + button.frame.size.width + 50 >= kScreen_width {
+                if button.frame.origin.x + button.frame.size.width + 20 >= kScreen_width {
                     var offsetX = button.frame.origin.x + button.frame.size.width - kScreen_width
                     if _currentIndex < itemTitles!.count - 1 {
                         offsetX = offsetX + button.frame.size.width

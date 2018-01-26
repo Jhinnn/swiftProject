@@ -112,7 +112,7 @@ static  NSString *cellID = @"cellID";
     
     
     [cell.bgImageView sd_setImageWithURL:self.browserArray[indexPath.item] placeholderImage:nil completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
+        self.currentImage = image;
     }];
     
     

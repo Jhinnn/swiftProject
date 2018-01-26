@@ -45,8 +45,6 @@ class PrivacyViewController: BaseViewController {
             if success {
                 self.isAllowCommunity = result?.value(forKey: "community") as? String
                 self.isAllowAdd = result?.value(forKey: "friend") as? String
-                
-                
                 self.tableView.reloadData()
             } else {
                 print(info!)

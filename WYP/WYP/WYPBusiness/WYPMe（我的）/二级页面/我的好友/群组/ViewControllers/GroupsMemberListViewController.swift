@@ -111,7 +111,7 @@ class GroupsMemberListViewController: BaseViewController {
         // 分享链接
         let urlString = kApi_baseUrl(path: "mob/Fenxiang/index.html?id=") + self.groupId!
 //        let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
-        let shareLink = URL.init(string: urlString)
+//        let shareLink = URL.init(string: urlString)
         // 设置文本
         //        messageObject.text = newsTitle! + shareLink
         // 分享对象
@@ -231,7 +231,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "groupMemberCell", for: indexPath) as! GroupMemberCollectionViewCell
-        if Int((self.groupDetail?.rank)!) != 1 {
+        if Int((self.groupDetail?.rank)!) != 1 {  // 0未进入 1 群组成员 2.群主  3、管理员
             if indexPath.row == (groupDetail?.groupMember?.count)! {
                 cell.memberImageView.image = UIImage.init(named: "cluster_icon_invite_normal")
                 cell.memberImageView.backgroundColor = UIColor.white
@@ -256,7 +256,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberFooter", for: indexPath) as! GroupsMemberListCollectionReusableView
-            let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
+//            let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
 //            if notification == "0" {
 //                footerView.switchBtn.isOn = false
 //            } else if notification == "1" {
@@ -276,7 +276,7 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
             return headView
         }
         
-        return UICollectionReusableView()
+        
     }
     
     

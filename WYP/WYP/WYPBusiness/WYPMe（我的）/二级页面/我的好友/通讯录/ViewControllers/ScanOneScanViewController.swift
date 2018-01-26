@@ -29,7 +29,7 @@ class ScanOneScanViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     func viewConfig(){
-        navigationItem.title = "二维码/条码"
+        navigationItem.title = "扫描二维码"
         navigationItem.titleView?.backgroundColor = UIColor.black
         navigationItem.titleView?.tintColor = UIColor.white
     }
@@ -128,16 +128,12 @@ extension ScanOneScanViewController:AVCaptureMetadataOutputObjectsDelegate{
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
             if metadataObj.stringValue != nil {
-                
-                
-    
                 let str = metadataObj.stringValue
                 if metadataObj.stringValue.hasPrefix("group") {
                     let vc = GroupsMemberListViewController()
                 
                     let startIndex = str?.index((str?.startIndex)!, offsetBy:8)//获取d的索引
                     let result = str?.substring(from: startIndex!)
-                    
                     vc.groupId = result
                     if zhiXingCount == 0 {
                         navigationController?.pushViewController(vc, animated: true)

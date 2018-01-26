@@ -89,8 +89,8 @@ class TopicReplyTableViewCell: UITableViewCell {
     // 点赞
     lazy var starCountButton: UIButton = {
         let starCountButton = UIButton(type: .custom)
-        starCountButton.setImage(UIImage(named: "common_grayStar_button_normal_iPhone"), for: .normal)
-        starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
+        starCountButton.setImage(UIImage(named: "sq_icon_dz_normal"), for: .normal)
+        starCountButton.setImage(UIImage(named: "sq_icon_dz_select"), for: .selected)
         starCountButton.setTitleColor(UIColor.black, for: .normal)
         starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
         starCountButton.addTarget(self, action: #selector(clickStarButton(sender:)), for: .touchUpInside)
@@ -108,7 +108,7 @@ class TopicReplyTableViewCell: UITableViewCell {
             starCountButton.setTitle(" \(newValue?.topics.zanNumber ?? "0")", for: .normal)
             if newValue?.topics.isStar == "1" {
                 starCountButton.isSelected = true
-                starCountButton.setImage(UIImage(named: "common_zan_button_selected_iPhone"), for: .selected)
+                starCountButton.setImage(UIImage(named: "sq_icon_dz_select"), for: .selected)
             } else {
                 starCountButton.isSelected = false
             }

@@ -51,8 +51,8 @@ class TalkOnePictureTableViewCell: UITableViewCell {
             make.right.equalTo(infoImageView.snp.left).offset(-36.5)
         }
         hotImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(20)
-            make.right.equalTo(contentView).offset(-13)
+            make.top.equalTo(infoImageView.snp.top).offset(2)
+            make.left.equalTo(infoLabel.snp.right).offset(5)
             make.width.equalTo(23.5)
             make.height.equalTo(14)
         }
@@ -108,7 +108,6 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     lazy var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.numberOfLines = 2
-        
         infoLabel.font = UIFont.systemFont(ofSize: 15)
         infoLabel.textColor = UIColor.init(hexColor: "#333333")
         return infoLabel
@@ -218,11 +217,11 @@ class TalkOnePictureTableViewCell: UITableViewCell {
                     make.width.equalTo(0)
                 })
             }
-//            if newValue?.isHot == "0" {
-//                hotImageView.isHidden = true
-//            } else {
-//                hotImageView.isHidden = false
-//            }
+            if newValue?.isHot == "0" {
+                hotImageView.isHidden = true
+            } else {
+                hotImageView.isHidden = false
+            }
         }
         
         

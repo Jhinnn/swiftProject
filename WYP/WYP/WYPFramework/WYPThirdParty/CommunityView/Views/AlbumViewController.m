@@ -129,7 +129,7 @@ static NSString *identifierAlbumCellId = @"identifierAlbumCellId";
     AlbumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierAlbumCellId forIndexPath:indexPath];
     
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:_dataList[indexPath.item]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-//        saveImage = image;
+        saveImage = image;
     }];
     // 手动的调用layoutSubViews
     [cell setNeedsLayout];
@@ -175,7 +175,6 @@ static NSString *identifierAlbumCellId = @"identifierAlbumCellId";
         UIImageWriteToSavedPhotosAlbum(saveImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
     }else {
         [SVProgressHUD showWithStatus:@"等待加载..."];
-        
         [SVProgressHUD dismissWithDelay:0.5];
     }
     

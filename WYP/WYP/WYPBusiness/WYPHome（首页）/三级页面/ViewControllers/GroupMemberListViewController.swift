@@ -28,6 +28,9 @@ class GroupMemberListViewController: BaseViewController {
     // 从消息页面进来 flag = 2
     var flag = 1
     
+    // 记录偏移量
+    var navOffset: CGFloat = 0
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,25 @@ class GroupMemberListViewController: BaseViewController {
         
         loadGroupMember()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 设置导航条透明度
+        DispatchQueue.main.async {
+            self.navBarBgAlpha = self.navOffset
+            if self.navOffset == 0 {
+                self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            }
+        }
+    }
+    // MARK: - scrollView代理方法
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        self.navOffset = scrollView.contentOffset.y / 200
+        self.navBarBgAlpha = self.navOffset
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
 
     // MARK: - private method
     func setTitle() {
@@ -73,7 +95,15 @@ class GroupMemberListViewController: BaseViewController {
     
     func layoutPageSubviews() {
         memberCollectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            if kScreen_height == 812 {
+                make.top.equalTo(view.snp.top).offset(-88)
+            }else{
+                make.top.equalTo(view.snp.top).offset(-64)
+            }
+            
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.bottom.equalTo(view.snp.bottom)
         }
     }
     
@@ -102,6 +132,7 @@ class GroupMemberListViewController: BaseViewController {
         memberCollectionView.dataSource = self
         memberCollectionView.register(GroupMemberCollectionViewCell.self, forCellWithReuseIdentifier: "groupMemberCell")
         memberCollectionView.register(MemberCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "groupMemberFooter")
+        memberCollectionView.register(GroupMemberListHeadCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "groupMemberhead")
         return memberCollectionView
     }()
     
@@ -113,6 +144,75 @@ class GroupMemberListViewController: BaseViewController {
         noMemberLabel.text = "暂无群成员"
         return noMemberLabel
     }()
+    
+    lazy var codeView: UIView = {
+        let blackView = UIView.init(frame: UIScreen.main.bounds)
+        blackView.backgroundColor = UIColor.init(white: 0, alpha: 0.1)
+        blackView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapCodeImageView(sender:))))
+        let whiteView = UIView()
+        whiteView.backgroundColor = UIColor.white
+        whiteView.layer.cornerRadius = 27
+        whiteView.layer.masksToBounds = true
+        blackView.addSubview(whiteView)
+        whiteView.snp.makeConstraints({ (make) in
+            make.size.equalTo(CGSize.init(width: 297, height: 322))
+            make.center.equalTo(blackView.snp.center)
+        })
+        let headimageView = UIImageView()
+        headimageView.layer.cornerRadius = 23.5
+        headimageView.layer.masksToBounds = true
+        headimageView.sd_setImage(with: URL.init(string: (self.groupDetail?.group_avatar)!))
+        whiteView.addSubview(headimageView)
+        headimageView.snp.makeConstraints({ (make) in
+            make.top.equalTo(19)
+            make.left.equalTo(24)
+            make.size.equalTo(47)
+        })
+        let groupName = UILabel()
+        groupName.text = self.title
+        groupName.font = UIFont.systemFont(ofSize: 15)
+        groupName.textColor = UIColor.init(hexColor: "333333")
+        groupName.lineBreakMode = .byTruncatingMiddle
+        whiteView.addSubview(groupName)
+        groupName.snp.makeConstraints({ (make) in
+            make.left.equalTo(headimageView.snp.right).offset(16)
+            make.top.equalTo(27)
+            make.right.equalTo(24)
+        })
+        let groupNum = UILabel()
+        groupNum.text = self.groupId
+        groupNum.textColor = UIColor.init(hexColor: "333333")
+        groupNum.alpha = 0.7
+        groupNum.font = UIFont.systemFont(ofSize: 12)
+        whiteView.addSubview(groupNum)
+        groupNum.snp.makeConstraints({ (make) in
+            make.left.equalTo(groupName)
+            make.top.equalTo(groupName.snp.bottom).offset(13)
+        })
+        let codeImageView = UIImageView()
+        codeImageView.backgroundColor = UIColor.clear
+        codeImageView.image = SGQRCodeGenerateManager.generate(withDefaultQRCodeData: "group," + (self.groupDetail?.aldrid)!, imageViewWidth: CGFloat(196))
+        whiteView.addSubview(codeImageView)
+        codeImageView.snp.makeConstraints({ (make) in
+            make.size.equalTo(196)
+            make.centerX.equalTo(whiteView.snp.centerX)
+            make.top.equalTo(groupNum.snp.bottom).offset(15)
+        })
+        let label = UILabel()
+        label.text = "扫码加群"
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = UIColor.init(hexColor: "999999")
+        whiteView.addSubview(label)
+        label.snp.makeConstraints({ (make) in
+            make.centerX.equalTo(whiteView.snp.centerX)
+            make.top.equalTo(codeImageView.snp.bottom).offset(10)
+        })
+        return blackView
+    }()
+    
+    func tapCodeImageView(sender : UITapGestureRecognizer) {
+        self.codeView.removeFromSuperview()
+    }
 }
 
 extension GroupMemberListViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -152,16 +252,33 @@ extension GroupMemberListViewController: UICollectionViewDelegate,UICollectionVi
             }else {
                 footerView.groupIntroduceLabel.text = groupDetail?.groupDetail
             }
-            
-            
             footerView.delegate = self
             return footerView
+        }else {
+            let headView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberhead", for: indexPath) as! GroupMemberListHeadCollectionReusableView
+            headView.delegate = self
+            let imgURL = URL.init(string: (self.groupDetail?.group_avatar ?? "")!)
+            headView.headerImgView.sd_setImage(with: imgURL)
+            headView.groupNumb.text = "群编号:" + (self.groupDetail?.aldrid ?? "")
+            headView.memberNumLabel.text = "群成员 " + "(\(self.groupDetail?.groupMember?.count ?? 0)人)"
+            return headView
         }
-        return UICollectionReusableView()
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: kScreen_width, height: 200)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: kScreen_width, height: 287)
+    }
+    
+
+    
+    
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let personalInformationVC = PersonalInformationViewController()
@@ -172,6 +289,36 @@ extension GroupMemberListViewController: UICollectionViewDelegate,UICollectionVi
         navigationController?.pushViewController(personalInformationVC, animated: true)
 
     }
+}
+extension GroupMemberListViewController :GroupsMemberListCollectionDelegate {
+    func quiteGroup() {
+        
+    }
+    
+    func putGroupNote() {
+        
+    }
+    
+    func noDisturbing(sender: UISwitch) {
+        
+    }
+    
+    func codeImageViewClicked() {
+        if self.groupDetail == nil {
+            return
+        }
+        UIApplication.shared.keyWindow?.addSubview(self.codeView)
+    }
+    
+    func chatRecordBtnClicked() {
+        
+    }
+    
+    func managerGroupBtnClicked() {
+        
+    }
+    
+    
 }
 
 extension GroupMemberListViewController: MemberCollectionReusableViewDelegate {

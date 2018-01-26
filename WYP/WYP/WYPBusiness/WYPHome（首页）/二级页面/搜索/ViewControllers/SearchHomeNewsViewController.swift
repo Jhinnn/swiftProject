@@ -257,17 +257,20 @@ extension SearchHomeNewsViewController: UITableViewDelegate,UITableViewDataSourc
             newsDetail.contentArray = newsData?[indexPath.row].contentArray
             newsDetail.newsId = newsData?[indexPath.row].newsId ?? ""
             newsDetail.commentNumber = newsData?[indexPath.row].infoComment
+            newsDetail.newsTitle = newsData?[indexPath.row].infoTitle
             navigationController?.pushViewController(newsDetail, animated: true)
             
         } else if newsData![indexPath.row].infoType! == 2 { // 视频
             let newsDetail = VideoDetailViewController()
             newsDetail.newsId = newsData?[indexPath.row].newsId ?? ""
+            newsDetail.newsTitle = newsData?[indexPath.row].infoTitle
             navigationController?.pushViewController(newsDetail, animated: true)
             
         } else { // web
             let newsDetail = NewsDetailsViewController()
             newsDetail.newsId = newsData?[indexPath.row].newsId
             newsDetail.commentNumber = newsData?[indexPath.row].infoComment
+            newsDetail.newsTitle = newsData?[indexPath.row].infoTitle
             navigationController?.pushViewController(newsDetail, animated: true)
         }
     }

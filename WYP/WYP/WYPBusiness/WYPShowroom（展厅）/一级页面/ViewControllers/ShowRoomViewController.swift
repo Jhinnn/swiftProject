@@ -24,6 +24,16 @@ class ShowRoomViewController: BaseViewController {
     // 最新最热 1：最新  2：最热
     var order = ""
     
+    
+    // MARK: 请求筛选条件参数
+    //请求页数
+    var filterPageNumber = 0
+    
+    var filterId : String = ""  //筛选条件
+    
+    var orderId: String = "" //排序方式
+    
+
     // banner数据
     var bannerData: [BannerModel]?
     // banner图片
@@ -34,16 +44,26 @@ class ShowRoomViewController: BaseViewController {
     }
     
     // MARK: - life cycle
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //修改搜索栏
         
-        viewConfig()
-        layoutPageSubviews()
         
-        // 获取数据
-        loadShowRoomData(requestType: .update)
+            viewConfig()
+            
+            layoutPageSubviews()
+            
+            // 获取数据
+            
+            loadShowRoomData(requestType: .update)
+
+        
+        
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +74,7 @@ class ShowRoomViewController: BaseViewController {
 
     // MARK: - private method
     private func viewConfig() {
-        view.addSubview(showRoomTableView)
+        self.view.addSubview(showRoomTableView)
         // 只有全部页面显示banner
         if isShowBanner == true {
             showRoomTableView.tableHeaderView = syBanner
@@ -62,15 +82,16 @@ class ShowRoomViewController: BaseViewController {
         showRoomData = [ShowroomModel]()
     }
     private func layoutPageSubviews() {
+        
         switch flag {
         case 1:
-            showRoomTableView.snp.makeConstraints { (make) in
+            self.showRoomTableView.snp.makeConstraints { (make) in
                 make.edges.equalTo(UIEdgeInsetsMake(0, 0, 157, 0))
             }
             break
 
         default:
-            showRoomTableView.snp.makeConstraints { (make) in
+            self.showRoomTableView.snp.makeConstraints { (make) in
                 make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
             }
             break
@@ -86,13 +107,68 @@ class ShowRoomViewController: BaseViewController {
                 let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
                 let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
                 self.bannerData = [BannerModel].deserialize(from: jsonString) as? [BannerModel]
-                
                 self.bannerImages = [String]()
                 for i in 0..<self.bannerData!.count {
                     self.bannerImages?.append(self.bannerData?[i].bannerImage ?? "")
                 }
                 
             }
+        }
+    }
+    
+    // MARK: 筛选条件请求接口
+    func loadFilterShowRoomData(requestType: RequestType) {
+        
+        if requestType == .update {
+            filterPageNumber = 1
+        }else {
+            filterPageNumber = filterPageNumber + 1
+        }
+        NetRequest.showFilterRoomNetRequest(page: "\(filterPageNumber)", id: self.filterId, order: self.orderId) { (success, info, result) in
+            if success {
+
+                    let array = result!.value(forKey: "data")
+                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                    if requestType == .update {
+                        self.showRoomData = [ShowroomModel].deserialize(from: jsonString) as? [ShowroomModel]
+                    } else {
+                        // 把新数据添加进去
+                        let show = [ShowroomModel].deserialize(from: jsonString) as! [ShowroomModel]
+                        self.showRoomData = self.showRoomData! + show
+                    }
+                    // 先移除再添加
+                    self.noDataImageView.removeFromSuperview()
+                    self.noDataLabel.removeFromSuperview()
+                    // 没有数据的情况
+                    self.noDataLabel.text = "该频道暂未开放，敬请期待"
+                    self.view.addSubview(self.noDataImageView)
+                    self.view.addSubview(self.noDataLabel)
+                    self.noDataImageView.snp.makeConstraints { (make) in
+                        if deviceTypeIphone5() || deviceTypeIPhone4() {
+                            make.top.equalTo(self.view).offset(130)
+                        }
+                        make.top.equalTo(self.view).offset(180)
+                        make.centerX.equalTo(self.view)
+                        make.size.equalTo(CGSize(width: 100, height: 147))
+                    }
+                    self.noDataLabel.snp.makeConstraints { (make) in
+                        make.top.equalTo(self.noDataImageView.snp.bottom).offset(10)
+                        make.centerX.equalTo(self.view)
+                        make.height.equalTo(11)
+                    }
+
+                    self.showRoomTableView.reloadData()
+                    self.showRoomTableView.mj_header.endRefreshing()
+                    self.showRoomTableView.mj_footer.endRefreshing()
+
+
+                } else {
+                    self.showRoomTableView.mj_header.endRefreshing()
+                    self.showRoomTableView.mj_footer.endRefreshing()
+
+                }
+
         }
     }
 
@@ -149,6 +225,7 @@ class ShowRoomViewController: BaseViewController {
         } else if flag == 10 { // 展厅搜索结果页
             NetRequest.roomSearchNetRequest(keyword: keyword ?? "", page: "\(pageNumber)", typeId: typeId ?? "") { (success, info, result) in
                 if success {
+                    
                     let array = result!.value(forKey: "data")
                     let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -191,8 +268,7 @@ class ShowRoomViewController: BaseViewController {
             }
             
         } else { // 获取展厅分类列表数据
-            NetRequest.showRoomNetRequest(page: "\(pageNumber)", type_id: typeId ?? "", order: order) { (success, info, result) in
-                print(self.order)
+            NetRequest.showRoomNetRequest(page: "\(pageNumber)", id: self.filterId,type_id: typeId ?? "", order: self.orderId) { (success, info, result) in
                 if success {
                     let array = result!.value(forKey: "data")
                     let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -226,18 +302,66 @@ class ShowRoomViewController: BaseViewController {
                         make.height.equalTo(11)
                     }
                     
+                    
                     self.showRoomTableView.reloadData()
+                    
+                    
+                    
                     self.showRoomTableView.mj_header.endRefreshing()
                     self.showRoomTableView.mj_footer.endRefreshing()
                     
                 } else {
                     self.showRoomTableView.mj_header.endRefreshing()
                     self.showRoomTableView.mj_footer.endRefreshing()
-                    print(info!)
+                    
                 }
             }
         }
     }
+    
+  
+    
+    // MARK: - Setter
+    lazy var showRoomTableView: WYPTableView = {
+        let showRoomTableView = WYPTableView()
+        showRoomTableView.rowHeight = 345 * width_height_ratio
+        showRoomTableView.delegate = self
+        showRoomTableView.dataSource = self
+        showRoomTableView.tableFooterView = UIView()
+        showRoomTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
+            self.loadShowRoomData(requestType: .loadMore)
+        })
+        showRoomTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.loadShowRoomData(requestType: .update)
+        })
+        //注册
+        showRoomTableView.register(ShowroomCell.self, forCellReuseIdentifier: "showRoomCell")
+
+        return showRoomTableView
+    }()
+    
+    // 设置表视图头视图
+    lazy var syBanner: SYBannerView = {
+        let banner = SYBannerView(frame: CGRect(x: 0, y: 70, width: kScreen_width, height: 180 * width_height_ratio))
+        banner.delegate = self
+        return banner
+    }()
+    
+    // 没有数据时的图片
+    lazy var noDataImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "common_noResult_icon_normal_iPhone")
+        return imageView
+    }()
+    // 没有找到结果
+    lazy var noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "内容已飞外太空"
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textColor = UIColor.init(hexColor: "a1a1a1")
+        label.textAlignment = .center
+        return label
+    }()
     
     // MARK: - event response
     // 自定义属性
@@ -271,47 +395,6 @@ class ShowRoomViewController: BaseViewController {
         }
         return attributedString
     }
-    
-    // MARK: - Setter
-    lazy var showRoomTableView: WYPTableView = {
-        let showRoomTableView = WYPTableView()
-        showRoomTableView.rowHeight = 345 * width_height_ratio
-        showRoomTableView.delegate = self
-        showRoomTableView.dataSource = self
-        showRoomTableView.tableFooterView = UIView()
-        showRoomTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
-            self.loadShowRoomData(requestType: .loadMore)
-        })
-        showRoomTableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.loadShowRoomData(requestType: .update)
-        })
-        //注册
-        showRoomTableView.register(ShowroomCell.self, forCellReuseIdentifier: "showRoomCell")
-        
-        return showRoomTableView
-    }()
-    // 设置表视图头视图
-    lazy var syBanner: SYBannerView = {
-        let banner = SYBannerView(frame: CGRect(x: 0, y: 70, width: kScreen_width, height: 180 * width_height_ratio))
-        banner.delegate = self
-        return banner
-    }()
-    
-    // 没有数据时的图片
-    lazy var noDataImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "common_noResult_icon_normal_iPhone")
-        return imageView
-    }()
-    // 没有找到结果
-    lazy var noDataLabel: UILabel = {
-        let label = UILabel()
-        label.text = "内容已飞外太空"
-        label.font = UIFont.systemFont(ofSize: 11)
-        label.textColor = UIColor.init(hexColor: "a1a1a1")
-        label.textAlignment = .center
-        return label
-    }()
 }
 
 extension ShowRoomViewController: UITableViewDelegate, UITableViewDataSource {
@@ -326,23 +409,21 @@ extension ShowRoomViewController: UITableViewDelegate, UITableViewDataSource {
             noDataImageView.isHidden = true
             noDataLabel.isHidden = true
         }
-        return showRoomData?.count ?? 0
+        return self.showRoomData?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "showRoomCell") as? ShowroomCell
         
-        if cell == nil {
-            cell = ShowroomCell.init(style: .default, reuseIdentifier: "showRoomCell")
-        }
-        cell?.selectionStyle = .none
-        cell?.showRoomModel = showRoomData?[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "showRoomCell", for: indexPath) as! ShowroomCell
+        cell.selectionStyle = .none
+        cell.showRoomModel = self.showRoomData?[indexPath.row]
         // 判断是不是搜索页面
         if flag == 10 || flag == 2 {
-            let attributeString = changeTextColor(text: cell?.showRoomTitleLabel.text ?? "")
-            cell?.showRoomTitleLabel.attributedText = attributeString
+            let attributeString = changeTextColor(text: cell.showRoomTitleLabel.text ?? "")
+            cell.showRoomTitleLabel.attributedText = attributeString
         }
-        return cell!
+        return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)

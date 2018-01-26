@@ -629,6 +629,7 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                     newsDetail.contentArray = homeSearch?.news![indexPath.row].contentArray
                     newsDetail.newsId = homeSearch?.news![indexPath.row].newsId ?? ""
                     newsDetail.commentNumber = homeSearch?.news![indexPath.row].infoComment
+                    newsDetail.newsTitle = homeSearch?.news![indexPath.row].infoTitle
                     navigationController?.pushViewController(newsDetail, animated: true)
                 }
 //
@@ -644,12 +645,14 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                 else if homeSearch?.news![indexPath.row].infoType! == 2 { // 视频
                     let newsDetail = VideoDetailViewController()
                     newsDetail.newsId = homeSearch?.news![indexPath.row].newsId ?? ""
+                    newsDetail.newsTitle = homeSearch?.news![indexPath.row].infoTitle ?? ""
                     navigationController?.pushViewController(newsDetail, animated: true)
 
                 } else { // web
                     let newsDetail = NewsDetailsViewController()
                     newsDetail.newsId = homeSearch?.news![indexPath.row].newsId
                     newsDetail.commentNumber = homeSearch?.news![indexPath.row].infoComment
+                    newsDetail.newsTitle = homeSearch?.news![indexPath.row].infoTitle
                     navigationController?.pushViewController(newsDetail, animated: true)
                 
             

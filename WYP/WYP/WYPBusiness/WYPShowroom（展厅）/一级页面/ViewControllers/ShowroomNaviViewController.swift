@@ -20,7 +20,11 @@ class ShowroomNaviViewController: BaseViewController {
         willSet {
             navTabBar.currentIndex = newValue!
             
-            self.loadMenuData(index: newValue!)  //加载菜单
+            if newValue != 0 {
+                self.loadMenuData(index: newValue!)  //加载菜单
+            }
+            
+            
             
             if subViewControllers != nil && flag == 0 {
                 let viewController = subViewControllers?[newValue!];
@@ -38,10 +42,11 @@ class ShowroomNaviViewController: BaseViewController {
     // 分页导航上的title数组
     var titles: [String]?
     
-    // 分页导航上的title数组
-    var arr: [[String]]?
+    // 菜单
+    var arr: [String: [ExhibitionModel]] = [String : [ExhibitionModel]]()
     
-    var showMenuData: [ExhibitionModel]?
+    var arrTitle = [String]()
+
     
     // 热搜
     var hotSearchArray: [String]?
@@ -75,14 +80,27 @@ class ShowroomNaviViewController: BaseViewController {
     
     // MARK: - 加载菜单数据
     func loadMenuData(index: NSInteger) {
+        self.arrTitle.removeAll()
+        self.arr.removeAll()
         
-//        NetRequest.getExhibitionHallMeunNetRequest(type: "\(index)") { (success, info, result) in
-//            if success {
-//                let data = try! JSONSerialization.data(withJSONObject: result!, options: JSONSerialization.WritingOptions.prettyPrinted)
-//                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-//                self.showMenuData = [ExhibitionModel].deserialize(from: jsonString) as? [ExhibitionModel]
-//            }
-//        }
+        NetRequest.getExhibitionHallMeunNetRequest(type: "\(index)") { (success, info, result) in
+            if success {
+        
+                for data in result! {
+                    let array = data.value(forKey: "child")
+                    let menuTitleStr = data.value(forKey: "title") as! String
+                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                    let showMenuData = [ExhibitionModel].deserialize(from: jsonString) as? [ExhibitionModel]
+                    
+                    self.arr[menuTitleStr] = showMenuData
+                    self.arrTitle.append(menuTitleStr)
+                    
+                    
+                    }
+                
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -102,10 +120,8 @@ class ShowroomNaviViewController: BaseViewController {
             } else {
                 if i < 3 || i == 6 {
                     showroom.typeId = "\(i)"
-                }else if i == 3 {
-                    showroom.typeId = "5"
-                } else if i > 3  {
-                    showroom.typeId = "\(i - 1)"
+                }else if i >= 3  {
+                    showroom.typeId = "\(i)"
                 }
                 showroom.isShowBanner = false
                 
@@ -122,7 +138,7 @@ class ShowroomNaviViewController: BaseViewController {
         self.addChildViewController(viewController!)
         
         // 初始化标题数组
-        titles = ["全部","演出","旅游","电影","会展","赛事","栏目"]
+        titles = ["全部","演出","旅游","会展","赛事","电影"]
         
         
         // 将标题数组赋给分页导航的数组
@@ -163,8 +179,7 @@ class ShowroomNaviViewController: BaseViewController {
         }
         searchViewController?.hotSearchStyle = .rankTag
         searchViewController?.searchHistoryStyle = .normalTag
-//        searchViewController?.cancelButton = UIBarButtonItem(title: "搜索", style: .done, target: self, action: #selector(searchButtonAction))
-//        searchViewController?.naviItemHidesBackButton = true
+
         
         let searchBtn = UIButton(type: .custom)
         searchBtn.setTitle("搜索", for: .normal)
@@ -178,17 +193,23 @@ class ShowroomNaviViewController: BaseViewController {
     
     // MARK: - event response
     func screenInfo(sender: UIButton) {
-//        let point = CGPoint(x: kScreen_width - 30, y: 55)
-//        let popupMenu = YBPopupMenu.show(at: point, titles: ["最新", "最热"], icons: nil, menuWidth: 80, delegate: self)
-//        popupMenu?.dismissOnSelected = true
-//        popupMenu?.type = .default
         
-        let arr = ["颜色":["红色","蓝色","白色","黄色","藏青色","红色","蓝色","白色","黄色","藏青色"],
-               "尺寸":["43","40","38","39","41","50","51","45","43","40","38","39","41","50","51","45"],
-               "风格":["拉风性","成熟稳重","杀马特","非主流形","拉风性","成熟稳重","杀马特","非主流形"]]
-
-        self.picker.show()
-        self.picker.arr = arr
+        if navTabBar.currentIndex == 0 {
+            var point = CGPoint.zero
+            if deviceTypeIPhoneX() {
+                point = CGPoint(x: kScreen_width - 30, y: 70)
+            }else {
+                point = CGPoint(x: kScreen_width - 30, y: 55)
+            }
+            
+            let popupMenu = YBPopupMenu.show(at: point, titles: ["最新", "最热"], icons: nil, menuWidth: 80, delegate: self)
+            popupMenu?.dismissOnSelected = true
+            popupMenu?.type = .default
+        }else {
+            self.picker.show()
+            self.picker.arr = self.arr
+            self.picker.arrTitle = self.arrTitle
+        }
     }
     
     lazy var picker: ZJPickerMenu = {
@@ -240,7 +261,7 @@ class ShowroomNaviViewController: BaseViewController {
     
     // 排序按钮
     lazy var sortItemButton: UIBarButtonItem = {
-        let sortItemButton = UIBarButtonItem(image: UIImage(named: "common_sort_button_normal_iPhone"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(screenInfo(sender:)))
+        let sortItemButton = UIBarButtonItem(image: UIImage(named: "find_icon_preparation_normal"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(screenInfo(sender:)))
         return sortItemButton
     }()
     
@@ -249,11 +270,42 @@ class ShowroomNaviViewController: BaseViewController {
 }
 
 extension ShowroomNaviViewController: ZJPickerMenuDelegate{
-    // MARK: ZJPickerMenu delegate
-    func getMsg(num: Int, pro: [String : String]) {
-        print(num)
-        print(pro)
+    // ["全部年份": "1050", "全部地区": "1026", "全部类型": "1034"]
+
+    func getMsg(pro: [String : String]) {
+        
+        let viewController = subViewControllers?[currentIndex!] as! ShowRoomViewController
+        
+        if pro.count != 0 {  //如果选择了筛选条件
+            var valuesArr : [String] =  Array((pro.values))  // [1050,1026,1034]
+            
+            if valuesArr[valuesArr.count - 1] == "1" || valuesArr[valuesArr.count - 1] == "2" {  //有最新 或者最热
+                let sort = valuesArr[valuesArr.count - 1]
+                viewController.orderId = sort
+                valuesArr.removeLast()
+                let paramStr = valuesArr.joined(separator: ",") //"1050,1026,1034"
+                viewController.filterId = paramStr
+            }else {
+                viewController.orderId = ""
+                let paramStr = valuesArr.joined(separator: ",") //"1050,1026,1034"
+                viewController.filterId = paramStr
+            }
+            
+            viewController.loadShowRoomData(requestType: .update)
+//            let paramStr = valuesArr.joined(separator: ",") //"1050,1026,1034"
+            
+        }else {
+            viewController.orderId = ""
+            viewController.filterId =  ""
+            viewController.loadShowRoomData(requestType: .update)
+        }
+        
+       
     }
+
+    
+
+  
 }
 
 
@@ -287,6 +339,7 @@ extension ShowroomNaviViewController: YBPopupMenuDelegate {
         
         let viewController = subViewControllers?[currentIndex!] as! ShowRoomViewController
         viewController.order = "\(index + 1)"
+        
         viewController.loadShowRoomData(requestType: .update)
     }
 }

@@ -20,7 +20,7 @@ class ApplyGroupModel: HandyJSON {
     // 群公告
     var board : String?
     // 成员等级
-    var rank : String?
+    var rank : String?  //1 普通人  
     
     // 群组介绍
 //    var Introduction: String?

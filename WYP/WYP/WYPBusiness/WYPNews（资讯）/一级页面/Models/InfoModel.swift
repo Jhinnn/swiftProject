@@ -51,6 +51,8 @@ class InfoModel: HandyJSON {
     var topic: String?
     
     
+    
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.photosCover <-- "fengMian"
         mapper <<< self.infoImageArr <-- "cover_url"

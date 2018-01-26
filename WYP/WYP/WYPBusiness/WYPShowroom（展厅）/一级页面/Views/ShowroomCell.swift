@@ -160,7 +160,7 @@ class ShowroomCell: UITableViewCell {
     }()
     lazy var showRoomGroupImageView: UIImageView = {
         let showRoomGroupImageView = UIImageView()
-        showRoomGroupImageView.image = UIImage(named: "showRoom_groups_button_normal_iPhone")
+        showRoomGroupImageView.image = UIImage(named: "find_icon_cluster_normal")
         showRoomGroupImageView.contentMode = .scaleAspectFit
         return showRoomGroupImageView
     }()
@@ -172,7 +172,7 @@ class ShowroomCell: UITableViewCell {
     }()
     lazy var showRoomCommentImageView: UIImageView = {
         let showRoomCommentImageView = UIImageView()
-        showRoomCommentImageView.image = UIImage(named: "showRoom_comment_button_normal_iPhone")
+        showRoomCommentImageView.image = UIImage(named: "find_icon_information_normal")
         showRoomCommentImageView.contentMode = .scaleAspectFit
         return showRoomCommentImageView
     }()
@@ -184,7 +184,7 @@ class ShowroomCell: UITableViewCell {
     }()
     lazy var showRoomAttentionImageView: UIImageView = {
         let showRoomAttentionImageView = UIImageView()
-        showRoomAttentionImageView.image = UIImage(named: "showRoom_attention_button_normal_iPhone")
+        showRoomAttentionImageView.image = UIImage(named: "find_icon_follow_normal")
         showRoomAttentionImageView.contentMode = .scaleAspectFit
         return showRoomAttentionImageView
     }()
@@ -196,7 +196,7 @@ class ShowroomCell: UITableViewCell {
     }()
     lazy var showRoomFansImageView: UIImageView = {
         let showRoomFansImageView = UIImageView()
-        showRoomFansImageView.image = UIImage(named: "showRoom_fans_button_normal_iPhone")
+        showRoomFansImageView.image = UIImage(named: "find_icon_follower_normal")
         showRoomFansImageView.contentMode = .scaleAspectFit
         return showRoomFansImageView
     }()

@@ -127,6 +127,8 @@ class TopicsViewController: BaseViewController {
     // MARK: - setter and getter
     lazy var navTabBar: SYNavTabBar = {
         let navTabBar = SYNavTabBar(frame:CGRect(x: 0, y: 128, width: kScreen_width, height: 42) )
+        navTabBar.navigationTabBar.contentSize = CGSize(width: 0, height: kScreen_width)
+        
         navTabBar.delegate = self
         navTabBar.backgroundColor = UIColor.white
         navTabBar.navTabBarHeight = 42

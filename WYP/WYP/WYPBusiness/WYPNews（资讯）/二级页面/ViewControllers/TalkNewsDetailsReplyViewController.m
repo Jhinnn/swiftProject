@@ -386,7 +386,7 @@
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:self.contentTextView.attributedText];
     UIFont *font = [UIFont systemFontOfSize:17];
     
-    NSData *imgData = UIImageJPEGRepresentation(image, 0.9);
+    NSData *imgData = UIImageJPEGRepresentation(image, 1);
     YYImage *img = [YYImage imageWithData:imgData];
     img.preloadAllAnimatedImageFrames = YES;
     YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
@@ -471,10 +471,27 @@
 - (void)photoViewControllerDidNext:(NSArray<HXPhotoModel *> *)allList Photos:(NSArray<HXPhotoModel *> *)photos Videos:(NSArray<HXPhotoModel *> *)videos Original:(BOOL)original {
     
     
-    
     for (HXPhotoModel *model in allList) {
-        [self setupImage:model.thumbPhoto];
+        if (model.asset == nil) { //拍摄照片
+            [self setupImage:model.previewPhoto];
+        }else {
+            [HXPhotoTools FetchPhotoForPHAsset:model.asset Size:CGSizeMake(kScreen_width, kScreen_height) resizeMode:PHImageRequestOptionsResizeModeFast completion:^(UIImage *image, NSDictionary *info) {
+                if (info[@"PHImageFileSandboxExtensionTokenKey"] != nil) {
+                    [self setupImage:image];
+                }
+            }];
+        }
+        
+
+        
     }
+    
+    
+   
+    
+        
+        
+
 }
 
 /**

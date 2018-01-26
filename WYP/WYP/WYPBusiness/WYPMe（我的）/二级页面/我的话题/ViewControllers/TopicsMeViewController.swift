@@ -53,7 +53,7 @@ class TopicsMeViewController: BaseViewController {
 
     // 设置tableView
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = WYPTableView()
         tableView.backgroundColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
@@ -99,7 +99,7 @@ class TopicsMeViewController: BaseViewController {
     // 没有数据时跳转到抽奖模块
     lazy var noDataButton: UIButton = {
         let noDataButton = UIButton()
-        noDataButton.setTitle("我要发话/抢发话题", for: .normal)
+        noDataButton.setTitle("我要发布话题", for: .normal)
         noDataButton.setTitleColor(UIColor.themeColor, for: .normal)
         noDataButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
         noDataButton.layer.masksToBounds = true
@@ -112,12 +112,7 @@ class TopicsMeViewController: BaseViewController {
     
     func releaseDynamic() {
         UserDefaults.standard.set(AppInfo.shared.user?.token ?? "", forKey: "token")
-        var releaseVC = PublicGroupViewController()
-        releaseVC = PublicGroupViewController.init()
-        releaseVC.userToken = AppInfo.shared.user?.token ?? ""
-        releaseVC.uid = AppInfo.shared.user?.userId ?? ""
-        releaseVC.post_topic = "1"
-        print(releaseVC.post_topic)
+        let releaseVC = PublicGroupOneViewController()
         navigationController?.pushViewController(releaseVC, animated: true)
     }
     
@@ -137,10 +132,10 @@ class TopicsMeViewController: BaseViewController {
                     let data = try! JSONSerialization.data(withJSONObject: dataArr!, options: JSONSerialization.WritingOptions.prettyPrinted)
                     let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
                     news = [MineTopicsModel].deserialize(from: jsonString)! as! [MineTopicsModel]
-                    
                 }else {
+                    self.tableView.mj_header.endRefreshing()
                     self.tableView.mj_footer.endRefreshing()
-                    return
+                    
                 }
                 if requestType == .update {
                     self.newsData = news

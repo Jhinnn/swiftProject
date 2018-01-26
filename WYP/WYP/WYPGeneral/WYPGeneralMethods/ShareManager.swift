@@ -67,16 +67,17 @@ class ShareManager: NSObject {
             
             UMSocialManager.default().share(to: platformType, messageObject: self.messageObject, currentViewController: self.viewController, completion: { (result, error) in
                 if error == nil {
-                    let resp: UMSocialShareResponse = result as! UMSocialShareResponse
+//                    let resp: UMSocialShareResponse = result as! UMSocialShareResponse
                     
-                    //分享结果消息
-                    print(resp.message)
-                    
-                    //第三方原始返回的数据
-                    print(resp.originalResponse)
+                    //分享成功，发送通知
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "shareSuccessNotification"), object: nil)
                 }
             })
         }
+    }
+    
+    deinit{
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

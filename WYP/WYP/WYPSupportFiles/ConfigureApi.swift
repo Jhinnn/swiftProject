@@ -234,6 +234,11 @@ public var kApi_showRoom: String {
     return kApi_baseUrl(path: "api/group_all")
 }
 
+// 展厅筛选列表接口
+public var kApi_showFilterRoom: String {
+    return kApi_baseUrl(path: "api/group_filter")
+}
+
 // 展厅详情接口
 public var kApi_showRoomDetail: String {
     return kApi_baseUrl(path: "api/group_detail")

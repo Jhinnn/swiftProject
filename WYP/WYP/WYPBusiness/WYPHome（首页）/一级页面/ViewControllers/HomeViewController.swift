@@ -139,6 +139,11 @@ class HomeViewController: BaseViewController {
 
         tableView.register(ClassifyTableViewCell.self, forCellReuseIdentifier: "classfiy")
         
+        tableView.register(TalkOnePictureTableViewCell.self, forCellReuseIdentifier: "talkonePicCell")
+        tableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "talktextCell")
+        tableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "talkthreeCell")
+        tableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "talkvideoCell")
+        
     }
    
 
@@ -715,6 +720,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             // 热门发现
             let cell = tableView.dequeueReusableCell(withIdentifier: "showroomCellIdentifier", for: indexPath)
             let collectionView = cell.viewWithTag(300) as? UICollectionView
+//            collectionView?.register(HotShowRoomCell.self, forCellWithReuseIdentifier: "HotShowRoomCell")
             if collectionView != nil {
                 collectionView?.reloadData()
             }
@@ -722,55 +728,105 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 4 && indexPath.row == 0 {
             // 热门群组
             let cell = tableView.dequeueReusableCell(withIdentifier: "theaterGroupCellIdentifier", for: indexPath)
+            
             let collectionView = cell.viewWithTag(301) as? UICollectionView
+//            collectionView?.register(HotTheaterGroupCell.self, forCellWithReuseIdentifier: "HotShowRoomCell")
             if collectionView != nil {
                 collectionView?.reloadData()
             }
             return cell
         } else if indexPath.section == 2  {
             if homeNewsData != nil {
-                switch homeNewsData![indexPath.row].showType! {
-                case 0: // 视频
-                    let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
-                    cell.line.isHidden = false
-                    cell.infoModel = homeNewsData?[indexPath.row]
-                    
-                    return cell
-                case 1: //只有文字
-                    let cell = TravelTableViewCell(style: .default, reuseIdentifier: "textCell")
-                    cell.line.isHidden = false
-                    cell.infoModel = homeNewsData?[indexPath.row]
-            
-                    return cell
-                case 2: //上图下文
-                    let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
-                    cell.line.isHidden = false
-                    cell.infoModel = homeNewsData?[indexPath.row]
-                    cell.infoLabel.isHidden = true
-                    cell.playImageView.isHidden = true
-                    return cell
-                case 3: //左文右图
-                    let cell = OnePictureTableViewCell(style: .default, reuseIdentifier: "onePicCell")
-                    cell.line.isHidden = false
-                    cell.infoModel = homeNewsData?[indexPath.row]
-                    
-                    return cell
-                case 4: //三张图
-                    let cell = ThreePictureTableViewCell(style: .default, reuseIdentifier: "threeCell")
-                    cell.line.isHidden = false
-                    cell.infoModel = homeNewsData?[indexPath.row]
                 
-                    return cell
-                case 5: // 大图
-                    let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
-                    cell.line.isHidden = false
-                    cell.infoLabel.isHidden = true
-                    cell.playImageView.isHidden = true
-                    cell.infoModel = homeNewsData?[indexPath.row]
-                    return cell
-                default:
-                    return UITableViewCell()
+                if homeNewsData![indexPath.row].infoType! != 3 { //资讯
+                    switch homeNewsData![indexPath.row].showType!  {  //infoType 3话题  0zi'xu
+                    case 0: // 视频
+                        let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
+                        cell.line.isHidden = false
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        
+                        return cell
+                    case 1: //只有文字
+                        let cell = TravelTableViewCell(style: .default, reuseIdentifier: "textCell")
+                        cell.line.isHidden = false
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        
+                        return cell
+                    case 2: //上图下文
+                        let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
+                        cell.line.isHidden = false
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        cell.infoLabel.isHidden = true
+                        cell.playImageView.isHidden = true
+                        return cell
+                    case 3: //左文右图
+                        let cell = OnePictureTableViewCell(style: .default, reuseIdentifier: "onePicCell")
+                        cell.line.isHidden = false
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        
+                        return cell
+                    case 4: //三张图
+                        let cell = ThreePictureTableViewCell(style: .default, reuseIdentifier: "threeCell")
+                        cell.line.isHidden = false
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        
+                        return cell
+                    case 5: // 大图
+                        let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
+                        cell.line.isHidden = false
+                        cell.infoLabel.isHidden = true
+                        cell.playImageView.isHidden = true
+                        cell.infoModel = homeNewsData?[indexPath.row]
+                        return cell
+                    default:
+                        return UITableViewCell()
+                    }
+                }else {  //话题
+                    switch homeNewsData![indexPath.row].showType! {
+                    case 0: // 视频
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+//                        cell.infoTitleLabel.attributedText = attributeString
+                        return cell
+                    case 1: //只有文字
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "talktextCell", for: indexPath) as! TalkTravelTableViewCell
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
+//                        cell.travelTitleLabel.attributedText = attributeString
+                        return cell
+                    case 2: //上图下文
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "talkvideoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+//                        cell.infoTitleLabel.attributedText = attributeString
+                        return cell
+                    case 3: //左文右图
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "talkonePicCell", for: indexPath) as! TalkOnePictureTableViewCell
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+//                        cell.infoLabel.attributedText = attributeString
+                        return cell
+                    case 4: //三张图
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "talkthreeCell", for: indexPath) as! TalkThreePictureTableViewCell
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+//                        cell.infoLabel.attributedText = attributeString
+                        return cell
+                    case 5: // 大图
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "talkvideoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                        cell.infoLabel.isHidden = true
+                        cell.playImageView.isHidden = true
+                        cell.infoModel = homeNewsData?[indexPath.row]
+//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+//                        cell.infoTitleLabel.attributedText = attributeString
+                        return cell
+                    default:
+                        return UITableViewCell()
+                    }
                 }
+                
+                
                 
                 
             }
@@ -1055,23 +1111,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if homeData != nil {
-            switch collectionView.tag {
-            case 300:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as! HotShowRoomCell
+            if collectionView.tag == 300 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotShowRoomCellIndentity", for: indexPath) as! HotShowRoomCell
                 cell.showRoomModel = homeData?.hotShowRoom?[indexPath.item]
                 return cell
-            case 301:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as! HotTheaterGroupCell
+            }else if collectionView.tag == 301 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotTheaterGroupCellIndentity", for: indexPath) as! HotTheaterGroupCell
                 cell.groupModel = homeData?.hotGroup?[indexPath.item]
                 return cell
-            default:
-
-                return UICollectionViewCell()
             }
         }
-        
-        return UICollectionViewCell()
+         return UICollectionViewCell()
     }
+    
+   
+    
     
     // MARK: - UICollectionViewDelegate
     
@@ -1113,14 +1167,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 let json = JSON(response.result.value!)
                 let dic = json.dictionary
                 let str = dic!["is_join"]!
-              
-
                 if str == "0" {
                     let group = GroupMemberListViewController()
                     group.groupId = groupModel?.groupId ?? ""
                     group.roomName = groupModel?.roomName ?? ""
                     group.groupName = groupModel?.groupName ?? ""
                     self.navigationController?.pushViewController(group, animated: false)
+                    
+//                    let groupsMember = GroupsMemberListViewController()
+//                    groupsMember.groupId = groupModel?.groupId ?? ""
+//                    groupsMember.title = groupModel?.groupName ?? ""
+//                    self.navigationController?.pushViewController(groupsMember, animated: true)
                 }else {
                     let conversationVC = ChatDeatilViewController()
                     conversationVC.conversationType = RCConversationType.ConversationType_GROUP
@@ -1362,16 +1419,16 @@ extension HomeViewController: ClassifyTableViewCellDelegate {
             roomsCurrentIndex = 1
             tabBarController?.selectedIndex = 2
         case 1002:
-            roomsCurrentIndex = 3
+            roomsCurrentIndex = 5
             tabBarController?.selectedIndex = 2
         case 1003:
             roomsCurrentIndex = 2
             tabBarController?.selectedIndex = 2
         case 1004:
-            roomsCurrentIndex = 5
+            roomsCurrentIndex = 4
             tabBarController?.selectedIndex = 2
         case 1005:
-            ticketsCurrentIndex = 1
+            ticketsCurrentIndex = 0
             tabBarController?.selectedIndex = 3
         default:
             break

@@ -19,6 +19,8 @@ class MyCommunityViewController: BaseViewController {
     var friendsCount: String!
     var addFriendsPhoneNumber: String!
     
+    
+    var statmentId: String!
 
     var headImageUrl: String? {
         willSet {
@@ -77,17 +79,22 @@ class MyCommunityViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
-        loadNetData(requestType: .update)
+        
         
         loadPersonData()
         
         setupUI()
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(shareSuccess), name: NSNotification.Name(rawValue: "shareSuccessNotification"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         IQKeyboardManager.shared().isEnabled = false
+        
+        loadNetData(requestType: .update)
         
         // 是否发布
         let userDefault = UserDefaults.standard
@@ -588,6 +595,26 @@ class MyCommunityViewController: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
+    // FIX: //分享成功能
+    func shareSuccess() {
+        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
+                                      "method": "POST",
+                                      "id": self.statmentId]
+        let url = kApi_baseUrl(path: "api/share_dynamic")
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                self.loadNetData(requestType: .update)
+                self.tableView.reloadData()
+                
+            case .failure(_): break
+                
+            }
+        
+        }
+    }
 }
 
 extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate {
@@ -687,6 +714,9 @@ extension MyCommunityViewController: StatementCellDelegate {
     // 分享按钮点击事件
     func statementCell(_ statementCell: StatementCell!, shareButtonAction button: UIButton!, statement: StatementModel!) {
         
+        self.statmentId = statement._id  //获得动态id
+        
+        
         let messageObject = UMSocialMessageObject()
         
         // 缩略图
@@ -708,17 +738,9 @@ extension MyCommunityViewController: StatementCellDelegate {
         ShareManager.shared.show()
         
         
-        let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
-                                      "method": "POST",
-                        
-            "id": statement._id]
-        let url = kApi_baseUrl(path: "api/share_dynamic")
-        
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).response { (response) in
-            self.loadNetData(requestType: .update)
-            self.tableView.reloadData()
-        }
-        
+//
+//        }
+    
         
     }
     // 更多按钮点击事件

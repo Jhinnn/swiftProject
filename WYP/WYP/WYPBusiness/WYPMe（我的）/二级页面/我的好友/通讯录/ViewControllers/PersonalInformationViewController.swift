@@ -14,6 +14,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     var conversationType: Int?
     var name: String?
 
+    var isFushFormTopic: Bool = false  //是否从话题页过来
     
     var gambit_cover: [String] = []
     var community_cover: [String] = []
@@ -240,14 +241,14 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                         break
                     case 1:
                         let bIV = UIImageView()
-                        let bUrl = URL(string: community_cover[index] ?? "")
+                        let bUrl = URL(string: community_cover[index] )
                         bIV.kf.setImage(with: bUrl)
                         bIV.frame = CGRect(x:130, y:25, width:60, height:60)
                         cell?.addSubview(bIV)
                       break
                     case 2 :
                         let cIV = UIImageView()
-                        let cUrl = URL(string: community_cover[index] ?? "")
+                        let cUrl = URL(string: community_cover[index] )
                         cIV.kf.setImage(with: cUrl)
                         cIV.frame = CGRect(x:210, y:25, width:60, height:60)
                         cell?.addSubview(cIV)
@@ -282,7 +283,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     case 1:
                         break
                         let bIV = UIImageView()
-                        let bURl = URL(string: self.gambit_cover[index] ?? "")
+                        let bURl = URL(string: self.gambit_cover[index] )
                         bIV.kf.setImage(with: bURl)
                         bIV.frame = CGRect(x:95, y:50, width:60, height:60)
                         cell?.addSubview(bIV)
@@ -302,27 +303,31 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             }
      
         case 4:
-            if self.personalModel?.isFollow == "1"  {
-            cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
-            cell?.textLabel?.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
-            if indexPath.row == 0 {
-                cell?.textLabel?.text = "查找聊天记录"
-                let arrowIV = UIImageView(image:UIImage(named:"chat_icon_advance_normalmore"))
-                arrowIV.frame = CGRect(x:UIScreen.main.bounds.size.width-50, y:15, width:10, height:20)
-                cell?.addSubview(arrowIV)
-                
-            }
-            if indexPath.row == 1 {
-                
-                
-                    cell?.textLabel?.text = "消息免打扰"
-                    let uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
-                    uiSwitch.setOn(false, animated: true)
-                    uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
-                    cell?.addSubview(uiSwitch)
+            
+            
+            if !self.isFushFormTopic {  //是从话题界面push过来 则都不显示 聊天记录
+                if self.personalModel?.isFollow == "1"  {
+                    cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                    cell?.textLabel?.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
+                    if indexPath.row == 0 {
+                        cell?.textLabel?.text = "查找聊天记录"
+                        let arrowIV = UIImageView(image:UIImage(named:"chat_icon_advance_normalmore"))
+                        arrowIV.frame = CGRect(x:UIScreen.main.bounds.size.width-50, y:15, width:10, height:20)
+                        cell?.addSubview(arrowIV)
+                        
+                    }
+                    if indexPath.row == 1 {
+                        cell?.textLabel?.text = "消息免打扰"
+                        let uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
+                        uiSwitch.setOn(false, animated: true)
+                        uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
+                        cell?.addSubview(uiSwitch)
+                    }
+                    
                 }
-             
             }
+            
+           
        
             
         default:
@@ -414,11 +419,11 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func messageBAction(button:UIButton) {
-        print("发消息")
+        
         
         if self.personalModel?.isFollow == "1" {
             let conversationVC = ChatDeatilViewController()
-            conversationVC.conversationType = RCConversationType(rawValue: UInt(self.conversationType!))!
+            conversationVC.conversationType = RCConversationType.ConversationType_PRIVATE
             conversationVC.targetId = self.targetId
             conversationVC.title = self.name
             conversationVC.flag = 11
@@ -432,11 +437,20 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func moreAction() {
-        let x = UIScreen.main.bounds.size.width - 20
-        let y = CGFloat(78)
-        let p = CGPoint(x: x, y: y)
-        LSXPopMenu.show(at: p, titles: ["修改备注", "推荐名片"], icons: ["", ""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
+     
+    
+        var point = CGPoint.zero
+        if deviceTypeIPhoneX() {
+            point = CGPoint(x: kScreen_width - 30, y: 74)
+        }else {
+            point = CGPoint(x: kScreen_width - 30, y: 55)
+        }
+        
+        let popupMenu = YBPopupMenu.show(at: point, titles: ["删除好友"], icons: nil, menuWidth: 100, delegate: self)
+        popupMenu?.dismissOnSelected = true
+        popupMenu?.type = .default
     }
+    
     
     func netRequestAction(){
         
@@ -448,13 +462,19 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     self.personalModel = PersonalModel.deserialize(from: jsonString)
                     self.community_cover = (self.personalModel?.community_cover)!
                     self.gambit_cover = (self.personalModel?.gambit_cover)!
-//                    self.name = self.personalModel?.name
+                    self.name = self.personalModel?.name
                     self.tableView.reloadData()
                     
                     if self.personalModel?.isFollow == "1" {
-                        self.button.setTitle("发消息", for: .normal)
-                        let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
-                        self.navigationItem.rightBarButtonItem = rightItem
+                            self.button.setTitle("发消息", for: .normal)
+//                        if !self.isFushFormTopic {
+//
+//                        }else {
+                        
+                            let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
+                            self.navigationItem.rightBarButtonItem = rightItem
+//                        }
+                       
                     }else {
                         self.button.setTitle("添加好友", for: .normal)
                     }
@@ -479,16 +499,46 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
 }
 
+extension PersonalInformationViewController: YBPopupMenuDelegate {
+    func ybPopupMenuDidSelected(at index: Int, ybPopupMenu: YBPopupMenu!) {
+        if index == 0 {  //删除
+            
+            
+            
+            let alertController = UIAlertController(title: "",
+                                                    message: "确定删除该好友？", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                action in
+              
+                NetRequest.peopleCancelAttentionNetRequest(openId: AppInfo.shared.user?.token ?? "", peopleId: self.targetId!, complete: { (success, result) in
+                    if success {
+                        SVProgressHUD.showSuccess(withStatus: "删除成功！")
+                        let time: TimeInterval = 0.5
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                            self.navigationController?.popViewController(animated: true)
+                            
+                        }
+                    }
+                })
+            })
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            
+            
+        }else if index == 1 {  //修改备注
+            
+        }
+        
+    }
+}
+
 //更多
 extension PersonalInformationViewController:LSXPopMenuDelegate{
     
     func lsxPopupMenuDidSelected(at index: Int, lsxPopupMenu LSXPopupMenu: LSXPopMenu!) {
-        print(index)
-        if index == 0 {
-            
-        }else if index == 1 {
-            
-        }
+      
     }
 }
 
