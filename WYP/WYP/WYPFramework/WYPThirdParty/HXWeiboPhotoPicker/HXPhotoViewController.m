@@ -206,7 +206,7 @@ static NSString *PhotoViewCellId = @"PhotoViewCellId";
         }
         self.albumsBgView.hidden = NO;
         [UIView animateWithDuration:0.25 animations:^{
-            self.albumView.frame = CGRectMake(0, 64, self.view.frame.size.width, 340);
+            self.albumView.frame = CGRectMake(0, 0, self.view.frame.size.width, 340);
             self.albumsBgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
             button.imageView.transform = CGAffineTransformMakeRotation(M_PI);
         }];

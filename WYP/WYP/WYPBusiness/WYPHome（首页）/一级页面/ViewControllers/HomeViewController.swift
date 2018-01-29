@@ -330,6 +330,7 @@ class HomeViewController: BaseViewController {
         // 设置所有按钮和通知按钮(元素越靠前，越靠right)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationBarButtonItem)
         // 设置导航控制器
+        
         self.navigationItem.titleView = searchTitleView
     
     }
@@ -365,8 +366,10 @@ class HomeViewController: BaseViewController {
                 self.tableView.contentInsetAdjustmentBehavior = .never
                 self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 30, 0)
                 self.tableView.scrollIndicatorInsets = self.tableView.contentInset
-            }else {
+            }
+            else {
                 self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
+                
             }
             
         }
@@ -474,8 +477,8 @@ class HomeViewController: BaseViewController {
     
     // 导航栏上的view
     lazy var searchTitleView: commonSearchView = {
-        let searchTitleView = commonSearchView(frame: .zero)
-
+        let searchTitleView = commonSearchView(frame: CGRect(x: 0, y: 0, width: 235 * width_height_ratio, height: 30))
+        
         // 添加手势
         let tap = UITapGestureRecognizer(target: self, action: #selector(searchNews(sender:)))
         tap.numberOfTapsRequired = 1
@@ -1058,7 +1061,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         if scrollView.isKind(of: UICollectionView.self) {
             return
         }
-        self.navOffset = scrollView.contentOffset.y / (tableView.tableHeaderView?.frame.size.height)!
+
+        self.navOffset = scrollView.contentOffset.y / 180 * width_height_ratio
+        
         self.navBarBgAlpha = self.navOffset
         if self.navOffset > 0.3 {
             notificationBarButtonItem.changeBadgeViewColor(color: .white)

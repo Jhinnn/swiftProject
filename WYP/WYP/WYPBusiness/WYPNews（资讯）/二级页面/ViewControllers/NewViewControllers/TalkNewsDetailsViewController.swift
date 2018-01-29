@@ -65,6 +65,8 @@ class TalkNewsDetailsViewController: BaseViewController {
         layoutPageSubviews()
         
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -606,6 +608,8 @@ extension TalkNewsDetailsViewController: WKScriptMessageHandler {
             return
         }
     }
+    
+    
 }
 
 extension TalkNewsDetailsViewController: WBImageBrowserViewDelegate {

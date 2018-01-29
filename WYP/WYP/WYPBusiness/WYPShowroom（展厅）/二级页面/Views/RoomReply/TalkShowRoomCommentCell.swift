@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol TalkShowRoomCommentCellDelegate: NSObjectProtocol {
     func commentReplyStarDidSelected(sender: UIButton, comments: CommentModel)
     func commentReplyButtonDidSelected(sender: UIButton)
@@ -262,6 +263,37 @@ class TalkShowRoomCommentCell: UITableViewCell {
             
             let contentStr = newValue?.comment.content_text?.replacingOccurrences(of: "\n", with: "")
             contentLabel.text = contentStr!
+            
+            
+            let labelArray = Tool.getLinesArrayOfString(in: contentLabel)
+            if (labelArray?.count)! > 6 {
+                let str1 = labelArray![0] as! String
+                let str2 = labelArray![1] as! String
+                let str3 = labelArray![2] as! String
+                let str4 = labelArray![3] as! String
+                let str5 = labelArray![4] as! String
+                let str6 = labelArray![5] as! String
+                var str7 = labelArray![6] as! String
+                
+                
+                let zankai = "...全文"
+                
+                
+                let str = String.init(format: "%@%@", str7,zankai)  //获得最后一行拼接文字
+
+                if str.count > str1.count {  //如果最后行小于第一行
+                    let len = str.count - str1.count
+                    str7 = str7.substring(to: str7.index(str7.endIndex, offsetBy: -(str7.count - len - 5)))
+                    str7 = String.init(format: "%@%@", str7,zankai)
+                    
+                    let strCount = String.init(format: "%@%@%@%@%@%@%@", str1,str2,str3,str4,str5,str6,str7).count - zankai.count
+                    
+                    
+                    contentLabel.attributedText = Tool.theRichText(String.init(format: "%@%@%@%@%@%@%@", str1,str2,str3,str4,str5,str6,str7), theRange: UInt(strCount), changeRange: 5, color: UIColor.init(red: 71/255.0, green: 141/255.0, blue: 237/255.0, alpha: 1))
+                }
+            }
+            
+            
 //            timeLabel.text = Int(newValue!.comment!.createTime!)?.getTimeString()
 //            replyCountLabel.text = "回复数：\(newValue?.comment.replyCount ?? 0)"
 //            starCountButton.setTitle(" \(newValue?.comment.zanNumber ?? "0")", for: .normal)

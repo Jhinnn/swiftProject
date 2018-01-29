@@ -77,6 +77,7 @@
 		8EBE8B3A1FE79549001A05D7 /* PublicGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */; };
 		8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */; };
 		8EC74C211FF228B200839A6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EC74C1F1FF228B200839A6F /* Main.storyboard */; };
+		8ED79B12201EB8DD0074EB2C /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED79B10201EB8DC0074EB2C /* Tool.m */; };
 		8EEDA0812007485B008352CE /* SearchHomeTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEDA0802007485B008352CE /* SearchHomeTopicsViewController.swift */; };
 		8EEDA08320074890008352CE /* SearchHomeComViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEDA08220074890008352CE /* SearchHomeComViewController.swift */; };
 		8EEDA0852007515A008352CE /* CommunityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEDA0842007515A008352CE /* CommunityModel.swift */; };
@@ -540,6 +541,8 @@
 		8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicGroupViewController.swift; sourceTree = "<group>"; };
 		8EC74C1D1FF1EAE400839A6F /* AttentionTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttentionTopicViewController.swift; sourceTree = "<group>"; };
 		8EC74C201FF228B200839A6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		8ED79B10201EB8DC0074EB2C /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		8ED79B11201EB8DD0074EB2C /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		8EEA9C0B2010760200519063 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EEA9C0D2010760B00519063 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EEA9C0F2010766C00519063 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1383,6 +1386,8 @@
 		A476BD401E934670009733A5 /* UITextView */ = {
 			isa = PBXGroup;
 			children = (
+				8ED79B11201EB8DD0074EB2C /* Tool.h */,
+				8ED79B10201EB8DC0074EB2C /* Tool.m */,
 				A476BD411E934670009733A5 /* UITextView+PinchZoom.h */,
 				A476BD421E934670009733A5 /* UITextView+PinchZoom.m */,
 				A476BD431E934670009733A5 /* UITextView+PlaceHolder.h */,
@@ -3443,6 +3448,7 @@
 				F9986A241EA61C2B002C502B /* ContactsFriendsViewController.swift in Sources */,
 				8EEDA08F20078C79008352CE /* SeachResultComNoCell.swift in Sources */,
 				A49DA1F31EA9A327000E4AFA /* ShowroomMediaCell.swift in Sources */,
+				8ED79B12201EB8DD0074EB2C /* Tool.m in Sources */,
 				8EC74C1E1FF1EAE400839A6F /* AttentionTopicViewController.swift in Sources */,
 				F9FA08F01EB9A58300E71E4D /* AttentionPeopleTableViewCell.swift in Sources */,
 				EF751DF91FEE004100C0FD3F /* TalkShowRoomCommentCell.swift in Sources */,

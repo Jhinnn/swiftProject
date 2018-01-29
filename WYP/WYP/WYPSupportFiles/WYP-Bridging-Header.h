@@ -58,7 +58,6 @@
 // 开屏广告
 #import "XHLaunchAd.h"
 
-
 //中文排序
 #import "ChineseString.h"
 
@@ -75,6 +74,8 @@
 #import "YYKit.h"
 
 #import "TalkNewsDetailsReplyViewController.h"
+
+#import "Tool.h"
 
 //#import "YYTextView.h"
 //#import "BlocksKit+UIKit.h"

@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guidePageWindow.backgroundColor = UIColor.clear
         guidePageWindow.windowLevel = UIWindowLevelStatusBar
         guidePageWindow.rootViewController = GuideViewController()
-       
         return guidePageWindow
     }()
     

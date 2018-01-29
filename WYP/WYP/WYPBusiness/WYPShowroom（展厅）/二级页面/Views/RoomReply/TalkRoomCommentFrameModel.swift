@@ -70,6 +70,8 @@ class TalkRoomCommentFrameModel: NSObject {
 
             contentF = CGRect(x: 13, y: (headImgUrlF?.maxY)! + 10, width:  kScreen_width - 26, height: contentSize)
             
+            
+            
             if newValue.content_img?.count != 0 {  //有图片
                 if newValue.content_img?.count == 1 {
                     image1F = CGRect(x: (contentF?.minX)!, y: (contentF?.maxY)! + 8, width: 120, height: 120)

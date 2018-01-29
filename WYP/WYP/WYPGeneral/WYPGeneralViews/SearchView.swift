@@ -59,10 +59,13 @@ class SearchView: UIView {
 
 
 class commonSearchView: UIView {
+    
     // 重写title的约束
     override var intrinsicContentSize: CGSize {
         return UILayoutFittingExpandedSize
     }
+    
+
     // MARK: - life cycle
     override init(frame: CGRect) {
         super.init(frame: frame)

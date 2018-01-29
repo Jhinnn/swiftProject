@@ -188,6 +188,8 @@ class VideosViewController: BaseViewController {
         view.addSubview(player)
 
         player.delegate = self
+        
+//        player.shareBtn.addTarget(self, action: #selector(shareBarButtonItemAction), for: .touchUpInside)
     }
     func viewConfig() {
         title = "宣传片"
@@ -275,6 +277,8 @@ class VideosViewController: BaseViewController {
         player = nil
         
     }
+    
+    
     
     /**
      *  旋转屏幕通知

@@ -12,6 +12,7 @@
 #import "HXPhotoViewController.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "Masonry.h"
 
 #define kDevice_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
@@ -67,6 +68,8 @@
     
     self.titleLabel.text = self.newsTitle;
     
+    
+    
 }
 
 /**
@@ -78,7 +81,23 @@
     // 图文正文输入框
     [self.view addSubview:self.contentTextView];
     [self.view addSubview:self.titleLabel];
+    
+//    CGRectMake(16, 15, kScreenWidth - 32, 45)
 
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(16);
+        make.right.equalTo(self.view).offset(-16);
+        make.top.equalTo(self.view).offset(10);
+    }];
+    
+//    WithFrame:CGRectMake(0, 60, kScreen_width, kScreen_height - 124)
+    [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.top.equalTo(self.titleLabel.mas_bottom);
+        make.bottom.equalTo(self.view);
+    }];
+    
     
 }
 
@@ -102,7 +121,7 @@
 
 - (YYTextView *)contentTextView {
     if (!_contentTextView) {
-        YYTextView *textView = [[YYTextView alloc] initWithFrame:CGRectMake(0, 60, kScreen_width, kScreen_height - 124)];
+        YYTextView *textView = [[YYTextView alloc] init];
         textView.tag = 1000;
         textView.textContainerInset = UIEdgeInsetsMake(10, 16, 20, 16);
         textView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -124,7 +143,7 @@
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 15, kScreenWidth - 32, 45)];
+        _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont systemFontOfSize:17];
         _titleLabel.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
         _titleLabel.numberOfLines = 0;
@@ -482,6 +501,8 @@
             }];
         }
         
+        
+      
 
         
     }
