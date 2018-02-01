@@ -8,11 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */; };
+		8E0FB0C62022ADFF00A5EAAE /* IntelligentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */; };
+		8E0FB0C92022B14B00A5EAAE /* IntelligentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */; };
+		8E0FB0CA2022B14B00A5EAAE /* IntelligentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */; };
+		8E0FB0CC2022BB5D00A5EAAE /* UICollectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */; };
+		8E0FB0CE2022BD7100A5EAAE /* UICollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */; };
 		8E2B7767200F0F8000087918 /* PublicGroupOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B7766200F0F8000087918 /* PublicGroupOneViewController.swift */; };
 		8E2B7769200F224800087918 /* TalkNewsDetailsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B7768200F224800087918 /* TalkNewsDetailsCommentViewController.swift */; };
 		8E2B776D200F7D4F00087918 /* CommentDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B776C200F7D4E00087918 /* CommentDetailCommentCell.swift */; };
 		8E2B776F200F7D5700087918 /* CommentDetailFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B776E200F7D5600087918 /* CommentDetailFrameModel.swift */; };
 		8E2B7771201034C700087918 /* TalkCommentCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B7770201034C700087918 /* TalkCommentCommentViewController.swift */; };
+		8E4E864020206BEF008262E0 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4E863D20206BEE008262E0 /* YYClassInfo.m */; };
+		8E4E864120206BEF008262E0 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4E863E20206BEE008262E0 /* NSObject+YYModel.m */; };
 		8E56103C20035EF20034D8E9 /* DVActionSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56103B20035EF10034D8E9 /* DVActionSheetVC.swift */; };
 		8E561054200604FD0034D8E9 /* StatementFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E56103F200604FD0034D8E9 /* StatementFrameModel.m */; };
 		8E561055200604FD0034D8E9 /* StatementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E561041200604FD0034D8E9 /* StatementModel.m */; };
@@ -58,8 +65,6 @@
 		8EB4DF2520119F83001D497D /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EB4DF2420119F83001D497D /* WeiboSDK.bundle */; };
 		8EB4DF272011D8BE001D497D /* TopicsMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF262011D8BE001D497D /* TopicsMeViewController.swift */; };
 		8EB4DF292011EBD0001D497D /* TopicAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF282011EBD0001D497D /* TopicAnswerViewController.swift */; };
-		8EB4DF47201589E8001D497D /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF44201589E7001D497D /* NSObject+YYModel.m */; };
-		8EB4DF48201589E8001D497D /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF45201589E7001D497D /* YYClassInfo.m */; };
 		8EB4DF7020158D83001D497D /* ProCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF6C20158D82001D497D /* ProCollectionViewCell.swift */; };
 		8EB4DF7120158D83001D497D /* ProHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF6D20158D82001D497D /* ProHeaderCollectionReusableView.swift */; };
 		8EB4DF7220158D83001D497D /* ZJPickerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4DF6E20158D83001D497D /* ZJPickerMenu.swift */; };
@@ -412,11 +417,21 @@
 		38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewController.swift; sourceTree = "<group>"; };
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentTableViewCell.swift; sourceTree = "<group>"; };
+		8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntelligentCollectionViewCell.xib; sourceTree = "<group>"; };
+		8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UICollectionHeader.xib; sourceTree = "<group>"; };
+		8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionHeader.swift; sourceTree = "<group>"; };
 		8E2B7766200F0F8000087918 /* PublicGroupOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicGroupOneViewController.swift; sourceTree = "<group>"; };
 		8E2B7768200F224800087918 /* TalkNewsDetailsCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsCommentViewController.swift; sourceTree = "<group>"; };
 		8E2B776C200F7D4E00087918 /* CommentDetailCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDetailCommentCell.swift; sourceTree = "<group>"; };
 		8E2B776E200F7D5600087918 /* CommentDetailFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDetailFrameModel.swift; sourceTree = "<group>"; };
 		8E2B7770201034C700087918 /* TalkCommentCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkCommentCommentViewController.swift; sourceTree = "<group>"; };
+		8E4E863B20206BEE008262E0 /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		8E4E863C20206BEE008262E0 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		8E4E863D20206BEE008262E0 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		8E4E863E20206BEE008262E0 /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		8E4E863F20206BEE008262E0 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
 		8E56103B20035EF10034D8E9 /* DVActionSheetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVActionSheetVC.swift; sourceTree = "<group>"; };
 		8E56103F200604FD0034D8E9 /* StatementFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementFrameModel.m; sourceTree = "<group>"; };
 		8E561040200604FD0034D8E9 /* StarAndCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarAndCommentModel.h; sourceTree = "<group>"; };
@@ -518,11 +533,6 @@
 		8EB4DF2420119F83001D497D /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		8EB4DF262011D8BE001D497D /* TopicsMeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsMeViewController.swift; sourceTree = "<group>"; };
 		8EB4DF282011EBD0001D497D /* TopicAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicAnswerViewController.swift; sourceTree = "<group>"; };
-		8EB4DF42201589E7001D497D /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
-		8EB4DF43201589E7001D497D /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
-		8EB4DF44201589E7001D497D /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
-		8EB4DF45201589E7001D497D /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
-		8EB4DF46201589E7001D497D /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
 		8EB4DF6C20158D82001D497D /* ProCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EB4DF6D20158D82001D497D /* ProHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		8EB4DF6E20158D83001D497D /* ZJPickerMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZJPickerMenu.swift; sourceTree = "<group>"; };
@@ -934,6 +944,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8E4E863A20206B3F008262E0 /* YYModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E4E863B20206BEE008262E0 /* NSObject+YYModel.h */,
+				8E4E863E20206BEE008262E0 /* NSObject+YYModel.m */,
+				8E4E863C20206BEE008262E0 /* YYClassInfo.h */,
+				8E4E863D20206BEE008262E0 /* YYClassInfo.m */,
+				8E4E863F20206BEE008262E0 /* YYModel.h */,
+			);
+			path = YYModel;
+			sourceTree = "<group>";
+		};
 		8E56103D200604FD0034D8E9 /* CommunityView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1053,19 +1075,6 @@
 			path = WYPContain;
 			sourceTree = "<group>";
 		};
-		8EB4DF41201589E7001D497D /* YYModel */ = {
-			isa = PBXGroup;
-			children = (
-				8EB4DF42201589E7001D497D /* YYClassInfo.h */,
-				8EB4DF43201589E7001D497D /* YYModel.h */,
-				8EB4DF44201589E7001D497D /* NSObject+YYModel.m */,
-				8EB4DF45201589E7001D497D /* YYClassInfo.m */,
-				8EB4DF46201589E7001D497D /* NSObject+YYModel.h */,
-			);
-			name = YYModel;
-			path = "../../../../../../../Desktop/iOS项目/Swift代码/1001ALaDing/WYP/WYP/WYPFramework/WYPThirdParty/FYLCityPickView/YYModel";
-			sourceTree = "<group>";
-		};
 		8EB4DF6B20158D60001D497D /* ZJPickerMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1144,7 +1153,7 @@
 		A42EDE051EDEB21D00C0B500 /* FYLCityPickView */ = {
 			isa = PBXGroup;
 			children = (
-				8EB4DF41201589E7001D497D /* YYModel */,
+				8E4E863A20206B3F008262E0 /* YYModel */,
 				A42EDE061EDEB21D00C0B500 /* FYLCity.plist */,
 				A42EDE071EDEB21D00C0B500 /* FYLCityModel.h */,
 				A42EDE081EDEB21D00C0B500 /* FYLCityModel.m */,
@@ -2472,6 +2481,11 @@
 				F99869AB1EA61C2B002C502B /* TravelTableViewCell.swift */,
 				F99869AC1EA61C2B002C502B /* VideoInfoTableViewCell.swift */,
 				9E4151691FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift */,
+				8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */,
+				8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */,
+				8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */,
+				8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */,
+				8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3034,6 +3048,8 @@
 				A44B22791EA628CA001A02AC /* fzjzjw.ttf in Resources */,
 				A4301C281E5FDEB000E8E222 /* Assets.xcassets in Resources */,
 				F9BF0BD11F09E95E002C0108 /* cityList.json in Resources */,
+				8E0FB0CA2022B14B00A5EAAE /* IntelligentCollectionViewCell.xib in Resources */,
+				8E0FB0CC2022BB5D00A5EAAE /* UICollectionHeader.xib in Resources */,
 				8EEDA08C20076BEA008352CE /* SeachResultComCell.xib in Resources */,
 				A42EDE111EDEB21D00C0B500 /* FYLCity.plist in Resources */,
 				8EEDA09020078C79008352CE /* SeachResultComNoCell.xib in Resources */,
@@ -3256,7 +3272,6 @@
 				8E650AD11FE7B5B300A453BB /* HXPhotoPreviewViewController.m in Sources */,
 				F92ABBF61EA8F0C4006A41A5 /* MediaModel.swift in Sources */,
 				F9A47A421F5CE49E00C313F2 /* SYBannerView.swift in Sources */,
-				8EB4DF48201589E8001D497D /* YYClassInfo.m in Sources */,
 				A4ECDEFF1E83A47300A05B40 /* LBCodeButton.swift in Sources */,
 				FB1BE5F51FEB494A003BDC1C /* GroupsMemberListCollectionReusableView.swift in Sources */,
 				8E2B7771201034C700087918 /* TalkCommentCommentViewController.swift in Sources */,
@@ -3276,7 +3291,6 @@
 				EF751DF01FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift in Sources */,
 				F9986A4F1EA61C2B002C502B /* LotteryViewController.swift in Sources */,
 				A43C2A421E8101D90037BB5A /* LocationManager.swift in Sources */,
-				8EB4DF47201589E8001D497D /* NSObject+YYModel.m in Sources */,
 				F9986A401EA61C2B002C502B /* VideoInfoTableViewCell.swift in Sources */,
 				A424DD421E821D65002F6720 /* LBTextField.swift in Sources */,
 				8E650ADD1FE7B5B300A453BB /* HXAlbumModel.m in Sources */,
@@ -3307,10 +3321,12 @@
 				F9986A691EA61C2B002C502B /* ShowroomDetailsViewController.swift in Sources */,
 				F98935281EC06614002590AE /* AttentionRoomModel.swift in Sources */,
 				F9599BBA1EB1FD3C00440E66 /* TicketVernveModel.swift in Sources */,
+				8E0FB0CE2022BD7100A5EAAE /* UICollectionHeader.swift in Sources */,
 				F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */,
 				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
 				FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */,
 				8EB4DF7020158D83001D497D /* ProCollectionViewCell.swift in Sources */,
+				8E4E864020206BEF008262E0 /* YYClassInfo.m in Sources */,
 				8EEDA0812007485B008352CE /* SearchHomeTopicsViewController.swift in Sources */,
 				F9986A671EA61C2B002C502B /* RoomVideoTableViewCell.swift in Sources */,
 				8E650ACD1FE7B5B300A453BB /* HXCollectionView.m in Sources */,
@@ -3339,6 +3355,7 @@
 				F9B1878B1F61184C00394D44 /* ClassifyTableViewCell.swift in Sources */,
 				F94756D51F6E7518008EA8F3 /* HeadModel.swift in Sources */,
 				8E650ACF1FE7B5B300A453BB /* HXVideoPreviewViewController.m in Sources */,
+				8E0FB0C62022ADFF00A5EAAE /* IntelligentTableViewCell.swift in Sources */,
 				F9986A441EA61C2B002C502B /* NewsVideosViewController.swift in Sources */,
 				FB1BE5F81FEB494A003BDC1C /* RecommendTableViewCell.swift in Sources */,
 				F9FA08ED1EB9863500E71E4D /* AttentionPeopleModel.swift in Sources */,
@@ -3348,6 +3365,7 @@
 				F91330801EC18DD800DF5E47 /* RecordModel.swift in Sources */,
 				F9599BC41EB20CE300440E66 /* LotteryDetailsViewController.swift in Sources */,
 				F9986A121EA61C2B002C502B /* AttentionViewController.swift in Sources */,
+				8E0FB0C92022B14B00A5EAAE /* IntelligentCollectionViewCell.swift in Sources */,
 				8E650ADF1FE7B5B300A453BB /* UIButton+HXExtension.m in Sources */,
 				F96139BC1EAD8D970029E22A /* HomeModel.swift in Sources */,
 				F9FE90571F9F024800D31F3C /* UIImage+ImageSize.m in Sources */,
@@ -3402,6 +3420,7 @@
 				F99869FB1EA61C2B002C502B /* SearchResultViewController.swift in Sources */,
 				F9986A3C1EA61C2B002C502B /* InfoModel.swift in Sources */,
 				FB1BE5EC1FEB494A003BDC1C /* GroupDeailsViewController.swift in Sources */,
+				8E4E864120206BEF008262E0 /* NSObject+YYModel.m in Sources */,
 				8EB4DF772015D11C001D497D /* ExhibitionModel.swift in Sources */,
 				FB1BE5EF1FEB494A003BDC1C /* GroupsViewController.swift in Sources */,
 				F9986A0C1EA61C2B002C502B /* TopicReplyTableViewCell.swift in Sources */,

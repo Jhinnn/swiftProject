@@ -15,8 +15,44 @@ class AboutViewController: BaseViewController {
 
         title = "关于1001阿拉丁"
         
+//        viewConfig()
         setupUI()
     }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        SVProgressHUD.dismiss()
+//    }
+//
+//    // MARK: - private method
+//    func viewConfig() {
+//        view.addSubview(newsWebView)
+//
+//        newsWebView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(view)
+//        }
+//
+//        let url = kApi_baseUrl(path: "Mob/About/About.html")
+//        let urlString = URL(string: url)
+//        let request = URLRequest(url: urlString!)
+//        newsWebView.load(request)
+//
+//    }
+//
+//    lazy var newsWebView: WKWebView = {
+//        let newsWebView = WKWebView(frame: .zero)
+//        newsWebView.backgroundColor = UIColor.clear
+//        newsWebView.isOpaque = false
+//        newsWebView.uiDelegate = self
+//        newsWebView.navigationDelegate = self
+//        newsWebView.scrollView.showsVerticalScrollIndicator = false
+//
+//        return newsWebView
+//    }()
+    
+    
+    
     
     private func setupUI() {
     
@@ -52,10 +88,9 @@ class AboutViewController: BaseViewController {
     
     lazy var versionLabel: UILabel = {
         let versionLabel = UILabel()
-        versionLabel.text = "v1.8.4"
+        versionLabel.text = "v1.9"
         versionLabel.font = UIFont.systemFont(ofSize: 15)
         versionLabel.textAlignment = .center
-        
         return versionLabel
     }()
     
@@ -76,9 +111,28 @@ class AboutViewController: BaseViewController {
         let alert = UIAlertView(title: "版本更新", message: "当前应用为最新版本", delegate: self, cancelButtonTitle: "确定")
         alert.show()
     }
+ 
+ 
 }
 
+/*
 extension AboutViewController: UIAlertViewDelegate {
     
     
 }
+ 
+ 
+
+extension AboutViewController: WKUIDelegate, WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        SVProgressHUD.setDefaultMaskType(.none)
+        SVProgressHUD.show(withStatus: "加载中")
+        SVProgressHUD.dismiss(withDelay: 10)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        SVProgressHUD.dismiss()
+    }
+}
+ 
+ */

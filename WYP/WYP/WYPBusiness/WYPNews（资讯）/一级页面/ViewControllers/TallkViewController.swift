@@ -352,6 +352,7 @@ class TallkViewController: BaseViewController {
         newAllTableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "textCell")
         newAllTableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
         newAllTableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
+        newAllTableView.register(IntelligentTableViewCell.self, forCellReuseIdentifier: "inteCell")
         return newAllTableView
     }()
     
@@ -397,88 +398,96 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch newsData[indexPath.section].showType ?? 6 {
-        case 0: // 视频
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-                cell.infoTitleLabel.attributedText = attributeString
-            }
-            return cell
-        case 1: //只有文字
-            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
-                cell.travelTitleLabel.attributedText = attributeString
-            }
-            return cell
-        case 2: //上图下文
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-                cell.infoTitleLabel.attributedText = attributeString
-            }
-            return cell
-        case 3: //左文右图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-                cell.infoLabel.attributedText = attributeString
-            }
-            return cell
-        case 4: //三张图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-                cell.infoLabel.attributedText = attributeString
-            }
-            return cell
-        case 5: // 大图
-            let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
-            cell.infoLabel.isHidden = true
-            cell.playImageView.isHidden = true
-            cell.infoModel = newsData[indexPath.section]
-            // 判断是不是搜索页面
-            if flag == 2 {
-                let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-                cell.infoTitleLabel.attributedText = attributeString
-            }
-            return cell
-        default:
-            return UITableViewCell()
-        }
         
+//        if indexPath.section == 2 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "inteCell", for: indexPath) as! IntelligentTableViewCell
+//            return cell
+//        }else {
+            switch newsData[indexPath.section].showType ?? 6 {
+            case 0: // 视频
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                }
+                return cell
+            case 1: //只有文字
+                let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TalkTravelTableViewCell
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
+                    cell.travelTitleLabel.attributedText = attributeString
+                }
+                return cell
+            case 2: //上图下文
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                }
+                return cell
+            case 3: //左文右图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! TalkOnePictureTableViewCell
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+                    cell.infoLabel.attributedText = attributeString
+                }
+                return cell
+            case 4: //三张图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell", for: indexPath) as! TalkThreePictureTableViewCell
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
+                    cell.infoLabel.attributedText = attributeString
+                }
+                return cell
+            case 5: // 大图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoLabel.isHidden = true
+                cell.playImageView.isHidden = true
+                cell.infoModel = newsData[indexPath.section]
+                // 判断是不是搜索页面
+                if flag == 2 {
+                    let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
+                    cell.infoTitleLabel.attributedText = attributeString
+                }
+                return cell
+            default:
+                return UITableViewCell()
+            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch newsData[indexPath.section].showType ?? 6 {
-        case 0:
-            return 275 * width_height_ratio
-        case 1:
-            return 87.5 * width_height_ratio
-        case 2:
-            return 275 * width_height_ratio
-        case 3:
-            return 109
-        case 4:
-            return 160 * width_height_ratio
-        case 5:
-            return 275 * width_height_ratio
-        default:
-            return 0
-        }
+//        if indexPath.section == 2 {
+//            return 180
+//        }else {
+            switch newsData[indexPath.section].showType ?? 6 {
+            case 0:
+                return 275 * width_height_ratio
+            case 1:
+                return 87.5 * width_height_ratio
+            case 2:
+                return 275 * width_height_ratio
+            case 3:
+                return 109
+            case 4:
+                return 160 * width_height_ratio
+            case 5:
+                return 275 * width_height_ratio
+            default:
+                return 0
+            }
+//        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 9
