@@ -40,6 +40,9 @@ class NotificationModel: HandyJSON {
     // 是否已经进群
     var isGroup: String?
     
+    // 新闻id
+    var news_id: String?
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.content <-- "message_details"
         mapper <<< self.timestamp <-- "create_time"
@@ -49,6 +52,7 @@ class NotificationModel: HandyJSON {
         mapper <<< self.headerImage <-- "avatar128"
         mapper <<< self.isFriend <-- "is_friend"
         mapper <<< self.isGroup <-- "is_group"
+        mapper <<< self.news_id <-- "news_id"
     }
     
     required init() {}

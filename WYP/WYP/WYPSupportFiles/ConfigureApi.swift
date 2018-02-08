@@ -707,3 +707,24 @@ public var kApi_getExhibitionHallMeunData: String {
 public var kApi_getMediaList: String {
     return kApi_baseUrl(path: "api/media_list")
 }
+
+//达人榜
+public var kApi_IntelligentList: String {
+    return kApi_baseUrl(path: "api/master_list")
+}
+
+//邀请联系人列表
+public var kApi_InvitefriendsList: String {
+    return kApi_baseUrl(path: "api/friend_invite_list")
+}
+
+//邀请联系人回答
+public var kApi_Invitefriends: String {
+    return kApi_baseUrl(path: "api/gambit_invite")
+}
+
+//屏蔽好友消息
+public var kApi_IgnorefriendsMsg: String {
+    return kApi_baseUrl(path: "api/switchFriendPush")
+}
+

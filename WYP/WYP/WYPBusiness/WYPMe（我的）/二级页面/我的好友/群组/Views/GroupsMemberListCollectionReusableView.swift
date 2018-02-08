@@ -38,26 +38,34 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     
     // MARK: - private method
     func viewConfig() {
-        self.addSubview(settingView)
-        self.addSubview(grayLine)
-        self.addSubview(grayLine2)
-        self.addSubview(grayLine3)
-        self.addSubview(noDisturbingLabel)
-//        self.addSubview(switchBtn)
-        self.addSubview(grayLine1)
-        self.addSubview(quitGroupButton)
-        self.addSubview(groupNote)
-        self.addSubview(groupNoteButton)
-        self.addSubview(groupNoteConten)
-        self.addSubview(Chatrecord)
-        self.addSubview(grayLine4)
+        self.addSubview(settingView)  //管理群
+        
+        self.addSubview(grayLine) //分割线
+        
+        self.addSubview(groupNote)  //群公告
+        
+        self.addSubview(groupNoteButton) //群公告箭头按钮
+        
+        self.addSubview(groupNoteConten) //群公告
+        
+        self.addSubview(grayLine1)  //群公告分割线
+        
+        self.addSubview(noDisturbingLabel)  //消息免打扰标签
+        
+        self.addSubview(switchBtn) //消息免打扰按钮
+        
+        self.addSubview(grayLine2)  //消息免打扰分割线
+        
         self.addSubview(groupDetal)
-        self.addSubview(groupNoteConten)
-        self.addSubview(grayLine5)
+        
         self.addSubview(groupDetalConten)
-        self.addSubview(chatRecordBtn)
+        
+        self.addSubview(grayLine3)  //消息免打扰分割线
+        
+        self.addSubview(quitGroupButton)
     }
     func layoutPageSubviews() {
+        
         settingView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self)
             make.height.equalTo(47)
@@ -82,83 +90,68 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             
         }
      
-        
         groupNoteConten.snp.makeConstraints { (make) in
             make.top.equalTo(groupNote.snp.bottom).offset(20)
-            make.left.equalTo(self).offset(100)
+            make.left.equalTo(self).offset(60)
             make.right.equalTo(self).offset(-30)
             make.height.equalTo(60)
         }
         
-        grayLine4.snp.makeConstraints { (make) in
-            make.top.equalTo(groupNoteConten.snp.bottom).offset(13)
+
+        grayLine1.snp.makeConstraints { (make) in
+            make.top.equalTo(groupNoteConten.snp.bottom).offset(20)
+            make.height.equalTo(1)
+            make.left.right.equalTo(self)
+
+        }
+        
+        noDisturbingLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self).offset(13)
+            make.top.equalTo(grayLine1.snp.bottom).offset(13)
+            make.size.equalTo(CGSize(width: 100, height: 24))
+        }
+        
+        switchBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(self).offset(-13)
+            make.top.equalTo(grayLine1.snp.bottom).offset(8)
+            make.size.equalTo(CGSize(width: 50, height: 28))
+        }
+        
+        grayLine2.snp.makeConstraints { (make) in
+            make.top.equalTo(noDisturbingLabel.snp.bottom).offset(10)
             make.height.equalTo(1)
             make.left.right.equalTo(self)
             
         }
         
-        Chatrecord.snp.makeConstraints { (make) in
-            make.top.equalTo(grayLine4.snp.bottom).offset(13)
-            make.right.equalTo(self)
-            make.left.equalTo(self).offset(13)
-            make.height.equalTo(0)
-        }
-
-        chatRecordBtn.snp.makeConstraints { (make) in
-            make.size.equalTo(Chatrecord)
-            make.centerY.equalTo(Chatrecord)
-        }
-        
-        grayLine3.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self)
-            make.top.equalTo(Chatrecord.snp.bottom).offset(13)
-            make.height.equalTo(0)
-        }
-
-        noDisturbingLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(13)
-            make.top.equalTo(grayLine3.snp.bottom).offset(13)
-            make.size.equalTo(CGSize(width: 100, height: 0))
-        }
-//        switchBtn.snp.makeConstraints { (make) in
-//            make.right.equalTo(self).offset(-13)
-//            make.top.equalTo(grayLine3.snp.bottom).offset(6)
-//            make.size.equalTo(CGSize(width: 50, height: 0))
-//        }
-        grayLine1.snp.makeConstraints { (make) in
-            make.left.right.equalTo(self)
-            make.top.equalTo(noDisturbingLabel.snp.bottom).offset(13)
-            make.height.equalTo(0)
-        }
         groupDetal.snp.makeConstraints { (make) in
             make.right.equalTo(self)
             make.left.equalTo(self).offset(13)
-            make.top.equalTo(grayLine1.snp.bottom).offset(13)
+            make.top.equalTo(grayLine2.snp.bottom).offset(13)
             make.height.equalTo(24)
         }
+        
         groupDetalConten.snp.makeConstraints { (make) in
             make.top.equalTo(groupDetal.snp.bottom).offset(20)
-            make.left.equalTo(self).offset(100)
+            make.left.equalTo(self).offset(60)
             make.right.equalTo(self).offset(-30)
             make.height.equalTo(60)
-            
-            
         }
         
-        grayLine5.snp.makeConstraints { (make) in
-            make.top.equalTo(groupDetalConten.snp.bottom).offset(13)
-            make.height.equalTo(10)
+        grayLine3.snp.makeConstraints { (make) in
+            make.top.equalTo(groupDetalConten.snp.bottom).offset(10)
+            make.height.equalTo(1)
             make.left.right.equalTo(self)
             
         }
         
         quitGroupButton.snp.makeConstraints { (make) in
-            make.top.equalTo(grayLine5.snp.bottom).offset(66)
+            make.top.equalTo(grayLine3.snp.bottom).offset(20)
             make.centerX.equalTo(self)
-            make.size.equalTo(CGSize(width: 276.5, height: 47))
+            make.size.equalTo(CGSize(width: kScreen_width - 100, height: 47))
         }
         
-        
+     
     }
     
     // MARK: - event response
@@ -172,7 +165,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         delegate?.noDisturbing(sender: sender)
     }
     
-    // MARK: - setter and getter
+    // MARK: --管理群
     lazy var settingView: UIView = {
         let setting = UIView()
         setting.backgroundColor = UIColor.white
@@ -199,6 +192,8 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.left.equalTo(imageView.snp.right).offset(11)
             make.centerY.equalTo(imageView)
         })
+        
+        
         let btn = UIButton()
         btn.setImage(UIImage(named: "chat_icon_advance_normalmore"), for: .normal)
         btn.addTarget(self, action: #selector(managerGroupBtnClicked(sender:)), for: UIControlEvents.touchUpInside)
@@ -208,6 +203,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
             make.size.equalTo(label)
             make.centerY.equalTo(label)
         })
+    
         return setting
     }()
     
@@ -215,18 +211,15 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         delegate?.managerGroupBtnClicked()
     }
     
+
     lazy var grayLine: UIView = {
         let grayLine = UIView()
         grayLine.backgroundColor = UIColor.vcBgColor
         return grayLine
     }()
-    lazy var grayLine1: UIView = {
-        let grayLine = UIView()
-        grayLine.backgroundColor = UIColor.vcBgColor
-        return grayLine
-    }()
     
-    lazy var grayLine3: UIView = {
+    
+    lazy var grayLine1: UIView = {
         let grayLine = UIView()
         grayLine.backgroundColor = UIColor.vcBgColor
         return grayLine
@@ -238,12 +231,11 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         return grayLine
     }()
     
-    lazy var grayLine4: UIView = {
-        let grayLine4 = UIView()
-        grayLine4.backgroundColor = UIColor.vcBgColor
-        return grayLine4
+    lazy var grayLine3: UIView = {
+        let grayLine = UIView()
+        grayLine.backgroundColor = UIColor.vcBgColor
+        return grayLine
     }()
-    
     
     //群公告
     lazy var groupNote: UILabel = {
@@ -266,9 +258,6 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         groupNoteConten.textColor = UIColor.init(hexColor: "333333")
         groupNoteConten.font = UIFont.systemFont(ofSize: 12)
         groupNoteConten.text = "不得在群内骂人斗嘴等具有人身攻击性质行为，可私下单挑解决。如被暴打请拨打110或向管理员求助，但管理员不负责替你出头。"
-        
-        
-        
         return groupNoteConten
     }()
     
@@ -310,12 +299,15 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
         return noDisturbingLabel
     }()
 
-//    lazy var switchBtn: UISwitch = {
-//        let switchBtn = UISwitch()
-//        switchBtn.onTintColor = UIColor.themeColor
-//        switchBtn.addTarget(self, action: #selector(noDisturbing(sender:)), for: .valueChanged)
-//        return switchBtn
-//    }()
+    lazy var switchBtn: UISwitch = {
+        let switchb = UISwitch()
+        switchb.onTintColor = UIColor.themeColor
+        switchb.backgroundColor = UIColor.white
+        switchb.isOn = true
+//        swit/chBtn.addTarget(self, action: #selector(noDisturbing(sender:)), for: .valueChanged)
+        switchb.addTarget(self, action: #selector(noDisturbing(sender:)), for: UIControlEvents.valueChanged)
+        return switchb
+    }()
     
     //群介绍
     lazy var groupDetal: UILabel = {
@@ -329,6 +321,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     //群简介
     lazy var groupDetalConten: UILabel = {
         let groupDetalConten = UILabel()
+
         groupDetalConten.numberOfLines = 3
         groupDetalConten.textColor = UIColor.init(hexColor: "333333")
         groupDetalConten.font = UIFont.systemFont(ofSize: 12)
@@ -340,7 +333,7 @@ class GroupsMemberListCollectionReusableView: UICollectionReusableView {
     
     lazy var quitGroupButton: UIButton = {
         let quitGroupButton = UIButton()
-        quitGroupButton.setTitle("删除并退出", for: .normal)
+        quitGroupButton.setTitle("退出该群", for: .normal)
         quitGroupButton.setTitleColor(UIColor.white, for: .normal)
         var image = UIImage(named: "common_backgroundColor_button_normal_iPhone")
         image = image?.resizableImage(withCapInsets: UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1), resizingMode: .tile)

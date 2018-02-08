@@ -150,7 +150,7 @@ class TopicsMeViewController: BaseViewController {
                 // 没有数据的情况
                 self.view.addSubview(self.noDataImageView)
                 self.view.addSubview(self.noDataLabel)
-                self.view.addSubview(self.noDataButton)
+//                self.view.addSubview(self.noDataButton)
                 self.noDataImageView.snp.makeConstraints { (make) in
                     if deviceTypeIphone5() || deviceTypeIPhone4() {
                         make.top.equalTo(self.view).offset(130)
@@ -164,11 +164,11 @@ class TopicsMeViewController: BaseViewController {
                     make.centerX.equalTo(self.view)
                     make.height.equalTo(11)
                 }
-                self.noDataButton.snp.makeConstraints { (make) in
-                    make.centerX.equalTo(self.view)
-                    make.top.equalTo(self.noDataLabel.snp.bottom).offset(10)
-                    make.size.equalTo(CGSize(width: 100, height: 20))
-                }
+//                self.noDataButton.snp.makeConstraints { (make) in
+//                    make.centerX.equalTo(self.view)
+//                    make.top.equalTo(self.noDataLabel.snp.bottom).offset(10)
+//                    make.size.equalTo(CGSize(width: 100, height: 20))
+//                }
                 
                 self.tableView.reloadData()
                 self.tableView.mj_header.endRefreshing()

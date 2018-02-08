@@ -11,19 +11,22 @@ import UIKit
 class NotificationCell: UITableViewCell {
 
     public var notification: NotificationModel? {
-        willSet { //1.添加好友 2.推荐好友入群 3.抢票活动/兑换票务 4.订单消息 5.通过群组审核 6.通过好友审核 7.被踢出群组
-            if newValue?.type == "2" || newValue?.type == "5" || newValue?.type == "6" || newValue?.type == "7" {
+        willSet { //1.添加好友 2.推荐好友入群 3.抢票活动/兑换票务 4.订单消息 5.通过群组审核 6.通过好友审核 7.被踢出群组 //8.话题消息
+            if newValue?.type == "2" || newValue?.type == "5" || newValue?.type == "7" {
                 typeLabel.text = "群组消息"
-                iconImageView.image = UIImage(named: "mine_notificationGroup_icon_normal_iPhone")
-            }else if newValue?.type == "1" {
+                iconImageView.image = UIImage(named: "qunzu")
+            }else if newValue?.type == "1" || newValue?.type == "6" {
                 typeLabel.text = "好友消息"
-                iconImageView.image = UIImage(named: "mine_notificationActive_icon_normal_iPhone")
+                iconImageView.image = UIImage(named: "haoyou")
             } else if newValue?.type == "3" {
                 typeLabel.text = "活动消息"
-                iconImageView.image = UIImage(named: "mine_notificationActive_icon_normal_iPhone")
+                iconImageView.image = UIImage(named: "huodong")
             } else if newValue?.type == "4" {
                 typeLabel.text = "订单消息"
                 iconImageView.image = UIImage(named: "mine_notificationOrder_icon_normal_iPhone")
+            }else if newValue?.type == "8" {
+                typeLabel.text = "话题消息"
+                iconImageView.image = UIImage(named: "huati")
             }
             
             contentLabel.text = newValue?.content
@@ -46,8 +49,7 @@ class NotificationCell: UITableViewCell {
     
     // MARK: - Public Methods
 
-    
-    
+
     // MARK: - Private Methods
     
     // 设置视图

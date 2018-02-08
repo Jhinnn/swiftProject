@@ -24,6 +24,8 @@ class ChatDeatilViewController: RCConversationViewController {
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
                 
         // 不是单聊的情况 添加rightBarButtonItem
         if flag == 11 {
@@ -38,6 +40,8 @@ class ChatDeatilViewController: RCConversationViewController {
             
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         }
+        
+       
         
         // 设置头像为圆角
         RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
@@ -55,6 +59,7 @@ class ChatDeatilViewController: RCConversationViewController {
         if flag != 11 {
             loadGroupMember()
         }
+        
         
         IQKeyboardManager.shared().isEnabled = false
     }
@@ -94,7 +99,7 @@ class ChatDeatilViewController: RCConversationViewController {
         } else if flag == 11 {
             // 单聊 不设置title
         } else {
-            if (roomName?.characters.count)! > 5 {
+            if (roomName?.count)! > 5 {
                 let subName = (roomName! as NSString).substring(to: 5)
                 self.title = String.init(format: "%@... - %@(%d)", subName, groupName ?? "", groupNumber ?? 0)
             } else {
@@ -137,42 +142,27 @@ class ChatDeatilViewController: RCConversationViewController {
         groupsMember.groupId = self.targetId
         groupsMember.title = self.title
         navigationController?.pushViewController(groupsMember, animated: true)
-
-       
-        
-//        let groupdetail = GroupDeailsViewController()
-//        groupdetail.title = self.title
-//        groupdetail.groupId = self.targetId
-//
-//
-//        navigationController?.pushViewController(groupdetail, animated: true)
-        
     }
     
     // 查看好友社区
     func checkFriendCoumity(sender: UIBarButtonItem) {
-//        goToUserCommunity(userId: self.targetId)
-        self.navigationController?.popViewController(animated: true)
+        goToUserCommunity(userId: self.targetId)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     func goToUserCommunity(userId: String) {
         // 获取点击用户的信息
-        let mineId = AppInfo.shared.user?.userId ?? ""
+//        let mineId = AppInfo.shared.user?.userId ?? ""
         NetRequest.gotoUserCommunityNetRequest(uid: userId, openId: AppInfo.shared.user?.token ?? "") { (success, info, result) in
             if success {
                 self.userData = PersonModel()
                 self.userData = PersonModel.deserialize(from: result)
-                
-                if self.userData?.userImage != nil && userId != mineId {
-
-                    let community = PersonalInformationViewController()
-                    community.targetId = userId
-                    community.name = self.userData?.name ?? ""
-                   
-                    self.navigationController?.pushViewController(community, animated: true)
-                }
-            } else {
-                print(info!)
+        
+                let community = PersonalInformationViewController()
+                community.targetId = userId
+                community.name = self.userData?.name ?? ""
+               
+                self.navigationController?.pushViewController(community, animated: true)
             }
         }
     }
@@ -181,31 +171,33 @@ class ChatDeatilViewController: RCConversationViewController {
     override func didTapCellPortrait(_ userId: String!) {
         //
         goToUserCommunity(userId: userId)
-        let mineId = AppInfo.shared.user?.userId ?? ""
-        if userId == mineId {
-            NetRequest.friendsListNetRequest(openId: AppInfo.shared.user?.token ?? "", page: "") { (success, info, result) in
-                if success {
-                    let array = result!.value(forKey: "data")
-                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
-                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-                    let friendsArr = [PersonModel].deserialize(from: jsonString) as! [PersonModel]
-                    
-                    let community = MyCommunityViewController()
-                    community.title = "个人主页"
-                    community.headImageUrl = AppInfo.shared.user?.headImgUrl ?? ""
-                    community.userId = AppInfo.shared.user?.userId ?? ""
-                    community.nickName = AppInfo.shared.user?.nickName ?? ""
-                    community.fansCount = String.init(format: "粉丝:%@人", AppInfo.shared.user?.fans ?? "0")
-                    community.friendsCountLabel.text = String.init(format: "好友:%d人", friendsArr.count)
-                    community.type = "2"
-                    community.userType = "200"
-                    community.isFollowed = false
-                    self.navigationController?.pushViewController(community, animated: true)
-                    
-                } else {
-                    print(info!)
-                }
-            }
-        }
+//        let mineId = AppInfo.shared.user?.userId ?? ""
+//        if userId == mineId {
+//            NetRequest.friendsListNetRequest(openId: AppInfo.shared.user?.token ?? "", page: "") { (success, info, result) in
+//                if success {
+//                    let array = result!.value(forKey: "data")
+//                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+//                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+//                    let friendsArr = [PersonModel].deserialize(from: jsonString) as! [PersonModel]
+//
+//                    let community = MyCommunityViewController()
+//                    community.title = "个人主页"
+//                    community.headImageUrl = AppInfo.shared.user?.headImgUrl ?? ""
+//                    community.userId = AppInfo.shared.user?.userId ?? ""
+//                    community.nickName = AppInfo.shared.user?.nickName ?? ""
+//                    community.fansCount = String.init(format: "粉丝:%@人", AppInfo.shared.user?.fans ?? "0")
+//                    community.friendsCountLabel.text = String.init(format: "好友:%d人", friendsArr.count)
+//                    community.type = "2"
+//                    community.userType = "200"
+//                    community.isFollowed = false
+//                    self.navigationController?.pushViewController(community, animated: true)
+//
+//                } else {
+//                    print(info!)
+//                }
+//            }
+//        }
+//
+//
     }
 }

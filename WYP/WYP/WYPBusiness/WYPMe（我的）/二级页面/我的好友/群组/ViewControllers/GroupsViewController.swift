@@ -351,7 +351,7 @@ class GroupsViewController: BaseViewController {
     
     //我加入的群--展开
     @objc func clickMyJoinGroupViewTap(sener:UITapGestureRecognizer) {
-        if JoinGroupClickStatus == 0 {
+        if JoinGroupClickStatus == 0 && dataSource?.count != nil {
             JoinGroupClickStatus = 1
             //计算我管理群组tableView的高度
             let myJoinGroupTableViewHeight = (dataSource?.count)! * 60;

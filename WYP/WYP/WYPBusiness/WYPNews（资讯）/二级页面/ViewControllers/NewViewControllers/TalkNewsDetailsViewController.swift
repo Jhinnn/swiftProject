@@ -145,8 +145,8 @@ class TalkNewsDetailsViewController: BaseViewController {
         view.addSubview(interactionView)
 
         
-        let imageArray = ["theme_icon_more_normal","detail_icon_follow_normal","theme_icon_publish_normal"]
-        let titleArray = ["更多","关注","提问"]
+        let imageArray = ["hauti_icon_ayoqin_normal","detail_icon_follow_normal","theme_icon_publish_normal"]
+        let titleArray = ["邀请","关注","提问"]
         
         for i in 0..<3 {
             let button: TalkButton = TalkButton()
@@ -438,8 +438,17 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     
     //三个按钮功能
     func clickAction(sender: UIButton) {
+        
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }
+        
         if sender.tag == 100 {
-            self.navigationController?.popViewController(animated: true)
+            let vc = IntelligentInviteViewController()
+            vc.new_id = self.newsId
+            self.navigationController?.pushViewController(vc, animated: true)
         }else if sender.tag == 101 {
             
             self.collectionNews(sender: sender)
@@ -453,6 +462,13 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     
     //回复话题
     func answerAction(sender: UIButton) {
+        
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }
+        
         let vc = TalkNewsDetailsReplyViewController()
         vc.newsId = self.newsId
         vc.newsTitle = self.newsTitle

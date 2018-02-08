@@ -176,6 +176,11 @@ extension NotificationViewController: UITableViewDataSource, UITableViewDelegate
             detail.roomName = message.roomName ?? ""
             navigationController?.pushViewController(detail, animated: true) 
         }
+        if message.type == "8"{
+            let talkNewVC = TalkNewsDetailsViewController()
+            talkNewVC.newsId = message.news_id
+            navigationController?.pushViewController(talkNewVC, animated: true)
+        }
         if dataList[indexPath.row].type == "5" {
             if message.isGroup == "1" {
                 let conversationVC = ChatDeatilViewController()

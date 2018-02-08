@@ -19,7 +19,8 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     var gambit_cover: [String] = []
     var community_cover: [String] = []
     
-
+    var uiSwitch: UISwitch?
+    
     // 记录偏移量
     var navOffset: CGFloat = 0
     
@@ -96,8 +97,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-       
+
          netRequestAction()
     }
     
@@ -274,23 +274,21 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     switch index{
                     case 0:
                         let aIV = UIImageView()
-                        let aURl = URL(string: self.gambit_cover[index] ?? "")
+                        let aURl = URL(string: self.gambit_cover[index] )
                         aIV.kf.setImage(with: aURl)
                         aIV.frame = CGRect(x:15, y:50, width:60, height:60)
                         cell?.addSubview(aIV)
                         break
                         
                     case 1:
-                        break
                         let bIV = UIImageView()
                         let bURl = URL(string: self.gambit_cover[index] )
                         bIV.kf.setImage(with: bURl)
                         bIV.frame = CGRect(x:95, y:50, width:60, height:60)
                         cell?.addSubview(bIV)
                     case 2:
-                        break
                         let cIV = UIImageView()
-                        let cURl = URL(string: self.gambit_cover[index] ?? "")
+                        let cURl = URL(string: self.gambit_cover[index] )
                         cIV.kf.setImage(with: cURl)
                         cIV.frame = CGRect(x:175, y:50, width:60, height:60)
                         cell?.addSubview(cIV)
@@ -318,10 +316,9 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     }
                     if indexPath.row == 1 {
                         cell?.textLabel?.text = "消息免打扰"
-                        let uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
-                        uiSwitch.setOn(false, animated: true)
-                        uiSwitch.addTarget(self, action: #selector(switchClick), for: .valueChanged)
-                        cell?.addSubview(uiSwitch)
+                        uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
+                        uiSwitch?.addTarget(self, action: #selector(switchClick), for: .valueChanged)
+                        cell?.addSubview(uiSwitch!)
                     }
                     
                 }
@@ -408,18 +405,55 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     
-    // MARK: - 自定义方法
-    func switchClick(uiSwitch:UISwitch) {
-        
-        if uiSwitch.isOn {
-            print("打开")
-        }else {
-            print("关闭")
+    // MARK: - 消息免打扰
+    func switchClick(sender:UISwitch) {
+//        NetRequest.ignoreFriendsMessageNetRequest(uid: targetId ?? "", complete: { (success, info, result) in
+//            if success {
+//
+//                if result!["is_push"] as! String == "1" {  //开启免打扰
+//
+//                    RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: self.targetId, isBlocked: true, success: { (status) in
+//
+//                    }) { (error) in
+//
+//                    }
+//                }else {
+//                    RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: self.targetId, isBlocked: false, success: { (status) in
+//
+//                    }) { (error) in
+//
+//                    }
+//                }
+//
+//            }
+//        })
+        if sender.isOn {
+            sender.isOn = false
+            RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: targetId, isBlocked: false, success: { (status) in
+                print(status)
+                // 允许通知
+                let userDefault = UserDefaults.standard
+                userDefault.set("0", forKey: "groupNotification")
+            }) { (error) in
+                print(error)
+            }
+            
+        } else {
+            sender.isOn = true
+            
+            RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE , targetId: targetId, isBlocked: true, success: { (status) in
+                print(status)
+                // 禁止通知
+                let userDefault = UserDefaults.standard
+                userDefault.set("1", forKey: "groupNotification")
+            }) { (error) in
+                print(error)
+            }
         }
+      
     }
     
     func messageBAction(button:UIButton) {
-        
         
         if self.personalModel?.isFollow == "1" {
             let conversationVC = ChatDeatilViewController()
@@ -463,18 +497,17 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     self.community_cover = (self.personalModel?.community_cover)!
                     self.gambit_cover = (self.personalModel?.gambit_cover)!
                     self.name = self.personalModel?.name
+                    if self.personalModel?.is_push == "0" {
+                        self.uiSwitch?.setOn(true, animated: true)
+                    }else {
+                        self.uiSwitch?.setOn(false, animated: true)
+                    }
                     self.tableView.reloadData()
                     
                     if self.personalModel?.isFollow == "1" {
-                            self.button.setTitle("发消息", for: .normal)
-//                        if !self.isFushFormTopic {
-//
-//                        }else {
-                        
-                            let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
-                            self.navigationItem.rightBarButtonItem = rightItem
-//                        }
-                       
+                        self.button.setTitle("发消息", for: .normal)
+                        let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
+                        self.navigationItem.rightBarButtonItem = rightItem
                     }else {
                         self.button.setTitle("添加好友", for: .normal)
                     }

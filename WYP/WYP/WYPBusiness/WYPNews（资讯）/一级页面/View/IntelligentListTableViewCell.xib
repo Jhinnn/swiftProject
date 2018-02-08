@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="IntelligentListTableViewCell" customModule="WYP" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="58"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="57.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mtc-hQ-l2i">
+                        <rect key="frame" x="12" y="7" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="2RS-cQ-eJY"/>
+                            <constraint firstAttribute="height" constant="44" id="YNi-P9-3lu"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="哈哈" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShS-GK-2jZ">
+                        <rect key="frame" x="72" y="10" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="再见来不及握手" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pi-OR-WQf">
+                        <rect key="frame" x="72" y="33" width="244" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.69358740482233505" green="0.69358740482233505" blue="0.69358740482233505" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="199" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqb-1V-MMA">
+                        <rect key="frame" x="336" y="15.5" width="48" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="BuL-bm-Nmn"/>
+                            <constraint firstAttribute="width" constant="48" id="QI1-fx-ei5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="关注"/>
+                        <connections>
+                            <action selector="attAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="o7l-aQ-Teo"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zqb-1V-MMA" firstAttribute="centerY" secondItem="Mtc-hQ-l2i" secondAttribute="centerY" id="3Cu-g1-fWi"/>
+                    <constraint firstItem="zqb-1V-MMA" firstAttribute="leading" secondItem="3pi-OR-WQf" secondAttribute="trailing" constant="20" id="bg6-ig-CJl"/>
+                    <constraint firstItem="Mtc-hQ-l2i" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dnh-rc-bhA"/>
+                    <constraint firstItem="3pi-OR-WQf" firstAttribute="leading" secondItem="ShS-GK-2jZ" secondAttribute="leading" id="fQc-2o-LPL"/>
+                    <constraint firstItem="Mtc-hQ-l2i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="fZ9-dw-RBn"/>
+                    <constraint firstItem="ShS-GK-2jZ" firstAttribute="leading" secondItem="Mtc-hQ-l2i" secondAttribute="trailing" constant="16" id="tB2-5p-o5c"/>
+                    <constraint firstItem="3pi-OR-WQf" firstAttribute="top" secondItem="ShS-GK-2jZ" secondAttribute="bottom" constant="6" id="thT-Vd-ueC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zqb-1V-MMA" secondAttribute="trailing" constant="-4" id="wRq-gj-Lyz"/>
+                    <constraint firstItem="ShS-GK-2jZ" firstAttribute="top" secondItem="Mtc-hQ-l2i" secondAttribute="top" constant="3" id="zD3-51-X4Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="attentionButton" destination="zqb-1V-MMA" id="xLf-ah-d4Y"/>
+                <outlet property="contentLabel" destination="3pi-OR-WQf" id="CKA-uY-P7N"/>
+                <outlet property="imgView" destination="Mtc-hQ-l2i" id="EfK-A7-t50"/>
+                <outlet property="nameLabel" destination="ShS-GK-2jZ" id="xpG-Av-o9a"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

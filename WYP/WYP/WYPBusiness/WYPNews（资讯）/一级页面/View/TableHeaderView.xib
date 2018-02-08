@@ -11,18 +11,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="headerView" id="iN0-l3-epB" customClass="UICollectionHeader" customModule="WYP" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TableHeaderView" customModule="WYP" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐达人榜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpi-qe-6hx">
-                    <rect key="frame" x="12" y="6" width="71.5" height="21"/>
+                    <rect key="frame" x="12" y="16" width="71.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="headTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i65-dG-Mvx">
-                    <rect key="frame" x="303" y="7" width="60" height="22"/>
+                <button opaque="NO" tag="99" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="headTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i65-dG-Mvx">
+                    <rect key="frame" x="303" y="13" width="60" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="rsz-jr-h5R"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="查看更多 " image="home_more_button_normal_iPhone">
                         <color key="titleColor" red="0.45633156627838906" green="0.46128273027135525" blue="0.47613622225025376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -32,11 +35,9 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Gpi-qe-6hx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="4ih-Pc-81C"/>
-                <constraint firstItem="i65-dG-Mvx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="FRN-zf-kpO"/>
+                <constraint firstAttribute="bottom" secondItem="Gpi-qe-6hx" secondAttribute="bottom" id="8rC-r4-NC3"/>
                 <constraint firstAttribute="trailing" secondItem="i65-dG-Mvx" secondAttribute="trailing" constant="12" id="hKF-IJ-u5c"/>
-                <constraint firstItem="Gpi-qe-6hx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="v2j-7b-lX7"/>
-                <constraint firstAttribute="bottom" secondItem="i65-dG-Mvx" secondAttribute="bottom" constant="4" id="wfk-fJ-T6H"/>
-                <constraint firstItem="Gpi-qe-6hx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="yRn-1a-Ff1"/>
+                <constraint firstAttribute="bottom" secondItem="i65-dG-Mvx" secondAttribute="bottom" id="wfk-fJ-T6H"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="34.5" y="114.5"/>

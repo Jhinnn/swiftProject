@@ -3746,6 +3746,114 @@ class NetRequest {
     }
     
     
+    //话题推荐达人
+    class func getIntelligentListNetRequest(page: String, new_id: String, complete: @escaping ((Bool, String?, [NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "is_login_uid" : AppInfo.shared.user?.userId ?? "",
+                                      "page" : page,
+                                      "news_id" : new_id]
+        Alamofire.request(kApi_IntelligentList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.dictionary?["data"]?.rawValue as? [NSDictionary]
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //话题推荐好友
+    class func invitefriendsListNetRequest(page: String,new_id: String, complete: @escaping ((Bool, String?, [NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "is_login_uid" : AppInfo.shared.user?.userId ?? "",
+                                      "page" : page,
+                                      "news_id" : new_id]
+        Alamofire.request(kApi_InvitefriendsList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    let dic = json.dictionary?["data"]?.rawValue as? [NSDictionary]
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //话题邀请回答
+    class func inviteFriendsNetRequest(uid: String,new_id: String, complete: @escaping ((Bool, String?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "is_login_uid" : AppInfo.shared.user?.userId ?? "",
+                                      "uid" : uid,
+                                      "news_id" : new_id]
+        Alamofire.request(kApi_Invitefriends, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info)
+                } else {
+                    complete(true, info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //消息免打扰
+    class func ignoreFriendsMessageNetRequest(uid: String, complete: @escaping ((Bool, String?,NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "open_id" : AppInfo.shared.user?.token ?? "",
+                                      "uid" : uid]
+        Alamofire.request(kApi_IgnorefriendsMsg, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                } else {
+                    complete(false, info,nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    
    
     
 }

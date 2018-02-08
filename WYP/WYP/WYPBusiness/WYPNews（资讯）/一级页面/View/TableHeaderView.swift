@@ -8,11 +8,13 @@
 
 import UIKit
 
-class UICollectionHeader: UICollectionReusableView {
+class TableHeaderView: UIView {
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
     }
     
 }

@@ -12,6 +12,8 @@ class BaseNavigationController: UINavigationController {
     
     var pan: UIPanGestureRecognizer?
     
+    var isNotication: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,8 +73,18 @@ class BaseNavigationController: UINavigationController {
     
     // 返回按钮点击事件
     func backButtonAction(button: UIButton) {
-        popViewController(animated: true)
+        
+        
+        if self.isNotication { //如果是点击推送过来
+            dismiss(animated: true) {
+                
+            }
+        }else {
+            popViewController(animated: true)
+        }
+        
     }
+    
 }
 
 extension BaseNavigationController: UIGestureRecognizerDelegate {

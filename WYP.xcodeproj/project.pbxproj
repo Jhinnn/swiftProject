@@ -8,11 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		38AA97311FE0BB850051F29F /* PersonalInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */; };
+		8E0B89F22023FF9100128BF9 /* MoreIntelligentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89F12023FF9100128BF9 /* MoreIntelligentViewController.swift */; };
+		8E0B89F5202401AD00128BF9 /* IntelligentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89F3202401AD00128BF9 /* IntelligentListTableViewCell.swift */; };
+		8E0B89F6202401AD00128BF9 /* IntelligentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0B89F4202401AD00128BF9 /* IntelligentListTableViewCell.xib */; };
+		8E0B89F820243AA400128BF9 /* IntelligentInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89F720243AA400128BF9 /* IntelligentInviteViewController.swift */; };
+		8E0B89FA20243CE400128BF9 /* TelentInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89F920243CE400128BF9 /* TelentInviteViewController.swift */; };
+		8E0B89FC20243CF500128BF9 /* FriendInviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89FB20243CF500128BF9 /* FriendInviteViewController.swift */; };
+		8E0B8A01202453CD00128BF9 /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B89FF202453CD00128BF9 /* InviteTableViewCell.swift */; };
+		8E0B8A02202453CD00128BF9 /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0B8A00202453CD00128BF9 /* InviteTableViewCell.xib */; };
 		8E0FB0C62022ADFF00A5EAAE /* IntelligentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */; };
 		8E0FB0C92022B14B00A5EAAE /* IntelligentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */; };
 		8E0FB0CA2022B14B00A5EAAE /* IntelligentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */; };
-		8E0FB0CC2022BB5D00A5EAAE /* UICollectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */; };
-		8E0FB0CE2022BD7100A5EAAE /* UICollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */; };
+		8E0FB0CC2022BB5D00A5EAAE /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CB2022BB5D00A5EAAE /* TableHeaderView.xib */; };
+		8E0FB0CE2022BD7100A5EAAE /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CD2022BD7100A5EAAE /* TableHeaderView.swift */; };
+		8E0FB0D0202318E700A5EAAE /* IntelligentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FB0CF202318E700A5EAAE /* IntelligentModel.swift */; };
 		8E2B7767200F0F8000087918 /* PublicGroupOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B7766200F0F8000087918 /* PublicGroupOneViewController.swift */; };
 		8E2B7769200F224800087918 /* TalkNewsDetailsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B7768200F224800087918 /* TalkNewsDetailsCommentViewController.swift */; };
 		8E2B776D200F7D4F00087918 /* CommentDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2B776C200F7D4E00087918 /* CommentDetailCommentCell.swift */; };
@@ -417,11 +426,20 @@
 		38AA97301FE0BB840051F29F /* PersonalInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewController.swift; sourceTree = "<group>"; };
 		5CE144E94DBD326567F8B46B /* Pods-WYP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WYP.release.xcconfig"; path = "Pods/Target Support Files/Pods-WYP/Pods-WYP.release.xcconfig"; sourceTree = "<group>"; };
 		6BA0A9B995D2E156A598FCD6 /* Pods_WYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E0B89F12023FF9100128BF9 /* MoreIntelligentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreIntelligentViewController.swift; sourceTree = "<group>"; };
+		8E0B89F3202401AD00128BF9 /* IntelligentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentListTableViewCell.swift; sourceTree = "<group>"; };
+		8E0B89F4202401AD00128BF9 /* IntelligentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntelligentListTableViewCell.xib; sourceTree = "<group>"; };
+		8E0B89F720243AA400128BF9 /* IntelligentInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentInviteViewController.swift; sourceTree = "<group>"; };
+		8E0B89F920243CE400128BF9 /* TelentInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelentInviteViewController.swift; sourceTree = "<group>"; };
+		8E0B89FB20243CF500128BF9 /* FriendInviteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInviteViewController.swift; sourceTree = "<group>"; };
+		8E0B89FF202453CD00128BF9 /* InviteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
+		8E0B8A00202453CD00128BF9 /* InviteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
 		8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentTableViewCell.swift; sourceTree = "<group>"; };
 		8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntelligentCollectionViewCell.xib; sourceTree = "<group>"; };
-		8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UICollectionHeader.xib; sourceTree = "<group>"; };
-		8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionHeader.swift; sourceTree = "<group>"; };
+		8E0FB0CB2022BB5D00A5EAAE /* TableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableHeaderView.xib; sourceTree = "<group>"; };
+		8E0FB0CD2022BD7100A5EAAE /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
+		8E0FB0CF202318E700A5EAAE /* IntelligentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentModel.swift; sourceTree = "<group>"; };
 		8E2B7766200F0F8000087918 /* PublicGroupOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicGroupOneViewController.swift; sourceTree = "<group>"; };
 		8E2B7768200F224800087918 /* TalkNewsDetailsCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkNewsDetailsCommentViewController.swift; sourceTree = "<group>"; };
 		8E2B776C200F7D4E00087918 /* CommentDetailCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDetailCommentCell.swift; sourceTree = "<group>"; };
@@ -2465,6 +2483,7 @@
 			isa = PBXGroup;
 			children = (
 				F99869A71EA61C2B002C502B /* InfoModel.swift */,
+				8E0FB0CF202318E700A5EAAE /* IntelligentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2484,8 +2503,12 @@
 				8E0FB0C52022ADFF00A5EAAE /* IntelligentTableViewCell.swift */,
 				8E0FB0C72022B14B00A5EAAE /* IntelligentCollectionViewCell.swift */,
 				8E0FB0C82022B14B00A5EAAE /* IntelligentCollectionViewCell.xib */,
-				8E0FB0CB2022BB5D00A5EAAE /* UICollectionHeader.xib */,
-				8E0FB0CD2022BD7100A5EAAE /* UICollectionHeader.swift */,
+				8E0FB0CB2022BB5D00A5EAAE /* TableHeaderView.xib */,
+				8E0FB0CD2022BD7100A5EAAE /* TableHeaderView.swift */,
+				8E0B89F3202401AD00128BF9 /* IntelligentListTableViewCell.swift */,
+				8E0B89F4202401AD00128BF9 /* IntelligentListTableViewCell.xib */,
+				8E0B89FF202453CD00128BF9 /* InviteTableViewCell.swift */,
+				8E0B8A00202453CD00128BF9 /* InviteTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2499,6 +2522,10 @@
 				EF3361991FDD0BBA00F85954 /* TallkViewController.swift */,
 				F99869B11EA61C2B002C502B /* NewsVideosViewController.swift */,
 				F99869B21EA61C2B002C502B /* NewsViewController.swift */,
+				8E0B89F12023FF9100128BF9 /* MoreIntelligentViewController.swift */,
+				8E0B89F720243AA400128BF9 /* IntelligentInviteViewController.swift */,
+				8E0B89F920243CE400128BF9 /* TelentInviteViewController.swift */,
+				8E0B89FB20243CF500128BF9 /* FriendInviteViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3034,6 +3061,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EB4DF2520119F83001D497D /* WeiboSDK.bundle in Resources */,
+				8E0B89F6202401AD00128BF9 /* IntelligentListTableViewCell.xib in Resources */,
+				8E0B8A02202453CD00128BF9 /* InviteTableViewCell.xib in Resources */,
 				F916E57C1E8DEFB90051F945 /* citydict.plist in Resources */,
 				A4E439231ED28305007532B0 /* FreeShowroomDetails.storyboard in Resources */,
 				F9B660B51F04EA5400692DE2 /* FastForwardView.xib in Resources */,
@@ -3049,7 +3078,7 @@
 				A4301C281E5FDEB000E8E222 /* Assets.xcassets in Resources */,
 				F9BF0BD11F09E95E002C0108 /* cityList.json in Resources */,
 				8E0FB0CA2022B14B00A5EAAE /* IntelligentCollectionViewCell.xib in Resources */,
-				8E0FB0CC2022BB5D00A5EAAE /* UICollectionHeader.xib in Resources */,
+				8E0FB0CC2022BB5D00A5EAAE /* TableHeaderView.xib in Resources */,
 				8EEDA08C20076BEA008352CE /* SeachResultComCell.xib in Resources */,
 				A42EDE111EDEB21D00C0B500 /* FYLCity.plist in Resources */,
 				8EEDA09020078C79008352CE /* SeachResultComNoCell.xib in Resources */,
@@ -3179,6 +3208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E0FB0D0202318E700A5EAAE /* IntelligentModel.swift in Sources */,
 				F9986A531EA61C2B002C502B /* ShowroomNaviViewController.swift in Sources */,
 				F9986A3A1EA61C2B002C502B /* InviteFriendsTableViewCell.swift in Sources */,
 				F9986A141EA61C2B002C502B /* AttentionRoomViewController.swift in Sources */,
@@ -3204,6 +3234,7 @@
 				A43C2A3E1E8101D90037BB5A /* UIColor+Extension.swift in Sources */,
 				F9986A0E1EA61C2B002C502B /* TopicsReplyFrameModel.swift in Sources */,
 				8EB4DF792015E2F0001D497D /* MediaLibraryViewController.swift in Sources */,
+				8E0B89FC20243CF500128BF9 /* FriendInviteViewController.swift in Sources */,
 				F98935251EC01D93002590AE /* LevelViewController.swift in Sources */,
 				F91AD0851EBAFB6200F70C82 /* NewsPhotosDetailViewController.swift in Sources */,
 				F9ADA3881EE54E3300289E5E /* PhotosCommentsDetailViewController.swift in Sources */,
@@ -3215,6 +3246,7 @@
 				F9A47A401F5CE45700C313F2 /* SYBannerCell.swift in Sources */,
 				F9986A301EA61C2B002C502B /* TopicsDetailsViewController.swift in Sources */,
 				F99869F71EA61C2B002C502B /* CityListViewController.swift in Sources */,
+				8E0B8A01202453CD00128BF9 /* InviteTableViewCell.swift in Sources */,
 				A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */,
 				F9599BC71EB20CE300440E66 /* TicketInfoCell.swift in Sources */,
 				F99869F11EA61C2B002C502B /* HomeViewController.swift in Sources */,
@@ -3321,7 +3353,7 @@
 				F9986A691EA61C2B002C502B /* ShowroomDetailsViewController.swift in Sources */,
 				F98935281EC06614002590AE /* AttentionRoomModel.swift in Sources */,
 				F9599BBA1EB1FD3C00440E66 /* TicketVernveModel.swift in Sources */,
-				8E0FB0CE2022BD7100A5EAAE /* UICollectionHeader.swift in Sources */,
+				8E0FB0CE2022BD7100A5EAAE /* TableHeaderView.swift in Sources */,
 				F94351C91EDFFEF300FB4831 /* UIButton+Extension.swift in Sources */,
 				F9BF0BD41F09F1A2002C0108 /* CityModel.swift in Sources */,
 				FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */,
@@ -3369,6 +3401,7 @@
 				8E650ADF1FE7B5B300A453BB /* UIButton+HXExtension.m in Sources */,
 				F96139BC1EAD8D970029E22A /* HomeModel.swift in Sources */,
 				F9FE90571F9F024800D31F3C /* UIImage+ImageSize.m in Sources */,
+				8E0B89F22023FF9100128BF9 /* MoreIntelligentViewController.swift in Sources */,
 				F9B660B61F04EA5400692DE2 /* WMLightView.m in Sources */,
 				F9986A291EA61C2B002C502B /* NotificationViewController.swift in Sources */,
 				F9FE905B1F9F024800D31F3C /* SGQRCodeHelperTool.m in Sources */,
@@ -3376,6 +3409,7 @@
 				F984BDD51E97875200FD3E0B /* SYAlertController.swift in Sources */,
 				A4A134F51EA4AF7500FC4D67 /* CCPScrollView.m in Sources */,
 				A419E7421EC1CF2C00C277D8 /* PrivacyViewController.swift in Sources */,
+				8E0B89F820243AA400128BF9 /* IntelligentInviteViewController.swift in Sources */,
 				F95EA8561F78EC1D008AE547 /* navTitleView.swift in Sources */,
 				8E650AC71FE7B5B300A453BB /* HXCameraPreviewViewController.m in Sources */,
 				F9E298181EAB5EC700DFD96F /* NewsSearchResultViewController.swift in Sources */,
@@ -3528,6 +3562,7 @@
 				F9986A371EA61C2B002C502B /* GoodsAddressController.swift in Sources */,
 				FB1BE5E91FEB494A003BDC1C /* GroupNoteModel.swift in Sources */,
 				F91E42CD1EA70B2100CDCE19 /* TheaterGroupModel.swift in Sources */,
+				8E0B89F5202401AD00128BF9 /* IntelligentListTableViewCell.swift in Sources */,
 				A43C2A461E8101D90037BB5A /* BaseNavigationController.swift in Sources */,
 				A476BD471E934670009733A5 /* UITextView+PinchZoom.m in Sources */,
 				8EB4DF752015D0D3001D497D /* ExhibitionMenuModel.swift in Sources */,
@@ -3537,6 +3572,7 @@
 				F992EAA21ED2E03E004E0CF8 /* BindingViewController.swift in Sources */,
 				F9FE90461F9ECB3700D31F3C /* MyQRViewController.swift in Sources */,
 				A41FBF741ED5A13D009B4E43 /* ShareManager.swift in Sources */,
+				8E0B89FA20243CE400128BF9 /* TelentInviteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

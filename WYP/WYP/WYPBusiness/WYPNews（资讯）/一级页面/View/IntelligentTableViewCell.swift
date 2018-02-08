@@ -9,12 +9,39 @@
 import UIKit
 
 class IntelligentTableViewCell: UITableViewCell {
-
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         viewConfig()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadSectionThree), name: NSNotification.Name(rawValue: "IntelligentNotifaction"), object: nil)
+    }
+    
+    //MARK :达人榜关注返回刷新
+    func reloadSectionThree() {
+        
+        NetRequest.getIntelligentListNetRequest(page: "1", new_id: "") { (success, info, result) in
+            if success {
+            self.intelligentModel?.removeAll()
+                for dic in result! {
+                    let model = IntelligentModel.deserialize(from: dic)
+                    self.intelligentModel?.append(model!)
+                }
+                self.collectionView.reloadData()
+            }
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    var intelligentModel: [IntelligentModel]? {
+        willSet {
+            self.collectionView.reloadData()
+        }
     }
     
     func  viewConfig() {
@@ -24,21 +51,16 @@ class IntelligentTableViewCell: UITableViewCell {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 130)
+        layout.itemSize = CGSize(width: 120, height: 168)
         layout.scrollDirection = UICollectionViewScrollDirection.horizontal
         layout.minimumInteritemSpacing = 4
-        layout.sectionInset = UIEdgeInsets(top: 35, left: 12, bottom: 23, right: 12)  //外边距
-        // 设定header的大小
-        layout.headerReferenceSize = CGSize(width: kScreen_width, height: 30)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)  //外边距
+   
+        let collectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_width, height: 190), collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+     
         
-        
-
-        let collectionView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_width, height: 180), collectionViewLayout: layout)
-        // 在注册cell 的同时，别忘了注册header
-        let nib = UINib.init(nibName: "UICollectionHeader", bundle: nil)
-        collectionView.register(nib, forSupplementaryViewOfKind:
-            UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView")
-        collectionView.register(IntelligentCollectionViewCell.self, forCellWithReuseIdentifier: "intellCell")
+        collectionView.register(UINib(nibName: "IntelligentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "intellCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
@@ -53,30 +75,72 @@ class IntelligentTableViewCell: UITableViewCell {
 
 extension IntelligentTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 8
+        return (self.intelligentModel?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "intellCell", for: indexPath) as! IntelligentCollectionViewCell
-        cell.backgroundColor = UIColor.red
+        cell.delegate = self
+        cell.model = self.intelligentModel?[indexPath.item]
+        cell.backgroundColor = UIColor.white
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let personalInformationVC = PersonalInformationViewController()
+        let model = self.intelligentModel?[indexPath.item]
+        personalInformationVC.targetId = model?.uid ?? ""
+        personalInformationVC.name = model?.nickname ?? ""
+        self.viewController?.navigationController?.pushViewController(personalInformationVC, animated: true)
     }
     
-    
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        var reusableView: UICollectionReusableView?
-//        if kind  ==  UICollectionElementKindSectionHeader {
-//            let header :UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath)
-//            reusableView = header
-//        }
-//        return reusableView!
-//    }
+   
     
   
     
+}
+
+
+//MARK : 关注delegate
+extension IntelligentTableViewCell: IntelligentAttentionDelegate {
+    func attentionActionCell(_ IntelligentCell: IntelligentCollectionViewCell, intelligentModel model: IntelligentModel) {
+        
+        if model.is_follow == "1" { //已关注
+            
+            NetRequest.addOrCancelAttentionNetRequest(method: "DELETE", mid: AppInfo.shared.user?.userId ?? "", follow_who: model.uid ?? "") { (success, info) in
+                
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info)
+                    
+                    IntelligentCell.attentionButton.adjustsImageWhenHighlighted = false
+                    IntelligentCell.attentionButton.backgroundColor = UIColor.themeColor
+                    IntelligentCell.attentionButton.setTitle("关注", for: .normal)
+                    IntelligentCell.attentionButton.setTitleColor(UIColor.white, for: .normal)
+                    model.is_follow = "0"
+                } else {
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            }
+            
+            
+        } else {
+            NetRequest.addOrCancelAttentionNetRequest(method: "POST", mid: AppInfo.shared.user?.userId ?? "", follow_who: model.uid ?? "") { (success, info) in
+                
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info)
+                    
+                    IntelligentCell.attentionButton.adjustsImageWhenHighlighted = false
+                    IntelligentCell.attentionButton.backgroundColor = UIColor.white
+                    IntelligentCell.attentionButton.setTitle("已关注", for: .normal)
+                    IntelligentCell.attentionButton.setTitleColor(UIColor.themeColor, for: .normal)
+                    model.is_follow = "1"
+                   
+                } else {
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            }
+        }
+    
+    }
 }

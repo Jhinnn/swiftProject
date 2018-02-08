@@ -85,8 +85,7 @@ class GroupsMemberListViewController: BaseViewController {
             if success {
                 self.groupDetail = ApplyGroupModel.deserialize(from: result)
                 self.memberCollectionView.reloadData()
-                
-                
+
             } else {
                 print(info!)
             }
@@ -256,12 +255,20 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberFooter", for: indexPath) as! GroupsMemberListCollectionReusableView
-//            let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
-//            if notification == "0" {
-//                footerView.switchBtn.isOn = false
-//            } else if notification == "1" {
-//                footerView.switchBtn.isOn = true
+            let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
+            if notification == "0" {
+                footerView.switchBtn.isOn = false
+            } else if notification == "1" {
+                footerView.switchBtn.isOn = true
+            }
+//            if self.groupDetail != nil {
+//                if Int((self.groupDetail?.rank)!) == 1 || Int((self.groupDetail?.rank)!) == 0 {  // 0未进入 1 群组成员 2.群主  3、管理员
+//                    footerView.settingView.isHidden = true
+//                }else {
+//                    footerView.settingView.isHidden = false
+//                }
 //            }
+           
             footerView.groupNoteConten.text = self.groupDetail?.board
             footerView.groupDetalConten.text = self.groupDetail?.groupDetail
             footerView.delegate = self
@@ -292,26 +299,6 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let community = MyCommunityViewController()
-        //        community.title = "个人主页"
-        //        community.userId = groupDetail?.groupMember?[indexPath.item].peopleId ?? ""
-        //        community.headImageUrl = groupDetail?.groupMember?[indexPath.item].userImage ?? ""
-        //        community.nickName = groupDetail?.groupMember?[indexPath.item].name
-        //        let fans = groupDetail?.groupMember?[indexPath.item].peopleFans ?? "0"
-        //        let friends = groupDetail?.groupMember?[indexPath.item].peopleFriends ?? "0"
-        //        community.fansCount = String.init(format: "粉丝:%@人", fans)
-        //        community.friendsCountLabel.text = String.init(format: "好友:%@人", friends)
-        //        community.type = "2"
-        //        if groupDetail?.groupMember?[indexPath.item].peopleId == AppInfo.shared.user?.userId {
-        //            community.userType = "200"
-        //        }
-        //        // 判断是否关注
-        //        if groupDetail?.groupMember?[indexPath.item].isFollow == "0" {
-        //            community.isFollowed = false
-        //        } else {
-        //            community.isFollowed = true
-        //        }
-        //        navigationController?.pushViewController(community, animated: true)
         if Int((self.groupDetail?.rank)!) != 1 {
             if indexPath.row == (groupDetail?.groupMember?.count)! {
                 let recommend = RecommendFriendsViewController()

@@ -345,50 +345,70 @@ extension AppDelegate: RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMRece
         // 解析json
         let aps = message.value(forKey: "aps") as? NSDictionary
         let info = aps?.value(forKey: "category") as? String
-        let arr = info?.components(separatedBy: "-")
-        let category = arr?[0] ?? ""
-        let newsId = arr?[1] ?? ""
         
-        // 分类展示详情页面
-        if category == "3" {
-            // 图集
-            NetRequest.getPhotoDeatilsNetRequest(photoId: newsId, complete: { (success, info, result) in
-                if success {
-                    let newsData = InfoModel.deserialize(from: result)
-                    UserDefaults.standard.set("PhotoPush", forKey: "PhotoPush")
-                    let photos = NewsPhotosDetailViewController()
-                    photos.newsId = newsData?.newsId
-                    photos.newsTitle = newsData?.infoTitle
-                    photos.isFollow = newsData?.isFollow
-                    photos.imageArray = newsData?.infoImageArr
-                    photos.contentArray = newsData?.contentArray
-                    photos.commentNumber = newsData?.infoComment
-                    photos.currentIndex = 0
-                    photos.flag = 100
-                    let navi = UINavigationController.init(rootViewController: photos)
+        if info == "gambit" {  //邀请话题
+          
+            let new_id = message.value(forKey: "news_id") as? String
+            let talkNewVC = TalkNewsDetailsViewController()
+            talkNewVC.newsId = new_id
+            
+            let navi = BaseNavigationController.init(rootViewController: talkNewVC)
+            navi.isNotication = true
+            
+            self.window?.rootViewController?.present(navi, animated: true, completion: nil)
+            
+        }else {
+            let arr = info?.components(separatedBy: "-")
+            
+            
+            let category = arr?[0] ?? ""
+            let newsId = arr?[1] ?? ""
+            
+            // 分类展示详情页面
+            if category == "3" {
+                // 图集
+                NetRequest.getPhotoDeatilsNetRequest(photoId: newsId, complete: { (success, info, result) in
+                    if success {
+                        let newsData = InfoModel.deserialize(from: result)
+                        UserDefaults.standard.set("PhotoPush", forKey: "PhotoPush")
+                        let photos = NewsPhotosDetailViewController()
+                        photos.newsId = newsData?.newsId
+                        photos.newsTitle = newsData?.infoTitle
+                        photos.isFollow = newsData?.isFollow
+                        photos.imageArray = newsData?.infoImageArr
+                        photos.contentArray = newsData?.contentArray
+                        photos.commentNumber = newsData?.infoComment
+                        photos.currentIndex = 0
+                        photos.flag = 100
+                        let navi = UINavigationController.init(rootViewController: photos)
+                        self.window?.rootViewController?.present(navi, animated: true, completion: nil)
+                    }
+                })
+            } else if category == "4" {
+                // 视频
+                UserDefaults.standard.set("VideoPush", forKey: "VideoPush")
+                if newsId != "" {
+                    let newsVC = VideoDetailViewController()
+                    newsVC.newsId = newsId
+                    newsVC.flag = 100
+                    let navi = UINavigationController.init(rootViewController: newsVC)
                     self.window?.rootViewController?.present(navi, animated: true, completion: nil)
                 }
-            })
-        } else if category == "4" {
-            // 视频
-            UserDefaults.standard.set("VideoPush", forKey: "VideoPush")
-            if newsId != "" {
-                let newsVC = VideoDetailViewController()
-                newsVC.newsId = newsId
-                newsVC.flag = 100
-                let navi = UINavigationController.init(rootViewController: newsVC)
-                self.window?.rootViewController?.present(navi, animated: true, completion: nil)
-            }
-        } else {
-            // 普通资讯
-            UserDefaults.standard.set("NewsPush", forKey: "NewsPush")
-            if newsId != "" {
-                let newsVC = NewsDetailsViewController()
-                newsVC.newsId = newsId
-                let navi = UINavigationController.init(rootViewController: newsVC)
-                self.window?.rootViewController?.present(navi, animated: true, completion: nil)
+            } else {
+                // 普通资讯
+                UserDefaults.standard.set("NewsPush", forKey: "NewsPush")
+                if newsId != "" {
+                    let newsVC = NewsDetailsViewController()
+                    newsVC.newsId = newsId
+                    let navi = UINavigationController.init(rootViewController: newsVC)
+                    self.window?.rootViewController?.present(navi, animated: true, completion: nil)
+                }
             }
         }
+        
+        
+        
+       
         
     }
 

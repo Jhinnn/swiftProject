@@ -13,6 +13,9 @@ class TallkViewController: BaseViewController {
     var isShowBanner: Bool = false
     
      var dataList = [TopicsFrameModel]()
+    
+    var dataSource = [IntelligentModel]()
+    
     // 数据源
     var newsData = [InfoModel]()
     // 广告数据
@@ -64,12 +67,18 @@ class TallkViewController: BaseViewController {
         
         // 获取数据
         loadNewsData(requestType: .update)
+        
+        //获得达人榜
+        loadIntelligentData()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         loadBannerData()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,6 +86,10 @@ class TallkViewController: BaseViewController {
         
         KRefreshDataCount().label.isHidden = true
     }
+    
+   
+    
+    
     
     // MARK: - private method
     private func viewConfig() {
@@ -134,6 +147,8 @@ class TallkViewController: BaseViewController {
         }
     }
     
+   
+    
     // 轮播图
     func loadBannerData() {
         NetRequest.newsAdv { (success, info, result) in
@@ -148,6 +163,19 @@ class TallkViewController: BaseViewController {
                     self.bannerImages?.append(self.bannerData?[i].bannerImage ?? "")
                 }
                 
+            }
+        }
+    }
+    
+    //MARK: 请求达人榜
+    func loadIntelligentData() {
+        NetRequest.getIntelligentListNetRequest(page: "1",new_id: "") { (success, info, result) in
+            if success {
+                for dic in result! {
+                    let model = IntelligentModel.deserialize(from: dic)
+                    self.dataSource.append(model!)
+                }
+                self.newAllTableView.reloadData()
             }
         }
     }
@@ -399,10 +427,11 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        if indexPath.section == 2 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "inteCell", for: indexPath) as! IntelligentTableViewCell
-//            return cell
-//        }else {
+        if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "inteCell", for: indexPath) as! IntelligentTableViewCell
+            cell.intelligentModel = self.dataSource
+            return cell
+        }else {
             switch newsData[indexPath.section].showType ?? 6 {
             case 0: // 视频
                 let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
@@ -463,14 +492,14 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             default:
                 return UITableViewCell()
             }
-//        }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-//        if indexPath.section == 2 {
-//            return 180
-//        }else {
+        if indexPath.section == 2 {
+            return 190
+        }else {
             switch newsData[indexPath.section].showType ?? 6 {
             case 0:
                 return 275 * width_height_ratio
@@ -487,15 +516,32 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             default:
                 return 0
             }
-//        }
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 0.0001
+        }
         return 9
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 30
+        }
         return 0.001
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 2 {
+            let view = Bundle.main.loadNibNamed("TableHeaderView", owner: nil, options: nil)?.first as! TableHeaderView
+            let moreButton = view.viewWithTag(99) as! UIButton
+            moreButton.addTarget(self, action: #selector(moreGotTelent), for: .touchUpInside)
+            return view
+        }
+        return UIView()
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -616,6 +662,10 @@ extension TallkViewController: SYBannerViewDelegate {
     }
     
     
+    //MARK: //更多达人
+    func moreGotTelent() {
+        navigationController?.pushViewController(MoreIntelligentViewController(), animated: true)
+    }
     
 }
 
