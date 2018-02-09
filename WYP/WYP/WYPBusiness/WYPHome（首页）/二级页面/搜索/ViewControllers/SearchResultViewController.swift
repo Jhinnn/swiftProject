@@ -34,9 +34,7 @@ class SearchResultViewController: BaseViewController {
         loadData()
         
         if #available(iOS 11, *) {
-            print(resultTableView.safeAreaInsets)
-            print(resultTableView.contentInset)
-            print(resultTableView.adjustedContentInset)
+       
         }
     }
     

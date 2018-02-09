@@ -142,8 +142,6 @@ class NewsNaviViewController: BaseViewController {
         }
         searchViewController?.hotSearchStyle = .rankTag
         searchViewController?.searchHistoryStyle = .normalTag
-//        searchViewController?.cancelButton = UIBarButtonItem(title: "搜索", style: .done, target: self, action: #selector(searchButtonAction))
-        
         let searchBtn = UIButton(type: .custom)
         searchBtn.setTitle("搜索", for: .normal)
         searchBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)

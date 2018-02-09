@@ -41,7 +41,12 @@ class ContactsViewController: BaseViewController {
     }
     func layoutPageSubViews() {
         friendsTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
+            if deviceTypeIPhoneX() {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108 + 34, 0))
+            }else {
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 108, 0))
+            }
+            
         }
         sectionTitleView.snp.makeConstraints { (make) in
             make.centerX.equalTo(view)

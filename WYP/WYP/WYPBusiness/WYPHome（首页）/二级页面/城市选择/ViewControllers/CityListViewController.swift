@@ -285,7 +285,7 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell")
         let sectionTitles : NSArray = letterResultArray?.object(at: indexPath.section) as! NSArray
-        print(sectionTitles)
+     
         cell?.textLabel?.text = sectionTitles.object(at: indexPath.row) as? String
         return cell!
     }

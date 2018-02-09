@@ -230,8 +230,14 @@ class NewsPhotosDetailViewController: BaseViewController {
         
         // 添加评论数
         commentDetailBtn.badgeLabel.frame = CGRect(x: 9, y: -2, width: 15, height: 8)
-        commentDetailBtn.badgeLabel.text = commentNumber ?? "0"
-        commentDetailBtn.addSubview(commentDetailBtn.badgeLabel)
+        if commentNumber == "0" {
+            commentDetailBtn.badgeLabel.isHidden = true
+        }else {
+            commentDetailBtn.badgeLabel.isHidden = false
+            commentDetailBtn.badgeLabel.text = commentNumber
+            commentDetailBtn.addSubview(commentDetailBtn.badgeLabel)
+        }
+        
     }
     
     // 浏览图集

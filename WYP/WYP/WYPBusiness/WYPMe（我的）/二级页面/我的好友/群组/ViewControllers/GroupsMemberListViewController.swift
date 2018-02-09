@@ -85,7 +85,6 @@ class GroupsMemberListViewController: BaseViewController {
             if success {
                 self.groupDetail = ApplyGroupModel.deserialize(from: result)
                 self.memberCollectionView.reloadData()
-
             } else {
                 print(info!)
             }
@@ -109,10 +108,6 @@ class GroupsMemberListViewController: BaseViewController {
         let messageObject = UMSocialMessageObject()
         // 分享链接
         let urlString = kApi_baseUrl(path: "mob/Fenxiang/index.html?id=") + self.groupId!
-//        let url = String.init(format: urlString + "&uid=" + (AppInfo.shared.user?.userId)! + "&name=" + self.title!)
-//        let shareLink = URL.init(string: urlString)
-        // 设置文本
-        //        messageObject.text = newsTitle! + shareLink
         // 分享对象
         let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: self.title ?? "", descr: "快加入我们的讨论吧！", thumImage: nil)
         // 网址
@@ -255,20 +250,6 @@ extension GroupsMemberListViewController: UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionFooter {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "groupMemberFooter", for: indexPath) as! GroupsMemberListCollectionReusableView
-            let notification = UserDefaults.standard.value(forKey: "groupNotification") as? String
-            if notification == "0" {
-                footerView.switchBtn.isOn = false
-            } else if notification == "1" {
-                footerView.switchBtn.isOn = true
-            }
-//            if self.groupDetail != nil {
-//                if Int((self.groupDetail?.rank)!) == 1 || Int((self.groupDetail?.rank)!) == 0 {  // 0未进入 1 群组成员 2.群主  3、管理员
-//                    footerView.settingView.isHidden = true
-//                }else {
-//                    footerView.settingView.isHidden = false
-//                }
-//            }
-           
             footerView.groupNoteConten.text = self.groupDetail?.board
             footerView.groupDetalConten.text = self.groupDetail?.groupDetail
             footerView.delegate = self
@@ -374,26 +355,22 @@ extension GroupsMemberListViewController: GroupsMemberListCollectionDelegate {
         self.navigationController?.pushViewController(groupNoteVc, animated: true)
     }
     
+    
+    //MARK: --是否允许通知
     func noDisturbing(sender: UISwitch) {
         if sender.isOn {
-            sender.isOn = false
+            
+            //MARK: --允许通知
             RCIMClient.shared().setConversationNotificationStatus(.ConversationType_GROUP, targetId: groupId, isBlocked: false, success: { (status) in
-                print(status)
-                // 允许通知
-                let userDefault = UserDefaults.standard
-                userDefault.set("0", forKey: "groupNotification")
+       
             }) { (error) in
-                print(error)
             }
             
         } else {
-            sender.isOn = true
-            
+            //MARK: --禁止通知
             RCIMClient.shared().setConversationNotificationStatus(.ConversationType_GROUP, targetId: groupId, isBlocked: true, success: { (status) in
                 print(status)
-                // 禁止通知
-                let userDefault = UserDefaults.standard
-                userDefault.set("1", forKey: "groupNotification")
+
             }) { (error) in
                 print(error)
             }

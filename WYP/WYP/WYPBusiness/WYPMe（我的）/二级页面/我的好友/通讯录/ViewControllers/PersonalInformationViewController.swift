@@ -164,13 +164,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             cell?.addSubview(circleIV)
             
             let label1 = UILabel(frame:CGRect(x:248/3+15+20, y:220-35, width:95, height:30))
-//            let label1 = UILabel()
             cell?.addSubview(label1)
-//            label1.snp.makeConstraints({ (make) in
-//                make.left.equalTo(circleIV.snp.right).offset(20)
-//                make.top.equalTo(circleIV.snp.top).offset(5)
-//                make.height.equalTo(30)
-//            })
             label1.layer.cornerRadius = 10
             label1.clipsToBounds = true
             label1.textColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
@@ -228,7 +222,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             cell?.addSubview(arrowIV)
             
             
-            if (self.community_cover != nil){
+            if self.community_cover.count != 0 {
                 for index in 0..<self.community_cover.count{
                     switch index {
                     case 0:
@@ -269,7 +263,7 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             let titleIV = UIImageView(image:UIImage(named:"0002"))
             titleIV.frame = CGRect(x:(UIScreen.main.bounds.size.width-550/3)/2, y:20, width:550/3, height:50/3)
             cell?.addSubview(titleIV)
-            if self.gambit_cover != nil{
+            if self.gambit_cover.count != 0{
                 for index in 0..<self.gambit_cover.count{
                     switch index{
                     case 0:
@@ -317,6 +311,13 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
                     if indexPath.row == 1 {
                         cell?.textLabel?.text = "消息免打扰"
                         uiSwitch = UISwitch(frame: CGRect(x: UIScreen.main.bounds.size.width-80, y: 10, width: 51, height: 31))
+                        uiSwitch?.onTintColor = UIColor.themeColor
+                        if self.personalModel?.is_push == "1" && self.personalModel != nil {
+                            uiSwitch?.setOn(true, animated: true)
+                        }else {
+                            uiSwitch?.setOn(false, animated: true)
+                        }
+    
                         uiSwitch?.addTarget(self, action: #selector(switchClick), for: .valueChanged)
                         cell?.addSubview(uiSwitch!)
                     }
@@ -360,14 +361,12 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             let commun = MyCommunityViewController()
             commun.userId = self.targetId
             self.navigationController?.pushViewController(commun, animated: true)
-//             print("社区点击事件")
         }
         if indexPath.section == 3 {
             let topicsView = TopicsViewController()
             topicsView.titleName = self.personalModel?.name
             topicsView.targId = self.targetId
             self.navigationController?.pushViewController(topicsView, animated: true)
-//             print("话题点击事件")
         }
        
     }
@@ -407,45 +406,29 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     
     // MARK: - 消息免打扰
     func switchClick(sender:UISwitch) {
-//        NetRequest.ignoreFriendsMessageNetRequest(uid: targetId ?? "", complete: { (success, info, result) in
-//            if success {
-//
-//                if result!["is_push"] as! String == "1" {  //开启免打扰
-//
-//                    RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: self.targetId, isBlocked: true, success: { (status) in
-//
-//                    }) { (error) in
-//
-//                    }
-//                }else {
-//                    RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: self.targetId, isBlocked: false, success: { (status) in
-//
-//                    }) { (error) in
-//
-//                    }
-//                }
-//
-//            }
-//        })
-        if sender.isOn {
-            sender.isOn = false
+
+        if !sender.isOn {
+            //MARK: ---允许通知
             RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE, targetId: targetId, isBlocked: false, success: { (status) in
-                print(status)
-                // 允许通知
-                let userDefault = UserDefaults.standard
-                userDefault.set("0", forKey: "groupNotification")
+                
+                NetRequest.ignoreFriendsMessageNetRequest(uid: self.targetId ?? "", complete: { (success, info, result) in
+                    print("开启通知")
+                })
+                
+                
             }) { (error) in
                 print(error)
             }
             
         } else {
-            sender.isOn = true
-            
+
+            //MARK: ---禁止通知
             RCIMClient.shared().setConversationNotificationStatus(.ConversationType_PRIVATE , targetId: targetId, isBlocked: true, success: { (status) in
-                print(status)
-                // 禁止通知
-                let userDefault = UserDefaults.standard
-                userDefault.set("1", forKey: "groupNotification")
+                
+                NetRequest.ignoreFriendsMessageNetRequest(uid: self.targetId ?? "", complete: { (success, info, result) in
+                    print("关闭通知")
+                })
+                
             }) { (error) in
                 print(error)
             }
@@ -471,73 +454,51 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
     }
     
     func moreAction() {
-     
-    
         var point = CGPoint.zero
         if deviceTypeIPhoneX() {
             point = CGPoint(x: kScreen_width - 30, y: 74)
         }else {
             point = CGPoint(x: kScreen_width - 30, y: 55)
         }
-        
         let popupMenu = YBPopupMenu.show(at: point, titles: ["删除好友"], icons: nil, menuWidth: 100, delegate: self)
         popupMenu?.dismissOnSelected = true
         popupMenu?.type = .default
     }
     
-    
+    // MARK: --数据请求
     func netRequestAction(){
-        
-            NetRequest.requestMyhome(tarUId: self.targetId! ,muid: AppInfo.shared.user?.userId ?? "" ) { (success, info, result) in
-                if success {
-                    let array = result
-                    let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
-                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-                    self.personalModel = PersonalModel.deserialize(from: jsonString)
-                    self.community_cover = (self.personalModel?.community_cover)!
-                    self.gambit_cover = (self.personalModel?.gambit_cover)!
-                    self.name = self.personalModel?.name
-                    if self.personalModel?.is_push == "0" {
-                        self.uiSwitch?.setOn(true, animated: true)
-                    }else {
-                        self.uiSwitch?.setOn(false, animated: true)
-                    }
-                    self.tableView.reloadData()
-                    
-                    if self.personalModel?.isFollow == "1" {
-                        self.button.setTitle("发消息", for: .normal)
-                        let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
-                        self.navigationItem.rightBarButtonItem = rightItem
-                    }else {
-                        self.button.setTitle("添加好友", for: .normal)
-                    }
-        
-                }else {
-                    SVProgressHUD.showError(withStatus: info)
-                }
+        NetRequest.requestMyhome(tarUId: self.targetId! ,muid: AppInfo.shared.user?.userId ?? "" ) { (success, info, result) in
+            if success {
+                let array = result
+                let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
+                self.personalModel = PersonalModel.deserialize(from: jsonString)
+                self.community_cover = (self.personalModel?.community_cover)!
+                self.gambit_cover = (self.personalModel?.gambit_cover)!
+                self.name = self.personalModel?.name
                 
+                self.tableView.reloadData()
+                
+                if self.personalModel?.isFollow == "1" {
+                    self.button.setTitle("发消息", for: .normal)
+                    let rightItem = UIBarButtonItem(title: "更多", style: .plain, target: self, action: #selector(self.moreAction))
+                    self.navigationItem.rightBarButtonItem = rightItem
+                }else {
+                    self.button.setTitle("添加好友", for: .normal)
+                }
+    
+            }else {
+                SVProgressHUD.showError(withStatus: info)
             }
-            
-            
-     
-        
-        
-      
-        
+                
+        }
     }
-    
-    
-    
-    
-    
+
 }
 
 extension PersonalInformationViewController: YBPopupMenuDelegate {
     func ybPopupMenuDidSelected(at index: Int, ybPopupMenu: YBPopupMenu!) {
         if index == 0 {  //删除
-            
-            
-            
             let alertController = UIAlertController(title: "",
                                                     message: "确定删除该好友？", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -549,7 +510,7 @@ extension PersonalInformationViewController: YBPopupMenuDelegate {
                         SVProgressHUD.showSuccess(withStatus: "删除成功！")
                         let time: TimeInterval = 0.5
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
-                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popToRootViewController(animated: true)
                             
                         }
                     }
@@ -558,8 +519,6 @@ extension PersonalInformationViewController: YBPopupMenuDelegate {
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-            
-            
         }else if index == 1 {  //修改备注
             
         }

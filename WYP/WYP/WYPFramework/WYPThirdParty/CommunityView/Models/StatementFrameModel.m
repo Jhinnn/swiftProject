@@ -89,7 +89,7 @@
             imageW = imageW;
             imageH = imageH;
             if (messageSize.height > 100) {
-                _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + 10, imageW, imageH);
+                _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + 17, imageW, imageH);
             } else {
                 _imageArrayF = CGRectMake(CGRectGetMaxX(_headImageF) + space, CGRectGetMaxY(_messageF) + space, imageW, imageH);
             }

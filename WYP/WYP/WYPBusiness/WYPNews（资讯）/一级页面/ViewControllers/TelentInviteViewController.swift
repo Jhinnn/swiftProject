@@ -43,9 +43,9 @@ class TelentInviteViewController: BaseViewController {
         
         tableView.snp.makeConstraints { (make) in
             if deviceTypeIPhoneX() {
-                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 34 + 50, 0))
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 64 + 50, 0))
             }else {
-                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 50, 0))
+                make.edges.equalTo(UIEdgeInsetsMake(0, 0, 64, 0))
             }
             
         }

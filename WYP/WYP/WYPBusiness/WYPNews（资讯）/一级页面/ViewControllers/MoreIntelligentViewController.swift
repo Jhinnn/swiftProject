@@ -26,13 +26,7 @@ class MoreIntelligentViewController: BaseViewController {
     
     // MARK: 加载达人数据
     func loadIntelligentData(requestType: RequestType) {
-        
-//        if requestType == .update {
-//            pageNumber = 1
-//        } else {
-//            pageNumber = pageNumber + 1
-//        }
-        
+
         NetRequest.getIntelligentListNetRequest(page: "\(pageNumber)",new_id: "") { (success, info, result) in
             if success {
                 self.dataSource.removeAll()
@@ -42,9 +36,7 @@ class MoreIntelligentViewController: BaseViewController {
                 }
                 
                 self.tableView.reloadData()
-//                self.tableView.mj_header.endRefreshing()
-//                self.tableView.mj_footer.endRefreshing()
-                
+
             }
         }
     }

@@ -2,12 +2,11 @@
 //  ChatViewController.swift
 //  WYP
 //
-//  Created by ShuYan Feng on 2017/3/20.
+//  Created by ShuYan    on 2017/3/20.
 //  Copyright © 2017年 NGeLB. All rights reserved.
 //
 
 import UIKit
-// RCConversationListViewController
 class ChatViewController: RCConversationListViewController {
 
     override func viewDidLoad() {
@@ -41,18 +40,14 @@ class ChatViewController: RCConversationListViewController {
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
-        
         let conversationVC = ChatDeatilViewController(conversationType: model.conversationType, targetId: model.targetId)
-
         if model.conversationType == .ConversationType_GROUP {
             if model.conversationTitle != nil {
                 let arr = model.conversationTitle.components(separatedBy: " - ")
                 conversationVC?.roomName = arr[0]
                 conversationVC?.groupName = arr[1]
-                
                 navigationController?.pushViewController(conversationVC!, animated: true)
             } else {
-                
                 let alert = UIAlertController(title: "温馨提示", message: "该群组已不存在，请手动从列表删除", preferredStyle: .alert)
                 let OKAction = UIAlertAction(title: "确定", style: .default, handler: nil)
                 alert.addAction(OKAction)

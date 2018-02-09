@@ -147,12 +147,9 @@ class ChatDeatilViewController: RCConversationViewController {
     // 查看好友社区
     func checkFriendCoumity(sender: UIBarButtonItem) {
         goToUserCommunity(userId: self.targetId)
-//        self.navigationController?.popViewController(animated: true)
     }
     
-    func goToUserCommunity(userId: String) {
-        // 获取点击用户的信息
-//        let mineId = AppInfo.shared.user?.userId ?? ""
+    func goToUserCommunity(userId: String) {    
         NetRequest.gotoUserCommunityNetRequest(uid: userId, openId: AppInfo.shared.user?.token ?? "") { (success, info, result) in
             if success {
                 self.userData = PersonModel()

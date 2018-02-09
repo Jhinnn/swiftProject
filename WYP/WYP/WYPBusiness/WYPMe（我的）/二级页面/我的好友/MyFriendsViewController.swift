@@ -91,22 +91,10 @@ class MyFriendsViewController: BaseViewController {
     
     // MARK: - event response
     func searchFriends(sender: UIBarButtonItem) {
-        
-        
-        
         navigationController?.pushViewController(SearchFriendsViewController(), animated: true)
     }
     func addFriends(sender: UIBarButtonItem) {
-        
         navigationController?.pushViewController(ScanOneScanViewController(), animated: true)
-        
-//        let x = UIScreen.main.bounds.size.width - 20
-        
-//        let y = CGFloat(78)
-//        let p = CGPoint(x: x, y: y)
-//        LSXPopMenu.show(at: p, titles: ["扫一扫","添加好友"], icons: ["",""], menuWidth: 100, isShowTriangle: false, delegate: self as LSXPopMenuDelegate)
-        //原来的代码，暂时注释掉
-//        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }
     
     // MARK: - setter and getter
@@ -174,6 +162,5 @@ extension MyFriendsViewController:LSXPopMenuDelegate{
         }else{
             navigationController?.pushViewController(ScanOneScanViewController(), animated: true)
         }
-//        navigationController?.pushViewController(ContactsFriendsViewController(), animated: true)
     }
 }

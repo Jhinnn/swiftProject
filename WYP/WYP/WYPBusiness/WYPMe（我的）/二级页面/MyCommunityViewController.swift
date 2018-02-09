@@ -139,7 +139,6 @@ class MyCommunityViewController: BaseViewController {
         tableViewHeaderView.addSubview(nickNameLabel)
         tableViewHeaderView.addSubview(friendsCountLabel)
         tableViewHeaderView.addSubview(fansCountLabel)
-//        tableView.addSubview(followBtn)
         tableViewHeaderView.addSubview(followBtn)
         
         view.addSubview(interactionView)

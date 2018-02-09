@@ -34,7 +34,7 @@ class QRCodeViewController: BaseViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         let userId = AppInfo.shared.user?.userId ?? ""
         let intUserId = Int(userId)! + 100000
         let str = String.init(format: "chat,%d", intUserId)

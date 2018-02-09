@@ -184,7 +184,7 @@ class HomeViewController: BaseViewController {
             // 3、开启网络状态消息监听
             try reachability.startNotifier()
         }catch{
-            print("could not start reachability notifier")
+            
         }
     }
     
@@ -202,7 +202,7 @@ class HomeViewController: BaseViewController {
         let reachability = note.object as! Reachability
         // 判断网络连接状态
         if reachability.isReachable {
-            print("网络连接：可用")
+           
             // 判断网络连接类型
             if reachability.isReachableViaWiFi {
                 print("连接类型：WiFi")
@@ -1303,10 +1303,8 @@ extension HomeViewController: UIAlertViewDelegate {
             return
         }
         let textField = alertView.textField(at: 0)
-        print(textField?.text ?? "哈哈哈")
-        
         NetRequest.exchangeNetRequest(token: AppInfo.shared.user?.token ?? "", code: textField?.text ?? "") { (success, info, dic) in
-            if success {
+            if success {    
                 let sb = UIStoryboard.init(name: "Main", bundle: nil)
                 let goodsAdressVC = sb.instantiateViewController(withIdentifier: "GoodsAddressIdentity") as! GoodsAddressController
                 goodsAdressVC.ticketTimeId = dic?.object(forKey: "ticket_time_id") as? String

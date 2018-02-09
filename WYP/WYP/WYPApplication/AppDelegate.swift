@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }, error: { (status) in
             
-            print(status.rawValue)
+       
             
         }) { 
             //token过期或者不正确。
@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if pushServiceData != nil {
             
             for (key, _) in pushServiceData! {
-                print(pushServiceData?[key] ?? "")
+             
             }
         } else {
             
@@ -235,7 +235,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if pushServiceData != nil {
             
             for (key, _) in pushServiceData! {
-                print(pushServiceData?[key] ?? "")
+        
             }
         } else {
             
@@ -273,7 +273,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
         
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
+  
         if userInfo["rc"] != nil {
             
         } else {
@@ -321,7 +321,7 @@ extension AppDelegate: RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMRece
        
                     completion(user)
                 } else {
-                    print(info ?? "")
+                   
                 }
             })
         }
@@ -332,7 +332,7 @@ extension AppDelegate: RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMRece
     }
 
     func onRCIMCustomLocalNotification(_ message: RCMessage!, withSenderName senderName: String!) -> Bool {
-        print(message)
+       
         return false
     }
     
