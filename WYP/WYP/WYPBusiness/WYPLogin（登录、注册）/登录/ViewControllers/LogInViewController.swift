@@ -25,6 +25,10 @@ class LogInViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .done, target: self, action: #selector(backButtonItemAction))
         
         setupUI()
+        
+        if !UMSocialManager.default().isInstall(UMSocialPlatformType.QQ) {
+            QQLogInButton.isHidden = true 
+        }
     }
     
     // MARK: - Private Methods
@@ -114,7 +118,7 @@ class LogInViewController: BaseViewController {
         phoneNumberTextField.placeholder = "请输入手机号"
         phoneNumberTextField.backgroundColor = UIColor.white
         phoneNumberTextField.keyboardType = .numberPad
-        
+        phoneNumberTextField.clearButtonMode = UITextFieldViewMode.always
         return phoneNumberTextField
     }()
     
@@ -127,7 +131,7 @@ class LogInViewController: BaseViewController {
         passwordTextField.keyboardType = .asciiCapable
         passwordTextField.returnKeyType = .done
         passwordTextField.isSecureTextEntry = true
-        
+        passwordTextField.clearButtonMode = UITextFieldViewMode.always
         return passwordTextField
     }()
     
@@ -302,9 +306,7 @@ class LogInViewController: BaseViewController {
             if error != nil {
                 
             } else {
-                
                 let resp: UMSocialUserInfoResponse = result as! UMSocialUserInfoResponse
-
                 if platformType == .sina {
                     NetRequest.thirdPartyLoginNetRequest(uuid: uuid ?? "", token: resp.uid, type: type, complete: { (success, info, dic) in
                         if success {

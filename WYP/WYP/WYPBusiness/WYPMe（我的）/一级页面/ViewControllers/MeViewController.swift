@@ -195,13 +195,13 @@ class MeViewController: UITableViewController {
                 friendsArr = [PersonModel].deserialize(from: jsonString) as! [PersonModel]
                 
                 let community = MyCommunityViewController()
-                community.title = "个人主页"
+                community.title = "个人社区"
                 community.headImageUrl = AppInfo.shared.user?.headImgUrl ?? ""
                 community.userId = AppInfo.shared.user?.userId ?? ""
                 community.nickName = AppInfo.shared.user?.nickName ?? ""
                 community.fansCount = String.init(format: "粉丝:%@人", AppInfo.shared.user?.fans ?? "0")
                 community.friendsCountLabel.text = String.init(format: "好友:%d人", friendsArr.count)
-                community.type = "2"
+                community.type = "1"  //看所有好友朋友圈
 //                community.userType = "200"
                 community.isFollowed = false
                 self.navigationController?.pushViewController(community, animated: true)

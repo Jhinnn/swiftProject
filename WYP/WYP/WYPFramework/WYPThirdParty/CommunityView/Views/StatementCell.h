@@ -18,6 +18,9 @@
 @protocol StatementCellDelegate <NSObject>
 
 // 分享按钮点击事件
+- (void)statementCell:(StatementCell *)statementCell statement:(StatementModel *)statement;
+
+// 分享按钮点击事件
 - (void)statementCell:(StatementCell *)statementCell shareButtonAction:(UIButton *)button statement:(StatementModel *)statement;
 // 删除按钮点击事件
 - (void)statementCell:(StatementCell *)statementCell deleteButtonAction:(UIButton *)button statement:(StatementModel *)statement;

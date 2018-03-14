@@ -526,18 +526,15 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="HotShowRoomCellIndentity" id="lN3-TE-u1x" customClass="HotShowRoomCell" customModule="WYP" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="0.0" width="115" height="220"/>
+                                                            <rect key="frame" x="10" y="10" width="115" height="200"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="220"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="200"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_game_button_normal_iPhone" translatesAutoresizingMaskIntoConstraints="NO" id="wbl-AS-ZcZ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="159"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="115" height="149"/>
                                                                         <color key="backgroundColor" red="0.90980392156862744" green="0.91764705882352937" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="159" id="DiF-uV-5fl"/>
-                                                                        </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
@@ -553,7 +550,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="从你的全世界路过" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRL-n6-Bx9">
-                                                                        <rect key="frame" x="0.0" y="164" width="115" height="36"/>
+                                                                        <rect key="frame" x="0.0" y="154" width="115" height="36"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="36" id="I5q-ML-ur5"/>
                                                                         </constraints>
@@ -561,26 +558,8 @@
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="哈尔滨" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmV-hy-zKS">
-                                                                        <rect key="frame" x="10" y="205" width="49" height="10"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="10" id="XfE-rG-hAY"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                        <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="即将上演" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qiq-Xb-sIr">
-                                                                        <rect key="frame" x="64" y="205" width="41" height="10"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="10" id="aMS-sF-Hw6"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                        <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_hotGroup_icon_normal_iPhone" translatesAutoresizingMaskIntoConstraints="NO" id="duE-rZ-Ztz">
-                                                                        <rect key="frame" x="93" y="134" width="17" height="17"/>
+                                                                        <rect key="frame" x="93" y="124" width="17" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="17" id="Too-Hg-VNn"/>
                                                                             <constraint firstAttribute="width" constant="17" id="yDN-nY-uNd"/>
@@ -591,27 +570,20 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="wbl-AS-ZcZ" secondAttribute="trailing" id="1ob-j1-Hcw"/>
+                                                                <constraint firstItem="kRL-n6-Bx9" firstAttribute="top" secondItem="wbl-AS-ZcZ" secondAttribute="bottom" constant="5" id="59v-Od-5dU"/>
+                                                                <constraint firstAttribute="bottom" secondItem="kRL-n6-Bx9" secondAttribute="bottom" constant="10" id="6C5-Qw-lbL"/>
                                                                 <constraint firstAttribute="trailingMargin" secondItem="kRL-n6-Bx9" secondAttribute="trailing" id="7Vc-3j-HXx"/>
-                                                                <constraint firstAttribute="bottomMargin" secondItem="Qiq-Xb-sIr" secondAttribute="bottom" constant="5" id="HON-Zg-N5Q"/>
                                                                 <constraint firstItem="wbl-AS-ZcZ" firstAttribute="top" secondItem="lN3-TE-u1x" secondAttribute="top" id="MRi-xu-N6d"/>
-                                                                <constraint firstItem="bmV-hy-zKS" firstAttribute="leading" secondItem="lN3-TE-u1x" secondAttribute="leadingMargin" constant="10" id="NGn-xq-xcV"/>
                                                                 <constraint firstItem="wbl-AS-ZcZ" firstAttribute="leading" secondItem="lN3-TE-u1x" secondAttribute="leading" id="R6F-Jk-Ljm"/>
-                                                                <constraint firstItem="Qiq-Xb-sIr" firstAttribute="top" secondItem="kRL-n6-Bx9" secondAttribute="bottom" constant="5" id="ViU-vX-rAQ"/>
-                                                                <constraint firstItem="Qiq-Xb-sIr" firstAttribute="leading" secondItem="bmV-hy-zKS" secondAttribute="trailing" constant="5" id="VuM-bi-Vmf"/>
-                                                                <constraint firstAttribute="trailingMargin" secondItem="Qiq-Xb-sIr" secondAttribute="trailing" constant="10" id="bUT-Oh-v99"/>
                                                                 <constraint firstItem="duE-rZ-Ztz" firstAttribute="trailing" secondItem="wbl-AS-ZcZ" secondAttribute="trailing" constant="-5" id="kRT-dT-Me8"/>
                                                                 <constraint firstItem="duE-rZ-Ztz" firstAttribute="bottom" secondItem="wbl-AS-ZcZ" secondAttribute="bottom" constant="-8" id="lRx-79-L9K"/>
-                                                                <constraint firstItem="kRL-n6-Bx9" firstAttribute="top" secondItem="wbl-AS-ZcZ" secondAttribute="bottom" constant="5" id="mZ9-Tw-QQb"/>
-                                                                <constraint firstAttribute="bottomMargin" secondItem="bmV-hy-zKS" secondAttribute="bottom" constant="5" id="pXH-ug-Z92"/>
                                                                 <constraint firstItem="kRL-n6-Bx9" firstAttribute="leading" secondItem="lN3-TE-u1x" secondAttribute="leadingMargin" id="s9Q-ve-oxL"/>
                                                                 <constraint firstItem="4zs-kY-bck" firstAttribute="top" secondItem="lN3-TE-u1x" secondAttribute="top" id="tcv-F5-cPf"/>
                                                                 <constraint firstItem="4zs-kY-bck" firstAttribute="leading" secondItem="lN3-TE-u1x" secondAttribute="leading" id="vdb-9A-3wB"/>
                                                             </constraints>
                                                             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                                            <size key="customSize" width="115" height="220"/>
+                                                            <size key="customSize" width="115" height="200"/>
                                                             <connections>
-                                                                <outlet property="ShowTimeLabel" destination="Qiq-Xb-sIr" id="6gs-jL-D34"/>
-                                                                <outlet property="addressLabel" destination="bmV-hy-zKS" id="Woq-SN-7Xx"/>
                                                                 <outlet property="imageView" destination="wbl-AS-ZcZ" id="alS-FF-n5W"/>
                                                                 <outlet property="starIconImage" destination="duE-rZ-Ztz" id="ml1-di-bPM"/>
                                                                 <outlet property="titleLabel" destination="kRL-n6-Bx9" id="SaH-4c-OP5"/>

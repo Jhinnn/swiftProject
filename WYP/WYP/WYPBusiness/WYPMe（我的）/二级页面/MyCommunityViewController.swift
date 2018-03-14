@@ -50,7 +50,7 @@ class MyCommunityViewController: BaseViewController {
     // 记录偏移量
     var navOffset: CGFloat = 0
     // 区分朋友圈和个人主页 1：朋友圈 2：个人主页
-    var type: String! = "2"
+    var type: String! = ""
     // 用于权限设置
     var userType: String! = ""
     
@@ -154,17 +154,7 @@ class MyCommunityViewController: BaseViewController {
     }
     
     func setupUIFrame() {
-//        tableView.snp.makeConstraints { (make) in
-//            make.edges.equalTo(UIEdgeInsetsMake(-64, 0, 0, 0))
-//        }
-//        sendMessageButton.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(view).offset(-33)
-//            make.left.equalTo(view.snp.left).offset(42)
-//            make.right.equalTo(view.snp.right).offset(-42)
-//            make.height.equalTo(44)
-//        }
 
-        
         
         tableView.snp.makeConstraints { (make) in
             if deviceTypeIPhoneX() {
@@ -221,22 +211,6 @@ class MyCommunityViewController: BaseViewController {
             make.left.equalTo(interactionView).offset(0)
             make.height.equalTo(34)
         }
-        /* 原来代码
-        */
-        /* 原来代码
-        findChatHistory.snp.makeConstraints { (make) in
-            make.top.equalTo(tableView.snp.bottom).offset(10)
-            make.left.right.equalTo(view)
-        }
-        essageDoNotDisturb.snp.makeConstraints { (make) in
-            make.top.equalTo(findChatHistory.snp.bottom)
-            make.left.right.equalTo(view)
-        }
-        */
-        
-        
-
-        
     }
     
     //发送消息按钮
@@ -508,7 +482,6 @@ class MyCommunityViewController: BaseViewController {
                                       "page": "\(pageNumber)",
             "usertype": userType]
         let url = kApi_baseUrl(path: "api/Community")
-        print(parameters)
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -527,10 +500,8 @@ class MyCommunityViewController: BaseViewController {
                     for optDic in arr {
                         let statement = StatementModel(contentDic: optDic as! [AnyHashable : Any])
                         let statementFrame = StatementFrameModel()
-                        
                         statementFrame.statement = statement
                         models.append(statementFrame)
-                        self.dataList.append(statementFrame)
                     }
                     
                     if requestType == .update {
@@ -539,12 +510,11 @@ class MyCommunityViewController: BaseViewController {
                         // 把新数据添加进去
                         self.dataList = self.dataList + models
                     }
-                    print(self.dataList.count)
                     // 没有数据时
                     self.view.addSubview(self.noDataImageView)
                     self.view.addSubview(self.noDataLabel)
                     // 当进入自己的社区时
-                    if self.userId == AppInfo.shared.user?.userId {
+                     if self.userId == AppInfo.shared.user?.userId {
                         self.sendMessageButton.isHidden = true
                         self.view.addSubview(self.noDataButton)
                         self.noDataButton.snp.makeConstraints({ (make) in
@@ -633,12 +603,19 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
-        cell.statementFrame = dataList[indexPath.row]
-        cell.selectionStyle = .none;
+        let staFrame = dataList[indexPath.row]
+        cell.statementFrame = staFrame
+        cell.selectionStyle = .none
         cell.delegate = self
-        if userId != AppInfo.shared.user?.userId {
+        if userId != staFrame.statement.userId && self.type == "1" {
             cell.deleteButton.isHidden = true
         }
+        
+        if self.type == "2"                                                                                                                                                                                                                     {
+            cell.deleteButton.isHidden = true
+        }
+        
+        
         cell.selectImgBlock = {(index, imageUrlArray) in
             let albumVC = AlbumViewController()
             albumVC.dataList = imageUrlArray
@@ -742,6 +719,14 @@ extension MyCommunityViewController: StatementCellDelegate {
     
         
     }
+    //图片点击
+    func statementCell(_ statementCell: StatementCell!, statement: StatementModel!) {
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = statement.userId ?? ""
+        personalInformationVC.name = statement.name ?? ""
+        navigationController?.pushViewController(personalInformationVC, animated: true)
+    }
+    
     // 更多按钮点击事件
     func statementCell(_ statementCell: StatementCell!, moreButtonAction button: UIButton!, statement: StatementModel!) {
         let moreCommenityVC = MoreCommunityViewController()

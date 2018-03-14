@@ -38,6 +38,9 @@
         _headImageView.backgroundColor = [UIColor whiteColor];
         _headImageView.layer.cornerRadius = 20;
         _headImageView.layer.masksToBounds = YES;
+        _headImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick)];
+        [_headImageView addGestureRecognizer:tap];
         [self.contentView addSubview:_headImageView];
         // 姓名
         _nameLabel = [[UILabel alloc] init];
@@ -302,6 +305,12 @@
         if ([self.delegate respondsToSelector:@selector(statementCell:moreButtonAction:statement:)]) {
             [self.delegate statementCell:self moreButtonAction:button statement:self.statementFrame.statement];
         }
+    }
+}
+
+- (void)imageClick {
+    if ([self.delegate respondsToSelector:@selector(statementCell:statement:)]) {
+        [self.delegate statementCell:self statement:self.statementFrame.statement];
     }
 }
 

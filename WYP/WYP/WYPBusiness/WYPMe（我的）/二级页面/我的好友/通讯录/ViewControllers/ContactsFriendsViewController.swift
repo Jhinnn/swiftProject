@@ -223,7 +223,7 @@ class ContactsFriendsViewController: BaseViewController {
     
     func addressBookAddFriends(searchResultArray:[AttentionPeopleModel]?){
         let community = MyCommunityViewController()
-        community.title = "个人主页"
+        community.title = "个人社区"
         let attentionPeopleModel:AttentionPeopleModel = searchResultArray![0]
         community.addFriendsPhoneNumber = addFriendsPhoneNumber 
         community.userId = attentionPeopleModel.peopleId ?? ""

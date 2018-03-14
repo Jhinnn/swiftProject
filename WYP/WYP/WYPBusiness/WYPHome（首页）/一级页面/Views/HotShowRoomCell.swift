@@ -15,11 +15,7 @@ class HotShowRoomCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    
-    @IBOutlet weak var ShowTimeLabel: UILabel!
-    
+
     @IBOutlet weak var starIconImage: UIImageView!
     
     override func awakeFromNib() {
@@ -48,13 +44,6 @@ class HotShowRoomCell: UICollectionViewCell {
             imageView.kf.setImage(with: imageUrl)
             typeLabel.text = newValue?.groupTypeName
             titleLabel.text = newValue?.title
-            addressLabel.text = "北京"
-            if newValue?.showStatus == "0" {
-                ShowTimeLabel.text = "即将上演"
-            } else {
-                ShowTimeLabel.text = "已经上演"
-            }
-            
             if newValue?.isTop == "1" {
                 starIconImage.isHidden = false
             } else {

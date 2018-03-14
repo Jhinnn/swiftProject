@@ -19,6 +19,8 @@ class AdvViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        
         title = "广告"
         view.addSubview(applyWebView)
         layoutPageSubViews()
@@ -50,6 +52,37 @@ class AdvViewController: BaseViewController {
         
         return applyWebView
     }()
+    
+    // 分享
+    func shareBarButtonItemAction() {
+        
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return
+        }
+        
+        let messageObject = UMSocialMessageObject()
+        // 分享链接
+//        let url = String.init(format: "Mob/news/index.html?news_id=%@&is_app=1&phone_type=1", newsId ?? "")
+//        let shareLink = kApi_baseUrl(path: url)
+        // 设置文本
+        //        messageObject.text = newsTitle! + shareLink
+        // 分享对象
+        let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: newsTitle ?? "", descr: "在这里，有各种好玩的内容等着你，点进来看看吧", thumImage: UIImage(named: "aladdiny_icon"))
+        // 网址
+        shareObject.webpageUrl = advLink
+        messageObject.shareObject = shareObject
+        
+        // 传相关参数
+        ShareManager.shared.loadShareAdv()
+//        ShareManager.shared.complaintId = newsId ?? ""
+        ShareManager.shared.type = "1"
+        
+        ShareManager.shared.messageObject = messageObject
+        ShareManager.shared.viewController = self
+        ShareManager.shared.show()
+    }
 }
 
 extension AdvViewController: WKUIDelegate, WKNavigationDelegate {

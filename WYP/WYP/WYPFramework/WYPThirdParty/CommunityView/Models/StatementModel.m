@@ -14,6 +14,7 @@
     self = [super initWithContentDic:dic];
     if (self) {
         NSLog(@"%@", [dic objectForKey:@"create_time"]);
+        self.userId = [dic objectForKey:@"uid"];
         self.headImgUrl = [dic objectForKey:@"path"];
         self._id = [dic objectForKey:@"id"];
         self.name = [dic objectForKey:@"nickname"];

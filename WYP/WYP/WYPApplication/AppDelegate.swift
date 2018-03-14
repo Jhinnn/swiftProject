@@ -54,8 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = UIColor.themeColor
         
-        
-
         // MARK: - 设置导航条样式
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor.themeColor
@@ -98,11 +96,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationNumber"), object: nil)
         }
 
-    
+        
         if #available(iOS 10, *) {
 
             let entiity = JPUSHRegisterEntity()
-            
             entiity.types = Int(UNAuthorizationOptions.alert.rawValue |
                 UNAuthorizationOptions.badge.rawValue |
                 UNAuthorizationOptions.sound.rawValue)
@@ -126,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                            appKey: JPushAppKey,
                            channel: "App Store",
                            apsForProduction: isProduction)
-        
+
         // MARK: - 友盟
         UMSocialManager.default().openLog(true)
         //不清除缓存，用缓存的数据请求用户数据
@@ -173,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pushServiceData = RCIMClient.shared().getPushExtra(fromLaunchOptions: launchOptions)
         if pushServiceData != nil {
             
-            for (key, _) in pushServiceData! {
+            for (_, _) in pushServiceData! {
              
             }
         } else {
@@ -234,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pushServiceData = RCIMClient.shared().getPushExtra(fromRemoteNotification: userInfo)
         if pushServiceData != nil {
             
-            for (key, _) in pushServiceData! {
+            for (_, _) in pushServiceData! {
         
             }
         } else {

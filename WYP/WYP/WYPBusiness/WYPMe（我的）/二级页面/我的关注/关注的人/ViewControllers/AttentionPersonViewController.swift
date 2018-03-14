@@ -159,7 +159,7 @@ extension AttentionPersonViewController: UITableViewDelegate,UITableViewDataSour
         let peoplesModel = dataSource[indexPath.row]
         
         let community = MyCommunityViewController()
-        community.title = "个人主页"
+        community.title = "个人社区"
         community.headImageUrl = peoplesModel.icon
         community.userId = peoplesModel.peopleId
         community.nickName = peoplesModel.nickName

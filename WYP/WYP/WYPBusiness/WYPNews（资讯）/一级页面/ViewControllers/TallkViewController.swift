@@ -12,7 +12,7 @@ class TallkViewController: BaseViewController {
     // 是否显示banner
     var isShowBanner: Bool = false
     
-     var dataList = [TopicsFrameModel]()
+    var dataList = [TopicsFrameModel]()
     
     var dataSource = [IntelligentModel]()
     
@@ -86,9 +86,6 @@ class TallkViewController: BaseViewController {
         
         KRefreshDataCount().label.isHidden = true
     }
-    
-   
-    
     
     
     // MARK: - private method
@@ -196,7 +193,6 @@ class TallkViewController: BaseViewController {
                     if requestType == .update {
                         self.newsData = [InfoModel].deserialize(from: jsonString)! as! [InfoModel]
                     } else {
-                        
                         // 把新数据添加进去
                         let news = [InfoModel].deserialize(from: jsonString) as! [InfoModel]
                         self.newsData = self.newsData + news
@@ -221,6 +217,7 @@ class TallkViewController: BaseViewController {
                         make.centerX.equalTo(self.view)
                         make.size.equalTo(CGSize(width: 100, height: 147))
                     }
+                    
                     self.noDataLabel.snp.makeConstraints { (make) in
                         make.top.equalTo(self.noDataImageView.snp.bottom).offset(10)
                         make.centerX.equalTo(self.view)

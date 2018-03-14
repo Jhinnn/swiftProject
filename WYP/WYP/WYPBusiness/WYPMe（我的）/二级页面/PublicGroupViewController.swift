@@ -226,9 +226,22 @@ class PublicGroupViewController: BaseViewController{
 
 extension PublicGroupViewController: HXPhotoViewDelegate{
     func photoViewChangeComplete(_ allList: [HXPhotoModel]!, photos: [HXPhotoModel]!, videos: [HXPhotoModel]!, original isOriginal: Bool) {
+//        uploadImageArray.removeAll()
+//        for model in photos {
+//            uploadImageArray.append(model.thumbPhoto)
+//        }
+        
         uploadImageArray.removeAll()
         for model in photos {
-            uploadImageArray.append(model.thumbPhoto)
+            if model.asset == nil { //拍摄照片
+                uploadImageArray.append(model.previewPhoto)
+            }else {
+                HXPhotoTools.fetchPhoto(for: model.asset, size: CGSize.init(width: kScreen_width, height: kScreen_height), resizeMode: PHImageRequestOptionsResizeMode.fast, completion: { (image, info) in
+                    if info!["PHImageFileSandboxExtensionTokenKey"] != nil {
+                        self.uploadImageArray.append(image!)
+                    }
+                })
+            }
         }
     }
     

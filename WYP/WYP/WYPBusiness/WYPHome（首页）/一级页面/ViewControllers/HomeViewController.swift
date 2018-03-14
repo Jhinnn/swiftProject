@@ -1,7 +1,3 @@
-
-
-
-
 //
 //  HomeViewController.swift
 //  WYP
@@ -56,7 +52,6 @@ class HomeViewController: BaseViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,8 +80,6 @@ class HomeViewController: BaseViewController {
         
         // 根据城市名称的长度来设置偏移量
         let cityName = UserDefaults.standard.object(forKey: "cityName") as? String ?? "北京"
-        
-        
         if cityName.count == 2 {  //2
             leftBarButton.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
             leftBarButton.imageEdgeInsets = UIEdgeInsets(top: 2, left: 35, bottom: 0, right: 0)
@@ -202,7 +195,7 @@ class HomeViewController: BaseViewController {
         let reachability = note.object as! Reachability
         // 判断网络连接状态
         if reachability.isReachable {
-           
+            
             // 判断网络连接类型
             if reachability.isReachableViaWiFi {
                 print("连接类型：WiFi")
@@ -263,19 +256,21 @@ class HomeViewController: BaseViewController {
         let startAdvData = appDelegate.startAdvData
         NetRequest.clickAdvNetRequest(advId: startAdvData?.bannerId ?? "")
         switch startAdvData?.bannerType ?? "0" {
-        case "0": // 默认广告
+        case "0": //默认广告
             let adv = AdvViewController()
             let link = String.init(format: "mob/adv/advdetails/id/%@", startAdvData?.bannerId ?? "")
             adv.advLink = kApi_baseUrl(path: link)
+            adv.newsTitle = startAdvData?.bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
-        case "1": // 跳转url
+        case "1": //跳转url
             let adv = AdvViewController()
             adv.advLink = startAdvData?.url
+            adv.newsTitle = startAdvData?.bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
-        case "2": // 跳转展厅
-            // 跳转
+        case "2": //跳转展厅
+            //跳转
             var board: UIStoryboard
             if startAdvData?.isFree == "0" {
                 board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
@@ -335,9 +330,7 @@ class HomeViewController: BaseViewController {
     
     }
     
-  
-    
-    
+
     // 消息铃铛
     lazy var notificationBarButtonItem: SYButton = {
         let notificationBarButtonItem = SYButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -369,9 +362,7 @@ class HomeViewController: BaseViewController {
             }
             else {
                 self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-                
             }
-            
         }
         self.tableView.snp.makeConstraints({ (make) in
             make.top.equalTo(self.view)
@@ -490,7 +481,7 @@ class HomeViewController: BaseViewController {
     
     
     lazy var searchViewController: PYSearchViewController = {
-        let hotSearchArray = ["赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017","赵薇黄晓明","农村老太","盆景艺术","棉麻棉衣","共享单车","你好2017"]
+        let hotSearchArray = ["特洛伊","kooza"]
         
         let searchViewController = PYSearchViewController(hotSearches: hotSearchArray, searchBarPlaceholder: "可输入关键字进行信息搜索") { (searchViewController, searchBar, searchText) in
             let result = SearchResultNaviViewController()
@@ -652,14 +643,14 @@ class HomeViewController: BaseViewController {
     // 点击更多
     func showMore(sender: UIButton) {
         switch sender.tag {
-        case 3:
+        case 2:
             roomsCurrentIndex = 0
             tabBarController?.selectedIndex = 2
             break
-        case 4:
+        case 3:
             navigationController?.pushViewController(TheaterGroupViewController(), animated: true)
             break
-        case 6:
+        case 5:
             newsCurrentIndex = 11
             tabBarController?.selectedIndex = 1
         default:
@@ -678,23 +669,20 @@ class HomeViewController: BaseViewController {
     }
 }
 
+//MARK: --TableView delegate
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // MARK: - UITableViewDataSource
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 6  //1.导航 2.资讯 3.热门发现 4.群组 5.广告 6.话题
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 2 {
+        if section == 1 {
             tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
             return homeNewsData?.count ?? 0
-        } else if section == 6 {
+        } else if section == 5 {
             tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15)
             return homeData?.hotTopics?.count ?? 0
-        } else if section == 7 {
-            return 0
         } else {
             return 1
         }
@@ -703,51 +691,23 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 && indexPath.row == 0 {
-            // 分类八个按钮
+            // 分类五个按钮
             let cell = tableView.dequeueReusableCell(withIdentifier: "classfiy", for: indexPath) as! ClassifyTableViewCell
             if headlineArray.count == 0 {
                 cell.titleArray = ["体验现场娱乐，参与火热抢票","体验现场娱乐，参与火热抢票"]
             } else {
                 cell.titleArray = headlineArray
             }
-            
             cell.delegate = self
             return cell
-        } else if indexPath.section == 1 && indexPath.row == 0 {
-            // 抢票专区
-            let cell = tableView.dequeueReusableCell(withIdentifier: "scrambleforticketbuttonCellIdentifier", for: indexPath)
-            
-            return cell
-        } else if indexPath.section == 3 && indexPath.row == 0 {
-            
-            // 热门发现
-            let cell = tableView.dequeueReusableCell(withIdentifier: "showroomCellIdentifier", for: indexPath)
-            let collectionView = cell.viewWithTag(300) as? UICollectionView
-//            collectionView?.register(HotShowRoomCell.self, forCellWithReuseIdentifier: "HotShowRoomCell")
-            if collectionView != nil {
-                collectionView?.reloadData()
-            }
-            return cell
-        } else if indexPath.section == 4 && indexPath.row == 0 {
-            // 热门群组
-            let cell = tableView.dequeueReusableCell(withIdentifier: "theaterGroupCellIdentifier", for: indexPath)
-            
-            let collectionView = cell.viewWithTag(301) as? UICollectionView
-//            collectionView?.register(HotTheaterGroupCell.self, forCellWithReuseIdentifier: "HotShowRoomCell")
-            if collectionView != nil {
-                collectionView?.reloadData()
-            }
-            return cell
-        } else if indexPath.section == 2  {
+        } else if indexPath.section == 1 {
             if homeNewsData != nil {
-                
                 if homeNewsData![indexPath.row].infoType! != 3 { //资讯
                     switch homeNewsData![indexPath.row].showType!  {  //infoType 3话题  0zi'xu
                     case 0: // 视频
                         let cell = VideoInfoTableViewCell(style: .default, reuseIdentifier: "videoCell")
                         cell.line.isHidden = false
                         cell.infoModel = homeNewsData?[indexPath.row]
-                        
                         return cell
                     case 1: //只有文字
                         let cell = TravelTableViewCell(style: .default, reuseIdentifier: "textCell")
@@ -789,52 +749,52 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     case 0: // 视频
                         let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                        cell.infoTitleLabel.attributedText = attributeString
                         return cell
                     case 1: //只有文字
                         let cell = tableView.dequeueReusableCell(withIdentifier: "talktextCell", for: indexPath) as! TalkTravelTableViewCell
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.travelTitleLabel.text ?? "")
-//                        cell.travelTitleLabel.attributedText = attributeString
                         return cell
                     case 2: //上图下文
                         let cell = tableView.dequeueReusableCell(withIdentifier: "talkvideoCell", for: indexPath) as! TalkVideoInfoTableViewCell
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                        cell.infoTitleLabel.attributedText = attributeString
                         return cell
                     case 3: //左文右图
                         let cell = tableView.dequeueReusableCell(withIdentifier: "talkonePicCell", for: indexPath) as! TalkOnePictureTableViewCell
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-//                        cell.infoLabel.attributedText = attributeString
                         return cell
                     case 4: //三张图
                         let cell = tableView.dequeueReusableCell(withIdentifier: "talkthreeCell", for: indexPath) as! TalkThreePictureTableViewCell
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.infoLabel.text ?? "")
-//                        cell.infoLabel.attributedText = attributeString
                         return cell
                     case 5: // 大图
                         let cell = tableView.dequeueReusableCell(withIdentifier: "talkvideoCell", for: indexPath) as! TalkVideoInfoTableViewCell
                         cell.infoLabel.isHidden = true
                         cell.playImageView.isHidden = true
                         cell.infoModel = homeNewsData?[indexPath.row]
-//                        let attributeString = changeTextColor(text: cell.infoTitleLabel.text ?? "")
-//                        cell.infoTitleLabel.attributedText = attributeString
                         return cell
                     default:
                         return UITableViewCell()
                     }
                 }
-                
-                
-                
-                
             }
             return UITableViewCell()
-        } else if indexPath.section == 5 {
+        } else if indexPath.section == 2 && indexPath.row == 0 {
+            // 热门发现
+            let cell = tableView.dequeueReusableCell(withIdentifier: "showroomCellIdentifier", for: indexPath)
+            let collectionView = cell.viewWithTag(300) as? UICollectionView
+            if collectionView != nil {
+                collectionView?.reloadData()
+            }
+            return cell
+        } else if indexPath.section == 3 && indexPath.row == 0 {
+            // 热门群组
+            let cell = tableView.dequeueReusableCell(withIdentifier: "theaterGroupCellIdentifier", for: indexPath)
+            let collectionView = cell.viewWithTag(301) as? UICollectionView
+            if collectionView != nil {
+                collectionView?.reloadData()
+            }
+            return cell
+        } else if indexPath.section == 4 {
             // 广告位
             let cell = ADTableViewCell(style: .default, reuseIdentifier: "AdvertisementCellIdentifier")
             cell.delegate = self
@@ -844,7 +804,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.adImageView2.kf.setImage(with: url2)
             return cell
             
-        } else if indexPath.section == 6 {
+        } else if indexPath.section == 5 {
             let cell = TopicsCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
             let view = UIView()
             view.backgroundColor = tableView.separatorColor
@@ -859,26 +819,17 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.starCountButton.tag = 110 + indexPath.row
             let topicsFrame = TopicsFrameModel()
             topicsFrame.topics = homeData?.hotTopics?[indexPath.row]
-            
             cell.topicsFrame = topicsFrame
-            
-            return cell
-        } else if indexPath.section == 7 {
-            let cell = ScrambleForTicketCell(style: .default, reuseIdentifier: "ticketCell")
             return cell
         }
         return UITableViewCell()
     }
-    
-    // MARK: - UITableViewDelegate
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 { // 六大分类
+        if indexPath.section == 0 { // 五大分类
             return 110
-        } else if indexPath.section == 1 { // 抢票专区
-            return 0
-        } else if indexPath.section == 2 { // 热门资讯
+        }else if indexPath.section == 1 { // 热门资讯
             if homeNewsData != nil {
                 switch homeNewsData![indexPath.row].showType! {
                 case 0:
@@ -898,16 +849,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
             return 0
-            
-        } else if indexPath.section == 3 { // 热门发现
+
+        } else if indexPath.section == 2 { // 热门发现
             return 220
             
-        } else if indexPath.section == 4 { // 推荐群组
+        } else if indexPath.section == 3 { // 推荐群组
             return 160
             
-        } else if indexPath.section == 5 { // 广告位
+        } else if indexPath.section == 4 { // 广告位
             return 77 * width_height_ratio
-        } else if indexPath.section == 6 { // 精选话题
+        } else if indexPath.section == 5 { // 精选话题
             if homeData != nil {
                 let topicsFrame = TopicsFrameModel()
                 topicsFrame.topics = homeData?.hotTopics?[indexPath.row]
@@ -922,7 +873,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // 隐藏抢票专区
-        if section != 0 && section != 5 && section != 1 && section != 2 {
+        if section != 0 && section != 4 && section != 1{
             return 40
         }
         
@@ -930,24 +881,18 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 4 {
-            return 0.01
-        }
-        // 隐藏抢票专区
-        if section == 1 {
+        if section == 3 {
             return 0.01
         }
         return 10
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 5 || section == 0 {
+        if section == 1 || section == 0 || section == 4 {
             return nil
         }
-        
         let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0))
         sectionHeaderView.backgroundColor = UIColor.white
-        
         // 图标视图
         let iconView = UIImageView()
         iconView.image = UIImage(named: "home_rednote_icon_normal_iPhone")
@@ -958,7 +903,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         titleLabel.textColor = UIColor.init(hexColor: "333333")
-        titleLabel.text = sectionTitleArray[section - 1]
+        titleLabel.text = sectionTitleArray[section]
         sectionHeaderView.addSubview(titleLabel)
         // 设置布局
         iconView.snp.makeConstraints { (make) in
@@ -971,20 +916,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             make.top.equalTo(sectionHeaderView).offset(10)
             make.height.equalTo(15)
         }
-        /*if section == 1 {
-            // 抢票专区
-            
-            let ccpView = CCPScrollView(frame: CGRect(x: kScreen_width - 250 * width_height_ratio - 30, y: 0, width: 250 * width_height_ratio, height: 40))
-            ccpView.titleArray = ["体验现场娱乐，参与火热抢票"]
-            ccpView.titleFont = 12
-            ccpView.titleColor = UIColor.gray
-            ccpView.bgColor = UIColor.white
-            ccpView.clickTitleLabel({ (index, titleSrting) in
-                print("index:\(index),titleString\(titleSrting!)")
-            })
-            sectionHeaderView.addSubview(ccpView)
-        } */
-        if section == 3 || section == 4 || section == 6 || section == 7 {
+        if section == 2 || section == 3 || section == 5 {
             // 更多按钮
             let moreButton = UIButton()
             moreButton.tag = section
@@ -1004,8 +936,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.section == 2 { // 热点资讯
+        if indexPath.section == 1 { // 热点资讯
             if homeNewsData![indexPath.row].infoType! == 4 { // 图集
                 let newsDetail = NewsPhotosDetailViewController()
                 newsDetail.currentIndex = 0
@@ -1016,13 +947,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 newsDetail.newsTitle = homeNewsData?[indexPath.row].infoTitle
                 newsDetail.commentNumber = homeNewsData?[indexPath.row].infoComment ?? "0"
                 navigationController?.pushViewController(newsDetail, animated: true)
-                
             } else if homeNewsData![indexPath.row].infoType! == 2 { // 视频
                 let newsDetail = VideoDetailViewController()
                 newsDetail.newsId = homeNewsData?[indexPath.row].newsId ?? ""
                 newsDetail.newsTitle = homeNewsData?[indexPath.row].infoTitle
                 navigationController?.pushViewController(newsDetail, animated: true)
-                
             } else { // web
                 if homeNewsData?[indexPath.row].advLink != "" {
                     let adv = AdvViewController()
@@ -1030,7 +959,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                     adv.newsTitle = self.homeNewsData?[indexPath.row].infoTitle
                     navigationController?.pushViewController(adv, animated: true)
                 } else {
-                    
                     if homeNewsData?[indexPath.row].infoSource == "话题" {
                         let talkNewsDetail = TalkNewsDetailsViewController()
                         talkNewsDetail.newsId = homeNewsData?[indexPath.row].newsId
@@ -1043,17 +971,13 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                         newsDetail.commentNumber = homeNewsData?[indexPath.row].infoComment
                         navigationController?.pushViewController(newsDetail, animated: true)
                     }
-                    
-                    
                 }
             }
-        } else if indexPath.section == 6 {
-            
+        } else if indexPath.section == 5 {
             let talkNewsDetail = TalkNewsDetailsViewController()
             talkNewsDetail.newsId = homeData?.hotTopics?[indexPath.row].topicId
             talkNewsDetail.newsTitle = homeData?.hotTopics?[indexPath.row].content
             navigationController?.pushViewController(talkNewsDetail, animated: true)
-        
         }
     }
     
@@ -1063,7 +987,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         self.navOffset = scrollView.contentOffset.y / 180 * width_height_ratio
-        
+
         self.navBarBgAlpha = self.navOffset
         if self.navOffset > 0.3 {
             notificationBarButtonItem.changeBadgeViewColor(color: .white)
@@ -1076,24 +1000,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         setNeedsStatusBarAppearanceUpdate()
     }
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.isKind(of: UICollectionView.self) {
-//            return
-//        }
-//        self.navOffset = scrollView.contentOffset.y / (tableView.tableHeaderView?.frame.size.height)!
-//        self.navBarBgAlpha = self.navOffset
-//        if self.navOffset > 0.3 {
-//            notificationBarButtonItem.changeBadgeViewColor(color: .white)
-//            searchTitleView.searchView.searchLabel.textColor = UIColor.init(hexColor: "cbcbcb")
-//            searchTitleView.alpha = 1
-//        } else {
-//            notificationBarButtonItem.changeBadgeViewColor(color: .themeColor)
-//            searchTitleView.searchView.searchLabel.textColor = UIColor.init(hexColor: "333333")
-//            searchTitleView.alpha = 0.5
-//        }
-//        setNeedsStatusBarAppearanceUpdate()
-//    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -1128,20 +1034,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
          return UICollectionViewCell()
     }
-    
-   
-    
-    
-    // MARK: - UICollectionViewDelegate
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch collectionView.tag {
         case 300:
-//            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-//            showroomDetailsViewController.roomId = .groupId ?? ""
             // 跳转
             let showRoom = homeData?.hotShowRoom?[indexPath.row]
             var board: UIStoryboard
@@ -1163,10 +1060,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             navigationController?.pushViewController(showroomDetailsViewController, animated: true)
         case 301:
-            
-    
             let groupModel = homeData?.hotGroup?[indexPath.item]
-    
             Alamofire.request(kApi_getIsJoinGroup, method: .post, parameters: ["access_token":access_token,"method" : "POST","uid":AppInfo.shared.user?.userId ?? "","qunid": groupModel?.groupId ?? ""], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
                 
                 let json = JSON(response.result.value!)
@@ -1178,11 +1072,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                     group.roomName = groupModel?.roomName ?? ""
                     group.groupName = groupModel?.groupName ?? ""
                     self.navigationController?.pushViewController(group, animated: false)
-                    
-//                    let groupsMember = GroupsMemberListViewController()
-//                    groupsMember.groupId = groupModel?.groupId ?? ""
-//                    groupsMember.title = groupModel?.groupName ?? ""
-//                    self.navigationController?.pushViewController(groupsMember, animated: true)
                 }else {
                     let conversationVC = ChatDeatilViewController()
                     conversationVC.conversationType = RCConversationType.ConversationType_GROUP
@@ -1191,19 +1080,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                     conversationVC.groupName = groupModel?.groupName ?? ""
                     self.navigationController?.pushViewController(conversationVC, animated: true)
                 }
-                
             }
         default:
             break
         }
     }
-    
-    
 }
 
+// MARK: - LBBannerDelegate
 extension HomeViewController: SYBannerViewDelegate {
     
-    // MARK: - LBBannerDelegate
+    
     
     func cycleScrollView(_ scrollView: SYBannerView, didSelectItemAtIndex index: Int) {
         NetRequest.clickAdvNetRequest(advId: bannerData?[index].bannerId ?? "")
@@ -1212,11 +1099,13 @@ extension HomeViewController: SYBannerViewDelegate {
             let adv = AdvViewController()
             let link = String.init(format: "mob/adv/advdetails/id/%@", bannerData?[index].bannerId ?? "")
             adv.advLink = kApi_baseUrl(path: link)
+            adv.newsTitle = bannerData?[index].bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
         case "1": // 跳转url
             let adv = AdvViewController()
             adv.advLink = bannerData?[index].url ?? ""
+            adv.newsTitle = bannerData?[index].bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
         case "2": // 跳转展厅
@@ -1351,11 +1240,13 @@ extension HomeViewController: ADTableViewCellDelegate {
             let adv = AdvViewController()
             let link = String.init(format: "mob/adv/advdetails/id/%@", logoData?[item].bannerId ?? "")
             adv.advLink = kApi_baseUrl(path: link)
+            adv.newsTitle = logoData?[item].bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
         case "1": // 跳转url
             let adv = AdvViewController()
             adv.advLink = logoData?[item].url
+            adv.newsTitle = logoData?[item].bannerTitle ?? ""
             navigationController?.pushViewController(adv, animated: false)
             break
         case "2": // 跳转展厅

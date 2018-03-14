@@ -78,7 +78,6 @@ class CityListViewController: BaseViewController {
         let hotPath: String = Bundle.main.path(forResource: "hotCityList.json", ofType: nil)!
         // 处理文件
         guard let hotData = try? Data.init(contentsOf: URL(fileURLWithPath: hotPath)) else {
-            print("获取文件data失败")
             return
         }
         let hotjsonString = NSString(data: hotData, encoding: String.Encoding.utf8.rawValue)! as String

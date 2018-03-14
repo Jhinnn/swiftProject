@@ -192,9 +192,9 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
             if indexPath.row == 0 {
                 label1.text = "性别："
                 if personalModel?.sex == "1"{
-                    label2.text = "女"
-                }else{
                     label2.text = "男"
+                }else{
+                    label2.text = "女"
                 }
                 
             }
@@ -360,6 +360,8 @@ class PersonalInformationViewController: BaseViewController, UITableViewDataSour
         if indexPath.section == 2 {
             let commun = MyCommunityViewController()
             commun.userId = self.targetId
+            commun.type = "2"
+            commun.title = "个人社区"
             self.navigationController?.pushViewController(commun, animated: true)
         }
         if indexPath.section == 3 {

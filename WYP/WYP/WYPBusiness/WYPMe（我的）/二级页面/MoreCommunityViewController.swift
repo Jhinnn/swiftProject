@@ -224,6 +224,13 @@ extension MoreCommunityViewController: UITableViewDataSource, UITableViewDelegat
 }
 
 extension MoreCommunityViewController: StatementCellDelegate {
+    func statementCell(_ statementCell: StatementCell!, statement: StatementModel!) {
+        let personalInformationVC = PersonalInformationViewController()
+        personalInformationVC.targetId = statement.userId ?? ""
+        personalInformationVC.name = statement.name ?? ""
+        navigationController?.pushViewController(personalInformationVC, animated: true)
+    }
+    
     
     
     // 点赞按钮点击事件

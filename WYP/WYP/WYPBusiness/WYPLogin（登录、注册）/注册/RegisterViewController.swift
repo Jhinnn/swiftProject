@@ -54,6 +54,7 @@ class RegisterViewController: BaseViewController {
             make.height.equalTo(60)
         }
         
+        
         verificationCodeTextField.snp.makeConstraints { (make) in
             make.left.right.equalTo(phoneNumberTextField)
             make.top.equalTo(phoneNumberTextField.snp.bottom).offset(1)
@@ -122,7 +123,7 @@ class RegisterViewController: BaseViewController {
         phoneNumberTextField.placeholder = "请输入手机号"
         phoneNumberTextField.backgroundColor = UIColor.white
         phoneNumberTextField.keyboardType = .numberPad
-        
+        phoneNumberTextField.clearButtonMode = UITextFieldViewMode.always
         return phoneNumberTextField
     }()
     
@@ -133,7 +134,7 @@ class RegisterViewController: BaseViewController {
         verificationCodeTextField.placeholder = "请输入验证码"
         verificationCodeTextField.backgroundColor = UIColor.white
         verificationCodeTextField.keyboardType = .numberPad
-        
+//        verificationCodeTextField.clearButtonMode = UITextFieldViewMode.always
         return verificationCodeTextField
     }()
     
@@ -160,7 +161,6 @@ class RegisterViewController: BaseViewController {
         passwordTextField.keyboardType = .asciiCapable
         passwordTextField.returnKeyType = .done
         passwordTextField.isSecureTextEntry = true
-        
         return passwordTextField
     }()
     
@@ -172,7 +172,6 @@ class RegisterViewController: BaseViewController {
         confirmPwdTextField.keyboardType = .asciiCapable
         confirmPwdTextField.returnKeyType = .done
         confirmPwdTextField.isSecureTextEntry = true
-        
         return confirmPwdTextField
     }()
     

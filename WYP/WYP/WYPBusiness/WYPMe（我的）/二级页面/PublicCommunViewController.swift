@@ -78,17 +78,23 @@ class PublicCommunViewController: BaseViewController{
     // MARK: --发布按钮点击事件
     func publicButtonItemAction() {
         
-        if self.textView.text.count <= 15 {
-            SVProgressHUD.showInfo(withStatus: "发布内容少于15个字")
+        
+        if self.textView.text.count <= 0 {
+            SVProgressHUD.showInfo(withStatus: "发布内容不能为空！")
             return
         }
-        
 
         NetRequest.publishCommunityNetRequest(open_id: AppInfo.shared.user?.userId ?? "",title: self.textView.text, images: uploadImageArray) { (success, info, userDic) in
             if success {
-                SVProgressHUD.showSuccess(withStatus: info)
+                
+                SVProgressHUD.setDefaultMaskType(.none)
+                SVProgressHUD.show(withStatus: "发送中...")
+                
                 let time: TimeInterval = 0.8
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                    SVProgressHUD.dismiss()
+                    
+                    SVProgressHUD.showSuccess(withStatus: info)
                     self.navigationController?.popViewController(animated: true)
                 }
             }else {
@@ -103,7 +109,15 @@ extension PublicCommunViewController: HXPhotoViewDelegate{
     func photoViewChangeComplete(_ allList: [HXPhotoModel]!, photos: [HXPhotoModel]!, videos: [HXPhotoModel]!, original isOriginal: Bool) {
         uploadImageArray.removeAll()
         for model in photos {
-            uploadImageArray.append(model.thumbPhoto)
+            if model.asset == nil { //拍摄照片
+                uploadImageArray.append(model.previewPhoto)
+            }else {
+                HXPhotoTools.fetchPhoto(for: model.asset, size: CGSize.init(width: kScreen_width, height: kScreen_height), resizeMode: PHImageRequestOptionsResizeMode.fast, completion: { (image, info) in
+                    if info!["PHImageFileSandboxExtensionTokenKey"] != nil {
+                        self.uploadImageArray.append(image!)
+                    }
+                })
+            }
         }
     }
     

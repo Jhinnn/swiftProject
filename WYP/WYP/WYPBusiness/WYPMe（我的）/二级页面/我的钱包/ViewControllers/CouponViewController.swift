@@ -104,9 +104,9 @@ class CouponViewController: BaseViewController {
     }
     
     // MARK: - setter and getter
-    // 设置tableView
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+    // 设置tableView WYPTableView
+    lazy var tableView: WYPTableView = {
+        let tableView = WYPTableView(frame: .zero, style: .plain)
         tableView.backgroundColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
@@ -197,7 +197,6 @@ extension CouponViewController: UITableViewDataSource, UITableViewDelegate {
                 // 兑换券
                 let sb = UIStoryboard.init(name: "Main", bundle: nil)
                 let goodsAdressVC = sb.instantiateViewController(withIdentifier: "GoodsAddressIdentity") as! GoodsAddressController
-                
                 let coupon: CouponModel = dataList[indexPath.row]
                 goodsAdressVC.ticketTimeId = coupon.ticketTimeId ?? ""
                 goodsAdressVC.typeId = "1"
@@ -206,15 +205,10 @@ extension CouponViewController: UITableViewDataSource, UITableViewDelegate {
                 goodsAdressVC.flag = 2
                 goodsAdressVC.ticketName = coupon.ticketName ?? ""
                 navigationController?.pushViewController(goodsAdressVC, animated: true)
-                
-//                let payViewController = PayViewController()
-//                navigationController?.pushViewController(payViewController, animated: false)
-                
             } else {
                 let useExplainVC = UseExplainViewController()
                 navigationController?.pushViewController(useExplainVC, animated: true)
             }
         }
-        
     }
 }

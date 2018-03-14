@@ -33,7 +33,6 @@ class NewsTopicViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,7 +124,6 @@ class NewsTopicViewController: BaseViewController {
                     self.tableView.mj_header.endRefreshing()
                     self.tableView.mj_footer.endRefreshing()
                     self.tableView.reloadData()
-                    
                 } else {
                     self.tableView.mj_header.endRefreshing()
                     self.tableView.mj_footer.endRefreshing()
@@ -212,7 +210,6 @@ class NewsTopicViewController: BaseViewController {
         } else {
             let board = UIStoryboard.init(name: "Main", bundle: nil)
             let issue = board.instantiateViewController(withIdentifier: "issueTopics") as! IssueTopicViewController
-            
             issue.delegate = self
             navigationController?.pushViewController(issue, animated: true)
         }
@@ -226,7 +223,6 @@ class NewsTopicViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        
         // 刷新
         tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadNewsData(requestType: .loadMore)
@@ -236,7 +232,6 @@ class NewsTopicViewController: BaseViewController {
         })
         tableView.rowHeight = 110
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TopicsCellIdentifier")
-        
         return tableView
     }()
     
@@ -258,7 +253,6 @@ class NewsTopicViewController: BaseViewController {
         commentButton.layer.borderWidth = 1
         commentButton.layer.cornerRadius = 5.0
         commentButton.layer.masksToBounds = true
-        
         commentButton.addTarget(self, action: #selector(issueTopic(sender:)), for: .touchUpInside)
         return commentButton
     }()
@@ -301,7 +295,7 @@ extension NewsTopicViewController: UITableViewDataSource, UITableViewDelegate {
         cell.topicsFrame = dataList[indexPath.row]
         cell.starCountButton.tag = 120 + indexPath.row
         cell.delegate = self
-        
+    
         return cell
     }
     

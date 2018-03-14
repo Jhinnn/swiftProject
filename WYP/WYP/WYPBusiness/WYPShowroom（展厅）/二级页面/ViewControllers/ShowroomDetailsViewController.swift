@@ -1323,7 +1323,7 @@ extension ShowroomDetailsViewController: UICollectionViewDataSource, UICollectio
             }
         case 202: // 社区
             let community = MyCommunityViewController()
-            community.title = "个人主页"
+            community.title = "个人社区"
             let memberModel = showRoomDetailData?.member?[indexPath.row]
             community.headImageUrl = memberModel?.memberPhoto
             community.userId = memberModel?.memberId

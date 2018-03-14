@@ -337,7 +337,6 @@ extension NewsViewController: UITableViewDelegate,UITableViewDataSource {
         switch newsData[indexPath.row].showType ?? 6 {
         case 0: // 视频
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoInfoTableViewCell
-            
             cell.infoModel = newsData[indexPath.row]
             // 判断是不是搜索页面
             if flag == 2 {
@@ -483,11 +482,13 @@ extension NewsViewController: SYBannerViewDelegate {
             let adv = AdvViewController()
             let link = String.init(format: "mob/adv/advdetails/id/%@", bannerData?[index].bannerId ?? "")
             adv.advLink = kApi_baseUrl(path: link)
+            adv.newsTitle = bannerData?[index].bannerTitle
             navigationController?.pushViewController(adv, animated: false)
             break
         case "1": // 跳转url
             let adv = AdvViewController()
             adv.advLink = bannerData?[index].url
+            adv.newsTitle = bannerData?[index].bannerTitle
             navigationController?.pushViewController(adv, animated: false)
             break
         case "2": // 跳转展厅
