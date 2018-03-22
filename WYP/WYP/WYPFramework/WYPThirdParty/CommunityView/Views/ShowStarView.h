@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ShowStarView;
+
+@protocol ShowStarViewDelegate <NSObject>
+
+// 更多点赞按钮点击事件
+- (void)showStarView:(ShowStarView *)starView list:(NSArray *)array;
+
+@end
 
 @interface ShowStarView : UIView
 
@@ -19,5 +27,8 @@
  点赞frame数组
  */
 @property (strong, nonatomic) NSMutableArray * starFArray;
+
+
+@property (weak, nonatomic) id<ShowStarViewDelegate> delegate;
 
 @end

@@ -116,11 +116,11 @@
         _starArrayView.layer.cornerRadius = 6;
         [self.contentView addSubview:_starArrayView];
         
-        //点赞视图图标
-        _zanImageView = [[UIImageView alloc] init];
-        _zanImageView.image = [UIImage imageNamed:@"sq_icon_dzt_select"];
-        [self.contentView addSubview:_zanImageView];
-        
+//        //点赞视图图标
+//        _zanImageView = [[UIImageView alloc] init];
+//        _zanImageView.image = [UIImage imageNamed:@"sq_icon_dzt_select"];
+//        [self.contentView addSubview:_zanImageView];
+//        
         
         // 所有评论视图
         _commentArrayView = [[ShowCommentView alloc] init];

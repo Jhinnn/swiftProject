@@ -191,49 +191,23 @@
         // 点赞
         _allStarNickNameF = [NSMutableArray array];
         CGRect lastStarRect = CGRectZero;
-        NSInteger starRow = 0;
         CGFloat starX = 0.0;
-        CGFloat starY = 0.0;
-        CGFloat starH = 0.0;
-        CGFloat starW = 0.0;
-        
         if (statement.starArray.count == 0) {
             _starArrayF = CGRectZero;
             
             _zanArrayF = CGRectZero;
         }else {
-            NSInteger i = 0;
-            for (StarAndCommentModel * star in statement.starArray) {
-                // 计算昵称尺寸
-                
-                CGSize starSize = [self sizeWithText:[NSString stringWithFormat:@"%@,", star.nickName] font:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(kScreen_width - 3 * space - 70, 30)];
-                starW = starSize.width;
-                starH = starSize.height;
-                // 获取上一个点赞昵称的位置
-                if (i == 0) {
-                    starX = CGRectGetMaxX(lastStarRect) + 30;
-                }else {
-                    starX = CGRectGetMaxX(lastStarRect);
-                }
-                i++;
-                
-                // 如果当前行放不下当前的昵称，换到下一行
-                if ((starW + starX) > (kScreen_width - 3 * space - 70)) {
-                    starX = 30;
-                    starRow = starRow + 1;
-                    
-                }
-                starY = starRow * starH + 5;
-                // 将上面计算好的X、Y、W、H设置到frame上
-                CGRect starRect = CGRectMake(starX, starY, starW, starH);
-                // 基本数据类型转换为对象
+          
+            for (int i = 0; i < statement.starArray.count; i++) {
+                //取前三个
+                CGRect starRect = CGRectMake(16 + i * 20, 8, 24, 24);
+                starX = CGRectGetMaxX(lastStarRect) + 24;
                 NSValue * starRectValue = [NSValue valueWithCGRect:starRect];
                 [_allStarNickNameF addObject:starRectValue];
-                // 保存上次的frame
-                lastStarRect = starRect;
+
             }
             
-            _starArrayF = CGRectMake(space * 2 + 40, CGRectGetMaxY(_shareF) + 10, kScreen_width - space * 3 - 40, starY + starH + 4);
+            _starArrayF = CGRectMake(space * 2 + 40, CGRectGetMaxY(_shareF) + 10, kScreen_width - space * 3 - 40, 40);
             
             _zanArrayF = CGRectMake(space * 2 + 40 + 8, CGRectGetMaxY(_shareF) + 16, 15, 15);
         }

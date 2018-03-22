@@ -728,3 +728,8 @@ public var kApi_IgnorefriendsMsg: String {
     return kApi_baseUrl(path: "api/switchFriendPush")
 }
 
+
+//同步社区展厅选择列表
+public var kApi_SynGroupRoomList: String {
+    return kApi_baseUrl(path: "api/community_sync")
+}

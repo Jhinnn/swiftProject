@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="TypeCollectionViewCell" customModule="WYP" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" tag="53" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGg-Ax-6uU">
+                        <rect key="frame" x="28" y="28" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="AYi-St-hwF"/>
+                            <constraint firstAttribute="height" constant="44" id="SIh-sS-OMt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal">
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="aGg-Ax-6uU" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="aFl-Sg-DPz"/>
+                <constraint firstItem="aGg-Ax-6uU" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dzB-qZ-bQC"/>
+            </constraints>
+            <size key="customSize" width="107" height="104"/>
+            <connections>
+                <outlet property="typeButton" destination="aGg-Ax-6uU" id="wWU-6u-xFr"/>
+            </connections>
+            <point key="canvasLocation" x="53.5" y="79"/>
+        </collectionViewCell>
+    </objects>
+</document>

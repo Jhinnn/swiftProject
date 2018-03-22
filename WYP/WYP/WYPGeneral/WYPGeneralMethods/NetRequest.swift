@@ -3578,7 +3578,7 @@ class NetRequest {
 
     
     //发布社区动态
-    class func publishCommunityNetRequest(open_id: String,title: String, images: [UIImage],complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+    class func publishCommunityNetRequest(open_id: String,title: String, images: [UIImage],groupId: String, qunzuId: String,topicID: String,gambitID: String,complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
         
         
         var infoArr:[String] = [String]()
@@ -3595,7 +3595,11 @@ class NetRequest {
                                       "method": "POST",
                                       "uid": open_id,
                                       "base64": str,
-                                      "content":title]
+                                      "content":title,
+                                      "group_id":groupId,
+                                      "qunzu_id": qunzuId,
+                                      "topic_id" : topicID,
+                                      "gambit_id" :gambitID]
             
         Alamofire.request(kApi_publicCommunity, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
@@ -3852,6 +3856,34 @@ class NetRequest {
         }
     }
     
+    
+    
+    //MARK: 同步展厅群组列表
+    //话题邀请回答
+    class func synchronizationListNetRequest(complete: @escaping ((Bool,String?,NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "open_id" : AppInfo.shared.user?.token ?? "",
+                                      ]
+        Alamofire.request(kApi_SynGroupRoomList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     
    

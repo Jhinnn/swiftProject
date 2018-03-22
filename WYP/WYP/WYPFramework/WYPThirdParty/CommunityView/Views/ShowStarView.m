@@ -9,7 +9,10 @@
 
 #import "ShowStarView.h"
 #import "StarAndCommentModel.h"
+#import "UIButton+WebCache.h"
 @implementation ShowStarView
+
+
 
 
 - (void)setStarArray:(NSArray *)starArray {
@@ -22,7 +25,10 @@
             for (NSInteger i = 0; i < starArray.count - starBtns.count; i ++) {
                 UIButton * starBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 starBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-                [starBtn setTitleColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1] forState:UIControlStateNormal];
+                starBtn.layer.masksToBounds = YES;
+                starBtn.layer.cornerRadius = 11;
+                starBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+                starBtn.layer.borderWidth = 1;
                 [self addSubview:starBtn];
             }
         } else if (starBtns.count > starArray.count) {
@@ -39,15 +45,15 @@
         
             UIButton * starBtn = self.subviews[i];
             NSString * btnTitle = [NSString stringWithFormat:@"%@,", star.nickName];
-            if (i == starArray.count -1) {
+            if (i == starArray.count - 1) {
                 btnTitle = [NSString stringWithFormat:@"%@", star.nickName];
             }
             
             starBtn.backgroundColor = [UIColor clearColor];
             starBtn.hidden = NO;
             // 设置标题
-            [starBtn setTitle:btnTitle forState:UIControlStateNormal];
-
+//            [starBtn setTitle:btnTitle forState:UIControlStateNormal];
+            [starBtn sd_setImageWithURL:[NSURL URLWithString:star.imageUrl] forState:UIControlStateNormal];
             starBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
     }
@@ -57,15 +63,50 @@
     if (_starFArray != starFArray) {
         _starFArray = starFArray;
         
-        for (NSInteger i = 0; i < starFArray.count; i ++) {
-            // 获取点赞昵称frame
-            NSValue * starRectValue = starFArray[i];
-            CGRect starRect = [starRectValue CGRectValue];
-            UIButton * starBtn = self.subviews[i];
+        if (_starArray.count >= 4) {
+            CGRect lastBtnRect = CGRectZero;
+            for (NSInteger i = 0; i < 3; i ++) {
+                // 获取点赞昵称frame
+                NSValue * starRectValue = starFArray[i];
+                CGRect starRect = [starRectValue CGRectValue];
+                UIButton * starBtn = self.subviews[i];
+                
+                // 设置frame
+                starBtn.frame = starRect;
+                lastBtnRect = starRect;
+            }
             
-            // 设置frame
-            starBtn.frame = starRect;
+            UIButton *totalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            totalBtn.frame = CGRectMake(CGRectGetMaxX(lastBtnRect) + 10, 8, kScreen_width - 3 * space - 40 - _starArray.count * 22 - 10 - 30, 24);
+            totalBtn.tag = 1001;
+            totalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            [totalBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            NSString *str = [NSString stringWithFormat:@"等%ld个人觉得很赞 >",_starArray.count];
+            [totalBtn setTitle:str forState:UIControlStateNormal];
+            [totalBtn addTarget:self action:@selector(zanListAction) forControlEvents:UIControlEventTouchUpInside];
+            totalBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+            [self addSubview:totalBtn];
+        }else {
+            CGRect lastBtnRect = CGRectZero;
+            for (NSInteger i = 0; i < starFArray.count; i ++) {
+                // 获取点赞昵称frame
+                NSValue * starRectValue = starFArray[i];
+                CGRect starRect = [starRectValue CGRectValue];
+                UIButton * starBtn = self.subviews[i];
+                
+                // 设置frame
+                starBtn.frame = starRect;
+                lastBtnRect = starRect;
+            }
         }
+        
+        
+    }
+}
+
+- (void)zanListAction {
+    if ([self.delegate respondsToSelector:@selector(showStarView:list:)]) {
+        [self.delegate showStarView:self list:self.starArray];
     }
 }
 

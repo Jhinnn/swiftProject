@@ -93,7 +93,6 @@ class CommentReplyViewController: BaseViewController {
                         self.secComment = [CommentModel].deserialize(from: jsonString) as? [CommentModel]
                     } else {
                         // 把新数据添加进去
-                        
                         let secCommentArray = [CommentModel].deserialize(from: jsonString) as? [CommentModel]
                         self.secComment = self.secComment! + secCommentArray!
                     }
@@ -381,8 +380,8 @@ extension CommentReplyViewController: ShowRoomCommentCellDelegate {
 extension CommentReplyViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if (textField.text?.characters.count)! < 5 {
-            SVProgressHUD.showError(withStatus: "评论内容不少于5个字")
+        if (textField.text?.count)! < 0 {
+            SVProgressHUD.showError(withStatus: "评论内容不能为空！")
             return false
         }
         let commentId = commentData?.commentId ?? ""

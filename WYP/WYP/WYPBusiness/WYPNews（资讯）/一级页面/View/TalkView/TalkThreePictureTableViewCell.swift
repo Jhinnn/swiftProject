@@ -273,5 +273,37 @@ class TalkThreePictureTableViewCell: UITableViewCell {
         }
     }
     
+    var synTopicModel: SynTopicModel? {
+        willSet {
+            infoLabel.text = newValue?.title ?? ""
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
+            }
+
+            let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
+            let imageUrl2 = URL(string: newValue?.cover_url?[1] ?? "")
+            let imageUrl3 = URL(string: newValue?.cover_url?[2] ?? "")
+            infoImageView1.kf.setImage(with: imageUrl1)
+            infoImageView2.kf.setImage(with: imageUrl2)
+            infoImageView3.kf.setImage(with: imageUrl3)
+            
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.comment ?? "0")
+            
+            infoTimeLabel.text = Int((newValue?.create_time)!)?.getTimeString()
+        }
+    }
+    
     
 }

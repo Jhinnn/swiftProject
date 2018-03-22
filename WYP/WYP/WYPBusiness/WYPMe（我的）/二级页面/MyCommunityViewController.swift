@@ -21,7 +21,7 @@ class MyCommunityViewController: BaseViewController {
     
     
     var statmentId: String!
-
+    
     var headImageUrl: String? {
         willSet {
             let url = URL(string: newValue ?? "")
@@ -63,13 +63,13 @@ class MyCommunityViewController: BaseViewController {
         super.viewDidLoad()
         
         self.navBarBgAlpha = 0
-
+        
         navigationController?.navigationBar.isTranslucent = false
         
         if userId == AppInfo.shared.user?.userId ?? "" {
             // 是自己的朋友圈
-            let releaseBtn = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(releaseDynamic))
-            navigationItem.rightBarButtonItem = releaseBtn
+            let releaseButton = UIBarButtonItem(image: UIImage.init(named: "community_icon_publish_normalmore"), style: .done, target: self, action: #selector(releaseDynamic))
+            navigationItem.rightBarButtonItem = releaseButton
             followBtn.isHidden = true
         } else {
             // 不是自己的朋友圈
@@ -96,15 +96,6 @@ class MyCommunityViewController: BaseViewController {
         
         loadNetData(requestType: .update)
         
-        // 是否发布
-        let userDefault = UserDefaults.standard
-        if userDefault.bool(forKey: "isPublic") {
-            loadNetData(requestType: .update)
-        }
-        
-        // 置为false
-        userDefault.set(false, forKey: "isPublic")
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,7 +106,7 @@ class MyCommunityViewController: BaseViewController {
             self.navBarBgAlpha = 0
             self.navigationController?.navigationBar.subviews.first?.alpha = 0
         }
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -132,29 +123,31 @@ class MyCommunityViewController: BaseViewController {
     
     func setupUI() {
         view.addSubview(tableView)
-    
+        
         
         tableView.tableHeaderView = tableViewHeaderView
         tableViewHeaderView.addSubview(headerImgView)
         tableViewHeaderView.addSubview(nickNameLabel)
+        tableViewHeaderView.addSubview(imageLabel)
         tableViewHeaderView.addSubview(friendsCountLabel)
         tableViewHeaderView.addSubview(fansCountLabel)
+        tableViewHeaderView.addSubview(signatureLabel)
         tableViewHeaderView.addSubview(followBtn)
         
         view.addSubview(interactionView)
         interactionView.addSubview(commentTextField)
         
-//        //添加 查找聊天记录View
+        //        //添加 查找聊天记录View
         view.addSubview(findChatHistory)
-//        //添加 消息免打扰View
+        //        //添加 消息免打扰View
         view.addSubview(essageDoNotDisturb)
-//        //添加 发送消息按钮
-//        view.addSubview(sendMessageButton)
+        //        //添加 发送消息按钮
+        //        view.addSubview(sendMessageButton)
         setupUIFrame()
     }
     
     func setupUIFrame() {
-
+        
         
         tableView.snp.makeConstraints { (make) in
             if deviceTypeIPhoneX() {
@@ -173,29 +166,41 @@ class MyCommunityViewController: BaseViewController {
         }
         
         
-        
         headerImgView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(tableViewHeaderView).offset(-20)
-            make.left.equalTo(tableViewHeaderView).offset(20)
+            make.top.equalTo(tableViewHeaderView).offset(100)
+            make.centerX.equalTo(tableViewHeaderView)
             make.size.equalTo(75)
         }
         
         nickNameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(headerImgView.snp.right).offset(20)
-            make.top.equalTo(headerImgView).offset(10)
+            make.centerX.equalTo(tableViewHeaderView)
+            make.top.equalTo(headerImgView.snp.bottom).offset(10)
             make.size.equalTo(CGSize(width: 200, height: 30))
         }
         
+        imageLabel.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 2, height: 13))
+            make.centerX.equalTo(tableViewHeaderView)
+            make.top.equalTo(nickNameLabel.snp.bottom).offset(5)
+        }
+        
         friendsCountLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(headerImgView)
-            make.left.equalTo(nickNameLabel)
+            make.centerY.equalTo(imageLabel.snp.centerY)
+            make.right.equalTo(imageLabel.snp.left).offset(-10)
             make.height.equalTo(35)
         }
         
         fansCountLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(headerImgView)
-            make.left.equalTo(friendsCountLabel.snp.right).offset(10)
+            make.centerY.equalTo(imageLabel.snp.centerY)
+            make.left.equalTo(imageLabel.snp.right).offset(10)
             make.height.equalTo(35)
+        }
+        
+        signatureLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(tableViewHeaderView)
+            make.height.equalTo(20)
+            make.top.equalTo(imageLabel.snp.bottom).offset(12)
+            make.width.equalTo(kScreen_width - 140)
         }
         
         followBtn.snp.makeConstraints { (make) in
@@ -219,7 +224,7 @@ class MyCommunityViewController: BaseViewController {
         sendMessageButton.addTarget(self, action: #selector(clickAddFriendsButton), for: UIControlEvents.touchUpInside)
         sendMessageButton.layer.cornerRadius = 5
         sendMessageButton.setTitle("添加朋友", for: .normal)
-        sendMessageButton.backgroundColor = UIColor(red: 221/250, green: 78/250, blue: 60/250, alpha: 1)
+        sendMessageButton.backgroundColor = UIColor(red: 221/250, green: 78/250, blue: 60/250, alpha: 0.5)
         return sendMessageButton
     }()
     //消息免打扰View
@@ -258,9 +263,8 @@ class MyCommunityViewController: BaseViewController {
     
     // 表视图的头视图
     lazy var tableViewHeaderView: UIImageView = {
-        let tableViewHeaderView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 180))
-        tableViewHeaderView.backgroundColor = UIColor.yellow
-        tableViewHeaderView.image = UIImage(named: "grzy_porfile_bg")
+        let tableViewHeaderView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_width * 0.75))
+        tableViewHeaderView.backgroundColor = UIColor.white
         tableViewHeaderView.isUserInteractionEnabled = true
         return tableViewHeaderView
     }()
@@ -270,8 +274,9 @@ class MyCommunityViewController: BaseViewController {
         let headerImgView = UIImageView()
         headerImgView.layer.cornerRadius = 37.5
         headerImgView.layer.masksToBounds = true
+        headerImgView.layer.borderColor = UIColor.white.cgColor
+        headerImgView.layer.borderWidth = 2
         headerImgView.backgroundColor = UIColor.init(hexColor: "a1a1a1")
-        
         return headerImgView
     }()
     
@@ -279,9 +284,9 @@ class MyCommunityViewController: BaseViewController {
     lazy var nickNameLabel: UILabel = {
         let nickNameLabel = UILabel()
         nickNameLabel.textColor = UIColor.white
-        nickNameLabel.font = UIFont.systemFont(ofSize: 15)
+        nickNameLabel.font = UIFont.boldSystemFont(ofSize: 17)
         nickNameLabel.text = self.nickName
-        
+        nickNameLabel.textAlignment = NSTextAlignment.center
         return nickNameLabel
     }()
     
@@ -290,10 +295,17 @@ class MyCommunityViewController: BaseViewController {
         let friendsCountLabel = UILabel()
         friendsCountLabel.textColor = UIColor.white
         friendsCountLabel.numberOfLines = 2
-        friendsCountLabel.font = UIFont.systemFont(ofSize: 11)
+        friendsCountLabel.font = UIFont.boldSystemFont(ofSize: 14)
         friendsCountLabel.text = self.friendsCount
-        
+        friendsCountLabel.textAlignment = NSTextAlignment.right
         return friendsCountLabel
+    }()
+    
+    // 好友
+    lazy var imageLabel: UIImageView = {
+        let imageLabel = UIImageView()
+        imageLabel.backgroundColor = UIColor.white
+        return imageLabel
     }()
     
     // 粉丝
@@ -301,10 +313,24 @@ class MyCommunityViewController: BaseViewController {
         let fansCountLabel = UILabel()
         fansCountLabel.textColor = UIColor.white
         fansCountLabel.numberOfLines = 2
-        fansCountLabel.font = UIFont.systemFont(ofSize: 11)
+        fansCountLabel.font = UIFont.boldSystemFont(ofSize: 14)
         fansCountLabel.text = self.fansCount
         
         return fansCountLabel
+    }()
+    
+    // 粉丝
+    lazy var signatureLabel: UILabel = {
+        let signatureLabel = UILabel()
+        signatureLabel.textColor = UIColor.white
+        signatureLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        signatureLabel.textAlignment = NSTextAlignment.center
+        signatureLabel.text = ""
+        signatureLabel.isHidden = true;
+        signatureLabel.layer.masksToBounds = true
+        signatureLabel.layer.cornerRadius = 10
+        signatureLabel.backgroundColor = UIColor.init(red: 196/255.0, green: 198/255.0, blue: 201/255.0, alpha: 0.5)
+        return signatureLabel
     }()
     
     // 关注
@@ -339,12 +365,12 @@ class MyCommunityViewController: BaseViewController {
         let imageView = UIImageView(frame: CGRect(x: 5, y: 9, width: 16, height: 16))
         imageView.image = UIImage(named: "community_icon_edit_normal")
         commentTextField.addSubview(imageView)
-    
+        
         return commentTextField
     }()
     
     
-
+    
     lazy var bgView: UIView = {
         let bgView = UIView()
         
@@ -380,7 +406,7 @@ class MyCommunityViewController: BaseViewController {
         return noDataButton
     }()
     
-  
+    
     
     func keyboardWillShow(note: NSNotification) {
         let userInfo = note.userInfo!
@@ -424,6 +450,11 @@ class MyCommunityViewController: BaseViewController {
             self.nickNameLabel.text = String.init(format: "%@", (dic?["nickname"] as? String)!)
             
             self.addFriendsPhoneNumber = (dic?["mobile"] as? String)!
+            
+            self.tableViewHeaderView.kf.setImage(with: url)
+            
+            self.signatureLabel.isHidden = false;
+            self.signatureLabel.text = String.init(format: "%@", (dic?["signature"] as? String)!)
             
             if (dic?["is_follow"] as? String)! == "0" {
                 
@@ -514,7 +545,7 @@ class MyCommunityViewController: BaseViewController {
                     self.view.addSubview(self.noDataImageView)
                     self.view.addSubview(self.noDataLabel)
                     // 当进入自己的社区时
-                     if self.userId == AppInfo.shared.user?.userId {
+                    if self.userId == AppInfo.shared.user?.userId {
                         self.sendMessageButton.isHidden = true
                         self.view.addSubview(self.noDataButton)
                         self.noDataButton.snp.makeConstraints({ (make) in
@@ -581,7 +612,7 @@ class MyCommunityViewController: BaseViewController {
             case .failure(_): break
                 
             }
-        
+            
         }
     }
 }
@@ -604,6 +635,12 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
         let staFrame = dataList[indexPath.row]
+        if (cell.starArrayView != nil) {
+            cell.starArrayView.delegate = self
+            print("11111111")
+        }else {
+            
+        }
         cell.statementFrame = staFrame
         cell.selectionStyle = .none
         cell.delegate = self
@@ -636,9 +673,6 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        
-        
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
@@ -646,6 +680,14 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
         self.navOffset = scrollView.contentOffset.y / (tableView.tableHeaderView?.frame.size.height)!
         self.navBarBgAlpha = self.navOffset
         setNeedsStatusBarAppearanceUpdate()
+    }
+}
+
+extension MyCommunityViewController: ShowStarViewDelegate {
+    public func showStarView(_ starView: ShowStarView!, list array: [Any]!) {
+        let zanlistVC = ZanListViewController()
+        zanlistVC.zanListArray = array! as NSArray
+        self.navigationController?.pushViewController(zanlistVC, animated: true)
     }
 }
 
@@ -670,7 +712,6 @@ extension MyCommunityViewController: StatementCellDelegate {
                 //1.从数据库将数据移除
                 NetRequest.deleteCommunityNetRequest(openId: AppInfo.shared.user?.token ?? "", cid: statement._id, complete: { (success, info) in
                     if success {
-                        
                         // 刷新单元格
                         self.loadNetData(requestType: .update)
                         self.tableView.reloadData()
@@ -696,7 +737,7 @@ extension MyCommunityViewController: StatementCellDelegate {
         let messageObject = UMSocialMessageObject()
         
         // 缩略图
-//        let thumbURL = ""
+        //        let thumbURL = ""
         // 分享对象
         let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: statement.message ?? "", descr: "在这里，总会找到你喜欢的话题，点进来看看吧", thumImage: UIImage(named: "aladdiny_icon"))
         // 网址
@@ -714,9 +755,9 @@ extension MyCommunityViewController: StatementCellDelegate {
         ShareManager.shared.show()
         
         
-//
-//        }
-    
+        //
+        //        }
+        
         
     }
     //图片点击
@@ -752,24 +793,6 @@ extension MyCommunityViewController: StatementCellDelegate {
                 let code = json["code"].intValue
                 let info = json["info"].stringValue
                 if code == 200 {
-                    
-                    
-//                    SVProgressHUD.showSuccess(withStatus: info)
-//                    self.commentTextField.resignFirstResponder()
-//
-//                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
-//
-//                    let statement = StatementModel(contentDic: dic as! [AnyHashable : Any])
-//
-////                    print(<#T##items: Any...##Any#>)
-//                    let frameModel = StatementFrameModel()
-//                    frameModel.statement = statement
-//
-//                    for statementFrame in self.dataList {
-//                        if statementFrame.statement == self.currentStatement {
-//                            statementFrame.statement = statement
-//                        }
-//                    }
                     self.commentTextField.resignFirstResponder()
                     self.loadNetData(requestType: .update)
                     self.tableView.reloadData()
@@ -797,7 +820,7 @@ extension MyCommunityViewController: UITextFieldDelegate {
             SVProgressHUD.showError(withStatus: "暂不支持特殊字符")
             return false
         }
-    
+        
         //在这里做你响应return键的代码
         if !(textField.text?.isEmpty)! {
             //判断输入的字是否是回车，即按下return
@@ -814,7 +837,7 @@ extension MyCommunityViewController: UITextFieldDelegate {
             textField.text  = ""
             return false //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
         }
-
+        
         return true
         
     }

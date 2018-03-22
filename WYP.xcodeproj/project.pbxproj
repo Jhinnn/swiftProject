@@ -397,12 +397,24 @@
 		FB1BE5F81FEB494A003BDC1C /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E51FEB4949003BDC1C /* RecommendTableViewCell.swift */; };
 		FB1BE5F91FEB494A003BDC1C /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */; };
 		FB1BE5FB1FEB6979003BDC1C /* ChatRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */; };
+		FB4431BC2060B79200DD75BA /* ZanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4431BB2060B79200DD75BA /* ZanListViewController.swift */; };
+		FB4431BE2060DA0600DD75BA /* SynchronizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4431BD2060DA0600DD75BA /* SynchronizationViewController.swift */; };
 		FBC511FF1FEC973A0061245E /* DeleteGroupMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */; };
 		FBC512011FECCB750061245E /* ManagerGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512001FECCB750061245E /* ManagerGroupViewController.swift */; };
 		FBC512031FECD1450061245E /* DeleteHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512021FECD1450061245E /* DeleteHeaderCollectionReusableView.swift */; };
 		FBC512051FECDD9E0061245E /* ManagerGroupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */; };
 		FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512061FECE4910061245E /* SettingManagerViewController.swift */; };
 		FBC512091FECE85E0061245E /* SettingManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */; };
+		FBD0EFDC2060FF93001347D3 /* SynRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EFDB2060FF93001347D3 /* SynRoomModel.swift */; };
+		FBD0EFDE2061027F001347D3 /* SynGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EFDD2061027F001347D3 /* SynGroupModel.swift */; };
+		FBD0EFE020610611001347D3 /* SynTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EFDF20610611001347D3 /* SynTypeModel.swift */; };
+		FBD0EFE22061064A001347D3 /* SynTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EFE12061064A001347D3 /* SynTopicModel.swift */; };
+		FBD0EFE920610C53001347D3 /* SynCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD0EFE720610C53001347D3 /* SynCollectionViewCell.swift */; };
+		FBD0EFEA20610C53001347D3 /* SynCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD0EFE820610C53001347D3 /* SynCollectionViewCell.xib */; };
+		FBD850FF2061FFF000D97C2B /* SynGourpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD850FD2061FFF000D97C2B /* SynGourpCollectionViewCell.swift */; };
+		FBD851002061FFF000D97C2B /* SynGourpCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD850FE2061FFF000D97C2B /* SynGourpCollectionViewCell.xib */; };
+		FBD851032062441D00D97C2B /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD851012062441D00D97C2B /* TypeCollectionViewCell.swift */; };
+		FBD851042062441D00D97C2B /* TypeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBD851022062441D00D97C2B /* TypeCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -919,12 +931,24 @@
 		FB1BE5E71FEB4949003BDC1C /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRecordTableViewCell.swift; sourceTree = "<group>"; };
+		FB4431BB2060B79200DD75BA /* ZanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZanListViewController.swift; sourceTree = "<group>"; };
+		FB4431BD2060DA0600DD75BA /* SynchronizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizationViewController.swift; sourceTree = "<group>"; };
 		FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupMemberViewController.swift; sourceTree = "<group>"; };
 		FBC512001FECCB750061245E /* ManagerGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGroupViewController.swift; sourceTree = "<group>"; };
 		FBC512021FECD1450061245E /* DeleteHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		FBC512041FECDD9E0061245E /* ManagerGroupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerGroupInfoModel.swift; sourceTree = "<group>"; };
 		FBC512061FECE4910061245E /* SettingManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerViewController.swift; sourceTree = "<group>"; };
 		FBC512081FECE85E0061245E /* SettingManagerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManagerTableViewCell.swift; sourceTree = "<group>"; };
+		FBD0EFDB2060FF93001347D3 /* SynRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynRoomModel.swift; sourceTree = "<group>"; };
+		FBD0EFDD2061027F001347D3 /* SynGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynGroupModel.swift; sourceTree = "<group>"; };
+		FBD0EFDF20610611001347D3 /* SynTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynTypeModel.swift; sourceTree = "<group>"; };
+		FBD0EFE12061064A001347D3 /* SynTopicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynTopicModel.swift; sourceTree = "<group>"; };
+		FBD0EFE720610C53001347D3 /* SynCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBD0EFE820610C53001347D3 /* SynCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SynCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBD850FD2061FFF000D97C2B /* SynGourpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynGourpCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBD850FE2061FFF000D97C2B /* SynGourpCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SynGourpCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBD851012062441D00D97C2B /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBD851022062441D00D97C2B /* TypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypeCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1015,13 +1039,6 @@
 				8E56104B200604FD0034D8E9 /* StatementCell.m */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		8E561061200606160034D8E9 /* LPlaceholderTextView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LPlaceholderTextView;
 			sourceTree = "<group>";
 		};
 		8E650A911FE7B5B300A453BB /* HXWeiboPhotoPicker */ = {
@@ -1149,6 +1166,8 @@
 				8E2B7766200F0F8000087918 /* PublicGroupOneViewController.swift */,
 				8EBE8B391FE79549001A05D7 /* PublicGroupViewController.swift */,
 				8E82B8621FF247AD00617220 /* PublicCommunViewController.swift */,
+				FB4431BB2060B79200DD75BA /* ZanListViewController.swift */,
+				FB4431BD2060DA0600DD75BA /* SynchronizationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1156,6 +1175,12 @@
 		A41CE6751EBABD16000BCDE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FBD0EFE720610C53001347D3 /* SynCollectionViewCell.swift */,
+				FBD0EFE820610C53001347D3 /* SynCollectionViewCell.xib */,
+				FBD850FD2061FFF000D97C2B /* SynGourpCollectionViewCell.swift */,
+				FBD850FE2061FFF000D97C2B /* SynGourpCollectionViewCell.xib */,
+				FBD851012062441D00D97C2B /* TypeCollectionViewCell.swift */,
+				FBD851022062441D00D97C2B /* TypeCollectionViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1164,6 +1189,10 @@
 			isa = PBXGroup;
 			children = (
 				8EEDA0842007515A008352CE /* CommunityModel.swift */,
+				FBD0EFDB2060FF93001347D3 /* SynRoomModel.swift */,
+				FBD0EFDD2061027F001347D3 /* SynGroupModel.swift */,
+				FBD0EFDF20610611001347D3 /* SynTypeModel.swift */,
+				FBD0EFE12061064A001347D3 /* SynTopicModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1439,7 +1468,6 @@
 		A4B204C71EC0127E007DA418 /* 朋友圈 */ = {
 			isa = PBXGroup;
 			children = (
-				8E561061200606160034D8E9 /* LPlaceholderTextView */,
 				8E56103D200604FD0034D8E9 /* CommunityView */,
 				A4B204C81EC01291007DA418 /* CMInputView */,
 			);
@@ -3080,10 +3108,13 @@
 				8E0FB0CA2022B14B00A5EAAE /* IntelligentCollectionViewCell.xib in Resources */,
 				8E0FB0CC2022BB5D00A5EAAE /* TableHeaderView.xib in Resources */,
 				8EEDA08C20076BEA008352CE /* SeachResultComCell.xib in Resources */,
+				FBD851002061FFF000D97C2B /* SynGourpCollectionViewCell.xib in Resources */,
 				A42EDE111EDEB21D00C0B500 /* FYLCity.plist in Resources */,
 				8EEDA09020078C79008352CE /* SeachResultComNoCell.xib in Resources */,
+				FBD0EFEA20610C53001347D3 /* SynCollectionViewCell.xib in Resources */,
 				F9986A681EA61C2B002C502B /* ShowroomDetails.storyboard in Resources */,
 				A43C2A551E8102F70037BB5A /* LaunchScreen.storyboard in Resources */,
+				FBD851042062441D00D97C2B /* TypeCollectionViewCell.xib in Resources */,
 				8EB4DF852016C7B9001D497D /* MediaImageCollectionCell.xib in Resources */,
 				F9360B881F163086002C6771 /* hotCityList.json in Resources */,
 				8EC74C211FF228B200839A6F /* Main.storyboard in Resources */,
@@ -3244,7 +3275,10 @@
 				A49DA1F51EA9A356000E4AFA /* ShowroomGroupCell.swift in Sources */,
 				A4B204F91EC01291007DA418 /* CMInputView.m in Sources */,
 				F9A47A401F5CE45700C313F2 /* SYBannerCell.swift in Sources */,
+				FBD850FF2061FFF000D97C2B /* SynGourpCollectionViewCell.swift in Sources */,
+				FBD0EFE020610611001347D3 /* SynTypeModel.swift in Sources */,
 				F9986A301EA61C2B002C502B /* TopicsDetailsViewController.swift in Sources */,
+				FBD0EFDE2061027F001347D3 /* SynGroupModel.swift in Sources */,
 				F99869F71EA61C2B002C502B /* CityListViewController.swift in Sources */,
 				8E0B8A01202453CD00128BF9 /* InviteTableViewCell.swift in Sources */,
 				A4FE0E4C1EA8591500F13C8F /* PooCodeView.m in Sources */,
@@ -3309,8 +3343,10 @@
 				8E2B7771201034C700087918 /* TalkCommentCommentViewController.swift in Sources */,
 				8E650ADC1FE7B5B300A453BB /* HXPhotoSubViewCell.m in Sources */,
 				F9986A2B1EA61C2B002C502B /* OrdersModel.swift in Sources */,
+				FBD0EFDC2060FF93001347D3 /* SynRoomModel.swift in Sources */,
 				8E650AD61FE7B5B300A453BB /* HXPhotoManager.m in Sources */,
 				A4A134F71EA4BD6600FC4D67 /* AppInfo.swift in Sources */,
+				FBD0EFE920610C53001347D3 /* SynCollectionViewCell.swift in Sources */,
 				F9986A081EA61C2B002C502B /* MeViewController.swift in Sources */,
 				9E41516A1FB1ACB800DF6DAA /* AdvisorySearchTitleView.swift in Sources */,
 				A42EDE121EDEB21D00C0B500 /* FYLCityModel.m in Sources */,
@@ -3401,6 +3437,7 @@
 				8E650ADF1FE7B5B300A453BB /* UIButton+HXExtension.m in Sources */,
 				F96139BC1EAD8D970029E22A /* HomeModel.swift in Sources */,
 				F9FE90571F9F024800D31F3C /* UIImage+ImageSize.m in Sources */,
+				FBD851032062441D00D97C2B /* TypeCollectionViewCell.swift in Sources */,
 				8E0B89F22023FF9100128BF9 /* MoreIntelligentViewController.swift in Sources */,
 				F9B660B61F04EA5400692DE2 /* WMLightView.m in Sources */,
 				F9986A291EA61C2B002C502B /* NotificationViewController.swift in Sources */,
@@ -3431,6 +3468,7 @@
 				9E16EF091FAF907D008B5B3C /* ScanOneScanViewController.swift in Sources */,
 				FB1BE5F91FEB494A003BDC1C /* LSXPopMenu.m in Sources */,
 				F9F5BE201ECED1A000F6C9C3 /* MapViewController.swift in Sources */,
+				FBD0EFE22061064A001347D3 /* SynTopicModel.swift in Sources */,
 				F99869F81EA61C2B002C502B /* ButtonGroupView.swift in Sources */,
 				F9D92ADD1EE6506300AA1CC6 /* RoomNewsDetailViewController.swift in Sources */,
 				F92ABBF41EA8EDBC006A41A5 /* CommentModel.swift in Sources */,
@@ -3443,6 +3481,7 @@
 				FB1BE5EA1FEB494A003BDC1C /* GroupsModel.swift in Sources */,
 				8E650ADA1FE7B5B300A453BB /* HXPhotoView.m in Sources */,
 				F9549A461F2F31EB00C3B5E4 /* CitySearchViewController.swift in Sources */,
+				FB4431BE2060DA0600DD75BA /* SynchronizationViewController.swift in Sources */,
 				8E561055200604FD0034D8E9 /* StatementModel.m in Sources */,
 				F9986A211EA61C2B002C502B /* GetAddressBook.swift in Sources */,
 				FB1BE5F61FEB494A003BDC1C /* GroupsTableViewCell.swift in Sources */,
@@ -3530,6 +3569,7 @@
 				F99869F21EA61C2B002C502B /* ADTableViewCell.swift in Sources */,
 				F92CE34B1F0B4C79005CB4E8 /* MapListViewController.swift in Sources */,
 				FBC512071FECE4910061245E /* SettingManagerViewController.swift in Sources */,
+				FB4431BC2060B79200DD75BA /* ZanListViewController.swift in Sources */,
 				F9DA8C781F00B53D00AE66BC /* KTabbarAnimation.swift in Sources */,
 				8E2B7767200F0F8000087918 /* PublicGroupOneViewController.swift in Sources */,
 				F933534D1ED59C3200E67DD2 /* SearchView.swift in Sources */,

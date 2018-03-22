@@ -146,18 +146,18 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     
     lazy var adButton: UIButton = {
         let adButton = UIButton(type: .custom)
-        adButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+//        adButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
         return adButton
     }()
     
     lazy var topButton: UIButton = {
         let adButton = UIButton(type: .custom)
-        adButton.setImage(UIImage(named: "common_top_icon_normal_iPhone"), for: .normal)
+//        adButton.setImage(UIImage(named: "common_top_icon_normal_iPhone"), for: .normal)
         return adButton
     }()
     lazy var hotImageView: UIImageView = {
         let hotImageView = UIImageView()
-        hotImageView.image = UIImage(named: "common_hot_icon_normal_iPhone")
+//        hotImageView.image = UIImage(named: "common_hot_icon_normal_iPhone")
         return hotImageView
     }()
     lazy var line: UIView = {
@@ -241,6 +241,34 @@ class TalkOnePictureTableViewCell: UITableViewCell {
             infoImageView.kf.setImage(with: imageUrl1)
            
             hotImageView.isHidden = true
+        }
+    }
+    
+    var synTopicModel: SynTopicModel? {
+        willSet {
+            infoLabel.text = newValue?.title ?? ""
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
+            }
+            
+            let imageUrl = URL(string: newValue?.cover_url?[0] ?? "")
+            infoImageView.kf.setImage(with: imageUrl)
+            
+            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.comment ?? "0")
+            
+            infoTimeLabel.text = Int((newValue?.create_time)!)?.getTimeString()
         }
     }
     

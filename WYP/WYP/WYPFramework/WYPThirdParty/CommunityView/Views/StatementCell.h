@@ -52,8 +52,7 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
     // 删除按钮
     UIImageView *_zanImageView;
     
-    // 点赞数组
-    ShowStarView * _starArrayView;
+    
     // 评论数组
     ShowCommentView * _commentArrayView;
 }
@@ -71,7 +70,7 @@ typedef void(^selectImg) (NSInteger index, NSArray * imageUrlArray);
 
 @property (strong, nonatomic) StartButton *starButton;
 
-
+@property (strong, nonatomic) ShowStarView *starArrayView; //点赞视图
 
 @property (strong, nonatomic) StatementFrameModel * statementFrame;
 

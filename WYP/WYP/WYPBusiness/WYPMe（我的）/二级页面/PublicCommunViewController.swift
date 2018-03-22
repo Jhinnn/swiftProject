@@ -20,11 +20,17 @@ class PublicCommunViewController: BaseViewController{
     //存放图片的数组
     var uploadImageArray = [UIImage]()
     
+    //分享群组id字符串
+    var group_id: String!
+    var qunzu_id: String!
+    var topic_id: String!
+    var gambit_id: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "发布社区动态"
+        title = "发布社区"
         // 创建注册Item
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(publicButtonItemAction))
         
@@ -32,7 +38,8 @@ class PublicCommunViewController: BaseViewController{
         backgroundView.addSubview(textView)
         self.view.addSubview(bgView)
         bgView.addSubview(photoView)
-        
+        self.view.addSubview(tongbuLabel)
+        self.view.addSubview(tongbuButton)
         
     }
     
@@ -74,6 +81,32 @@ class PublicCommunViewController: BaseViewController{
     }()
     
     
+    lazy var tongbuLabel: UILabel = {
+        let laebl = UILabel(frame: CGRect(x: 10, y: 380, width: 100, height: 30))
+        laebl.text = "同步至"
+        return laebl
+    }()
+    
+    lazy var tongbuButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: kScreen_width - 80, y: 380, width: 80, height: 30))
+        button.setImage(UIImage.init(named: "community_icon_more_normal"), for: .normal)
+        button.addTarget(self, action: #selector(tongbuAction), for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: --同步按钮
+    func tongbuAction() {
+        
+        let synVC = SynchronizationViewController()
+        synVC.postValueBlock = {(arrOne,arrTwo,arrThree,arrFour) in
+            self.group_id = arrOne.joined(separator: ",") //展厅
+            self.qunzu_id = arrTwo.joined(separator: ",")
+            self.topic_id = arrThree.joined(separator: ",")
+            self.gambit_id = arrFour.joined(separator: ",")
+        }
+        
+        self.navigationController?.pushViewController(synVC, animated: true)
+    }
 
     // MARK: --发布按钮点击事件
     func publicButtonItemAction() {
@@ -83,8 +116,8 @@ class PublicCommunViewController: BaseViewController{
             SVProgressHUD.showInfo(withStatus: "发布内容不能为空！")
             return
         }
-
-        NetRequest.publishCommunityNetRequest(open_id: AppInfo.shared.user?.userId ?? "",title: self.textView.text, images: uploadImageArray) { (success, info, userDic) in
+        
+        NetRequest.publishCommunityNetRequest(open_id: AppInfo.shared.user?.userId ?? "", title: self.textView.text, images: uploadImageArray, groupId: self.group_id, qunzuId: self.qunzu_id, topicID: self.topic_id, gambitID: "") { (success, info, userDic) in
             if success {
                 
                 SVProgressHUD.setDefaultMaskType(.none)
@@ -101,6 +134,8 @@ class PublicCommunViewController: BaseViewController{
                 SVProgressHUD.showError(withStatus: info)
             }
         }
+
+       
     }
     
 }

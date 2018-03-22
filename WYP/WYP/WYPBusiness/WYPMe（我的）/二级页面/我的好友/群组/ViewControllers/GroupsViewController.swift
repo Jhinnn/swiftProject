@@ -211,6 +211,7 @@ class GroupsViewController: BaseViewController {
     }()
     //懒加载我加入群的tableView
     lazy var secondGroupTableView:WYPTableView = {
+        
         let secondGroupTableView = WYPTableView(frame: .zero, style: .plain)
         secondGroupTableView.backgroundColor = UIColor.white
         secondGroupTableView.rowHeight = 60
