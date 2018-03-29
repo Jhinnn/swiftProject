@@ -77,8 +77,9 @@ class ShowRoomCommentCell: UITableViewCell {
     // 昵称
     lazy var nickNameLablel: UILabel = {
         let nickNameLablel = UILabel()
-        nickNameLablel.textColor = UIColor.init(hexColor: "#507bab")
-        nickNameLablel.font = UIFont.systemFont(ofSize: 11)
+//        nickNameLablel.textColor = UIColor.init(hexColor: "#507bab")
+        nickNameLablel.textColor = UIColor.init(red: 137/255, green: 137/255, blue: 137/255, alpha: 1)
+        nickNameLablel.font = UIFont.systemFont(ofSize: 14)
         
         return nickNameLablel
     }()
@@ -105,8 +106,8 @@ class ShowRoomCommentCell: UITableViewCell {
         let starCountButton = UIButton(type: .custom)
         starCountButton.setImage(UIImage(named: "sq_icon_dz_normal"), for: .normal)
         starCountButton.setImage(UIImage(named: "sq_icon_dz_select"), for: .selected)
-        starCountButton.setTitleColor(UIColor.black, for: .normal)
-        starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
+        starCountButton.setTitleColor(UIColor.init(hexColor: "afafaf"), for: .normal)
+        starCountButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         starCountButton.addTarget(self, action: #selector(clickStarButton(sender:)), for: .touchUpInside)
         return starCountButton
     }()
@@ -115,6 +116,7 @@ class ShowRoomCommentCell: UITableViewCell {
     lazy var replyCountLabel: UILabel = {
         let replyCountLabel = UILabel()
         replyCountLabel.text = "回复数：5"
+        replyCountLabel.textAlignment = NSTextAlignment.right
         replyCountLabel.font = UIFont.systemFont(ofSize: 10)
         replyCountLabel.textColor = UIColor.init(hexColor: "afafaf")
         return replyCountLabel

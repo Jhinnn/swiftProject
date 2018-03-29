@@ -22,7 +22,15 @@ class ShowroomDetailsViewController: UITableViewController {
     // 封面图片
     @IBOutlet weak var headImgView: UIImageView!
     
-    @IBOutlet weak var headScrollView: UIScrollView!
+    @IBOutlet weak var contentLabel: UILabel!
+    
+    
+    @IBOutlet weak var headimageView: UIImageView!
+    
+    @IBOutlet weak var qianpiaoBtn: UIButton!
+    
+    @IBOutlet weak var headSmallImageView: UIImageView!
+    
     // 关注按钮
     @IBOutlet weak var followButton: UIButton!
     
@@ -73,6 +81,8 @@ class ShowroomDetailsViewController: UITableViewController {
     @IBOutlet weak var thirdLineWidth: NSLayoutConstraint!
     
     
+    var dynamicArray = [StatementModel]()
+    
     
     // 单元格的高度
     var descriptionCellHeight: CGFloat = 160
@@ -93,7 +103,7 @@ class ShowroomDetailsViewController: UITableViewController {
     var typeId: Int!
     // 分组标题
     lazy var sectionTitleArray: [String] = {
-        let sectionTitleArray = ["", "", "媒体库", "群组", "项目成员", "最新动态", "申请入驻", "最近评论"]
+        let sectionTitleArray = ["媒体库", "群组", "项目成员", "最新动态","","","申请入驻", "最近评论"]
         return sectionTitleArray
     }()
     lazy var moreTitleArray: [String] = {
@@ -104,19 +114,23 @@ class ShowroomDetailsViewController: UITableViewController {
     var roomInfo: RoomInfoModel? {
         willSet {
             var imageUrl: URL?
+            var imageUrll: URL?
             if isFree {
                 imageUrl = URL(string: newValue?.logo ?? "")
                 self.headImgView.kf.setImage(with: imageUrl)
             } else {
                 imageUrl = URL(string: newValue?.background ?? "")
-                self.headAImageView.kf.setImage(with: imageUrl)
+                
+                imageUrll = URL(string: newValue?.logo ?? "")
+                self.headimageView.kf.setImage(with: imageUrl, placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
+
+                
+                self.headSmallImageView.kf.setImage(with: imageUrll, placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
             }
     
             self.projectTitleLabel.text = newValue?.title ?? ""
             self.followButton.setTitle("  \(newValue?.followedCount ?? "")人", for: .normal)
-            if newValue?.isLike == 1 {
-                followButton.isSelected = true
-            }
+            
             if newValue?.isProject == 1 {
                 projectButton.isSelected = true
             }
@@ -256,6 +270,14 @@ class ShowroomDetailsViewController: UITableViewController {
     // 媒体库数据源
     var mediaData: [MediaModel]?
     
+    //话题数据源
+    var topicsData: [InfoModel]?
+    
+    
+    var newsData = [StatementFrameModel]()
+    
+    var newsDataAll = [StatementFrameModel]()
+    
     //  MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,46 +292,57 @@ class ShowroomDetailsViewController: UITableViewController {
         self.tableView.register(ThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell")
         self.tableView.register(VideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell")
         
+        
+        self.tableView.register(TalkOnePictureTableViewCell.self, forCellReuseIdentifier: "onePicCell1")
+        self.tableView.register(TalkTravelTableViewCell.self, forCellReuseIdentifier: "textCell1")
+        self.tableView.register(TalkThreePictureTableViewCell.self, forCellReuseIdentifier: "threeCell1")
+        self.tableView.register(TalkVideoInfoTableViewCell.self, forCellReuseIdentifier: "videoCell1")
+        self.tableView.register(IntelligentTableViewCell.self, forCellReuseIdentifier: "inteCell1")
+        
+        self.tableView.register(UINib.init(nibName: "ShowroomApplyCell", bundle: nil), forCellReuseIdentifier: "appCell")
+        
+        
+        self.tableView.register(StatementCell.self, forCellReuseIdentifier: "StatementCellIdentifier")
+        
+        
         self.tableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadShowRoomDetailData(requestType: .loadMore)
         })
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.loadShowRoomDetailData(requestType: .update)
-        })
+//        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+//            self.loadShowRoomDetailData(requestType: .update)
+//        })
 
-        
-        if !isFree {
+        // 监听键盘
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+
             // 如果不是免费展厅
-            tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: 355 * width_height_ratio)
-        }
+        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: 460 * width_height_ratio)
+
+    }
     
-        // 放大封面图
-        if isFree && roomInfo?.logo != "" {
-            let tap = UITapGestureRecognizer(target: self, action: #selector(clickHeadImageView(tap:)))
-            tap.numberOfTapsRequired = 1
-            tap.numberOfTouchesRequired = 1
-            headImgView.isUserInteractionEnabled = true
-            headImgView.addGestureRecognizer(tap)
-            headImgView.clipsToBounds = true
-        }
+    deinit {
+
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.blockRotation = false
         
-        if isFree {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-//            navigationController?.navigationBar.barTintColor = UIColor.white
+       
             
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
-        }
-        loadShowRoomDetailData(requestType: .update)
-        headAImageView.startAnimation()
+        self.navigationController?.navigationBar.isHidden = true
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fxh_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -318,14 +351,28 @@ class ShowroomDetailsViewController: UITableViewController {
         // 判断是否关联票务 08/01 修改为一直显示抢票按钮，将判断加载点击事件中
         self.tableView.window?.addSubview(bottomView)
         self.tableView.window?.bringSubview(toFront: bottomView)
-        bottomView.addSubview(lotteryBtn)
+        bottomView.addSubview(commentTextField)
+        bottomView.addSubview(collectionButton)
             
-        lotteryBtn.snp.makeConstraints { (make) in
+        commentTextField.snp.makeConstraints { (make) in
+            if deviceTypeIPhoneX() {
+                make.centerY.equalTo(bottomView.snp.centerY).offset(-4)
+            }else {
+                make.centerY.equalTo(bottomView.snp.centerY)
+            }
+            
             make.left.equalTo(bottomView).offset(13)
-            make.right.equalTo(bottomView).offset(-13)
-            make.bottom.equalTo(bottomView).offset(-9)
-            make.height.equalTo(46)
+            make.right.equalTo(collectionButton.snp.left).offset(-30)
+            make.height.equalTo(34)
         }
+        
+        collectionButton.snp.makeConstraints { (make) in
+            make.right.equalTo(bottomView).offset(-24)
+            make.centerY.equalTo(commentTextField.snp.centerY)
+            make.size.equalTo(CGSize(width: 21, height: 21))
+        }
+        
+        loadShowRoomDetailData(requestType: .update)
 
     }
     
@@ -334,40 +381,32 @@ class ShowroomDetailsViewController: UITableViewController {
         
         navigationController?.navigationBar.barTintColor = UIColor.themeColor
         
+        self.navigationController?.navigationBar.isHidden = false
+        
         bottomView.removeFromSuperview()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if isFree {
-            return .default
-        } else {
-            return .lightContent
-        }
+       
+       return .lightContent
+
     }
     
     func viewConfig() {
-        headScrollView.contentSize = CGSize(width: kScreen_width, height: 220 * width_height_ratio)
-        headScrollView.isScrollEnabled = false
-        headScrollView.addSubview(headAImageView)
-        headAImageView.startAnimation()
+        self.headSmallImageView.layer.masksToBounds = true
+        self.headSmallImageView.layer.cornerRadius = 8
+        self.headSmallImageView.layer.borderColor = UIColor.white.cgColor
+        self.headSmallImageView.layer.borderWidth = 1.5
+        
+        self.qianpiaoBtn.layer.masksToBounds = true
+        self.qianpiaoBtn.layer.cornerRadius = 20
+        self.qianpiaoBtn.backgroundColor = UIColor.themeColor
+        
+        self.tableView.separatorColor = UIColor.init(hexColor: "f8f8f8")
+        
     }
     
-    // 动画图片
-    lazy var headAImageView: KImageViewAnimation = {
-        let headAImageView = KImageViewAnimation(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 220 * width_height_ratio))
-        return headAImageView
-    }()
-    
-    // 返回按钮
-    lazy var backButton: UIButton = {
-        let backButton = UIButton(type: .custom)
-        backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 13.5)
-        backButton.setImage(UIImage(named: "chat_icon_return_normalmore"), for: .normal)
-        backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        
-        return backButton
-    }()
-    
+
     lazy var bottomView: UIView = {
         let bottomView = UIView(frame: CGRect(x: 0, y: kScreen_height - 60, width: kScreen_width, height: 60))
         bottomView.backgroundColor = UIColor.white
@@ -375,119 +414,37 @@ class ShowroomDetailsViewController: UITableViewController {
         return bottomView
     }()
     
-    lazy var lotteryBtn: UIButton = {
-        let lotteryBtn = UIButton(type: .custom)
-        lotteryBtn.layer.cornerRadius = 5.0
-        lotteryBtn.layer.masksToBounds = true
-        lotteryBtn.setTitle("立即抢票", for: .normal)
-        lotteryBtn.backgroundColor = UIColor.themeColor
-        lotteryBtn.addTarget(self, action: #selector(lotteryBtnAction), for: .touchUpInside)
+  
+    
+    // 评论框
+    lazy var commentTextField: SYTextField = {
+        let commentTextField = SYTextField()
+        commentTextField.font = UIFont.systemFont(ofSize: 14)
+        commentTextField.delegate = self
+        commentTextField.placeholder = "写下你的想法..."
+        commentTextField.returnKeyType = .send
+        commentTextField.layer.masksToBounds = true
+        commentTextField.layer.cornerRadius = 15
+        commentTextField.backgroundColor = UIColor.init(red: 244/255.0, green: 244/255.0, blue: 244/255.0, alpha: 1)
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 8, width: 16, height: 16))
+        imageView.image = UIImage(named: "zx_icon_write_normal")
+        commentTextField.addSubview(imageView)
         
-        return lotteryBtn
+        return commentTextField
     }()
     
-    // MARK: - private method
-    func loadShowRoomDetailData(requestType: RoomRequestType) {
+    lazy var collectionButton: UIButton = {
+        let collectionButton = UIButton()
+        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_normal_iPhone"), for: .normal)
+        collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+        collectionButton.addTarget(self, action: #selector(collectionNews(sender:)), for: .touchUpInside)
+        return collectionButton
+    }()
+    
 
-        if requestType == .update {
-            pageNum = 1
-        } else {
-            pageNum = pageNum + 1
-        }
+    // MARK: --关注展厅
+    func collectionNews(sender: UIButton) {
         
-        NetRequest.showRoomDetailNetRequest(page: "\(pageNum)", uid: AppInfo.shared.user?.userId ?? "", type_id: roomId ?? "") { (success, info, result) in
-            if success {
-                let dic = result?.value(forKey: "data") as? NSDictionary
-                
-                if requestType == .update {
-                    self.showRoomDetailData = ShowRoomDetailModel.deserialize(from: dic)
-                    self.roomInfo = self.showRoomDetailData?.roomInfo
-                    self.attribution = self.showRoomDetailData?.attribution
-                    self.mediaData = self.showRoomDetailData?.video
-                    for image in (self.showRoomDetailData?.image)! {
-                        image.type = "1"
-                        self.mediaData?.append(image)
-                    }
-                } else {
-                    // 把新数据添加进去
-                    let roomDetail = ShowRoomDetailModel.deserialize(from: dic)
-                    self.showRoomDetailData?.comment = (self.showRoomDetailData?.comment)! + (roomDetail?.comment)!
-                }
-
-                self.tableView.mj_header.endRefreshing()
-                self.tableView.mj_footer.endRefreshing()
-                self.tableView.reloadData()
-            } else {
-                SVProgressHUD.showError(withStatus: info!)
-            }
-        }
-    }
-    
-    // MARK: - event response
-    // 点击展厅封面
-    func clickHeadImageView(tap: UITapGestureRecognizer) {
-        let bgView = UIScrollView.init(frame: UIScreen.main.bounds)
-        bgView.backgroundColor = UIColor.black
-        bgView.alpha = 0.3
-        let tapBg = UITapGestureRecognizer.init(target: self, action: #selector(tapBgView(tapBgRecognizer:)))
-        bgView.addGestureRecognizer(tapBg)
-        let picView = tap.view as! UIImageView//view 强制转换uiimageView
-        if picView.image != nil {
-            let imageView = UIImageView.init()
-            imageView.image = picView.image;
-            
-            var frame = imageView.frame
-            frame.size.width = 275 * width_height_ratio
-            frame.size.height = frame.size.width * ((imageView.image?.size.height)! / (imageView.image?.size.width)!)
-            frame.origin.x = 50 * width_height_ratio
-            frame.origin.y = (bgView.frame.size.height - frame.size.height) * 0.5
-            imageView.frame = bgView.convert(frame, from: self.view)
-            
-            UIApplication.shared.keyWindow?.addSubview(bgView)
-            UIApplication.shared.keyWindow?.addSubview(imageView)
-            self.lastImageView = imageView
-            self.originalFrame = imageView.frame
-            self.scrollView = bgView
-            self.scrollView?.isScrollEnabled = false
-            self.scrollView?.delegate = self
-            
-            UIView.animate(
-                withDuration: 0.3,
-                delay: 0.0,
-                options: UIViewAnimationOptions.beginFromCurrentState,
-                animations: {
-                    var frame = imageView.frame
-                    frame.size.width = 275 * width_height_ratio
-                    frame.size.height = frame.size.width * ((imageView.image?.size.height)! / (imageView.image?.size.width)!)
-                    frame.origin.x = 50 * width_height_ratio
-                    frame.origin.y = (bgView.frame.size.height - frame.size.height) * 0.5
-                    imageView.frame = frame
-            }, completion: nil
-            )
-        }
-    }
-    func tapBgView(tapBgRecognizer:UITapGestureRecognizer)
-    {
-        self.scrollView?.contentOffset = CGPoint.zero
-        UIView.animate(withDuration: 0.5, animations: {
-            self.lastImageView?.frame = self.originalFrame
-            tapBgRecognizer.view?.backgroundColor = UIColor.clear
-            
-        }) { (finished:Bool) in
-            self.lastImageView?.removeFromSuperview()
-            tapBgRecognizer.view?.removeFromSuperview()
-            self.scrollView = nil
-            self.lastImageView = nil
-        }
-    }
-    
-    //正确代理回调方法
-    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.lastImageView
-    }
-    
-    // 收藏展厅
-    @IBAction func collectionCurrentRoom(_ sender: UIButton) {
         let token = AppInfo.shared.user?.token ?? ""
         if sender.isSelected {
             NetRequest.roomCancelAttentionNetRequest(openId: token, groupId: roomId ?? "", complete: { (success, info) in
@@ -516,40 +473,90 @@ class ShowroomDetailsViewController: UITableViewController {
         sender.isSelected = !sender.isSelected
     }
     
+    // MARK: - private method
+    func loadShowRoomDetailData(requestType: RoomRequestType) {
+
+        if requestType == .update {
+            pageNum = 1
+        } else {
+            pageNum = pageNum + 1
+        }
+        
+        NetRequest.showRoomDetailNetRequest(page: "\(pageNum)", uid: AppInfo.shared.user?.userId ?? "", type_id: roomId ?? "") { (success, info, result) in
+            if success {
+                let dic = result?.value(forKey: "data") as? NSDictionary
+                let dynamicArray = dic!["dynamic"] as! [NSDictionary]
+                
+                if requestType == .update {
+                    self.showRoomDetailData = ShowRoomDetailModel.deserialize(from: dic)
+                    
+                    
+                    
+                    self.roomInfo = self.showRoomDetailData?.roomInfo
+                    self.attribution = self.showRoomDetailData?.attribution
+                    self.mediaData = self.showRoomDetailData?.video
+                    self.topicsData = self.showRoomDetailData?.gambit
+                    
+                    self.newsData.removeAll()
+
+                    for optDic in dynamicArray {
+                        let statement = StatementModel(contentDic: optDic as! [AnyHashable : Any])
+                        let statementFrame = StatementFrameModel()
+                        let statementFrameAll = StatementFrameModel()
+                        statementFrame.isSeachResult = true
+                        
+                        statementFrame.statement = statement
+                        statementFrameAll.statement = statement
+                        statementFrame.isShowAllMessage = true
+                        self.newsData.append(statementFrame)
+                        self.newsDataAll.append(statementFrameAll)
+                    }
+                    
+                    for image in (self.showRoomDetailData?.image)! {
+                        image.type = "1"
+                        self.mediaData?.append(image)
+                    }
+                    
+                    if self.showRoomDetailData?.roomInfo?.isLike == 0 {
+                        self.collectionButton.isSelected = false
+                        self.collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_normal_iPhone"), for: .normal)
+                    }else {
+                        self.collectionButton.isSelected = true
+                        self.collectionButton.setBackgroundImage(UIImage(named: "common_collection_button_selected_iPhone"), for: .selected)
+                    }
+                    
+                    
+                    
+                    self.contentLabel.text = self.showRoomDetailData?.roomInfo?.detail
+                } else {
+                    // 把新数据添加进去
+                    let roomDetail = ShowRoomDetailModel.deserialize(from: dic)
+                    self.showRoomDetailData?.comment = (self.showRoomDetailData?.comment)! + (roomDetail?.comment)!
+                }
+
+//                self.tableView.mj_header.endRefreshing()
+                self.tableView.mj_footer.endRefreshing()
+                self.tableView.reloadData()
+            } else {
+                SVProgressHUD.showError(withStatus: info!)
+            }
+        }
+    }
+    
+    
+    //正确代理回调方法
+    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.lastImageView
+    }
+    
+    // 收藏展厅
+    @IBAction func collectionCurrentRoom(_ sender: UIButton) {
+
+    }
+    
     // 添加取消关注
     @IBAction func addAttention(_ sender: UIButton) {
-        let uid = AppInfo.shared.user?.userId ?? ""
-        if uid == "" {
-            GeneralMethod.alertToLogin(viewController: self)
-            return
-        }
-        if sender.isSelected == false {
-            NetRequest.addOrCancelAttentionNetRequest(method: "POST", mid: AppInfo.shared.user?.userId ?? "", follow_who: showRoomDetailData?.member?[sender.tag - 500].memberId ?? "") { (success, info) in
-                
-                if success {
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    sender.setBackgroundImage(UIImage(named: "showRoom_alreadyAttentionRed_button_normal_iPhone"), for: .selected)
-                    sender.isSelected = true
-                    self.showRoomDetailData?.member?[sender.tag - 500].isFllow = "1"
-                    self.loadShowRoomDetailData(requestType: .update)
-                } else {
-                    SVProgressHUD.showError(withStatus: info)
-                }
-            }
-        } else {
-            NetRequest.addOrCancelAttentionNetRequest(method: "DELETE", mid: AppInfo.shared.user?.userId ?? "", follow_who: showRoomDetailData?.member?[sender.tag - 500].memberId ?? "") { (success, info) in
-                
-                if success {
-                    SVProgressHUD.showSuccess(withStatus: info)
-                    sender.setBackgroundImage(UIImage(named: "showRoom_attentionRed_button_normal_iPhone"), for: .normal)
-                    sender.isSelected = false
-                    self.showRoomDetailData?.member?[sender.tag - 500].isFllow = "0"
-                    self.loadShowRoomDetailData(requestType: .update)
-                } else {
-                    SVProgressHUD.showError(withStatus: info)
-                }
-            }
-        }
+
     }
     // 项目认证
     @IBAction func projectCertificate(_ sender: UIButton) {
@@ -567,10 +574,13 @@ class ShowroomDetailsViewController: UITableViewController {
         navigationController?.pushViewController(company, animated: true)
     }
     
-    // 返回按钮点击事件
-    func backButtonAction(button: UIButton) {
+    
+// 返回按钮点击事件
+    @IBAction func backBtnAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+    
+
     
     //MARK: // 查看更多视频
     func showMoreVideos(sender: UIButton) {
@@ -605,11 +615,11 @@ class ShowroomDetailsViewController: UITableViewController {
     // 点击更多
     func showMore(sender: UIButton) {
         switch sender.tag {
-        case 3:
+        case 1:
             let groupList = TheaterGroupViewController()
             groupList.roomId = roomId ?? ""
             navigationController?.pushViewController(groupList, animated: true)
-        case 4:
+        case 2:
             
             if showRoomDetailData?.member?.count == 0 {
                 return
@@ -620,26 +630,31 @@ class ShowroomDetailsViewController: UITableViewController {
             }
            
             break
-        case 5:
+        case 3:
             let news = ShowNewsListViewController()
             news.roomId = roomId
             navigationController?.pushViewController(news, animated: true)
             break
-        case 6:
-            navigationController?.pushViewController(ApplyToEnterViewController(), animated: true)
-            break
-        case 7:
-            let issueComment = IssueCommentViewController()
-            issueComment.roomId = roomId
-            navigationController?.pushViewController(issueComment, animated: true)
-            break
+//        case 6:
+//
+//            break
+//        case 7:
+//            let issueComment = IssueCommentViewController()
+//            issueComment.roomId = roomId
+//            navigationController?.pushViewController(issueComment, animated: true)
+//            break
         default:
             break
         }
     }
     
+    // MARK --申请入驻
+    func applyAction() {
+        navigationController?.pushViewController(ApplyToEnterViewController(), animated: true)
+    }
+    
     // 分享
-    func shareBarButtonItemAction() {
+    @IBAction func shareBtnAction(_ sender: Any) {
         // 判断是否登录
         let uid = AppInfo.shared.user?.userId ?? ""
         if uid == "" {
@@ -658,7 +673,7 @@ class ShowroomDetailsViewController: UITableViewController {
             shareLink = kApi_baseUrl(path: url)
         }
         // 设置文本
-//        messageObject.text = showRoomDetailData!.roomInfo!.title! + shareLink!
+        //        messageObject.text = showRoomDetailData!.roomInfo!.title! + shareLink!
         // 分享对象
         let shareObject: UMShareWebpageObject = UMShareWebpageObject.shareObject(withTitle: showRoomDetailData?.roomInfo?.title ?? "", descr: showRoomDetailData?.roomInfo?.detail ?? "", thumImage: UIImage(named: "aladdiny_icon"))
         // 网址
@@ -675,8 +690,37 @@ class ShowroomDetailsViewController: UITableViewController {
         ShareManager.shared.show()
     }
     
-    // 跳转抢票详情
-    func lotteryBtnAction() {
+    func keyboardWillShow(note: NSNotification) {
+        let userInfo = note.userInfo!
+        let  keyBoardBounds = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        
+        let deltaY = keyBoardBounds.size.height
+        let animations:(() -> Void) = {
+            //键盘的偏移量
+            self.bottomView.transform = CGAffineTransform(translationX: 0 , y: -deltaY)
+        }
+        
+        if duration > 0 {
+            let options = UIViewAnimationOptions(rawValue: UInt((userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).intValue << 16))
+            
+            UIView.animate(withDuration: duration, delay: 0, options:options, animations: animations, completion: nil)
+            
+        }else{
+            animations()
+        }
+    }
+    
+    
+    func keyboardWillHidden(note: NSNotification) {
+        self.bottomView.transform = CGAffineTransform(translationX: 0 , y: 0)
+    }
+    
+ 
+    
+    //MARK: --抢票详情
+    
+    @IBAction func lotteryBtnAction(_ sender: Any) {
         if isTicket == 1 {
             let board = UIStoryboard.init(name: "LotteryDetails", bundle: nil)
             let lotteryDetailsViewController = board.instantiateInitialViewController() as! LotteryDetailsViewController
@@ -695,23 +739,33 @@ class ShowroomDetailsViewController: UITableViewController {
         }
     }
     
+
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 8
+ 
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 5 {
+        if section == 3 {
             if showRoomDetailData != nil {
-                if (showRoomDetailData?.recentNews?.count)! > 0 {
-                    return (showRoomDetailData?.recentNews?.count)!
-                }
-                return 1
+                return (showRoomDetailData?.recentNews?.count)!
             }
-            return 1
-        } else if section == 6 {
             return 0
-        } else if section == 7 {
+        } else if section == 4 {
+            if showRoomDetailData != nil {
+                return (showRoomDetailData?.gambit?.count)!
+            }
+            return 0
+        } else if section == 5 {
+            if self.newsData.count != 0 {
+                return self.newsData.count
+            } else {
+                return 0
+            }
+        }else if section == 6 {
+            return 1
+        }else if section == 7 {
             if showRoomDetailData != nil {
                 return (showRoomDetailData?.comment?.count)!
             }
@@ -720,39 +774,11 @@ class ShowroomDetailsViewController: UITableViewController {
         return 1
     }
     
-    lazy var descriptionCell: ShowroomDescriptionCell = {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "descriptionCellIdentifier") as! ShowroomDescriptionCell
-        cell.delegate = self as ShowroomDescriptionCellDelegate
-        
-        return cell
-    }()
+  
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            // 没有简介
-            if showRoomDetailData?.roomInfo?.detail != "" {
-                descriptionCell.descriptionLabel.text = showRoomDetailData?.roomInfo?.detail?.appending("\n\n\n\n\n\n\n")
-            } else {
-                let label = UILabel()
-                label.tag = 160
-                label.text = "暂无介绍"
-                label.textAlignment = .center
-                label.font = UIFont.systemFont(ofSize: 18)
-                label.textColor = UIColor.init(hexColor: "afafaf")
-                descriptionCell.addSubview(label)
-                
-                label.snp.makeConstraints({ (make) in
-                    make.center.equalTo(descriptionCell)
-                    make.size.equalTo(CGSize(width: kScreen_width, height: 20))
-                })
-            }
-
-            return descriptionCell
-        } else if indexPath.section == 1 { // 公告
-            let cell = tableView.dequeueReusableCell(withIdentifier: "noticeCellIdentifier") as! ShowroomNoticeCell
-            cell.noticeLabel.text = showRoomDetailData?.announ?[0].announTitle ?? "暂无公告！"
-            return cell
-        } else if indexPath.section == 2 { // 媒体库
+            //媒体库
             let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCellIdentifier")
             // 没有数据
             if mediaData?.count == 0 {
@@ -776,10 +802,12 @@ class ShowroomDetailsViewController: UITableViewController {
             }
             
             let collectionView = cell?.viewWithTag(200) as! UICollectionView
+            collectionView.layer.cornerRadius = 12
+            collectionView.layer.masksToBounds = true
             collectionView.reloadData()
             cell?.backgroundColor = UIColor.white
             return cell!
-        } else if indexPath.section == 3 { // 群组
+        }else if indexPath.section == 1 {  //群组
             let cell = tableView.dequeueReusableCell(withIdentifier: "theaterGroupCellIdentifier")
             // 没有数据
             if showRoomDetailData?.group?.count == 0 {
@@ -787,8 +815,8 @@ class ShowroomDetailsViewController: UITableViewController {
                 label.tag = 1002
                 label.text = "暂无群组"
                 label.textAlignment = .center
-                label.font = UIFont.systemFont(ofSize: 18)
-                label.textColor = UIColor.init(hexColor: "afafaf")
+                label.font = UIFont.systemFont(ofSize: 17)
+                label.textColor = UIColor.black
                 cell?.addSubview(label)
                 
                 label.snp.makeConstraints({ (make) in
@@ -803,9 +831,11 @@ class ShowroomDetailsViewController: UITableViewController {
             }
             
             let collectionView = cell?.viewWithTag(201) as! UICollectionView
+            collectionView.layer.cornerRadius = 12
+            collectionView.layer.masksToBounds = true
             collectionView.reloadData()
             return cell!
-        } else if indexPath.section == 4 { // 项目成员
+        }else if indexPath.section == 2 { //项目成员
             let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCellIdentifier")
             // 没有项目成员
             if showRoomDetailData?.member?.count == 0 {
@@ -827,65 +857,19 @@ class ShowroomDetailsViewController: UITableViewController {
                     label?.removeFromSuperview()
                 }
             }
-            
             let collectionView = cell?.viewWithTag(202) as! UICollectionView
+            collectionView.layer.cornerRadius = 12
+            collectionView.layer.masksToBounds = true
             collectionView.reloadData()
-            
             return cell!
-        } else if indexPath.section == 5 {  // 资讯
-            let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell") as! OnePictureTableViewCell?
-            
-            // 暂无数据
-            if showRoomDetailData != nil && showRoomDetailData?.recentNews?.count != 0 {
-                cell?.adButton.isHidden = false
-                cell?.topButton.isHidden = false
-                cell?.infoImageView.isHidden = false
-                cell?.infoModel = showRoomDetailData?.recentNews?[indexPath.row]
-                
-                let label = cell?.viewWithTag(1004)
-                if label != nil {
-                    label?.isHidden = true
-                }
-            } else {
-                // 没有最新动态的时候
-                
-                cell?.adButton.isHidden = true
-                cell?.topButton.isHidden = true
-                cell?.infoImageView.isHidden = true
-                
-                let label = UILabel()
-                label.tag = 1004
-                label.text = "暂无数据"
-                label.textAlignment = .center
-                label.font = UIFont.systemFont(ofSize: 18)
-                label.textColor = UIColor.init(hexColor: "afafaf")
-                cell?.addSubview(label)
-                
-                label.snp.makeConstraints({ (make) in
-                    make.center.equalTo(cell!)
-                    make.size.equalTo(CGSize(width: kScreen_width, height: 20))
-                })
-            }
-            
-            if showRoomDetailData != nil {
-                if (showRoomDetailData?.recentNews?.count)! == 2 && indexPath.row == 1 {
-                    let view = UIView()
-                    view.backgroundColor = tableView.separatorColor
-                    cell?.contentView.addSubview(view)
-                    view.snp.makeConstraints({ (make) in
-                        make.height.equalTo(0.5)
-                        make.left.equalTo((cell?.contentView)!).offset(15)
-                        make.right.equalTo((cell?.contentView)!)
-                        make.bottom.equalTo((cell?.contentView)!)
-                    })
-                }
-            }
-            
+        }else if indexPath.section == 3 {  //最新动态
+          
             let newsData = showRoomDetailData?.recentNews
             if newsData?.count != 0 {
                 switch newsData?[indexPath.row].showType ?? 0 {
                 case 1: //只有文字
                     let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! TravelTableViewCell
+                    
                     cell.infoModel = newsData?[indexPath.row]
                     return cell
                 case 2: //上图下文
@@ -894,6 +878,8 @@ class ShowroomDetailsViewController: UITableViewController {
                     return cell
                 case 3: //左文右图
                     let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell", for: indexPath) as! OnePictureTableViewCell
+                    cell.contentView.layer.masksToBounds = true
+                    cell.contentView.layer.cornerRadius = 20
                     cell.infoModel = newsData?[indexPath.row]
                     return cell
                 case 4: //三张图
@@ -907,12 +893,62 @@ class ShowroomDetailsViewController: UITableViewController {
                     cell.infoModel = newsData?[indexPath.row]
                     return cell
                 default:
-                    return cell!
+                    return UITableViewCell()
                 }
             }
-            return cell!
+
+        }else if indexPath.section == 4 {  //话题
+            let newData1 = showRoomDetailData?.gambit
+            switch newData1?[indexPath.row].showType ?? 6 {
+            case 0: // 视频
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell1", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            case 1: //只有文字
+                let cell = tableView.dequeueReusableCell(withIdentifier: "textCell1", for: indexPath) as! TalkTravelTableViewCell
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            case 2: //上图下文
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell1", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            case 3: //左文右图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "onePicCell1", for: indexPath) as! TalkOnePictureTableViewCell
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            case 4: //三张图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "threeCell1", for: indexPath) as! TalkThreePictureTableViewCell
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            case 5: // 大图
+                let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell1", for: indexPath) as! TalkVideoInfoTableViewCell
+                cell.infoLabel.isHidden = true
+                cell.playImageView.isHidden = true
+                cell.infoModel = newData1?[indexPath.row]
+                return cell
+            default:
+                return UITableViewCell()
+            }
+        }else if indexPath.section == 5 { //社区
+            let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
+            cell.statementFrame = newsData[indexPath.row]
+            cell.shareButton.isHidden = true
+            cell.leaveMessageButton.isHidden =  true
+            cell.starButton.isHidden = true
+            cell.selectionStyle = .none;
+            cell.selectImgBlock = {(index, imageUrlArray) in
+                return
+            }
             
-        } else {
+            return cell
+        }else if indexPath.section == 6 {  //申请入驻
+            let cell = tableView.dequeueReusableCell(withIdentifier: "appCell", for: indexPath)
+            let btn1 = cell.contentView.viewWithTag(99) as! UIButton
+            let btn2 = cell.contentView.viewWithTag(100) as! UIButton
+            btn1.addTarget(self, action: #selector(applyAction), for: .touchUpInside)
+            btn2.addTarget(self, action: #selector(applyAction), for: .touchUpInside)
+            return cell
+        }else if indexPath.section == 7 { //最新评论
             let cell = ShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
             if showRoomDetailData != nil {
                 let commentFrame = RoomCommentFrameModel()
@@ -936,50 +972,84 @@ class ShowroomDetailsViewController: UITableViewController {
             
             return cell
         }
+        return UITableViewCell()
+        
     }
     
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.section == 0 {
-            return descriptionCellHeight
+            return 110
         } else if indexPath.section == 1 {
-            return 44.5
-        } else if indexPath.section == 2 {
-            return 95
-        } else if indexPath.section == 3 {
             return 160
-        } else if indexPath.section == 4 {
-            if isFree {
+        } else if indexPath.section == 2 {
+            return 165
+        } else if indexPath.section == 3 {
+            let newsData = showRoomDetailData?.recentNews
+            
+            switch newsData?[indexPath.row].showType ?? 0 {
+            case 1:
+                return 87.5 * width_height_ratio
+            case 2:
+                return 280 * width_height_ratio
+            case 3:
+                return 109
+            case 4:
+                return 160 * width_height_ratio
+            case 5:
+                return 280 * width_height_ratio
+            default:
                 return 0
             }
-            return 160
-        } else if indexPath.section == 5 {
-            let newsData = showRoomDetailData?.recentNews
-            if newsData?.count == 0 {
-                return 109
-            } else {
-                if newsData != nil {
-                    switch newsData?[indexPath.row].showType ?? 0 {
-                    case 1:
-                        return 87.5 * width_height_ratio
-                    case 2:
-                        return 280 * width_height_ratio
-                    case 3:
-                        return 109
-                    case 4:
-                        return 160 * width_height_ratio
-                    case 5:
-                        return 280 * width_height_ratio
-                    default:
-                        return 0
-                    }
+ 
+        }else if indexPath.section == 4 {
+            
+            let newsData1 = showRoomDetailData?.gambit
+            switch newsData1![indexPath.row].showType ?? 6 {
+            case 0:
+                
+                let titleH = self.getLabHeight(labelStr: newsData1![indexPath.row].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {   //两行
+                    return 310 * width_height_ratio
                 }
+                return 275 * width_height_ratio
+            case 1:  //只有文字
+                let titleH = self.getLabHeight(labelStr: newsData1![indexPath.row].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {
+                    return 87.5 * width_height_ratio
+                }
+                return 74 * width_height_ratio
+            case 2:  //大图下文
+                let titleH = self.getLabHeight(labelStr: newsData1![indexPath.row].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {   //两行
+                    return 295 * width_height_ratio
+                }
+                return 275 * width_height_ratio
+            case 3:    //左文右图
+                return 100
+            case 4:  //三图
+                
+                let titleH = self.getLabHeight(labelStr: newsData1![indexPath.row].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {
+                    return 180 * width_height_ratio
+                }
+                
+                return 160 * width_height_ratio
+            case 5:
+                
+                return 275 * width_height_ratio
+            default:
+                return 0
             }
-            
-            return 0
-            
-        } else if indexPath.section == 7 {
+        }else if indexPath.section == 5 {
+            let statementFrame = newsData[indexPath.row]
+            return statementFrame.cellHeight
+        }else if indexPath.section == 6 {
+            return 50
+        }
+        else if indexPath.section == 7 {
             
             if showRoomDetailData != nil {
                 let commentFrame = RoomCommentFrameModel()
@@ -990,15 +1060,13 @@ class ShowroomDetailsViewController: UITableViewController {
         } else {
             return 0
         }
+
     }
     
     // MARK: - 设置组头
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 || section == 1 {
-            return nil
-        }
         let sectionHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0))
-        sectionHeaderView.backgroundColor = UIColor.white
+        sectionHeaderView.backgroundColor = UIColor.init(hexColor: "F8F8F8")
         
         // 图标视图
         let iconView = UIImageView()
@@ -1007,21 +1075,24 @@ class ShowroomDetailsViewController: UITableViewController {
         
         // 标题
         let titleLabel = UILabel()
-        titleLabel.font = UIFont.systemFont(ofSize: 18)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.textColor = UIColor.init(hexColor: "333333")
+        
+        
+        
         titleLabel.text = sectionTitleArray[section]
         sectionHeaderView.addSubview(titleLabel)
         
         // 设置布局
         iconView.snp.makeConstraints { (make) in
-            make.left.equalTo(sectionHeaderView)
-            make.top.equalTo(sectionHeaderView).offset(15)
-            make.size.equalTo(CGSize(width: 2, height: 16.5))
+            make.left.equalTo(sectionHeaderView).offset(17)
+            make.centerY.equalTo(sectionHeaderView)
+            make.size.equalTo(CGSize(width: 2, height: 15))
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(iconView.snp.right).offset(4)
-            make.bottom.equalTo(sectionHeaderView).offset(-8)
-            make.height.equalTo(18)
+            make.left.equalTo(iconView.snp.right).offset(6)
+            make.centerY.equalTo(sectionHeaderView)
+            
         }
         // 按钮前的文字
         let moreTitleLabel = UILabel()
@@ -1033,7 +1104,7 @@ class ShowroomDetailsViewController: UITableViewController {
         // 媒体库
         
         // FIXME:- 媒体库按钮大小
-        if section == 2 && showRoomDetailData != nil {
+        if section == 0 && showRoomDetailData != nil {
             
             // 更多按钮
             let moreButton = UIButton()
@@ -1044,11 +1115,11 @@ class ShowroomDetailsViewController: UITableViewController {
             
             let photosButton = UIButton()
             photosButton.titleLabel?.textAlignment = .right
-            let photosTitle = String.init(format: "图片 %d", showRoomDetailData?.image?.count ?? 0)
+            let photosTitle = String.init(format: "图片 (%d)", showRoomDetailData?.image?.count ?? 0)
             photosButton.setTitle(photosTitle, for: .normal)
             photosButton.setTitleColor(UIColor.black, for: .normal)
             
-            photosButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+            photosButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
             photosButton.addTarget(self, action: #selector(showMorePhotos), for: .touchUpInside)
             sectionHeaderView.addSubview(photosButton)
             
@@ -1070,33 +1141,34 @@ class ShowroomDetailsViewController: UITableViewController {
                 make.height.equalTo(sectionHeaderView)
             })
             
+            let videosButton = UIButton()
+            videosButton.titleLabel?.textAlignment = .right
             
+            let videosTitle = String.init(format: "视频 (%d)", showRoomDetailData?.video?.count ?? 0)
+            videosButton.setTitle(videosTitle, for: .normal)
+            videosButton.setTitleColor(UIColor.black, for: .normal)
+            videosButton.titleLabel?.font = UIFont.systemFont(ofSize: 11)
+            videosButton.addTarget(self, action: #selector(showMoreVideos(sender:)), for: .touchUpInside)
+            sectionHeaderView.addSubview(videosButton)
             
-            if !isFree { // 免费展厅没有视频
-                let videosButton = UIButton()
-                videosButton.titleLabel?.textAlignment = .right
-                
-                let videosTitle = String.init(format: "视频 %d", showRoomDetailData?.video?.count ?? 0)
-                videosButton.setTitle(videosTitle, for: .normal)
-                videosButton.setTitleColor(UIColor.black, for: .normal)
-                videosButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-                videosButton.addTarget(self, action: #selector(showMoreVideos(sender:)), for: .touchUpInside)
-                sectionHeaderView.addSubview(videosButton)
-                
-                if showRoomDetailData?.video?.count == 0 {
-                    photosButton.isEnabled = false
-                } else {
-                    photosButton.isEnabled = true
-                }
-                
-                videosButton.snp.makeConstraints({ (make) in
-                    make.right.equalTo(photosButton.snp.left).offset(-6)
-                    make.centerY.equalTo(sectionHeaderView)
-                    make.height.equalTo(sectionHeaderView)
-                })
+            if showRoomDetailData?.video?.count == 0 {
+                photosButton.isEnabled = false
+            } else {
+                photosButton.isEnabled = true
             }
             
-        } else if section > 3 && section < 7 {
+            videosButton.snp.makeConstraints({ (make) in
+                make.right.equalTo(photosButton.snp.left).offset(-6)
+                make.centerY.equalTo(sectionHeaderView)
+                make.height.equalTo(sectionHeaderView)
+            })
+            
+            
+        } else if section >= 1 && section < 4 || section == 6{
+            
+            let groupLabel = UILabel()
+            groupLabel.font = UIFont.boldSystemFont(ofSize: 12)
+            sectionHeaderView.addSubview(groupLabel)
             
             // 更多按钮
             let moreButton = UIButton()
@@ -1106,21 +1178,28 @@ class ShowroomDetailsViewController: UITableViewController {
             sectionHeaderView.addSubview(moreButton)
             
             moreButton.snp.makeConstraints { (make) in
-                make.right.equalTo(sectionHeaderView).offset(-13)
+                make.right.equalTo(sectionHeaderView).offset(-12)
                 make.centerY.equalTo(sectionHeaderView)
-                make.size.equalTo(CGSize(width: 25, height: 25))
+                make.size.equalTo(CGSize(width: 40, height: 25))
             }
             
-            moreTitleLabel.snp.makeConstraints({ (make) in
-                make.right.equalTo(moreButton.snp.left).offset(-10)
+    
+            groupLabel.snp.makeConstraints({ (make) in
+                make.left.equalTo(titleLabel.snp.right).offset(5)
                 make.centerY.equalTo(sectionHeaderView)
                 make.height.equalTo(10)
             })
             
-            // 项目成员
-            if section == 4 && isFree {
-                return nil
+            
+            if section == 1 {
+                groupLabel.text = "(\(showRoomDetailData?.group?.count ?? 0))"
+            }else if section == 2 {
+                groupLabel.text = "(\(showRoomDetailData?.member?.count ?? 0))"
+            }else if section == 3 {
+                groupLabel.text = "(\(showRoomDetailData?.recentNews?.count ?? 0))"
             }
+            
+         
             
             // 添加手势
             if section == 6 {
@@ -1130,60 +1209,48 @@ class ShowroomDetailsViewController: UITableViewController {
                 sectionHeaderView.addGestureRecognizer(tap)
             }
             
-        } else {
-            // 群组
-            if section == 3 && showRoomDetailData?.group != nil {
-                let groupButton = UIButton()
-                groupButton.tag = section
-                groupButton.isEnabled = false
-                groupButton.titleLabel?.textAlignment = .right
-                groupButton.setTitle("群组\(showRoomDetailData?.group?.count ?? 0)", for: .normal)
-                groupButton.setTitleColor(UIColor.black, for: .normal)
-                groupButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-                groupButton.addTarget(self, action: #selector(showMore(sender:)), for: .touchUpInside)
-                sectionHeaderView.addSubview(groupButton)
-                
-                groupButton.snp.makeConstraints({ (make) in
-                    make.right.equalTo(sectionHeaderView).offset(-13)
-                    make.centerY.equalTo(sectionHeaderView)
-                    
-                    make.height.equalTo(10)
-                })
-            }
-            
+        }else if section == 4 || section == 5 {
+            return UIView()
+        }else {
             // 评论
             if section == 7 {
                 let commentLabel = UILabel()
+                if showRoomDetailData == nil {
+                    commentLabel.text = "0"
+                }else {
+                    commentLabel.text = "(\(showRoomDetailData!.plcount!))"
+                }
                 
-                commentLabel.text = "(\(showRoomDetailData!.plcount!))"
                 commentLabel.font = UIFont.systemFont(ofSize: 13)
                 sectionHeaderView.addSubview(commentLabel)
                 
                 commentLabel.snp.makeConstraints({ (make) in
-                    make.left.equalTo(titleLabel.snp.right).offset(8)
-                    make.bottom.equalTo(sectionHeaderView).offset(-8)
-                    make.height.equalTo(11)
-                })
-                
-                let commentButton = UIButton()
-                commentButton.tag = section
-                commentButton.titleLabel?.textAlignment = .right
-                commentButton.setTitle("我要评论", for: .normal)
-                commentButton.setTitleColor(UIColor.black, for: .normal)
-                commentButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
-                commentButton.addTarget(self, action: #selector(showMore(sender:)), for: .touchUpInside)
-                sectionHeaderView.addSubview(commentButton)
-                
-                commentButton.snp.makeConstraints({ (make) in
-                    make.right.equalTo(sectionHeaderView).offset(-13)
+                    make.left.equalTo(titleLabel.snp.right).offset(5)
                     make.centerY.equalTo(sectionHeaderView)
-                    make.height.equalTo(40)
+                    make.height.equalTo(10)
                 })
+//
+//                let commentButton = UIButton()
+//                commentButton.tag = section
+//                commentButton.titleLabel?.textAlignment = .right
+//                commentButton.setTitle("我要评论", for: .normal)
+//                commentButton.setTitleColor(UIColor.black, for: .normal)
+//                commentButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+//                commentButton.addTarget(self, action: #selector(showMore(sender:)), for: .touchUpInside)
+//                sectionHeaderView.addSubview(commentButton)
+//
+//                commentButton.snp.makeConstraints({ (make) in
+//                    make.right.equalTo(sectionHeaderView).offset(-13)
+//                    make.centerY.equalTo(sectionHeaderView)
+//                    make.height.equalTo(40)
+//                })
 
             }
         }
         return sectionHeaderView
     }
+
+
     
     func applyToEnter(tap: UITapGestureRecognizer) {
         let uid = AppInfo.shared.user?.userId ?? ""
@@ -1195,19 +1262,13 @@ class ShowroomDetailsViewController: UITableViewController {
     
     // 设置组头高度
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 || section == 1 {
-            return 0.01
-        }
-        if section == 4 && isFree {
-            return 0.01
+        if section == 4 || section == 5 {
+            return 0.0001
         }
         return 40
     }
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 4 && isFree {
-            return 0.01
-        }
-        return 10
+        return 0.0001
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
@@ -1217,7 +1278,7 @@ class ShowroomDetailsViewController: UITableViewController {
                 navigationController?.pushViewController(announce, animated: true)
             }
         }
-        if indexPath.section == 5 {
+        if indexPath.section == 3 {
             if (showRoomDetailData?.recentNews?.count)! > 0 {
                 let news = RoomNewsDetailViewController()
                 news.newsPhoto = showRoomDetailData?.recentNews?[indexPath.row].infoImageArr?[0] ?? ""
@@ -1228,7 +1289,7 @@ class ShowroomDetailsViewController: UITableViewController {
             }
             
         }
-        if indexPath.section == 7 {
+        if indexPath.section == 5 {
             let commentReply = CommentReplyViewController()
             commentReply.roomId = roomId
             commentReply.commentData = showRoomDetailData?.comment?[indexPath.row]
@@ -1277,6 +1338,7 @@ extension ShowroomDetailsViewController: UICollectionViewDataSource, UICollectio
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reuseIdentifier", for: indexPath) as! ShowroomMemberCell
                 cell.memberModel = showRoomDetailData?.member?[indexPath.row]
                 cell.followButton.tag = indexPath.item + 500
+                cell.delegate = self
                 return cell
             default:
                 return UICollectionViewCell()
@@ -1343,6 +1405,57 @@ extension ShowroomDetailsViewController: UICollectionViewDataSource, UICollectio
             break
         }
     }
+    
+   
+}
+
+extension ShowroomDetailsViewController: ShowroomMemberAttentionDelegate {
+    func attentionActionCell(_ IntelligentCell: ShowroomMemberCell, intelligentModel model: MemberModel) {
+        if model.isFllow == "1" { //已关注
+            
+            NetRequest.addOrCancelAttentionNetRequest(method: "DELETE", mid: AppInfo.shared.user?.userId ?? "", follow_who: model.memberId ?? "") { (success, info) in
+                
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info)
+                    
+                    IntelligentCell.followButton.adjustsImageWhenHighlighted = false
+                    IntelligentCell.followButton.backgroundColor = UIColor.themeColor
+                    IntelligentCell.followButton.setTitle("关注", for: .normal)
+                    IntelligentCell.followButton.setTitleColor(UIColor.white, for: .normal)
+                    model.isFllow = "0"
+                } else {
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            }
+            
+            
+        } else {
+            NetRequest.addOrCancelAttentionNetRequest(method: "POST", mid: AppInfo.shared.user?.userId ?? "", follow_who: model.memberId ?? "") { (success, info) in
+                
+                if success {
+                    SVProgressHUD.showSuccess(withStatus: info)
+                    
+                    IntelligentCell.followButton.adjustsImageWhenHighlighted = false
+                    IntelligentCell.followButton.backgroundColor = UIColor.white
+                    IntelligentCell.followButton.setTitle("已关注", for: .normal)
+                    IntelligentCell.followButton.setTitleColor(UIColor.themeColor, for: .normal)
+                    model.isFllow = "1"
+                    
+                } else {
+                    SVProgressHUD.showError(withStatus: info)
+                }
+            }
+        }
+    }
+    
+    func getLabHeight(labelStr:String,font:UIFont,width:CGFloat) -> CGFloat {
+        let statusLabelText: NSString = labelStr as NSString
+        let size = CGSize(width: width, height: 1000)
+        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context: nil).size
+        return strSize.height
+    }
+    
 }
 
 extension ShowroomDetailsViewController: ShowRoomCommentCellDelegate {
@@ -1403,4 +1516,36 @@ extension ShowroomDetailsViewController: ShowroomDescriptionCellDelegate {
     }
     
     
+}
+
+
+extension ShowroomDetailsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let token = AppInfo.shared.user?.token ?? ""
+        if token == "" {
+            GeneralMethod.alertToLogin(viewController: self)
+            return false
+        }
+        
+        NetRequest.issueCommentNetRequest(openId: token, groupId: roomId ?? "", content: textField.text!, pid: "") { (success, info, result) in
+            if success {
+                SVProgressHUD.showSuccess(withStatus: info!)
+
+                textField.text = ""
+                textField.resignFirstResponder()
+                self.loadShowRoomDetailData(requestType: .update)
+            } else {
+                SVProgressHUD.showError(withStatus: info!)
+            }
+        }
+        
+        
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return true
+    }
 }

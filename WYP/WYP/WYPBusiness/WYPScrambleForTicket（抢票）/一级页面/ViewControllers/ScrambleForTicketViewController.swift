@@ -347,18 +347,26 @@ extension ScrambleForTicketViewController: SYBannerViewDelegate {
             var board: UIStoryboard
             if showRoom?.isFree == "0" {
                 board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+                let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+                
+                showroomFreeDetailsViewController.roomId = showRoom?.roomId
+                showroomFreeDetailsViewController.isTicket = bannerData?[index].isTicket ?? 0
+                showroomFreeDetailsViewController.isFree = true
+                
+                navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
             } else {
                 board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-            }
-            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-            showroomDetailsViewController.roomId = showRoom?.roomId
-            showroomDetailsViewController.isTicket = bannerData?[index].isTicket ?? 0
-            if showRoom?.isFree == "0" {
-                showroomDetailsViewController.isFree = true
-            } else {
+                let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+                
+                showroomDetailsViewController.roomId = showRoom?.roomId
+                showroomDetailsViewController.isTicket = bannerData?[index].isTicket ?? 0
                 showroomDetailsViewController.isFree = false
+                
+                showroomDetailsViewController.roomInfo?.isTicket = bannerData?[index].isTicket ?? 0
+                navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+                
+                
             }
-            navigationController?.pushViewController(showroomDetailsViewController, animated: false)
             break
         case "3": // 跳转活动
             switch bannerData?[index].ticketType ?? "" {

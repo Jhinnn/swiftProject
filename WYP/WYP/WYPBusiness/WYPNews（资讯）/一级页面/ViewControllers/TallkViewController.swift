@@ -30,39 +30,11 @@ class TallkViewController: BaseViewController {
     //刷新次数
     var upnumb: Int = 0
     
-    // banner数据
-    var bannerData: [BannerModel]?
-    // banner图片
-    var bannerImages: [String]? {
-        willSet {
-            syBanner.imagePaths = newValue!
-        }
-    }
-    
-    lazy var commentView: UIView = {
-        let commentView = UIView()
-      
-        return commentView
-    }()
-    
-    
-    // 评论框
-    lazy var commentButton: UIButton = {
-        let commentButton = UIButton()
-        commentButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        
-        commentButton.setTitleColor(UIColor.white, for: .normal)
-        commentButton.setImage(UIImage(named: "topic_icon_issuance_normal"), for: .normal)
-        commentButton.layer.masksToBounds = true
-        commentButton.addTarget(self, action: #selector(issueTopic(sender:)), for: .touchUpInside)
-        return commentButton
-    }()
-    
+
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewConfig()
+
         layoutPageSubviews()
         
         // 获取数据
@@ -72,15 +44,10 @@ class TallkViewController: BaseViewController {
         loadIntelligentData()
         
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        loadBannerData()
-
-    }
     
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -88,46 +55,10 @@ class TallkViewController: BaseViewController {
     }
     
     
-    // MARK: - private method
-    private func viewConfig() {
+
+    private func layoutPageSubviews() {
         
         view.addSubview(newAllTableView)
-        view.addSubview(commentView)
-        commentView.addSubview(commentButton)
-        
-        newsData = [InfoModel]()
-        
-        // 只有全部页面显示banner
-        if isShowBanner == true {
-            newAllTableView.tableHeaderView = syBanner
-        }
-        
-        
-        commentButton.snp.makeConstraints { (make) in
-            make.left.equalTo(commentView)
-            make.right.equalTo(commentView)
-            make.centerY.equalTo(commentView)
-        }
-        
-        if deviceTypeIPhoneX() {
-            commentView.snp.makeConstraints { (make) in
-                make.bottom.equalTo(newAllTableView.snp.bottom).offset(-70)
-                make.right.equalTo(newAllTableView.snp.right).offset(-10)
-                make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
-            }
-        }else {
-            commentView.snp.makeConstraints { (make) in
-                make.bottom.equalTo(newAllTableView.snp.bottom).offset(-58)
-                make.right.equalTo(newAllTableView.snp.right).offset(-10)
-                make.size.equalTo(UIImage(named: "topic_icon_issuance_normal")!.size)
-            }
-        }
-        
-        
-        
-
-    }
-    private func layoutPageSubviews() {
         switch flag {
         case 1:
             newAllTableView.snp.makeConstraints { (make) in
@@ -144,26 +75,7 @@ class TallkViewController: BaseViewController {
         }
     }
     
-   
-    
-    // 轮播图
-    func loadBannerData() {
-        NetRequest.newsAdv { (success, info, result) in
-            if success {
-                let array = result!.value(forKey: "banner")
-                let data = try! JSONSerialization.data(withJSONObject: array!, options: JSONSerialization.WritingOptions.prettyPrinted)
-                let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-                self.bannerData = [BannerModel].deserialize(from: jsonString) as? [BannerModel]
-                
-                self.bannerImages = [String]()
-                for i in 0..<self.bannerData!.count {
-                    self.bannerImages?.append(self.bannerData?[i].bannerImage ?? "")
-                }
-                
-            }
-        }
-    }
-    
+
     //MARK: 请求达人榜
     func loadIntelligentData() {
         NetRequest.getIntelligentListNetRequest(page: "1",new_id: "") { (success, info, result) in
@@ -329,9 +241,7 @@ class TallkViewController: BaseViewController {
             let string = (keyword! as NSString).substring(with: NSMakeRange(i, 1))
             changeText.append(string)
         }
-        
-        print(changeText)
-        
+
         for i in 0..<nsText.length {
             let textRange = NSMakeRange(i, 1)
             for char in changeText {
@@ -340,7 +250,7 @@ class TallkViewController: BaseViewController {
                     (substring, substringRange, _, _) in
                     print("\(char)\(i)\(String(describing: substring))")
                     if (substring == char) {
-                        print("执行了")
+                     
                         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: substringRange)
                     }
                 })
@@ -349,23 +259,16 @@ class TallkViewController: BaseViewController {
         return attributedString
     }
 
-    func issueTopic(sender: UIButton) {
-        let token = AppInfo.shared.user?.token ?? ""
-        if token == "" {
-            GeneralMethod.alertToLogin(viewController: self)
-            return
-        } else {
-            navigationController?.pushViewController(PublicGroupOneViewController(), animated: true)
-        }
-    }
-    
     // MARK: - setter and getter
     lazy var newAllTableView: WYPTableView = {
         let newAllTableView = WYPTableView(frame: .zero, style: .grouped)
         newAllTableView.backgroundColor = UIColor.init(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
         newAllTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        newAllTableView.separatorColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
         newAllTableView.delegate = self
         newAllTableView.dataSource = self
+        
+
         // 刷新
         newAllTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadNewsData(requestType: .loadMore)
@@ -381,12 +284,8 @@ class TallkViewController: BaseViewController {
         return newAllTableView
     }()
     
-    lazy var syBanner: SYBannerView = {
-        let banner = SYBannerView(frame: CGRect(x: 0, y: 70, width: kScreen_width, height: 180 * width_height_ratio))
-        banner.delegate = self
-        return banner
-    }()
     
+
     // 没有数据时的图片
     lazy var noDataImageView: UIImageView = {
         let imageView = UIImageView()
@@ -403,9 +302,7 @@ class TallkViewController: BaseViewController {
         return label
     }()
   
-    
-    
-    
+
 }
 
 extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
@@ -497,18 +394,40 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 2 {
             return 190
         }else {
-            switch newsData[indexPath.section].showType ?? 6 {
+            
+            switch newsData[indexPath.section].showType ?? 6 { //2大图  4三图  3左文右图  1文字
+                
             case 0:
+                
+                let titleH = self.getLabHeight(labelStr: newsData[indexPath.section].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {   //两行
+                    return 310 * width_height_ratio
+                }
                 return 275 * width_height_ratio
-            case 1:
-                return 87.5 * width_height_ratio
-            case 2:
+            case 1:  //只有文字
+                let titleH = self.getLabHeight(labelStr: newsData[indexPath.section].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {
+                    return 87.5 * width_height_ratio
+                }
+                return 74 * width_height_ratio
+            case 2:  //大图下文
+                let titleH = self.getLabHeight(labelStr: newsData[indexPath.section].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {   //两行
+                    return 295 * width_height_ratio
+                }
                 return 275 * width_height_ratio
-            case 3:
-                return 109
-            case 4:
+            case 3:    //左文右图
+                return 100
+            case 4:  //三图
+                
+                let titleH = self.getLabHeight(labelStr: newsData[indexPath.section].infoTitle!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+                if titleH > 20 {
+                    return 180 * width_height_ratio
+                }
+                
                 return 160 * width_height_ratio
             case 5:
+                
                 return 275 * width_height_ratio
             default:
                 return 0
@@ -519,17 +438,27 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
         if section == 1 {
             return 0.0001
         }
-        return 9
+        return 0.0001
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 2 {
             return 30
+        }else if section == 0 {
+            return 144
         }
         return 0.001
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            let view = Bundle.main.loadNibNamed("TalkHeadView", owner: self, options: nil)?.first as! TalkHeadView
+            let answerButton = view.viewWithTag(99) as! UIButton
+//            let headImage = view.viewWithTag(96) as! UIImageView
+            
+            answerButton.addTarget(self, action: #selector(myaqAction), for: .touchUpInside)
+            return view
+        }
         if section == 2 {
             let view = Bundle.main.loadNibNamed("TableHeaderView", owner: nil, options: nil)?.first as! TableHeaderView
             let moreButton = view.viewWithTag(99) as! UIButton
@@ -592,77 +521,30 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             }
         }
     }
-}
-
-extension TallkViewController: SYBannerViewDelegate {
-    func cycleScrollView(_ scrollView: SYBannerView, didSelectItemAtIndex index: Int) {
-        
-        NetRequest.clickAdvNetRequest(advId: bannerData?[index].bannerId ?? "")
-        switch bannerData?[index].bannerType ?? "0" {
-        case "0": // 默认广告
-            let adv = AdvViewController()
-            let link = String.init(format: "mob/adv/advdetails/id/%@", bannerData?[index].bannerId ?? "")
-            adv.advLink = kApi_baseUrl(path: link)
-            navigationController?.pushViewController(adv, animated: false)
-            break
-        case "1": // 跳转url
-            let adv = AdvViewController()
-            adv.advLink = bannerData?[index].url
-            navigationController?.pushViewController(adv, animated: false)
-            break
-        case "2": // 跳转展厅
-            // 跳转
-            let showRoom = bannerData?[index]
-            var board: UIStoryboard
-            if showRoom?.isFree == "0" {
-                board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
-            } else {
-                board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-            }
-            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-            showroomDetailsViewController.roomId = showRoom?.roomId
-            showroomDetailsViewController.isTicket = bannerData?[index].isTicket ?? 0
-            if showRoom?.isFree == "0" {
-                showroomDetailsViewController.isFree = true
-            } else {
-                showroomDetailsViewController.isFree = false
-            }
-            navigationController?.pushViewController(showroomDetailsViewController, animated: false)
-            break
-        case "3": // 跳转活动
-            switch bannerData?[index].ticketType ?? "" {
-            case "1":
-                let question = QuestionsViewController()
-                question.ticketId = bannerData?[index].ticketId ?? ""
-                question.ticketTimeId = bannerData?[index].ticketTimeId ?? ""
-                navigationController?.pushViewController(question, animated: false)
-                break
-            case "2":
-                let vote = VoteViewController()
-                vote.ticketId = bannerData?[index].ticketId ?? ""
-                vote.ticketTimeId = bannerData?[index].ticketTimeId ?? ""
-                navigationController?.pushViewController(vote, animated: false)
-                break
-            case "3":
-                let lottery = LotteryViewController()
-                lottery.ticketId = bannerData?[index].ticketId ?? ""
-                lottery.ticketTimeId = bannerData?[index].ticketTimeId ?? ""
-                navigationController?.pushViewController(lottery, animated: false)
-                break
-            default:
-                break
-            }
-            break
-        default:
-            break
-        }
-    }
     
+    func getLabHeight(labelStr:String,font:UIFont,width:CGFloat) -> CGFloat {
+        let statusLabelText: NSString = labelStr as NSString
+        let size = CGSize(width: width, height: 1000)
+        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context: nil).size
+        return strSize.height
+    }
     
     //MARK: //更多达人
     func moreGotTelent() {
         navigationController?.pushViewController(MoreIntelligentViewController(), animated: true)
     }
+    
+    //MARK: 我的问答
+    func myaqAction() {
+        navigationController?.pushViewController(MyAnswerQViewController(), animated: true)
+    }
+    
+}
+
+extension TallkViewController: SYBannerViewDelegate {
+
+    
     
 }
 
@@ -680,8 +562,4 @@ extension TallkViewController: TopicsDetailsViewControllerDelegate {
     }
 }
 
-extension TallkViewController: IssueTopicViewControllerDelegate {
-    func issueTopicsSuccess() {
-        loadNewsData(requestType: .update)
-    }
-}
+

@@ -26,86 +26,92 @@ class TalkThreePictureTableViewCell: UITableViewCell {
     
     //MARK: - private method
     private func viewConfig() {
-    
+        
         contentView.addSubview(infoImageView1)
         contentView.addSubview(infoImageView2)
         contentView.addSubview(infoImageView3)
         contentView.addSubview(infoLabel)
-        contentView.addSubview(adButton)
-        contentView.addSubview(topButton)
-        contentView.addSubview(infoSourceLabel)
-        contentView.addSubview(infoTimeLabel)
-        contentView.addSubview(infoLookLabel)
+        
+        
+        //        contentView.addSubview(adButton)
+        //        contentView.addSubview(topButton)
+        //        contentView.addSubview(infoSourceLabel)
+        //        contentView.addSubview(infoTimeLabel)
+        //        contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
-        contentView.addSubview(hotImageView)
+//        contentView.addSubview(delButton)
         contentView.addSubview(line)
-        line.isHidden = true
+        
     }
     private func layoutPageSubviews() {
-
-        adButton.snp.makeConstraints { (make) in
-            make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(contentView).offset(-14)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        topButton.snp.makeConstraints { (make) in
-            make.left.equalTo(adButton.snp.right).offset(3)
-            make.bottom.equalTo(contentView).offset(-14)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoImageView1.snp.left)
-            make.bottom.equalTo(contentView).offset(-8)
-            make.height.equalTo(18)
-            make.width.equalTo(50)
-        }
-        infoTimeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
-            make.centerY.equalTo(infoSourceLabel.snp.centerY)
-            make.height.equalTo(10)
-        }
-        infoCommentLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(infoImageView3.snp.right)
-            make.centerY.equalTo(infoSourceLabel.snp.centerY)
-            make.height.equalTo(10)
-        }
-        infoLookLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoCommentLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-14)
-            make.height.equalTo(10)
-        }
-        infoImageView1.snp.makeConstraints { (make) in
-            make.bottom.equalTo(adButton.snp.top).offset(-10)
-            make.left.equalTo(contentView).offset(13)
-            make.size.equalTo(CGSize(width: (kScreen_width-44)/3, height: 80 * width_height_ratio))
-        }
-        infoImageView2.snp.makeConstraints { (make) in
-            make.bottom.equalTo(adButton.snp.top).offset(-10)
-            make.left.equalTo(infoImageView1.snp.right).offset(6)
-            make.size.equalTo(CGSize(width: (kScreen_width-44)/3, height: 80 * width_height_ratio))
-        }
-        infoImageView3.snp.makeConstraints { (make) in
-            make.bottom.equalTo(adButton.snp.top).offset(-10)
-            make.left.equalTo(infoImageView2.snp.right).offset(6)
-            make.size.equalTo(CGSize(width: (kScreen_width-44)/3, height: 80 * width_height_ratio))
-        }
+        
+        //        adButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(contentView).offset(13)
+        //            make.bottom.equalTo(contentView).offset(-14)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        topButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(adButton.snp.right).offset(3)
+        //            make.bottom.equalTo(contentView).offset(-14)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        infoSourceLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoImageView1.snp.left)
+        //            make.bottom.equalTo(contentView).offset(-8)
+        //            make.height.equalTo(18)
+        //            make.width.equalTo(50)
+        //        }
+        //        infoTimeLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
+        //            make.centerY.equalTo(infoSourceLabel.snp.centerY)
+        //            make.height.equalTo(10)
+        //        }
+        
+        //        infoLookLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoCommentLabel.snp.right).offset(10)
+        //            make.bottom.equalTo(contentView).offset(-14)
+        //            make.height.equalTo(10)
+        //        }
+        
         infoLabel.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(infoImageView1.snp.top).offset(-12)
-            make.right.equalTo(contentView).offset(-36.5)
-            make.height.equalTo(15)
-        }
-        hotImageView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoImageView1.snp.top).offset(-12)
+            make.top.equalTo(contentView).offset(15)
             make.right.equalTo(contentView).offset(-13)
-            make.width.equalTo(23.5)
-            make.height.equalTo(14)
         }
+        
+        infoImageView1.snp.makeConstraints { (make) in
+            make.top.equalTo(infoLabel.snp.bottom).offset(12)
+            make.left.equalTo(infoLabel)
+            make.size.equalTo(CGSize(width: (kScreen_width-38)/3, height: 80 * width_height_ratio))
+        }
+        infoImageView2.snp.makeConstraints { (make) in
+            make.top.equalTo(infoImageView1)
+            make.left.equalTo(infoImageView1.snp.right).offset(6)
+            make.size.equalTo(CGSize(width: (kScreen_width-38)/3, height: 80 * width_height_ratio))
+        }
+        infoImageView3.snp.makeConstraints { (make) in
+            make.top.equalTo(infoImageView1)
+            make.left.equalTo(infoImageView2.snp.right).offset(6)
+            make.size.equalTo(CGSize(width: (kScreen_width-38)/3, height: 80 * width_height_ratio))
+        }
+        
+        infoCommentLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoImageView1.snp.left)
+            make.top.equalTo(infoImageView1.snp.bottom).offset(10)
+            make.height.equalTo(10)
+        }
+        
+//        delButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(infoCommentLabel)
+//            make.right.equalTo(infoImageView3)
+//            make.width.equalTo(20)
+//            make.height.equalTo(14)
+//        }
         line.snp.makeConstraints { (make) in
-            make.left.equalTo(contentView).offset(15)
-            make.right.equalTo(contentView).offset(-15)
+            make.left.equalTo(contentView).offset(13)
+            make.right.equalTo(contentView).offset(-13)
             make.bottom.equalTo(contentView)
-            make.height.equalTo(0.5)
+            make.height.equalTo(0.8)
         }
     }
     
@@ -136,9 +142,10 @@ class TalkThreePictureTableViewCell: UITableViewCell {
     }()
     lazy var infoLabel: UILabel = {
         let infoLabel = UILabel()
-        infoLabel.text = "这布吐槽局实在有毒，笑得我吃不下饭"
+        infoLabel.text = ""
+        infoLabel.tag = 2001
         infoLabel.numberOfLines = 2
-        infoLabel.font = UIFont.systemFont(ofSize: 15)
+        infoLabel.font = UIFont.systemFont(ofSize: 16)
         infoLabel.textColor = UIColor.init(hexColor: "333333")
         return infoLabel
     }()
@@ -162,7 +169,7 @@ class TalkThreePictureTableViewCell: UITableViewCell {
     }()
     lazy var infoLookLabel: UILabel = {
         let infoLookLabel = UILabel()
-//        infoLookLabel.text = "6666浏览"
+        //        infoLookLabel.text = "6666浏览"
         infoLookLabel.textAlignment = .right
         infoLookLabel.font = grayTextFont
         infoLookLabel.textColor = UIColor.viewGrayColor
@@ -172,10 +179,18 @@ class TalkThreePictureTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.text = "11111评论"
         infoCommentLabel.textAlignment = .right
-        infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
+        infoCommentLabel.font = UIFont.systemFont(ofSize: 12)
+        infoCommentLabel.textColor = UIColor.init(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1)
         return infoCommentLabel
     }()
+    
+    //删除按钮
+    lazy var delButton: UIButton = {
+        let delButton = UIButton(type: .custom)
+        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        return delButton
+    }()
+    
     lazy var adButton: UIButton = {
         let adButton = UIButton(type: .custom)
         adButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
@@ -217,9 +232,9 @@ class TalkThreePictureTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-        
+            
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.infoComment ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.infoComment ?? "0")
             let imageUrl1 = URL(string: newValue?.infoImageArr?[0] ?? "")
             let imageUrl2 = URL(string: newValue?.infoImageArr?[1] ?? "")
             let imageUrl3 = URL(string: newValue?.infoImageArr?[2] ?? "")
@@ -250,26 +265,7 @@ class TalkThreePictureTableViewCell: UITableViewCell {
             } else {
                 hotImageView.isHidden = false
             }
-
-        }
-    }
-    
-    //数据模型
-    var mineTopicsModel: MineTopicsModel? {
-        willSet {
-            infoLabel.text = newValue?.content ?? ""
-    
-            infoSourceLabel.text = newValue?.category
-            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
-            let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
-            let imageUrl2 = URL(string: newValue?.cover_url?[1] ?? "")
-            let imageUrl3 = URL(string: newValue?.cover_url?[2] ?? "")
-            infoImageView1.kf.setImage(with: imageUrl1)
-            infoImageView2.kf.setImage(with: imageUrl2)
-            infoImageView3.kf.setImage(with: imageUrl3)
-
-            hotImageView.isHidden = true
+            
         }
     }
     
@@ -304,6 +300,30 @@ class TalkThreePictureTableViewCell: UITableViewCell {
             infoTimeLabel.text = Int((newValue?.create_time)!)?.getTimeString()
         }
     }
+    
+ 
+    
+    
+    
+    //数据模型
+    var mineTopicsModel: MineTopicsModel? {
+        willSet {
+            infoLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
+            let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
+            let imageUrl2 = URL(string: newValue?.cover_url?[1] ?? "")
+            let imageUrl3 = URL(string: newValue?.cover_url?[2] ?? "")
+            infoImageView1.kf.setImage(with: imageUrl1)
+            infoImageView2.kf.setImage(with: imageUrl2)
+            infoImageView3.kf.setImage(with: imageUrl3)
+            
+            hotImageView.isHidden = true
+        }
+    }
+    
     
     
 }

@@ -272,20 +272,32 @@ class HomeViewController: BaseViewController {
         case "2": //跳转展厅
             //跳转
             var board: UIStoryboard
+            
+            
             if startAdvData?.isFree == "0" {
+                
                 board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+                let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+                showroomFreeDetailsViewController.isFree = true
+                showroomFreeDetailsViewController.roomId = startAdvData?.roomId
+                showroomFreeDetailsViewController.roomInfo?.isTicket = startAdvData?.isTicket ?? 0
+                navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
+                
             } else {
                 board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
+                let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+                
+                showroomDetailsViewController.roomId = startAdvData?.roomId
+                if startAdvData?.isFree == "0" {
+                    showroomDetailsViewController.isFree = true
+                } else {
+                    showroomDetailsViewController.isFree = false
+                }
+                showroomDetailsViewController.roomInfo?.isTicket = startAdvData?.isTicket ?? 0
+                navigationController?.pushViewController(showroomDetailsViewController, animated: true)
             }
-            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-            showroomDetailsViewController.roomId = startAdvData?.roomId
-            if startAdvData?.isFree == "0" {
-                showroomDetailsViewController.isFree = true
-            } else {
-                showroomDetailsViewController.isFree = false
-            }
-            showroomDetailsViewController.roomInfo?.isTicket = startAdvData?.isTicket ?? 0
-            navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+           
+            
             break
         case "3": // 跳转活动
             switch startAdvData?.ticketType ?? "" {
@@ -854,7 +866,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             return 220
             
         } else if indexPath.section == 3 { // 推荐群组
-            return 160
+            return 140
             
         } else if indexPath.section == 4 { // 广告位
             return 77 * width_height_ratio
@@ -1043,22 +1055,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             let showRoom = homeData?.hotShowRoom?[indexPath.row]
             var board: UIStoryboard
             if showRoom?.isFree == "0" {
-                // 免费
                 board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+                let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+                showroomFreeDetailsViewController.isFree = true
+                showroomFreeDetailsViewController.roomId = showRoom?.groupId
+                navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
+                
             } else {
                 // 收费
                 board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-            }
-            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-            showroomDetailsViewController.roomId = showRoom?.groupId
-            if showRoom?.isFree == "0" {
-                // 免费
-                showroomDetailsViewController.isFree = true
-            } else {
-                // 收费
+                let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+                showroomDetailsViewController.roomId = showRoom?.groupId
                 showroomDetailsViewController.isFree = false
+                navigationController?.pushViewController(showroomDetailsViewController, animated: true)
             }
-            navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+            
         case 301:
             let groupModel = homeData?.hotGroup?[indexPath.item]
             Alamofire.request(kApi_getIsJoinGroup, method: .post, parameters: ["access_token":access_token,"method" : "POST","uid":AppInfo.shared.user?.userId ?? "","qunid": groupModel?.groupId ?? ""], encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
@@ -1255,18 +1266,29 @@ extension HomeViewController: ADTableViewCellDelegate {
             var board: UIStoryboard
             if showRoom?.isFree == "0" {
                 board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+                let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+                
+                showroomFreeDetailsViewController.roomId = showRoom?.roomId
+                
+                showroomFreeDetailsViewController.isFree = true
+                
+                showroomFreeDetailsViewController.roomInfo?.isTicket = showRoom?.isTicket ?? 0
+                navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
+                
+                
             } else {
                 board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-            }
-            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-            showroomDetailsViewController.roomId = showRoom?.roomId
-            if showRoom?.isFree == "0" {
-                showroomDetailsViewController.isFree = true
-            } else {
+                let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+                
+                showroomDetailsViewController.roomId = showRoom?.roomId
+                
                 showroomDetailsViewController.isFree = false
+                
+                showroomDetailsViewController.roomInfo?.isTicket = showRoom?.isTicket ?? 0
+                navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+                
             }
-            showroomDetailsViewController.roomInfo?.isTicket = logoData?[item].isTicket ?? 0
-            navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+           
             break
         case "3": // 跳转活动
             switch logoData?[item].ticketType ?? "" {

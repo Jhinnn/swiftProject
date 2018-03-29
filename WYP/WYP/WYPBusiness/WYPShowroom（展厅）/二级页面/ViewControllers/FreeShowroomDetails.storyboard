@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Showroom Details View Controller-->
+        <!--Showroom Free Details View Controller-->
         <scene sceneID="XNq-NZ-Vfr">
             <objects>
-                <tableViewController id="GMQ-aZ-ocB" customClass="ShowroomDetailsViewController" customModule="WYP" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GMQ-aZ-ocB" customClass="ShowroomFreeDetailsViewController" customModule="WYP" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" sectionIndexMinimumDisplayRowCount="1" rowHeight="119" sectionHeaderHeight="18" sectionFooterHeight="18" id="j3M-pE-X4E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

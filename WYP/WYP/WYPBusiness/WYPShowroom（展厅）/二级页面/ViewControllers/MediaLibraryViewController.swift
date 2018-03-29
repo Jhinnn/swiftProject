@@ -148,13 +148,13 @@ extension MediaLibraryViewController: UICollectionViewDelegate,UICollectionViewD
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath)
                 let imageView = cell.viewWithTag(100) as! UIImageView
                 let model = self.mediaVideoData[indexPath.row]
-                imageView.sd_setImage(with: URL.init(string: model.address!), placeholderImage: UIImage.init(named: "aladdiny_icon"), options: SDWebImageOptions.retryFailed)
+                imageView.sd_setImage(with: URL.init(string: model.address!), placeholderImage: UIImage.init(color: UIColor.gray), options: SDWebImageOptions.retryFailed)
                 return cell
             }else {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
                 let imageView = cell.viewWithTag(101) as! UIImageView
                 let model = self.mediaImageData[indexPath.row - self.mediaVideoData.count]
-                imageView.sd_setImage(with: URL.init(string: model.address!), placeholderImage: UIImage.init(named: "aladdiny_icon"), options: SDWebImageOptions.retryFailed)
+                imageView.sd_setImage(with: URL.init(string: model.address!), placeholderImage: UIImage.init(color: UIColor.gray), options: SDWebImageOptions.retryFailed)
                 return cell
             }
         }

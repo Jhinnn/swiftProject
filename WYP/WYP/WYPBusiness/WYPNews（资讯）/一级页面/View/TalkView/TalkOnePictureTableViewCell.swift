@@ -26,67 +26,76 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     private func viewConfig() {
         contentView.addSubview(infoImageView)
         contentView.addSubview(infoLabel)
-        contentView.addSubview(hotImageView)
-        contentView.addSubview(infoSourceLabel)
-        contentView.addSubview(infoTimeLabel)
+        //        contentView.addSubview(hotImageView)
+        //        contentView.addSubview(infoSourceLabel)
+        //        contentView.addSubview(infoTimeLabel)
         contentView.addSubview(infoCommentLabel)
-        contentView.addSubview(infoLookLabel)
-        contentView.addSubview(adButton)
-        contentView.addSubview(topButton)
-        contentView.addSubview(hotImageView)
+        //        contentView.addSubview(infoLookLabel)
+        //        contentView.addSubview(adButton)
+        //        contentView.addSubview(topButton)
+        //        contentView.addSubview(hotImageView)
+//        contentView.addSubview(delButton)
         contentView.addSubview(line)
-        line.isHidden = true
-        hotImageView.isHidden = true
+        //        line.isHidden = true
+        //        hotImageView.isHidden = true
     }
     private func layoutPageSubviews() {
         infoImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(9.5)
+            make.top.equalTo(contentView).offset(10)
             make.right.equalTo(contentView).offset(-13)
             make.width.equalTo(114 * width_height_ratio)
             make.height.equalTo(74 * width_height_ratio)
         }
         infoLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(infoImageView.snp.top)
+            make.top.equalTo(infoImageView.snp.top).offset(4)
             make.left.equalTo(contentView).offset(13)
-            make.right.equalTo(infoImageView.snp.left).offset(-36.5)
+            make.right.equalTo(infoImageView.snp.left).offset(-20)
         }
-        hotImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(infoImageView.snp.top).offset(2)
-            make.left.equalTo(infoLabel.snp.right).offset(5)
-            make.width.equalTo(23.5)
-            make.height.equalTo(14)
-        }
-        adButton.snp.makeConstraints { (make) in
-            make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        topButton.snp.makeConstraints { (make) in
-            make.left.equalTo(adButton.snp.right).offset(3)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoLabel.snp.left)
-            make.bottom.equalTo(contentView).offset(-13)
-            make.height.equalTo(18)
-            make.width.equalTo(50)
-        }
-        infoTimeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.height.equalTo(10)
-        }
-        infoLookLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
-            make.height.equalTo(10)
-        }
+        //        hotImageView.snp.makeConstraints { (make) in
+        //            make.top.equalTo(infoImageView.snp.top).offset(2)
+        //            make.left.equalTo(infoLabel.snp.right).offset(5)
+        //            make.width.equalTo(23.5)
+        //            make.height.equalTo(14)
+        //        }
+        //        adButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(contentView).offset(13)
+        //            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        topButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(adButton.snp.right).offset(3)
+        //            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        infoSourceLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoLabel.snp.left)
+        //            make.bottom.equalTo(contentView).offset(-13)
+        //            make.height.equalTo(18)
+        //            make.width.equalTo(50)
+        //        }
+        //        infoTimeLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoSourceLabel.snp.right).offset(8.5)
+        //            make.bottom.equalTo(contentView).offset(-17)
+        //            make.height.equalTo(10)
+        //        }
+        //        infoLookLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
+        //            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+        //            make.height.equalTo(10)
+        //        }
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoTimeLabel.snp.right).offset(4)
-            make.centerY.equalTo(infoTimeLabel.snp.centerY)
+            make.left.equalTo(infoLabel)
+            make.top.equalTo(infoLabel.snp.bottom).offset(10)
             make.height.equalTo(10)
         }
+        
+//        delButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(infoCommentLabel.snp.centerY)
+//            make.right.equalTo(infoLabel)
+//            make.width.equalTo(20)
+//            make.height.equalTo(14)
+//        }
+        
         line.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(15)
             make.right.equalTo(contentView).offset(-15)
@@ -108,7 +117,7 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     lazy var infoLabel: UILabel = {
         let infoLabel = UILabel()
         infoLabel.numberOfLines = 2
-        infoLabel.font = UIFont.systemFont(ofSize: 15)
+        infoLabel.font = UIFont.systemFont(ofSize: 16)
         infoLabel.textColor = UIColor.init(hexColor: "#333333")
         return infoLabel
     }()
@@ -132,8 +141,8 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     lazy var infoCommentLabel: UILabel = {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
-        infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
+        infoCommentLabel.font = UIFont.systemFont(ofSize: 13)
+        infoCommentLabel.textColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
         return infoCommentLabel
     }()
     lazy var infoLookLabel: UILabel = {
@@ -146,20 +155,29 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     
     lazy var adButton: UIButton = {
         let adButton = UIButton(type: .custom)
-//        adButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        adButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
         return adButton
     }()
     
     lazy var topButton: UIButton = {
         let adButton = UIButton(type: .custom)
-//        adButton.setImage(UIImage(named: "common_top_icon_normal_iPhone"), for: .normal)
+        adButton.setImage(UIImage(named: "common_top_icon_normal_iPhone"), for: .normal)
         return adButton
     }()
     lazy var hotImageView: UIImageView = {
         let hotImageView = UIImageView()
-//        hotImageView.image = UIImage(named: "common_hot_icon_normal_iPhone")
+        hotImageView.image = UIImage(named: "common_hot_icon_normal_iPhone")
         return hotImageView
     }()
+    
+    
+    //删除按钮
+    lazy var delButton: UIButton = {
+        let delButton = UIButton(type: .custom)
+        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        return delButton
+    }()
+    
     lazy var line: UIView = {
         let line = UIView()
         line.backgroundColor = UIColor.init(hexColor: "e4e4e4")
@@ -170,33 +188,33 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     var infoModel: InfoModel? {
         willSet {
             
-           
-                if newValue?.topic == "13" {
-                    infoSourceLabel.text = "演出文化"
-                }else if newValue?.topic == "14" {
-                    infoSourceLabel.text = "旅游文化"
-                }else if newValue?.topic == "15" {
-                    infoSourceLabel.text = "体育文化"
-                }else if newValue?.topic == "16" {
-                    infoSourceLabel.text = "电影文化"
-                }else if newValue?.topic == "17" {
-                    infoSourceLabel.text = "会展文化"
-                }else if newValue?.topic == "18" {
-                    infoSourceLabel.text = "饮食文化"
-                }else {
-                    infoSourceLabel.text = "演出文化"
-                }
+            
+            if newValue?.topic == "13" {
+                infoSourceLabel.text = "演出文化"
+            }else if newValue?.topic == "14" {
+                infoSourceLabel.text = "旅游文化"
+            }else if newValue?.topic == "15" {
+                infoSourceLabel.text = "体育文化"
+            }else if newValue?.topic == "16" {
+                infoSourceLabel.text = "电影文化"
+            }else if newValue?.topic == "17" {
+                infoSourceLabel.text = "会展文化"
+            }else if newValue?.topic == "18" {
+                infoSourceLabel.text = "饮食文化"
+            }else {
+                infoSourceLabel.text = "演出文化"
+            }
             
             
             infoLabel.text = newValue?.infoTitle ?? ""
             
-          
-//            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-
+            
+            //            infoTimeLabel.text = newValue?.infoTime?.getTimeString()
+            
             
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
-//            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.infoComment ?? "0")
+            //            infoLookLabel.text = String.init(format: "%@浏览", newValue?.infoLook ?? "0")
             let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
             infoImageView.kf.setImage(with: imageUrl)
             if newValue?.isTop == "1" {
@@ -227,7 +245,6 @@ class TalkOnePictureTableViewCell: UITableViewCell {
         
     }
     
-    
     //数据模型
     var mineTopicsModel: MineTopicsModel? {
         willSet {
@@ -235,14 +252,32 @@ class TalkOnePictureTableViewCell: UITableViewCell {
             
             infoSourceLabel.text = newValue?.category
             infoTimeLabel.text = newValue?.timestamp?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
             let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
-           
+            
             infoImageView.kf.setImage(with: imageUrl1)
-           
+            
             hotImageView.isHidden = true
         }
     }
+    
+    
+    //数据模型
+    var topicsModel: TopicsModel? {
+        willSet {
+            infoLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
+            let imageUrl1 = URL(string: newValue?.cover_url ?? "")
+            
+            infoImageView.kf.setImage(with: imageUrl1)
+            hotImageView.isHidden = true
+        }
+    }
+    
+    
     
     var synTopicModel: SynTopicModel? {
         willSet {

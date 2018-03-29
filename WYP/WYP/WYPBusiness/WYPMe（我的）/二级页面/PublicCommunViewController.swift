@@ -117,7 +117,7 @@ class PublicCommunViewController: BaseViewController{
             return
         }
         
-        NetRequest.publishCommunityNetRequest(open_id: AppInfo.shared.user?.userId ?? "", title: self.textView.text, images: uploadImageArray, groupId: self.group_id, qunzuId: self.qunzu_id, topicID: self.topic_id, gambitID: "") { (success, info, userDic) in
+        NetRequest.publishCommunityNetRequest(open_id: AppInfo.shared.user?.userId ?? "", title: self.textView.text, images: uploadImageArray, groupId: self.group_id ?? "", qunzuId: self.qunzu_id ?? "", topicID: self.topic_id ?? "", gambitID: self.gambit_id ?? "") { (success, info, userDic) in
             if success {
                 
                 SVProgressHUD.setDefaultMaskType(.none)

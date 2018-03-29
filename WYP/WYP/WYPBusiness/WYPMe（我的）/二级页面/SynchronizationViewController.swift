@@ -120,7 +120,7 @@ class SynchronizationViewController: BaseViewController {
           
                 
                 var RH = 0
-                if self.synroomArray.count % 4 != 0{
+                if self.syngroupArray.count % 4 != 0{
                     RH = Int(CGFloat(Int(self.syngroupArray.count / 4) + 1) * (kScreen_width / 4 * 1.2))
                 }else {
                     RH = Int(CGFloat(Int(self.syngroupArray.count / 4)) * (kScreen_width / 4 * 1.2))
@@ -141,11 +141,11 @@ class SynchronizationViewController: BaseViewController {
                 var TH = 0
                 for model in self.syntopicArray {
                     if model.new_type == "0" || model.new_type == "2" || model.new_type == "3" {
-                        TH += 109
-                    }else if model.new_type == "1" {
-                        TH += 98
+                        TH += Int(109 * width_height_ratio)
+                    }else if model.new_type == "1" { //文字
+                        TH += Int(87 * width_height_ratio)
                     }else if model.new_type == "4" {
-                        TH += 160
+                        TH += Int(160 * width_height_ratio)
                     }
                 }
                 
@@ -768,17 +768,22 @@ extension SynchronizationViewController: UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        
-        switch self.syntopicArray[indexPath.row].new_type ?? "" {
+        switch self.syntopicArray[indexPath.row].new_type ?? "" {  ////2大图  4三图  3左文右图  1文字
         case "0":
             return 109
         case "1":
-            return 87.5
+            return 87.5 * width_height_ratio
         case "2":
             return 109
         case "3":
-            return 109
+            return 109 * width_height_ratio
         case "4":
-            return 160
+            let titleH = self.getLabHeight(labelStr: self.syntopicArray[indexPath.row].title!, font: UIFont.systemFont(ofSize: 16), width: kScreen_width - 26)
+            if titleH > 20 {
+                return 180 * width_height_ratio
+            }
+            
+            return 160 * width_height_ratio
         default:
             return 0
         
@@ -810,6 +815,15 @@ extension SynchronizationViewController: UITableViewDelegate,UITableViewDataSour
         cell?.backgroundColor = UIColor.white
     }
     
+    
+    
+    func getLabHeight(labelStr:String,font:UIFont,width:CGFloat) -> CGFloat {
+        let statusLabelText: NSString = labelStr as NSString
+        let size = CGSize(width: width, height: 1000)
+        let dic = NSDictionary(object: font, forKey: NSFontAttributeName as NSCopying)
+        let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context: nil).size
+        return strSize.height
+    }
 }
 
 

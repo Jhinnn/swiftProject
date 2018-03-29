@@ -189,11 +189,11 @@ class TalkNewsDetailsViewController: BaseViewController {
     func resetWebViewFrameWidthHeight(height: CGFloat) {
         // 如果是新高度，那就重置
         if height != webContentHeight {
-            if height >= kScreen_height {
-                newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height)
-            } else {
+//            if height >= kScreen_height {
+//                newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height)
+//            } else {
                 newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: height)
-            }
+//            }
             newsTableView.reloadData()
             webContentHeight = height
         }

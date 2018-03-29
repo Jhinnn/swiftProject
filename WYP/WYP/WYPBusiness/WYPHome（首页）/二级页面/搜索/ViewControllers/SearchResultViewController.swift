@@ -76,10 +76,7 @@ class SearchResultViewController: BaseViewController {
                     self.newsData.append(statementFrame)
                     self.newsDataAll.append(statementFrameAll)
                 }
-                
-                
-                
-                
+
                 // 先移除再添加
                 self.noDataImageView.removeFromSuperview()
                 self.noDataLabel.removeFromSuperview()
@@ -689,20 +686,19 @@ extension SearchResultViewController: UITableViewDelegate,UITableViewDataSource 
                 if showRoom?.isFree == "0" {
                     // 免费
                     board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+                    let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+                    showroomFreeDetailsViewController.roomId = showRoom?.groupId
+                    showroomFreeDetailsViewController.isFree = true
+                    navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
                 } else {
                     // 收费
                     board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-                }
-                let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-                showroomDetailsViewController.roomId = showRoom?.groupId
-                if showRoom?.isFree == "0" {
-                    // 免费
-                    showroomDetailsViewController.isFree = true
-                } else {
-                    // 收费
+                    let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+                    showroomDetailsViewController.roomId = showRoom?.groupId
                     showroomDetailsViewController.isFree = false
+                    navigationController?.pushViewController(showroomDetailsViewController, animated: true)
                 }
-                navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+                
             }
         default:
             break

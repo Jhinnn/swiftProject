@@ -25,60 +25,70 @@ class TalkTravelTableViewCell: UITableViewCell {
     // MARK: - private method
     private func viewConfig() {
         contentView.addSubview(travelTitleLabel)
-        contentView.addSubview(hotImageView)
-        contentView.addSubview(adButton)
-        contentView.addSubview(topButton)
-        contentView.addSubview(infoSourceLabel)
-        contentView.addSubview(infoTimeLabel)
-        contentView.addSubview(infoLookLabel)
+        //        contentView.addSubview(hotImageView)
+        //        contentView.addSubview(adButton)
+        //        contentView.addSubview(topButton)
+        //        contentView.addSubview(infoSourceLabel)
+        //        contentView.addSubview(infoTimeLabel)
+        //        contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
+//        contentView.addSubview(delButton)
         contentView.addSubview(line)
-        line.isHidden = true
     }
     private func layoutPageSubviews() {
         travelTitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(8)
+            make.top.equalTo(contentView).offset(15)
             make.left.equalTo(contentView).offset(13)
-            make.width.equalTo(UIScreen.main.bounds.size.width - 60)
-            make.height.equalTo(25)
+            make.right.equalTo(contentView).offset(-13)
+            
         }
-        hotImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(12)
-            make.left.equalTo(travelTitleLabel.snp.right).offset(5)
-            make.width.equalTo(23.5)
-            make.height.equalTo(14)
-        }
-        adButton.snp.makeConstraints { (make) in
-            make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        topButton.snp.makeConstraints { (make) in
-            make.left.equalTo(adButton.snp.right).offset(3)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(travelTitleLabel.snp.left)
-            make.bottom.equalTo(contentView).offset(-13)
-            make.height.equalTo(18)
-            make.width.equalTo(50)
-        }
-        infoTimeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.height.equalTo(10)
-        }
+        //        hotImageView.snp.makeConstraints { (make) in
+        //            make.top.equalTo(contentView).offset(12)
+        //            make.left.equalTo(travelTitleLabel.snp.right).offset(5)
+        //            make.width.equalTo(23.5)
+        //            make.height.equalTo(14)
+        //        }
+        //        adButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(contentView).offset(13)
+        //            make.bottom.equalTo(contentView).offset(-17)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        topButton.snp.makeConstraints { (make) in
+        //            make.left.equalTo(adButton.snp.right).offset(3)
+        //            make.bottom.equalTo(contentView).offset(-17)
+        //            make.size.equalTo(CGSize(width: 20, height: 12))
+        //        }
+        //        infoSourceLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(travelTitleLabel.snp.left)
+        //            make.bottom.equalTo(contentView).offset(-13)
+        //            make.height.equalTo(18)
+        //            make.width.equalTo(50)
+        //        }
+        //        infoTimeLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoSourceLabel.snp.right).offset(10)
+        //            make.bottom.equalTo(contentView).offset(-17)
+        //            make.height.equalTo(10)
+        //        }
+        //
+        //        infoLookLabel.snp.makeConstraints { (make) in
+        //            make.left.equalTo(infoCommentLabel.snp.right).offset(10)
+        //            make.bottom.equalTo(contentView).offset(-17)
+        //            make.height.equalTo(10)
+        //        }
+        //
         infoCommentLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(self.contentView).offset(-10)
-            make.bottom.equalTo(contentView).offset(-17)
+            make.left.equalTo(travelTitleLabel)
+            make.top.equalTo(travelTitleLabel.snp.bottom).offset(10)
             make.height.equalTo(10)
         }
-        infoLookLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoCommentLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.height.equalTo(10)
-        }
+        
+//        delButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(infoCommentLabel)
+//            make.right.equalTo(travelTitleLabel)
+//            make.width.equalTo(20)
+//            make.height.equalTo(14)
+//        }
+        
         line.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(15)
             make.right.equalTo(contentView).offset(-15)
@@ -87,14 +97,15 @@ class TalkTravelTableViewCell: UITableViewCell {
         }
         
     }
-
+    
     
     // MARK: - setter and getter
     lazy var travelTitleLabel: UILabel = {
         let travelTitleLabel = UILabel()
-        travelTitleLabel.font = UIFont.systemFont(ofSize: 15)
+        travelTitleLabel.font = UIFont.systemFont(ofSize: 16)
+        travelTitleLabel.numberOfLines = 2
         travelTitleLabel.textColor = UIColor.init(hexColor: "333333")
-        travelTitleLabel.text = "【菜市口】速八酒店陶然亭地铁站西店，八折起！！！"
+        travelTitleLabel.text = ""
         return travelTitleLabel
     }()
     lazy var hotImageView: UIImageView = {
@@ -122,7 +133,7 @@ class TalkTravelTableViewCell: UITableViewCell {
     }()
     lazy var infoLookLabel: UILabel = {
         let infoLookLabel = UILabel()
-//        infoLookLabel.text = "6666人浏览"
+        //        infoLookLabel.text = "6666人浏览"
         infoLookLabel.textAlignment = .right
         infoLookLabel.font = grayTextFont
         infoLookLabel.textColor = UIColor.viewGrayColor
@@ -131,8 +142,8 @@ class TalkTravelTableViewCell: UITableViewCell {
     lazy var infoCommentLabel: UILabel = {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
-        infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
+        infoCommentLabel.font = UIFont.systemFont(ofSize: 13)
+        infoCommentLabel.textColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
         return infoCommentLabel
     }()
     lazy var adButton: UIButton = {
@@ -145,6 +156,14 @@ class TalkTravelTableViewCell: UITableViewCell {
         adButton.setImage(UIImage(named: "common_top_icon_normal_iPhone"), for: .normal)
         return adButton
     }()
+    
+    //删除按钮
+    lazy var delButton: UIButton = {
+        let delButton = UIButton(type: .custom)
+        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        return delButton
+    }()
+    
     lazy var line: UIView = {
         let line = UIView()
         line.backgroundColor = UIColor.init(hexColor: "e4e4e4")
@@ -155,7 +174,7 @@ class TalkTravelTableViewCell: UITableViewCell {
     var infoModel: InfoModel? {
         willSet {
             travelTitleLabel.text = newValue?.infoTitle ?? ""
-//            ["演出文化","旅游文化","体育文化","电影文化","会展文化","饮食文化"]
+            //            ["演出文化","旅游文化","体育文化","电影文化","会展文化","饮食文化"]
             if newValue?.topic == "13" {
                 infoSourceLabel.text = "演出文化"
             }else if newValue?.topic == "14" {
@@ -171,9 +190,9 @@ class TalkTravelTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-
+            
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@个回答", newValue?.infoComment ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.infoComment ?? "0")
             
             if newValue?.isTop == "1" {
                 topButton.snp.updateConstraints({ (make) in
@@ -198,9 +217,25 @@ class TalkTravelTableViewCell: UITableViewCell {
             } else {
                 hotImageView.isHidden = false
             }
-
+            
         }
     }
+    
+    
+    //数据模型
+    var topicsModel: TopicsModel? {
+        willSet {
+            travelTitleLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
+            
+            hotImageView.isHidden = true
+        }
+    }
+    
+    
     
     //数据模型
     var mineTopicsModel: MineTopicsModel? {
@@ -209,8 +244,8 @@ class TalkTravelTableViewCell: UITableViewCell {
             
             infoSourceLabel.text = newValue?.category
             infoTimeLabel.text = newValue?.timestamp?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
-         
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
+            
             hotImageView.isHidden = true
         }
     }
@@ -233,9 +268,6 @@ class TalkTravelTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-            
-//            let imageUrl = URL(string: newValue?.cover_url?[0] ?? "")
-//            infoImageView.kf.setImage(with: imageUrl)
             
             infoCommentLabel.text = String.init(format: "%@人回答", newValue?.comment ?? "0")
             

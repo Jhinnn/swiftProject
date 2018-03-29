@@ -57,7 +57,9 @@
             NSString * imageUrl = thumbImageUrlArray[i];
             // 设置图片
             
-            [imageBtn sd_setImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"beijingbuxianshi_"]];
+            [imageBtn sd_setImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"place_image"] options:SDWebImageRefreshCached];
+            
+            
         }
     }
 }
@@ -65,7 +67,8 @@
     if (_imageUrlArray != imageUrlArray) {
         _imageUrlArray = imageUrlArray;
         
-            }
+        
+    }
 }
 
 - (void)setImageFArray:(NSMutableArray *)imageFArray {

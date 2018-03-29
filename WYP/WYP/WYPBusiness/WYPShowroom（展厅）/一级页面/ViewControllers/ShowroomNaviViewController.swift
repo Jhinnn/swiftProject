@@ -33,9 +33,6 @@ class ShowroomNaviViewController: BaseViewController {
                 self.addChildViewController(viewController!)
                 
                 mainView.setContentOffset(CGPoint(x: CGFloat(newValue!) * kScreen_width, y: 0), animated: false)
-                
-                
-                
             }
         }
     }
@@ -112,13 +109,13 @@ class ShowroomNaviViewController: BaseViewController {
         
         var viewArray = [BaseViewController]()
         // 添加到控制器数组
-        for i in 0..<7 {
+        for i in 0..<6 {
             let showroom = ShowRoomViewController()
             if i == 0 {
                 showroom.isShowBanner = true
                 showroom.typeId = ""
             } else {
-                if i < 3 || i == 6 {
+                if i < 3 || i == 5 {
                     showroom.typeId = "\(i)"
                 }else if i >= 3  {
                     showroom.typeId = "\(i)"

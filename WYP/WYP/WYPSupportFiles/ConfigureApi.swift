@@ -733,3 +733,9 @@ public var kApi_IgnorefriendsMsg: String {
 public var kApi_SynGroupRoomList: String {
     return kApi_baseUrl(path: "api/community_sync")
 }
+
+
+//话题界面头部数据
+public var kApi_TopicHeadData: String {
+    return kApi_baseUrl(path: "api/my_qa_info")
+}

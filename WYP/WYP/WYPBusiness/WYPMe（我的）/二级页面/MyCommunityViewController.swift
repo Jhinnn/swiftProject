@@ -137,12 +137,11 @@ class MyCommunityViewController: BaseViewController {
         view.addSubview(interactionView)
         interactionView.addSubview(commentTextField)
         
-        //        //添加 查找聊天记录View
+        //添加 查找聊天记录View
         view.addSubview(findChatHistory)
-        //        //添加 消息免打扰View
+        //添加 消息免打扰View
         view.addSubview(essageDoNotDisturb)
-        //        //添加 发送消息按钮
-        //        view.addSubview(sendMessageButton)
+        //添加 发送消息按钮
         setupUIFrame()
     }
     
@@ -451,7 +450,9 @@ class MyCommunityViewController: BaseViewController {
             
             self.addFriendsPhoneNumber = (dic?["mobile"] as? String)!
             
-            self.tableViewHeaderView.kf.setImage(with: url)
+
+        
+            self.tableViewHeaderView.kf.setImage(with: url, placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
             
             self.signatureLabel.isHidden = false;
             self.signatureLabel.text = String.init(format: "%@", (dic?["signature"] as? String)!)
@@ -477,7 +478,7 @@ class MyCommunityViewController: BaseViewController {
                 if success {
                     SVProgressHUD.showSuccess(withStatus: info)
                     self.isFollowed = true
-                    self .loadPersonData()
+                    self.loadPersonData()
                     self.tableView.reloadData()
                 } else {
                     SVProgressHUD.showError(withStatus: info)
@@ -504,7 +505,6 @@ class MyCommunityViewController: BaseViewController {
         } else {
             pageNumber = pageNumber + 1
         }
-        print(userId)
         let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
                                       "method": "POST",
                                       "type": type,
@@ -556,9 +556,9 @@ class MyCommunityViewController: BaseViewController {
                     }
                     self.noDataImageView.snp.makeConstraints { (make) in
                         if deviceTypeIphone5() || deviceTypeIPhone4() {
-                            make.top.equalTo(self.view).offset(130)
+                            make.top.equalTo(self.view).offset(150)
                         }
-                        make.top.equalTo(self.view).offset(180)
+                        make.top.equalTo(self.view).offset(220)
                         make.centerX.equalTo(self.view)
                         make.size.equalTo(CGSize(width: 100, height: 147))
                     }
@@ -635,9 +635,10 @@ extension MyCommunityViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = StatementCell(style: .default, reuseIdentifier: "StatementCellIdentifier")
         let staFrame = dataList[indexPath.row]
+        
         if (cell.starArrayView != nil) {
             cell.starArrayView.delegate = self
-            print("11111111")
+            
         }else {
             
         }

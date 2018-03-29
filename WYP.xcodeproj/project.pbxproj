@@ -397,6 +397,14 @@
 		FB1BE5F81FEB494A003BDC1C /* RecommendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E51FEB4949003BDC1C /* RecommendTableViewCell.swift */; };
 		FB1BE5F91FEB494A003BDC1C /* LSXPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */; };
 		FB1BE5FB1FEB6979003BDC1C /* ChatRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */; };
+		FB1CE60C2064F62700531A88 /* ShowroomFreeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1CE60B2064F62700531A88 /* ShowroomFreeDetailsViewController.swift */; };
+		FB35BF272068F0B40072221B /* ShowroomApplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35BF252068F0B30072221B /* ShowroomApplyCell.swift */; };
+		FB35BF282068F0B40072221B /* ShowroomApplyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB35BF262068F0B40072221B /* ShowroomApplyCell.xib */; };
+		FB35BF2D206A18E20072221B /* MyAnswerHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB35BF29206A18E10072221B /* MyAnswerHeadCell.xib */; };
+		FB35BF2E206A18E20072221B /* TalkHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35BF2A206A18E10072221B /* TalkHeadView.swift */; };
+		FB35BF2F206A18E20072221B /* MyAnswerHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35BF2B206A18E10072221B /* MyAnswerHeadCell.swift */; };
+		FB35BF30206A18E20072221B /* TalkHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB35BF2C206A18E20072221B /* TalkHeadView.xib */; };
+		FB35BF32206A18FD0072221B /* MyAnswerQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35BF31206A18FD0072221B /* MyAnswerQViewController.swift */; };
 		FB4431BC2060B79200DD75BA /* ZanListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4431BB2060B79200DD75BA /* ZanListViewController.swift */; };
 		FB4431BE2060DA0600DD75BA /* SynchronizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4431BD2060DA0600DD75BA /* SynchronizationViewController.swift */; };
 		FBC511FF1FEC973A0061245E /* DeleteGroupMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */; };
@@ -931,6 +939,14 @@
 		FB1BE5E71FEB4949003BDC1C /* LSXPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSXPopMenu.h; sourceTree = "<group>"; };
 		FB1BE5E81FEB4949003BDC1C /* LSXPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSXPopMenu.m; sourceTree = "<group>"; };
 		FB1BE5FA1FEB6979003BDC1C /* ChatRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRecordTableViewCell.swift; sourceTree = "<group>"; };
+		FB1CE60B2064F62700531A88 /* ShowroomFreeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowroomFreeDetailsViewController.swift; sourceTree = "<group>"; };
+		FB35BF252068F0B30072221B /* ShowroomApplyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowroomApplyCell.swift; sourceTree = "<group>"; };
+		FB35BF262068F0B40072221B /* ShowroomApplyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowroomApplyCell.xib; sourceTree = "<group>"; };
+		FB35BF29206A18E10072221B /* MyAnswerHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAnswerHeadCell.xib; sourceTree = "<group>"; };
+		FB35BF2A206A18E10072221B /* TalkHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkHeadView.swift; sourceTree = "<group>"; };
+		FB35BF2B206A18E10072221B /* MyAnswerHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnswerHeadCell.swift; sourceTree = "<group>"; };
+		FB35BF2C206A18E20072221B /* TalkHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalkHeadView.xib; sourceTree = "<group>"; };
+		FB35BF31206A18FD0072221B /* MyAnswerQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnswerQViewController.swift; sourceTree = "<group>"; };
 		FB4431BB2060B79200DD75BA /* ZanListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZanListViewController.swift; sourceTree = "<group>"; };
 		FB4431BD2060DA0600DD75BA /* SynchronizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizationViewController.swift; sourceTree = "<group>"; };
 		FBC511FE1FEC973A0061245E /* DeleteGroupMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupMemberViewController.swift; sourceTree = "<group>"; };
@@ -2537,6 +2553,10 @@
 				8E0B89F4202401AD00128BF9 /* IntelligentListTableViewCell.xib */,
 				8E0B89FF202453CD00128BF9 /* InviteTableViewCell.swift */,
 				8E0B8A00202453CD00128BF9 /* InviteTableViewCell.xib */,
+				FB35BF2B206A18E10072221B /* MyAnswerHeadCell.swift */,
+				FB35BF29206A18E10072221B /* MyAnswerHeadCell.xib */,
+				FB35BF2A206A18E10072221B /* TalkHeadView.swift */,
+				FB35BF2C206A18E20072221B /* TalkHeadView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2554,6 +2574,7 @@
 				8E0B89F720243AA400128BF9 /* IntelligentInviteViewController.swift */,
 				8E0B89F920243CE400128BF9 /* TelentInviteViewController.swift */,
 				8E0B89FB20243CF500128BF9 /* FriendInviteViewController.swift */,
+				FB35BF31206A18FD0072221B /* MyAnswerQViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2789,6 +2810,7 @@
 				F99869EB1EA61C2B002C502B /* ShowroomDetails.storyboard */,
 				A4E439221ED28305007532B0 /* FreeShowroomDetails.storyboard */,
 				F99869EC1EA61C2B002C502B /* ShowroomDetailsViewController.swift */,
+				FB1CE60B2064F62700531A88 /* ShowroomFreeDetailsViewController.swift */,
 				8EB4DF782015E2F0001D497D /* MediaLibraryViewController.swift */,
 			);
 			path = ViewControllers;
@@ -2803,6 +2825,8 @@
 				A49DA1F21EA9A327000E4AFA /* ShowroomMediaCell.swift */,
 				A49DA1F41EA9A356000E4AFA /* ShowroomGroupCell.swift */,
 				A49DA1F61EA9A3AB000E4AFA /* ShowroomMemberCell.swift */,
+				FB35BF252068F0B30072221B /* ShowroomApplyCell.swift */,
+				FB35BF262068F0B40072221B /* ShowroomApplyCell.xib */,
 				8EB4DF7E2016C7A6001D497D /* MediaVideoCollectionCell.swift */,
 				8EB4DF7F2016C7A6001D497D /* MediaVideoCollectionCell.xib */,
 				8EB4DF822016C7B9001D497D /* MediaImageCollectionCell.swift */,
@@ -3088,6 +3112,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB35BF30206A18E20072221B /* TalkHeadView.xib in Resources */,
 				8EB4DF2520119F83001D497D /* WeiboSDK.bundle in Resources */,
 				8E0B89F6202401AD00128BF9 /* IntelligentListTableViewCell.xib in Resources */,
 				8E0B8A02202453CD00128BF9 /* InviteTableViewCell.xib in Resources */,
@@ -3098,7 +3123,9 @@
 				8E650AD91FE7B5B300A453BB /* HXWeiboPhotoPicker.bundle in Resources */,
 				F9599BC31EB20CE300440E66 /* LotteryDetails.storyboard in Resources */,
 				F9FE90581F9F024800D31F3C /* SGQRCode.bundle in Resources */,
+				FB35BF282068F0B40072221B /* ShowroomApplyCell.xib in Resources */,
 				F9B660B71F04EA5400692DE2 /* WMPlayer.bundle in Resources */,
+				FB35BF2D206A18E20072221B /* MyAnswerHeadCell.xib in Resources */,
 				F985615C1EF8FE2000965183 /* image1.jpg in Resources */,
 				8EB4DF812016C7A6001D497D /* MediaVideoCollectionCell.xib in Resources */,
 				F9761C1B1F03AA6F009CAE49 /* Info.plist in Resources */,
@@ -3290,6 +3317,7 @@
 				F9986A021EA61C2B002C502B /* ForgetPwdStep3ViewController.swift in Sources */,
 				F91E42C81EA6FA2000CDCE19 /* ShowRoomDetailModel.swift in Sources */,
 				F99869F41EA61C2B002C502B /* HotTheaterGroupCell.swift in Sources */,
+				FB35BF32206A18FD0072221B /* MyAnswerQViewController.swift in Sources */,
 				8EB4DF7D2015E954001D497D /* MediaLibaryImageModel.swift in Sources */,
 				8E650ADB1FE7B5B300A453BB /* HXFullScreenCameraPlayView.m in Sources */,
 				8E650AD21FE7B5B300A453BB /* HXPhotoTools.m in Sources */,
@@ -3354,6 +3382,7 @@
 				8E561059200604FD0034D8E9 /* StatementCell.m in Sources */,
 				F9E086671EA9BA630023EA43 /* RoomInfoModel.swift in Sources */,
 				F9986A661EA61C2B002C502B /* ProjectCertificationCollectionViewCell.swift in Sources */,
+				FB35BF2F206A18E20072221B /* MyAnswerHeadCell.swift in Sources */,
 				F9986A111EA61C2B002C502B /* ServiceCenterViewController.swift in Sources */,
 				8E561057200604FD0034D8E9 /* CXBaseModel.m in Sources */,
 				EF751DF01FEDFDDE00C0FD3F /* TalkThreePictureTableViewCell.swift in Sources */,
@@ -3364,6 +3393,7 @@
 				8E650ADD1FE7B5B300A453BB /* HXAlbumModel.m in Sources */,
 				A419E7401EC1B16600C277D8 /* GeneralViewController.swift in Sources */,
 				F94D327B1F38302A00A779D9 /* OrderDetailTableViewCell.swift in Sources */,
+				FB1CE60C2064F62700531A88 /* ShowroomFreeDetailsViewController.swift in Sources */,
 				A4567B0D1ECE854D00413CA8 /* UseExplainViewController.swift in Sources */,
 				F9986A091EA61C2B002C502B /* AboutViewController.swift in Sources */,
 				F9986A501EA61C2B002C502B /* QuestionsViewController.swift in Sources */,
@@ -3372,6 +3402,7 @@
 				F99869F01EA61C2B002C502B /* GuideViewController.swift in Sources */,
 				F9CE6F8D1EC5640900B9B06D /* RecordsDeatilViewController.swift in Sources */,
 				EF751DE61FEDFC3600C0FD3F /* TopicHeaderView.swift in Sources */,
+				FB35BF272068F0B40072221B /* ShowroomApplyCell.swift in Sources */,
 				F9986A451EA61C2B002C502B /* NewsViewController.swift in Sources */,
 				F95B7E931EC94BB600A3ACBA /* VideoInfoModel.swift in Sources */,
 				F9986A031EA61C2B002C502B /* RegisterViewController.swift in Sources */,
@@ -3447,6 +3478,7 @@
 				A4A134F51EA4AF7500FC4D67 /* CCPScrollView.m in Sources */,
 				A419E7421EC1CF2C00C277D8 /* PrivacyViewController.swift in Sources */,
 				8E0B89F820243AA400128BF9 /* IntelligentInviteViewController.swift in Sources */,
+				FB35BF2E206A18E20072221B /* TalkHeadView.swift in Sources */,
 				F95EA8561F78EC1D008AE547 /* navTitleView.swift in Sources */,
 				8E650AC71FE7B5B300A453BB /* HXCameraPreviewViewController.m in Sources */,
 				F9E298181EAB5EC700DFD96F /* NewsSearchResultViewController.swift in Sources */,

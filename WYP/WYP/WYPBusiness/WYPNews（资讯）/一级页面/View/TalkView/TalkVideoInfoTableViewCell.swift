@@ -24,84 +24,58 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
     
     //MARK: - private method
     private func viewConfig() {
-        contentView.addSubview(infoImageView)
-        infoImageView.addSubview(playImageView)
-        infoImageView.addSubview(infoLabel)
         contentView.addSubview(infoTitleLabel)
-        contentView.addSubview(adButton)
-        contentView.addSubview(topButton)
-        contentView.addSubview(infoSourceLabel)
-        contentView.addSubview(infoTimeLabel)
-        contentView.addSubview(infoLookLabel)
+        //        contentView.addSubview(infoSourceLabel)
+        contentView.addSubview(infoImageView)
+        //        infoImageView.addSubview(playImageView)
+        //        infoImageView.addSubview(infoLabel)
+        
+        //        contentView.addSubview(adButton)
+        //        contentView.addSubview(topButton)
+        
+        //        contentView.addSubview(infoTimeLabel)
+        //        contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
-        contentView.addSubview(hotImageView)
+//        contentView.addSubview(delButton)
         contentView.addSubview(line)
-        line.isHidden = true
     }
     private func layoutPageSubviews() {
         
-        adButton.snp.makeConstraints { (make) in
+        infoTitleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(contentView).offset(15)
             make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.size.equalTo(CGSize(width: 0, height: 0))
+            make.right.equalTo(contentView).offset(-13)
         }
-        topButton.snp.makeConstraints { (make) in
-            make.left.equalTo(adButton.snp.right).offset(3)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.size.equalTo(CGSize(width: 20, height: 12))
-        }
-        infoSourceLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoImageView.snp.left)
-            make.bottom.equalTo(contentView).offset(-10)
-            make.height.equalTo(18)
-            make.width.equalTo(50)
-        }
-        infoTimeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoSourceLabel.snp.right).offset(20)
-            make.centerY.equalTo(infoSourceLabel.snp.centerY)
-            make.height.equalTo(10)
-        }
-        infoCommentLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(infoImageView.snp.right)
-            make.centerY.equalTo(infoSourceLabel.snp.centerY)
-            make.height.equalTo(10)
-        }
-        infoLookLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(infoCommentLabel.snp.right).offset(10)
-            make.bottom.equalTo(contentView).offset(-17)
-            make.height.equalTo(10)
-        }
+        
         infoImageView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoSourceLabel.snp.top).offset(-15)
+            make.top.equalTo(infoTitleLabel.snp.bottom).offset(12)
             make.left.equalTo(contentView).offset(13)
             make.right.equalTo(contentView).offset(-13)
             make.height.equalTo(194 * width_height_ratio)
         }
-        playImageView.snp.makeConstraints { (make) in
-            make.center.equalTo(infoImageView)
-            make.size.equalTo(CGSize(width: 37.5 * width_height_ratio, height: 37.5 * width_height_ratio))
+        
+        
+        infoCommentLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(infoImageView.snp.left)
+            make.top.equalTo(infoImageView.snp.bottom).offset(10)
+            make.height.equalTo(10)
         }
-        infoLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(infoImageView).offset(-13)
-            make.bottom.equalTo(infoImageView).offset(-10)
-            make.size.equalTo(CGSize(width: 50, height: 20))
-        }
-        infoTitleLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoImageView.snp.top).offset(-6)
-            make.left.equalTo(contentView).offset(13)
-            make.right.equalTo(contentView).offset(-36.5)
-        }
-        hotImageView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoImageView.snp.top).offset(-6)
-            make.right.equalTo(contentView).offset(-13)
-            make.width.equalTo(23.5)
-            make.height.equalTo(14)
-        }
+        
+        
+//        delButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(infoCommentLabel.snp.centerY)
+//            make.right.equalTo(infoTitleLabel)
+//            make.width.equalTo(20)
+//            make.height.equalTo(14)
+//        }
+        
+        
+        
         line.snp.makeConstraints { (make) in
-            make.left.equalTo(contentView).offset(15)
-            make.right.equalTo(contentView).offset(-15)
+            make.left.equalTo(contentView).offset(13)
+            make.right.equalTo(contentView).offset(-13)
             make.bottom.equalTo(contentView)
-            make.height.equalTo(0.5)
+            make.height.equalTo(0.8)
         }
     }
     
@@ -109,7 +83,8 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
     //MARK: - setter and getter
     lazy var infoTitleLabel: UILabel = {
         let infoTitleLabel = UILabel()
-        infoTitleLabel.font = UIFont.systemFont(ofSize: 15)
+        infoTitleLabel.numberOfLines = 2
+        infoTitleLabel.font = UIFont.systemFont(ofSize: 16)
         infoTitleLabel.textColor = UIColor.init(hexColor: "333333")
         return infoTitleLabel
     }()
@@ -122,7 +97,7 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
     }()
     lazy var playImageView: UIImageView = {
         let playImageView = UIImageView()
-//        playImageView.image = UIImage(named: "info_play_button_normal_iPhone")
+        //        playImageView.image = UIImage(named: "info_play_button_normal_iPhone")
         return playImageView
     }()
     lazy var infoLabel: UILabel = {
@@ -163,8 +138,8 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
     lazy var infoCommentLabel: UILabel = {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
-        infoCommentLabel.font = grayTextFont
-        infoCommentLabel.textColor = UIColor.init(hexColor: "507BAB")
+        infoCommentLabel.font = UIFont.systemFont(ofSize: 13)
+        infoCommentLabel.textColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
         return infoCommentLabel
     }()
     lazy var adButton: UIButton = {
@@ -182,6 +157,14 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
         hotImageView.image = UIImage(named: "common_hot_icon_normal_iPhone")
         return hotImageView
     }()
+    
+    //删除按钮
+    lazy var delButton: UIButton = {
+        let delButton = UIButton(type: .custom)
+        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        return delButton
+    }()
+    
     lazy var line: UIView = {
         let line = UIView()
         line.backgroundColor = UIColor.init(hexColor: "e4e4e4")
@@ -207,10 +190,10 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
             }else {
                 infoSourceLabel.text = "演出文化"
             }
-//            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
+            //            infoSourceLabel.text = newValue?.infoSource ?? "未知来源"
             infoTimeLabel.text = newValue?.infoTime?.getTimeString()
-//            infoLookLabel.text = String.init(format: "%@人回答", newValue?.infoLook ?? "0")
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.infoComment ?? "0")
+            //            infoLookLabel.text = String.init(format: "%@人回答", newValue?.infoLook ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.infoComment ?? "0")
             let imageUrl = URL(string: newValue?.infoImageArr?[0] ?? "")
             infoImageView.kf.setImage(with: imageUrl)
             
@@ -265,7 +248,7 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
             } else {
                 hotImageView.isHidden = true
             }
-
+            
         }
     }
     
@@ -276,13 +259,27 @@ class TalkVideoInfoTableViewCell: UITableViewCell {
             
             infoSourceLabel.text = newValue?.category
             infoTimeLabel.text = newValue?.timestamp?.getTimeString()
-            infoCommentLabel.text = String.init(format: "%@人回答", newValue?.commentCount ?? "0")
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
             let imageUrl1 = URL(string: newValue?.cover_url?[0] ?? "")
-     
+            
             infoImageView.kf.setImage(with: imageUrl1)
             
             hotImageView.isHidden = true
             
+        }
+    }
+    
+    
+    //数据模型
+    var topicsModel: TopicsModel? {
+        willSet {
+            infoTitleLabel.text = newValue?.content ?? ""
+            
+            infoSourceLabel.text = newValue?.category
+            infoTimeLabel.text = newValue?.timestamp?.getTimeString()
+            infoCommentLabel.text = String.init(format: "%@回答", newValue?.commentCount ?? "0")
+            
+            hotImageView.isHidden = true
         }
     }
     

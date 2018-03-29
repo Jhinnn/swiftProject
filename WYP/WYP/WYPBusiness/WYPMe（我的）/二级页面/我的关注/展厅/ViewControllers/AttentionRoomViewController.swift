@@ -147,20 +147,29 @@ extension AttentionRoomViewController: UITableViewDelegate, UITableViewDataSourc
         if showRoom.isFree == "0" {
             // 免费
             board = UIStoryboard.init(name: "FreeShowroomDetails", bundle: nil)
+            let showroomFreeDetailsViewController = board.instantiateInitialViewController() as! ShowroomFreeDetailsViewController
+            
+            showroomFreeDetailsViewController.roomId = showRoom.roomId
+            
+            showroomFreeDetailsViewController.isFree = true
+            
+            navigationController?.pushViewController(showroomFreeDetailsViewController, animated: true)
         } else {
             // 收费
             board = UIStoryboard.init(name: "ShowroomDetails", bundle: nil)
-        }
-        let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
-        showroomDetailsViewController.roomId = showRoom.roomId
-        if showRoom.isFree == "0" {
-            // 免费
-            showroomDetailsViewController.isFree = true
-        } else {
-            // 收费
+            
+            let showroomDetailsViewController = board.instantiateInitialViewController() as! ShowroomDetailsViewController
+            
+            showroomDetailsViewController.roomId = showRoom.roomId
+            
             showroomDetailsViewController.isFree = false
+        
+            navigationController?.pushViewController(showroomDetailsViewController, animated: true)
         }
-        navigationController?.pushViewController(showroomDetailsViewController, animated: true)
+        
+       
+       
+        
 
     }
     // 设置侧滑删除

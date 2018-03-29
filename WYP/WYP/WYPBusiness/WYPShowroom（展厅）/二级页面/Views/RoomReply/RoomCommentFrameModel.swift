@@ -39,7 +39,7 @@ class RoomCommentFrameModel: NSObject {
         willSet {
             headImgUrlF = CGRect(x: 13, y: 17.5, width: 40, height: 40)
             
-            nickNameF = CGRect(x: (headImgUrlF?.maxX)! + 14, y: 29, width: 100, height: 11)
+            nickNameF = CGRect(x: (headImgUrlF?.maxX)! + 14, y: 29, width: 150, height: 11)
             
             starCountF = CGRect(x: kScreen_width - 65, y: 24, width: 65, height: 15)
             
@@ -50,9 +50,10 @@ class RoomCommentFrameModel: NSObject {
             
             timeF = CGRect(x: (contentF?.minX)!, y: (contentF?.maxY)! + 10, width: 65, height: 10.5)
             
-            replyCountF = CGRect(x: (timeF?.maxX)! + 10, y: (contentF?.maxY)! + 10, width: 80, height: 10.5)
+            replyCountF = CGRect(x: kScreen_width - 100, y: (contentF?.maxY)! + 10, width: 80, height: 10.5)
             
-            replyButtonF = CGRect(x: kScreen_width - 45, y: (contentF?.maxY)! + 10, width: 30, height: 10.5)
+//            replyButtonF = CGRect(x: kScreen_width - 45, y: (contentF?.maxY)! + 10, width: 30, height: 10.5)
+            replyButtonF = CGRect.zero
             
             cellHeight = (timeF?.maxY)! + 20
         }

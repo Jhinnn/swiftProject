@@ -25,12 +25,17 @@ class ShowRoomDetailModel: HandyJSON {
     var group: [TheaterGroupModel]?
     // 项目成员
     var member: [MemberModel]?
+    // 话题
+    var gambit: [InfoModel]?
+    
     // 资讯
     var recentNews: [InfoModel]?
     // 评论
     var comment: [CommentModel]?
     // 公告
     var announ: [AnnouncementModel]?
+    
+    var dynamic: [StatementModel]?
     
     //评论数量
     var plcount: String?
@@ -48,6 +53,7 @@ class ShowRoomDetailModel: HandyJSON {
         mapper <<< self.comment <-- "pinglun"
         mapper <<< self.announ <-- "announcement"
         mapper <<< self.plcount <-- "plcount"
+        mapper <<< self.dynamic <-- "dynamic"
     }
     
     required init() {}

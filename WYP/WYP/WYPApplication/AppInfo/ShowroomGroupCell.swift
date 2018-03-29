@@ -18,6 +18,18 @@ class ShowroomGroupCell: UICollectionViewCell {
     
     @IBOutlet weak var vipImageView: UIImageView!
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        imageView.layer.cornerRadius = 34
+        imageView.layer.masksToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+    }
+    
+    
     var groupModel: TheaterGroupModel? {
         willSet {
             let imageUrl = URL(string: newValue?.groupPhoto ?? "")

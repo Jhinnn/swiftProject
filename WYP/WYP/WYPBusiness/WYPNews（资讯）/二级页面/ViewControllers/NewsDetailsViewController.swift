@@ -288,7 +288,7 @@ class NewsDetailsViewController: BaseViewController {
         conf.userContentController.add(self as WKScriptMessageHandler, name: "showImgs")
         
         
-        let newWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: 0), configuration: conf)
+        let newWebView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height), configuration: conf)
         newWebView.backgroundColor = UIColor.clear
         newWebView.isOpaque = false
         newWebView.uiDelegate = self
