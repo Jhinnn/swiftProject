@@ -34,10 +34,9 @@ target 'WYP' do
     pod 'HandyJSON','~> 1.7.2'
     pod 'CHIPageControl', '~> 0.1.3'
     pod 'ReachabilitySwift'
-    
     pod 'AvoidCrash', '~> 1.6.7'
-    
-    
+ 
     pod 'YYKit', '~> 1.0.9'
-
+    
+    
 end

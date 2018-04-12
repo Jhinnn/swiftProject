@@ -35,11 +35,17 @@ class BannerModel: HandyJSON {
     
     
     func mapping(mapper: HelpingMapper) {
-        mapper <<< self.bannerId <-- "id"
-        mapper <<< self.bannerTitle <-- "title"
-        mapper <<< self.bannerImage <-- "logo"
-        mapper <<< self.bannerType <-- "isjob"
         mapper <<< self.roomId <-- "group_id"
+        
+        mapper <<< self.bannerId <-- "id"
+        mapper <<< self.bannerType <-- "isjob"
+        
+        mapper <<< self.bannerTitle <-- "title"
+        
+        mapper <<< self.bannerImage <-- "logo"
+        
+        
+        
         mapper <<< self.ticketId <-- "ticket_id"
         mapper <<< self.isFree <-- "is_spend"
         mapper <<< self.ticketType <-- "type_id"

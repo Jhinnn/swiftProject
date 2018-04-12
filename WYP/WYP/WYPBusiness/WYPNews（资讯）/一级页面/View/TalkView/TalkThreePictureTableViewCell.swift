@@ -39,7 +39,7 @@ class TalkThreePictureTableViewCell: UITableViewCell {
         //        contentView.addSubview(infoTimeLabel)
         //        contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
-//        contentView.addSubview(delButton)
+        contentView.addSubview(delButton)
         contentView.addSubview(line)
         
     }
@@ -101,12 +101,12 @@ class TalkThreePictureTableViewCell: UITableViewCell {
             make.height.equalTo(10)
         }
         
-//        delButton.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(infoCommentLabel)
-//            make.right.equalTo(infoImageView3)
-//            make.width.equalTo(20)
-//            make.height.equalTo(14)
-//        }
+        delButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(infoCommentLabel)
+            make.right.equalTo(infoImageView3)
+            make.width.equalTo(20)
+            make.height.equalTo(14)
+        }
         line.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(13)
             make.right.equalTo(contentView).offset(-13)
@@ -180,14 +180,14 @@ class TalkThreePictureTableViewCell: UITableViewCell {
         infoCommentLabel.text = "11111评论"
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = UIFont.systemFont(ofSize: 12)
-        infoCommentLabel.textColor = UIColor.init(red: 220/255.0, green: 220/255.0, blue: 220/255.0, alpha: 1)
+        infoCommentLabel.textColor = UIColor.init(hexColor: "999999")
         return infoCommentLabel
     }()
     
     //删除按钮
     lazy var delButton: UIButton = {
         let delButton = UIButton(type: .custom)
-        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        delButton.setImage(UIImage(named: "topic_icon_disincline_normal"), for: .normal)
         return delButton
     }()
     

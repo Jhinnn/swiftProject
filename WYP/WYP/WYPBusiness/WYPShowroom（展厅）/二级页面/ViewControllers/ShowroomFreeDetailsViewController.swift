@@ -1122,6 +1122,27 @@ class ShowroomFreeDetailsViewController: UITableViewController {
                 return nil
             }
             
+            
+            if section == 5 {
+                let commentLabel = UILabel()
+                if showRoomDetailData != nil {
+                    commentLabel.text = "(\(showRoomDetailData!.recentNews?.count ?? 0))"
+                }else {
+                    commentLabel.text = "0"
+                }
+                
+                
+                commentLabel.font = UIFont.systemFont(ofSize: 13)
+                sectionHeaderView.addSubview(commentLabel)
+                
+                commentLabel.snp.makeConstraints({ (make) in
+                    make.left.equalTo(titleLabel.snp.right).offset(8)
+                    make.bottom.equalTo(sectionHeaderView).offset(-8)
+                    make.height.equalTo(11)
+                })
+            }
+            
+            
             // 添加手势
             if section == 6 {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(applyToEnter(tap:)))
@@ -1155,7 +1176,13 @@ class ShowroomFreeDetailsViewController: UITableViewController {
             if section == 7 {
                 let commentLabel = UILabel()
                 
-                commentLabel.text = "(\(showRoomDetailData!.plcount!))"
+                if showRoomDetailData != nil {
+                    commentLabel.text = "(\(showRoomDetailData!.plcount!))"
+                }else {
+                    commentLabel.text = "0"
+                }
+                
+                
                 commentLabel.font = UIFont.systemFont(ofSize: 13)
                 sectionHeaderView.addSubview(commentLabel)
                 

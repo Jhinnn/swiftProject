@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class TallkViewController: BaseViewController {
     // 是否显示banner
@@ -30,6 +32,16 @@ class TallkViewController: BaseViewController {
     //刷新次数
     var upnumb: Int = 0
     
+    var readCount: Int?
+    var readMonthCount: Int?
+    var zanCount: Int?
+    var zanMonthCount: Int?
+    
+    
+    var niceName: String?
+    var imageUrl: String?
+
+    var titleStr: String?
 
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -44,9 +56,50 @@ class TallkViewController: BaseViewController {
         loadIntelligentData()
         
         
-        
+        loadData()
     
     }
+    
+    // MARK: --加载头部数据
+    func loadData() {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "uid" : AppInfo.shared.user?.userId ?? ""
+        ]
+        Alamofire.request(kApi_TopicHeadData, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                
+                if code == 400 {
+                    
+                } else {
+                    // 获取数据
+                    let dic = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    
+                    self.niceName = dic?["nickname"] as? String
+
+                    if self.zanCount == 0 {
+                        self.titleStr = String.init(format: "%@个阅读", dic?["view_num"] as! String)
+                    }else {
+                        self.titleStr = String.init(format: "回答获得%@赞·%@个阅读",dic?["fabulous_num"] as! String,dic?["view_num"] as! String)
+                    }
+                    
+                    
+                    self.imageUrl = dic?["avatar128"] as? String
+                    
+                    
+                    self.newAllTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -54,6 +107,12 @@ class TallkViewController: BaseViewController {
         KRefreshDataCount().label.isHidden = true
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.themeColor
+    }
     
 
     private func layoutPageSubviews() {
@@ -326,7 +385,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
             cell.intelligentModel = self.dataSource
             return cell
         }else {
-            switch newsData[indexPath.section].showType ?? 6 {
+            switch newsData[indexPath.section].showType ?? 6 { // 2431
             case 0: // 视频
                 let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! TalkVideoInfoTableViewCell
                 cell.infoModel = newsData[indexPath.section]
@@ -445,7 +504,7 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
         if section == 2 {
             return 30
         }else if section == 0 {
-            return 144
+            return 140
         }
         return 0.001
     }
@@ -453,10 +512,20 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let view = Bundle.main.loadNibNamed("TalkHeadView", owner: self, options: nil)?.first as! TalkHeadView
-            let answerButton = view.viewWithTag(99) as! UIButton
-//            let headImage = view.viewWithTag(96) as! UIImageView
+            let actionView = view.viewWithTag(102)
+            actionView?.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(myaqAction))
+            actionView?.addGestureRecognizer(tap)
             
-            answerButton.addTarget(self, action: #selector(myaqAction), for: .touchUpInside)
+            view.answerBtn.addTarget(self, action: #selector(myanwerAction), for: .touchUpInside)
+            view.questionBtn.addTarget(self, action: #selector(myquseAction), for: .touchUpInside)
+            view.findBtn.addTarget(self, action: #selector(myfindAction), for: .touchUpInside)
+            
+            if self.imageUrl != nil && self.niceName != nil && self.titleStr != nil {
+                view.headView.kf.setImage(with: URL.init(string: self.imageUrl!), placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
+                view.nameLabel.text = self.niceName
+                view.readLabel.text = self.titleStr
+            }
             return view
         }
         if section == 2 {
@@ -537,7 +606,23 @@ extension TallkViewController: UITableViewDelegate,UITableViewDataSource {
     
     //MARK: 我的问答
     func myaqAction() {
+
         navigationController?.pushViewController(MyAnswerQViewController(), animated: true)
+    }
+    
+    func myanwerAction() {
+        navigationController?.pushViewController(MyAnswerViewController(), animated: true)
+    }
+    
+    func myquseAction() {
+        navigationController?.pushViewController(PublicGroupOneViewController(), animated: true)
+    }
+    
+    func myfindAction() {
+       
+        let board = UIStoryboard.init(name: "findTypeView", bundle: nil)
+        let myFindViewController = board.instantiateInitialViewController() as! MyFindViewController
+        navigationController?.pushViewController(myFindViewController, animated: true)
     }
     
 }

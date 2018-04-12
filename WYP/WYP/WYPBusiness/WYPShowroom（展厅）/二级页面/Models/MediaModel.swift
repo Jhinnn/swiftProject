@@ -22,11 +22,14 @@ class MediaModel: HandyJSON {
     // 类型 0 视频 、1 图片
     var type: String?
     
+    var duration: Int?
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.address <-- "address"
         mapper <<< self.mediaId <-- "id"
         mapper <<< self.title <-- "title"
         mapper <<< self.view <-- "view"
+        mapper <<< self.duration <-- "duration"
     }
     
     required init() {}

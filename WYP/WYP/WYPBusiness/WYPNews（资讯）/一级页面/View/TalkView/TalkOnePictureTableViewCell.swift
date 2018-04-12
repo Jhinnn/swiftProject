@@ -34,7 +34,7 @@ class TalkOnePictureTableViewCell: UITableViewCell {
         //        contentView.addSubview(adButton)
         //        contentView.addSubview(topButton)
         //        contentView.addSubview(hotImageView)
-//        contentView.addSubview(delButton)
+        contentView.addSubview(delButton)
         contentView.addSubview(line)
         //        line.isHidden = true
         //        hotImageView.isHidden = true
@@ -89,12 +89,12 @@ class TalkOnePictureTableViewCell: UITableViewCell {
             make.height.equalTo(10)
         }
         
-//        delButton.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(infoCommentLabel.snp.centerY)
-//            make.right.equalTo(infoLabel)
-//            make.width.equalTo(20)
-//            make.height.equalTo(14)
-//        }
+        delButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(infoCommentLabel.snp.centerY)
+            make.right.equalTo(infoLabel)
+            make.width.equalTo(20)
+            make.height.equalTo(14)
+        }
         
         line.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(15)
@@ -142,7 +142,7 @@ class TalkOnePictureTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = UIFont.systemFont(ofSize: 13)
-        infoCommentLabel.textColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
+        infoCommentLabel.textColor = UIColor.init(hexColor: "999999")
         return infoCommentLabel
     }()
     lazy var infoLookLabel: UILabel = {
@@ -174,7 +174,7 @@ class TalkOnePictureTableViewCell: UITableViewCell {
     //删除按钮
     lazy var delButton: UIButton = {
         let delButton = UIButton(type: .custom)
-        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        delButton.setImage(UIImage(named: "topic_icon_disincline_normal"), for: .normal)
         return delButton
     }()
     

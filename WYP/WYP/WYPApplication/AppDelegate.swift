@@ -81,7 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+      
         
+        /*
         // MARK: - 开始获取定位信息
         LocationManager.shared.starUpdatingLocation()
         
@@ -184,8 +186,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             UserDefaults.standard.set(true, forKey: versionString)
         }
+ 
+ 
+         */
         
         return true
+ 
+ 
+ 
     }
     
     /**

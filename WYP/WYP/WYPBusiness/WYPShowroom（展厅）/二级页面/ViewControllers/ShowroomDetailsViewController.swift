@@ -317,7 +317,12 @@ class ShowroomDetailsViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden(note:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
 
             // 如果不是免费展厅
-        tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: 460 * width_height_ratio)
+        if deviceTypeIphone5() {
+            tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: 520 * width_height_ratio)
+        }else {
+             tableView.tableHeaderView?.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: 460 * width_height_ratio)
+        }
+       
 
     }
     
@@ -485,7 +490,7 @@ class ShowroomDetailsViewController: UITableViewController {
         NetRequest.showRoomDetailNetRequest(page: "\(pageNum)", uid: AppInfo.shared.user?.userId ?? "", type_id: roomId ?? "") { (success, info, result) in
             if success {
                 let dic = result?.value(forKey: "data") as? NSDictionary
-                let dynamicArray = dic!["dynamic"] as! [NSDictionary]
+                let dynamicArray = dic!["dynamic"] as? [NSDictionary]
                 
                 if requestType == .update {
                     self.showRoomDetailData = ShowRoomDetailModel.deserialize(from: dic)
@@ -499,7 +504,7 @@ class ShowroomDetailsViewController: UITableViewController {
                     
                     self.newsData.removeAll()
 
-                    for optDic in dynamicArray {
+                    for optDic in dynamicArray! {
                         let statement = StatementModel(contentDic: optDic as! [AnyHashable : Any])
                         let statementFrame = StatementFrameModel()
                         let statementFrameAll = StatementFrameModel()
@@ -1183,24 +1188,26 @@ class ShowroomDetailsViewController: UITableViewController {
                 make.size.equalTo(CGSize(width: 40, height: 25))
             }
             
-    
             groupLabel.snp.makeConstraints({ (make) in
                 make.left.equalTo(titleLabel.snp.right).offset(5)
                 make.centerY.equalTo(sectionHeaderView)
                 make.height.equalTo(10)
             })
             
-            
             if section == 1 {
                 groupLabel.text = "(\(showRoomDetailData?.group?.count ?? 0))"
             }else if section == 2 {
                 groupLabel.text = "(\(showRoomDetailData?.member?.count ?? 0))"
             }else if section == 3 {
-                groupLabel.text = "(\(showRoomDetailData?.recentNews?.count ?? 0))"
+                if showRoomDetailData != nil {
+                    let count = (showRoomDetailData?.recentNews?.count)! + (showRoomDetailData?.gambit?.count)! + (self.newsData.count)
+                    groupLabel.text = "(\(count))"
+                }else {
+                    groupLabel.text = "(0)"
+                }
+                
             }
-            
-         
-            
+
             // 添加手势
             if section == 6 {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(applyToEnter(tap:)))
@@ -1278,7 +1285,7 @@ class ShowroomDetailsViewController: UITableViewController {
                 navigationController?.pushViewController(announce, animated: true)
             }
         }
-        if indexPath.section == 3 {
+        if indexPath.section == 3 { //资讯
             if (showRoomDetailData?.recentNews?.count)! > 0 {
                 let news = RoomNewsDetailViewController()
                 news.newsPhoto = showRoomDetailData?.recentNews?[indexPath.row].infoImageArr?[0] ?? ""
@@ -1289,7 +1296,20 @@ class ShowroomDetailsViewController: UITableViewController {
             }
             
         }
-        if indexPath.section == 5 {
+        if indexPath.section == 4 {  //话题
+            let newsDetail = TalkNewsDetailsViewController()
+            newsDetail.newsTitle = showRoomDetailData?.gambit?[indexPath.row].infoTitle
+            newsDetail.newsId = showRoomDetailData?.gambit?[indexPath.row].newsId
+            newsDetail.commentNumber = showRoomDetailData?.gambit?[indexPath.row].infoComment
+            navigationController?.pushViewController(newsDetail, animated: true)
+        }
+        if indexPath.section == 5 {  //社区
+            let moreCommenityVC = MoreCommunityViewController()
+            let statement = self.newsDataAll[indexPath.row]
+            moreCommenityVC.dataId = statement.statement._id
+            navigationController?.pushViewController(moreCommenityVC, animated: true)
+        }
+        if indexPath.section == 7 {
             let commentReply = CommentReplyViewController()
             commentReply.roomId = roomId
             commentReply.commentData = showRoomDetailData?.comment?[indexPath.row]

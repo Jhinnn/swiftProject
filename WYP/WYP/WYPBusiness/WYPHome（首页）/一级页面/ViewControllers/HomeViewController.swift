@@ -1332,8 +1332,8 @@ extension HomeViewController: ClassifyTableViewCellDelegate {
     func clickToClassifyVC(sender: ClassButton) {
         switch sender.tag {
         case 1001:
-            roomsCurrentIndex = 1
-            tabBarController?.selectedIndex = 2
+            roomsCurrentIndex = 10
+            tabBarController?.selectedIndex = 1
         case 1002:
             roomsCurrentIndex = 5
             tabBarController?.selectedIndex = 2

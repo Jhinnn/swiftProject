@@ -128,11 +128,9 @@ class TopicAnswerViewController: BaseViewController {
             pageNumber = pageNumber + 1
         }
         
-        NetRequest.myAnswerTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dataArr) in
+        NetRequest.myAnswerTopicListNetRequest(page: "\(pageNumber)", token: AppInfo.shared.user?.token ?? "",uid: self.targId!) { (success, info, dataArr,gambitCount) in
             
             if success {
-                
-                
                 
                 var news = [MineTopicsModel]()
                 if dataArr?.count != 0 {

@@ -22,9 +22,7 @@ class PublicGroupOneViewController: BaseViewController {
         
         setupView()
         
-  
-        
-        
+ 
     }
     
     func setupView() {

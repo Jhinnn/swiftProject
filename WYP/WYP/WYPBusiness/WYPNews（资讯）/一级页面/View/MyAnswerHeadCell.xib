@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tio-SP-dc9">
                         <rect key="frame" x="12" y="12" width="390" height="135.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="MoI-pm-yXg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mine_icon_browse_normal" translatesAutoresizingMaskIntoConstraints="NO" id="MoI-pm-yXg">
                                 <rect key="frame" x="12" y="20" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="EzO-AU-Em7"/>
@@ -37,10 +37,10 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本月共0人浏览" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOZ-IT-Ku3">
                                 <rect key="frame" x="44" y="44" width="88" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.68633110400769226" green="0.69122473797670836" blue="0.70590563988375632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.67733775714738165" green="0.68822141417889227" blue="0.70215801932538069" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="GHk-dU-zsQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_icon_help_normal" translatesAutoresizingMaskIntoConstraints="NO" id="GHk-dU-zsQ">
                                 <rect key="frame" x="12" y="74" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="VaO-Aw-geM"/>
@@ -56,7 +56,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本月共0人点赞" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEv-uh-Aic">
                                 <rect key="frame" x="44" y="98" width="88" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.68633110399999997" green="0.69122473799999995" blue="0.70590563989999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.66651144202037649" green="0.6772211387204069" blue="0.69093498634670047" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -77,7 +77,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.90193597694470573" green="0.91642854248363026" blue="0.93498638226954311" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.90196078431372551" green="0.91764705882352937" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Tio-SP-dc9" secondAttribute="bottom" constant="12" id="AfV-R8-MRp"/>
                     <constraint firstAttribute="trailing" secondItem="Tio-SP-dc9" secondAttribute="trailing" constant="12" id="bIj-2O-oty"/>
@@ -92,10 +92,11 @@
                 <outlet property="readLabel" destination="LHA-eU-MYo" id="hua-50-1wl"/>
                 <outlet property="zanLabel" destination="aa2-JY-39A" id="mxK-oe-WqQ"/>
             </connections>
-            <point key="canvasLocation" x="-332" y="-144"/>
+            <point key="canvasLocation" x="-436" y="-151"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Comment.png" width="120" height="120"/>
+        <image name="answer_icon_help_normal" width="24" height="24"/>
+        <image name="mine_icon_browse_normal" width="24" height="19"/>
     </resources>
 </document>

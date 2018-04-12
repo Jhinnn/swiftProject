@@ -195,7 +195,7 @@ class NetRequest {
     }
     
     //我的话题列表---新
-    class func myNewTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?) -> Void)) {
+    class func myNewTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?,String?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
                                       "open_id": token,
@@ -211,15 +211,19 @@ class NetRequest {
                 // 获取info信息
                 let info = json["info"].stringValue
                 if code == 400 {
-                    complete(false, info, nil)
+                    complete(false, info, nil,nil)
                 } else {
                     // 获取数据
 
                     let dic = json["data"].dictionaryValue
-
+                    
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    
+                    let gambitCount = dics?["gambit_num"] as? String
+                    
                     let arr = dic["gambit"]?.rawValue as? [NSDictionary?]
 
-                    complete(true, info, arr)
+                    complete(true, info, arr,gambitCount)
                 }
             case .failure(let error):
                 print(error)
@@ -228,7 +232,7 @@ class NetRequest {
     }
     
     //我的回答的话题列表---新
-    class func myAnswerTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?) -> Void)) {
+    class func myAnswerTopicListNetRequest(page: String, token: String, uid: String, complete: @escaping ((Bool, String?, [NSDictionary?]?,String?) -> Void)) {
         let parameters: Parameters = ["access_token": access_token,
                                       "method": "POST",
                                       "open_id": token,
@@ -244,7 +248,7 @@ class NetRequest {
                 // 获取info信息
                 let info = json["info"].stringValue
                 if code == 400 {
-                    complete(false, info, nil)
+                    complete(false, info, nil,nil)
                 } else {
                     // 获取数据
                     
@@ -252,7 +256,12 @@ class NetRequest {
                     
                     let arr = dic["gambit"]?.rawValue as? [NSDictionary?]
                     
-                    complete(true, info, arr)
+                    
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    
+                    let gambitCount = dics?["gambit_num"] as? String
+                    
+                    complete(true, info, arr,gambitCount)
                 }
             case .failure(let error):
                 print(error)
@@ -1202,7 +1211,35 @@ class NetRequest {
                                       "method": "POST",
                                       "open_id": openId,
                                       "page": page]
-        Alamofire.request(kApi_attentionTopic, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(kApi_attentionNewTopic, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 400 {
+                    complete(false, info, nil)
+                } else {
+                    // 获取数据
+                    let dic = json.rawValue as? NSDictionary
+                    complete(true, info, dic)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    // 我的 - 关注的话题 kApi_attentionNews 新
+    class func attentionTopicNewNetRequest(page: String, openId: String, complete: @escaping ((Bool, String?, NSDictionary?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "uid" : AppInfo.shared.user?.userId ?? "",
+                                      "page": page]
+        Alamofire.request(kApi_attentionNewTopic, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
@@ -3885,8 +3922,171 @@ class NetRequest {
         }
     }
     
+    //MARK: 答题
+    class func anwerQusetionListNetRequest(page: String,complete: @escaping ((Bool,String?,[NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "page" : page,
+                                      ]
+        Alamofire.request(kApi_TopicAnwerQues, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    let dataArray = dics?["gambit"] as? [NSDictionary]?
+                    complete(true, info, dataArray!)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
+    //MARK: 搜索
+    class func qusetionSearchListNetRequest(keyword: String,complete: @escaping ((Bool,String?,[NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "keyword" : keyword,
+                                      ]
+        Alamofire.request(kApi_TopicQuesSearch, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    let dataArray = dics?["gambit"] as? [NSDictionary]?
+                    complete(true, info, dataArray!)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    //MARK: 发现话题推荐类型
+    class func findTypeListNetRequest(complete: @escaping ((Bool,String?,[NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET"
+                                      ]
+        Alamofire.request(kApi_FindTypeList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dic = json.dictionary?["data"]?.rawValue as? [NSDictionary]
+                    complete(true, info, dic)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
    
     
+    //MARK: 发现话题推荐类型
+    class func findExpertListNetRequest(limit:String, page: String,complete: @escaping ((Bool,String?,[NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "limit" : limit,
+                                      "page" : page
+        ]
+        Alamofire.request(kApi_FindExpertList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    let dataArray = dics?["expert"] as? [NSDictionary]?
+                    complete(true, info, dataArray!)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    //MARK: 发现精选话题
+    class func findChoiceTopicListNetRequest(page:String, complete: @escaping ((Bool,String?,[NSDictionary]?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "GET",
+                                      "page" : page,
+                                      ]
+        Alamofire.request(kApi_FindChoiceTopicList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    let dics = json.dictionary?["data"]?.rawValue as? NSDictionary
+                    let dataArray = dics?["gambit"] as? [NSDictionary]?
+                    complete(true, info, dataArray!)
+                } else {
+                    complete(true, info, nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    //MARK: 发现精选话题
+    class func ingoreTopicNetRequest(id:String,type: String,reson: String,tag: String, complete: @escaping ((Bool,String?) -> Void)) {
+        let parameters: Parameters = ["access_token": access_token,
+                                      "method": "POST",
+                                      "id" : id,
+                                      "is_login_uid": AppInfo.shared.user?.userId ?? "",
+                                      "type" : type,
+                                      "reason" : reson,
+                                      "tag" : tag
+                                      ]
+        Alamofire.request(kApi_IngoreTopicList, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                // 获取code码
+                let code = json["code"].intValue
+                // 获取info信息
+                let info = json["info"].stringValue
+                if code == 200 {
+                    complete(true, info)
+                } else {
+                    complete(true, info)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
 

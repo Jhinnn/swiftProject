@@ -59,7 +59,7 @@ class ForgetPwdStep1ViewController: BaseViewController {
         verificationCodeButton.snp.makeConstraints { (make) in
             make.right.equalTo(backView).offset(-14)
             make.centerY.equalTo(backView)
-            make.size.equalTo(CGSize(width: 78, height: 25))
+            make.size.equalTo(CGSize(width: 74, height: 25))
         }
         
         verificationCodeTextField.snp.makeConstraints { (make) in
@@ -98,7 +98,7 @@ class ForgetPwdStep1ViewController: BaseViewController {
     lazy var verificationCodeTextField: LBTextField = {
         let verificationCodeTextField = LBTextField()
         verificationCodeTextField.delegate = self
-        verificationCodeTextField.placeholder = "验证码"
+        verificationCodeTextField.placeholder = "验证码(不区分大小写,无空格)"
         verificationCodeTextField.backgroundColor = UIColor.white
         verificationCodeTextField.returnKeyType = .done
         
@@ -108,11 +108,10 @@ class ForgetPwdStep1ViewController: BaseViewController {
     // 切换验证码按钮
     lazy var verificationCodeButton: PooCodeView = {
         let verificationCodeButton = PooCodeView()
-        verificationCodeButton.backgroundColor = UIColor.white
+        verificationCodeButton.backgroundColor = UIColor.groupTableViewBackground
         verificationCodeButton.layer.cornerRadius = 5
         verificationCodeButton.layer.borderWidth = 1
         verificationCodeButton.layer.borderColor = UIColor.themeColor.cgColor
-        
         return verificationCodeButton
     }()
     

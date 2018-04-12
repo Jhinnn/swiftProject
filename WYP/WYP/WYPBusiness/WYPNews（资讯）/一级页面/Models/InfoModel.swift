@@ -11,6 +11,9 @@ import HandyJSON
 
 class InfoModel: HandyJSON {
     
+    
+//    var reply: InfoReplyModel?
+    
     // 图集的封面
     var photosCover: String?
     // 资讯图片数组
@@ -51,6 +54,7 @@ class InfoModel: HandyJSON {
     var topic: String?
     
     
+  
     
     
     func mapping(mapper: HelpingMapper) {
@@ -73,6 +77,7 @@ class InfoModel: HandyJSON {
         mapper <<< self.advLink <-- "adv_url"
         mapper <<< self.status <-- "status"
         mapper <<< self.topic <-- "topic"
+//        mapper <<< self.reply <-- "reply"
     }
     
     required init() {}

@@ -56,8 +56,6 @@ class ShowroomNaviViewController: BaseViewController {
         viewConfig()
         layoutPageSubviews()
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,13 +107,13 @@ class ShowroomNaviViewController: BaseViewController {
         
         var viewArray = [BaseViewController]()
         // 添加到控制器数组
-        for i in 0..<6 {
+        for i in 0..<7 {
             let showroom = ShowRoomViewController()
             if i == 0 {
                 showroom.isShowBanner = true
                 showroom.typeId = ""
             } else {
-                if i < 3 || i == 5 {
+                if i < 3 || i == 6 {
                     showroom.typeId = "\(i)"
                 }else if i >= 3  {
                     showroom.typeId = "\(i)"
@@ -135,7 +133,7 @@ class ShowroomNaviViewController: BaseViewController {
         self.addChildViewController(viewController!)
         
         // 初始化标题数组
-        titles = ["全部","演出","旅游","会展","赛事","电影"]
+        titles = ["全部","演出","旅游","会展","赛事","电影","栏目"]
         
         
         // 将标题数组赋给分页导航的数组

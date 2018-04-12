@@ -54,18 +54,19 @@ class TalkNewsDetailsViewController: BaseViewController {
     // 是否添加了观察者
     var isAddObserver = false
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "话题详情"
+        title = "阿拉丁问答"
         
         viewConfig()
         
         layoutPageSubviews()
-        
-        
-        
         
     }
     
@@ -75,6 +76,17 @@ class TalkNewsDetailsViewController: BaseViewController {
         request()
         
         loadCommentList(requestType: .update)
+    }
+    
+    
+    override func viewDidAppear(_ animated:Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+    
     }
     
     func layoutPageSubviews() {
@@ -138,7 +150,11 @@ class TalkNewsDetailsViewController: BaseViewController {
     
     // MARK: - private method
     func viewConfig() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "tj_icon_fx_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "answer_icon_add_normal"), style: .done, target: self, action: #selector(shareBarButtonItemAction))
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "common_blackback_button_normal_iPhone"), style: .done, target: self, action: #selector(backToPrevious))
+       
         
         view.addSubview(newsTableView)
         newsTableView.isHidden = true
@@ -189,11 +205,11 @@ class TalkNewsDetailsViewController: BaseViewController {
     func resetWebViewFrameWidthHeight(height: CGFloat) {
         // 如果是新高度，那就重置
         if height != webContentHeight {
-//            if height >= kScreen_height {
-//                newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height)
-//            } else {
+            if height >= kScreen_height {
+                newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: kScreen_height)
+            } else {
                 newsWebView.frame = CGRect(x: 0, y: 0, width: kScreen_width, height: height)
-//            }
+            }
             newsTableView.reloadData()
             webContentHeight = height
         }
@@ -262,6 +278,9 @@ class TalkNewsDetailsViewController: BaseViewController {
         newAllTableView.mj_footer = MJRefreshAutoFooter(refreshingBlock: {
             self.loadCommentList(requestType: .loadMore)
         })
+        
+        newAllTableView.register(UINib.init(nibName: "CollectionViewCell", bundle: nil), forCellReuseIdentifier: "collectionCell")
+        
         newAllTableView.register(ShowRoomCommentCell.self, forCellReuseIdentifier: "replyCell")
         return newAllTableView
     }()
@@ -312,6 +331,10 @@ class TalkNewsDetailsViewController: BaseViewController {
         
     }
     
+    func backToPrevious() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
@@ -355,50 +378,69 @@ extension TalkNewsDetailsViewController: WKUIDelegate,WKNavigationDelegate {
 extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if commentData.count == 0 {
-            return 1
+            return 2
         } else {
-            return commentData.count
+            return commentData.count + 1
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if commentData.count == 0 {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "tableViewCell")
-            tableView.separatorStyle = .none
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
+                return cell
+            }else {
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "tableViewCell")
+                tableView.separatorStyle = .none
+                
+                let label = UILabel()
+                label.tag = 160
+                label.text = "暂无回答"
+                label.textAlignment = .center
+                label.font = UIFont.systemFont(ofSize: 17)
+                label.textColor = UIColor.init(hexColor: "afafaf")
+                cell.addSubview(label)
+                
+                label.snp.makeConstraints({ (make) in
+                    make.centerX.equalTo(cell)
+                    make.size.equalTo(CGSize(width: kScreen_width, height: 40))
+                })
+                
+                return cell
+            }
             
-            let label = UILabel()
-            label.tag = 160
-            label.text = "暂无回答"
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 17)
-            label.textColor = UIColor.init(hexColor: "afafaf")
-            cell.addSubview(label)
-            
-            label.snp.makeConstraints({ (make) in
-                make.centerX.equalTo(cell)
-                make.size.equalTo(CGSize(width: kScreen_width, height: 40))
-            })
-            
-            return cell
         } else {
-            let cell = TalkShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
-            let commentFrame = TalkRoomCommentFrameModel()
-            commentFrame.comment = commentData[indexPath.row]
-            cell.starCountButton.tag = indexPath.section + 180
-            cell.replyButton.tag = indexPath.section + 190
-            cell.delegate = self
-            cell.commentFrame = commentFrame
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath) as! CollectionViewCell
+                return cell
+            }else {
+                let cell = TalkShowRoomCommentCell(style: .default, reuseIdentifier: "TopicsViewIdentifier")
+                let commentFrame = TalkRoomCommentFrameModel()
+                commentFrame.comment = commentData[indexPath.row - 1]
+                cell.starCountButton.tag = indexPath.section + 180
+                cell.replyButton.tag = indexPath.section + 190
+                cell.delegate = self
+                cell.commentFrame = commentFrame
+                
+                return cell
+            }
             
-            return cell
         }
-        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if commentData.count == 0 {
+            if indexPath.row == 0 {
+                return 60
+            }
             return 0
         } else {
-            let commentFrame = TalkRoomCommentFrameModel()
-            commentFrame.comment = commentData[indexPath.row]
-            return commentFrame.cellHeight ?? 0
+            if indexPath.row == 0 {
+                return 60
+            }else {
+                let commentFrame = TalkRoomCommentFrameModel()
+                commentFrame.comment = commentData[indexPath.row - 1]
+                return commentFrame.cellHeight ?? 0
+            }
+            
         }
     }
  
@@ -407,12 +449,12 @@ extension TalkNewsDetailsViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 9
+        return 0.001
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = TalkNewsDetailsCommentViewController()
-        let model = commentData[indexPath.row]
+        let model = commentData[indexPath.row - 1]
         vc.pid = model.commentId
         vc.newsId = self.newsId
         vc.commentZanNumber = model.zanNumber

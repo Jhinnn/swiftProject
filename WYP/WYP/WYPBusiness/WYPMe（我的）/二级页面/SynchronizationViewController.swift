@@ -58,6 +58,8 @@ class SynchronizationViewController: BaseViewController {
     
     var ViewH = 0.0
     
+    var imageV:UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "同步"
@@ -806,12 +808,25 @@ extension SynchronizationViewController: UITableViewDelegate,UITableViewDataSour
         
         
         let cell = tableView.cellForRow(at: indexPath)
+        let tipV = UIImageView()
+        self.imageV = tipV
+        tipV.image = UIImage.init(named: "synchro_icon_pitch_normal")
+        cell?.contentView.addSubview(tipV)
+        tipV.snp.makeConstraints { (make) in
+            make.center.equalTo((cell?.contentView)!)
+            cell?.size.equalTo(CGSize(width: 24, height: 24))
+        }
+        
+        
         cell?.backgroundColor = UIColor.groupTableViewBackground
     }
  
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+
+        self.imageV?.removeFromSuperview()
+        
         cell?.backgroundColor = UIColor.white
     }
     
@@ -922,7 +937,7 @@ extension SynchronizationViewController: UICollectionViewDelegate,UICollectionVi
         }
         if collectionView.isEqual(synTypeCollectionView) {
             
-            
+            self.imageV?.removeFromSuperview()
             self.synTopicIdArray.removeAll()
             for cell in (synTopicTableView?.visibleCells)! {  //选中话题类型，取消话题回答选中cell
                 cell.backgroundColor = UIColor.white

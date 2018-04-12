@@ -29,6 +29,8 @@ class MineTopicsModel: HandyJSON {
     var category: String?
     
     
+    var status: String?
+    
     // 时间
     var timestamp: Int?
     // 浏览量
@@ -53,6 +55,12 @@ class MineTopicsModel: HandyJSON {
     //话题图片
     var cover_url: [String]?
     
+    
+    var follow_num: String?
+    
+    
+    var reply: InfoReplyModel?
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< self.headImgUrl <-- "avatar128"
         mapper <<< self.nickName <-- "nickname"
@@ -72,6 +80,8 @@ class MineTopicsModel: HandyJSON {
         mapper <<< self.peopleFriends <-- "friend_num"
         mapper <<< self.cover_url <-- "cover_url"
         mapper <<< self.title <-- "title"
+        mapper <<< self.follow_num <-- "follow_num"
+        mapper <<< self.reply <-- "reply"
     }
     
     required init() {}

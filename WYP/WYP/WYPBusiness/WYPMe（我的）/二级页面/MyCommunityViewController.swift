@@ -74,6 +74,9 @@ class MyCommunityViewController: BaseViewController {
         } else {
             // 不是自己的朋友圈
             followBtn.isHidden = false
+            
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: followBtn)
+            
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(note:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
@@ -95,8 +98,11 @@ class MyCommunityViewController: BaseViewController {
         IQKeyboardManager.shared().isEnabled = false
         
         loadNetData(requestType: .update)
+        self.tableView.reloadData()
         
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -105,6 +111,9 @@ class MyCommunityViewController: BaseViewController {
         DispatchQueue.main.async {
             self.navBarBgAlpha = 0
             self.navigationController?.navigationBar.subviews.first?.alpha = 0
+            
+            self.loadNetData(requestType: .update)
+            self.tableView.reloadData()
         }
         
     }
@@ -132,7 +141,7 @@ class MyCommunityViewController: BaseViewController {
         tableViewHeaderView.addSubview(friendsCountLabel)
         tableViewHeaderView.addSubview(fansCountLabel)
         tableViewHeaderView.addSubview(signatureLabel)
-        tableViewHeaderView.addSubview(followBtn)
+//        tableViewHeaderView.addSubview(followBtn)
         
         view.addSubview(interactionView)
         interactionView.addSubview(commentTextField)
@@ -197,16 +206,21 @@ class MyCommunityViewController: BaseViewController {
         
         signatureLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(tableViewHeaderView)
-            make.height.equalTo(20)
+            make.height.equalTo(22)
             make.top.equalTo(imageLabel.snp.bottom).offset(12)
             make.width.equalTo(kScreen_width - 140)
         }
         
-        followBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(fansCountLabel)
-            make.left.equalTo(fansCountLabel.snp.right).offset(15)
-            make.size.equalTo(CGSize(width: 60, height: 30))
-        }
+//        followBtn.snp.makeConstraints { (make) in
+//            if deviceTypeIPhoneX() {
+//              make.top.equalTo(tableViewHeaderView).offset(100)
+//            }else {
+//                make.top.equalTo(tableViewHeaderView).offset(24)
+//            }
+//
+//            make.right.equalTo(tableViewHeaderView.snp.right).offset(-6)
+//            make.size.equalTo(CGSize(width: 54, height: 28))
+//        }
         
         commentTextField.snp.makeConstraints { (make) in
             
@@ -335,12 +349,12 @@ class MyCommunityViewController: BaseViewController {
     // 关注
     lazy var followBtn: UIButton = {
         let followBtn = UIButton(type: .custom)
+        followBtn.frame = CGRect.init(x: 0, y: 0, width: 54, height: 28)
         followBtn.addTarget(self, action: #selector(founcDynamic(sender:)), for: .touchUpInside)
         followBtn.setTitleColor(UIColor.white, for: .normal)
+        followBtn.backgroundColor = UIColor.themeColor
         followBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        followBtn.layer.cornerRadius = 3
-        followBtn.layer.borderWidth = 1
-        followBtn.layer.borderColor = UIColor.white.cgColor
+        followBtn.layer.cornerRadius = 4
         return followBtn
     }()
     
@@ -450,9 +464,13 @@ class MyCommunityViewController: BaseViewController {
             
             self.addFriendsPhoneNumber = (dic?["mobile"] as? String)!
             
-
+            if url == URL.init(string: "http://ald.1001alading.com/Uploads/tou.png") { //默认图片
+                self.tableViewHeaderView.image = UIImage.init(named: "place_image")
+            }else {
+                self.tableViewHeaderView.kf.setImage(with: url)
+            }
         
-            self.tableViewHeaderView.kf.setImage(with: url, placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
+//            self.tableViewHeaderView.kf.setImage(with: url, placeholder: UIImage.init(named: "place_image"), options: nil, progressBlock: nil, completionHandler: nil)
             
             self.signatureLabel.isHidden = false;
             self.signatureLabel.text = String.init(format: "%@", (dic?["signature"] as? String)!)
@@ -507,8 +525,8 @@ class MyCommunityViewController: BaseViewController {
         }
         let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
                                       "method": "POST",
-                                      "type": type,
-                                      "uid": userId,
+                                      "type": type!,
+                                      "uid": userId!,
                                       "is_login_uid": AppInfo.shared.user?.userId ?? "",
                                       "page": "\(pageNumber)",
             "usertype": userType]
@@ -555,10 +573,7 @@ class MyCommunityViewController: BaseViewController {
                         })
                     }
                     self.noDataImageView.snp.makeConstraints { (make) in
-                        if deviceTypeIphone5() || deviceTypeIPhone4() {
-                            make.top.equalTo(self.view).offset(150)
-                        }
-                        make.top.equalTo(self.view).offset(220)
+                        make.top.equalTo(self.view).offset(kScreen_width * 0.75 + 40)
                         make.centerX.equalTo(self.view)
                         make.size.equalTo(CGSize(width: 100, height: 147))
                     }
@@ -699,7 +714,7 @@ extension MyCommunityViewController: StatementCellDelegate {
         currentStatement = statement
         let parameters: Parameters = ["access_token": "4170fa02947baeed645293310f478bb4",
                                       "method": "POST",
-                                      "dynamic_id": statement._id,
+                                      "dynamic_id": statement._id ?? "",
                                       "uid": AppInfo.shared.user?.userId ?? ""]
         let url = kApi_baseUrl(path: "api/community_fabulous")
         buttonActionRequestNetData(URLString: url, parameters: parameters)

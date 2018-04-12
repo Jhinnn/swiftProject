@@ -439,6 +439,12 @@ public var kApi_attentionTopic: String {
     return kApi_baseUrl(path: "api/my_follow_topic")
 }
 
+// 我的 - 关注的话题
+public var kApi_attentionNewTopic: String {
+    return kApi_baseUrl(path: "api/follow_gambit_list")
+}
+
+
 // 我的 - 取消关注资讯
 public var kApi_newsCancelAttention: String {
     return kApi_baseUrl(path: "api/cancelFollowNews")
@@ -738,4 +744,35 @@ public var kApi_SynGroupRoomList: String {
 //话题界面头部数据
 public var kApi_TopicHeadData: String {
     return kApi_baseUrl(path: "api/my_qa_info")
+}
+
+//答题
+public var kApi_TopicAnwerQues: String {
+    return kApi_baseUrl(path: "api/wait_answer")
+}
+
+//答题
+public var kApi_TopicQuesSearch: String {
+    return kApi_baseUrl(path: "api/search_gambit_title")
+}
+
+//答题
+public var kApi_FindTypeList: String {
+    return kApi_baseUrl(path: "api/gambit_topic")
+}
+
+
+//专家团
+public var kApi_FindExpertList: String {
+    return kApi_baseUrl(path: "api/expert_list")
+}
+
+//精选话题
+public var kApi_FindChoiceTopicList: String {
+    return kApi_baseUrl(path: "api/selected_answer")
+}
+
+//精选话题
+public var kApi_IngoreTopicList: String {
+    return kApi_baseUrl(path: "api/not_interest")
 }

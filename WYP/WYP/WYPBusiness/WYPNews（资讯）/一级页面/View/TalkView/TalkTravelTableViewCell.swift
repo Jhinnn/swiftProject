@@ -32,7 +32,7 @@ class TalkTravelTableViewCell: UITableViewCell {
         //        contentView.addSubview(infoTimeLabel)
         //        contentView.addSubview(infoLookLabel)
         contentView.addSubview(infoCommentLabel)
-//        contentView.addSubview(delButton)
+        contentView.addSubview(delButton)
         contentView.addSubview(line)
     }
     private func layoutPageSubviews() {
@@ -82,12 +82,12 @@ class TalkTravelTableViewCell: UITableViewCell {
             make.height.equalTo(10)
         }
         
-//        delButton.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(infoCommentLabel)
-//            make.right.equalTo(travelTitleLabel)
-//            make.width.equalTo(20)
-//            make.height.equalTo(14)
-//        }
+        delButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(infoCommentLabel)
+            make.right.equalTo(travelTitleLabel)
+            make.width.equalTo(20)
+            make.height.equalTo(14)
+        }
         
         line.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(15)
@@ -143,7 +143,7 @@ class TalkTravelTableViewCell: UITableViewCell {
         let infoCommentLabel = UILabel()
         infoCommentLabel.textAlignment = .right
         infoCommentLabel.font = UIFont.systemFont(ofSize: 13)
-        infoCommentLabel.textColor = UIColor.init(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 1)
+        infoCommentLabel.textColor = UIColor.init(hexColor: "999999")
         return infoCommentLabel
     }()
     lazy var adButton: UIButton = {
@@ -160,7 +160,7 @@ class TalkTravelTableViewCell: UITableViewCell {
     //删除按钮
     lazy var delButton: UIButton = {
         let delButton = UIButton(type: .custom)
-        delButton.setImage(UIImage(named: "common_ad_icon_normal_iPhone"), for: .normal)
+        delButton.setImage(UIImage(named: "topic_icon_disincline_normal"), for: .normal)
         return delButton
     }()
     

@@ -58,17 +58,17 @@ class OnePictureTableViewCell: UITableViewCell {
         }
         adButton.snp.makeConstraints { (make) in
             make.left.equalTo(contentView).offset(13)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+            make.bottom.equalTo(contentView).offset(-10 * width_height_ratio)
             make.size.equalTo(CGSize(width: 20, height: 12))
         }
         topButton.snp.makeConstraints { (make) in
             make.left.equalTo(adButton.snp.right).offset(3)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+            make.bottom.equalTo(contentView).offset(-10 * width_height_ratio)
             make.size.equalTo(CGSize(width: 20, height: 12))
         }
         infoSourceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(topButton.snp.right).offset(3.5)
-            make.bottom.equalTo(contentView).offset(-20 * width_height_ratio)
+            make.bottom.equalTo(contentView).offset(-10 * width_height_ratio)
             make.height.equalTo(10)
         }
 //        infoTimeLabel.snp.makeConstraints { (make) in

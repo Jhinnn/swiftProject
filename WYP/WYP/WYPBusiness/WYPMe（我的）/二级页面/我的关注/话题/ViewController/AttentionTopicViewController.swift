@@ -68,7 +68,7 @@ class AttentionTopicViewController: BaseViewController {
                 let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
                 
             
-                if requestType == .update {
+                if requestType == .update && jsonString != "" {
                     self.newsData = ([InfoModel].deserialize(from: jsonString) as? [InfoModel])!
                 } else {
                     // 把新数据添加进去
